@@ -1,0 +1,33 @@
+{
+    "name": "Suburban Starter Home",
+    "address": "1334 W Alameda Ave, Denver, CO 80223",
+    "description": "Cozy starter home in a quiet family neighborhood",
+    "image": "/images/20.jpg",
+    "id": "20",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 16
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1700
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2008
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Austin Downtown Loft",
+    "address": "300 Congress Ave, Austin, TX 78701",
+    "description": "Sleek downtown loft in the heart of Austin",
+    "image": "/images/6.jpg",
+    "id": "6",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 18
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Condo"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 1
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1450
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2016
+        }
+    ]
+}

@@ -25,7 +25,6 @@ describe('Escrow', () => {
         const Escrow = await ethers.getContractFactory('Escrow')
         escrow = await Escrow.deploy(
             realEstate.address,
-            seller.address,
             inspector.address,
             lender.address
         )
@@ -35,7 +34,7 @@ describe('Escrow', () => {
         await transaction.wait()
 
         // List Property
-        transaction = await escrow.connect(seller).list(1, buyer.address, tokens(10), tokens(5))
+        transaction = await escrow.connect(seller).list(1, tokens(10), tokens(5))
         await transaction.wait()
     })
 
@@ -46,7 +45,7 @@ describe('Escrow', () => {
         })
 
         it('Returns seller', async () => {
-            const result = await escrow.seller()
+            const result = await escrow.sellerOf(1)
             expect(result).to.be.equal(seller.address)
         })
 
@@ -67,9 +66,9 @@ describe('Escrow', () => {
             expect(result).to.be.equal(true)
         })
 
-        it('Returns buyer', async () => {
+        it('Returns no buyer until deposit', async () => {
             const result = await escrow.buyer(1)
-            expect(result).to.be.equal(buyer.address)
+            expect(result).to.be.equal(ethers.constants.AddressZero)
         })
 
         it('Returns purchase price', async () => {
@@ -91,6 +90,11 @@ describe('Escrow', () => {
         beforeEach(async () => {
             const transaction = await escrow.connect(buyer).depositEarnest(1, { value: tokens(5) })
             await transaction.wait()
+        })
+
+        it('Commits the depositor as buyer', async () => {
+            const result = await escrow.buyer(1)
+            expect(result).to.be.equal(buyer.address)
         })
 
         it('Updates contract balance', async () => {
@@ -127,6 +131,37 @@ describe('Escrow', () => {
             expect(await escrow.approval(1, buyer.address)).to.be.equal(true)
             expect(await escrow.approval(1, seller.address)).to.be.equal(true)
             expect(await escrow.approval(1, lender.address)).to.be.equal(true)
+        })
+    })
+
+    describe('Cancellation', () => {
+        beforeEach(async () => {
+            const transaction = await escrow.connect(buyer).depositEarnest(1, { value: tokens(5) })
+            await transaction.wait()
+
+            await escrow.connect(seller).cancelSale(1)
+        })
+
+        it('Returns the property to the seller', async () => {
+            expect(await realEstate.ownerOf(1)).to.be.equal(seller.address)
+        })
+
+        it('Reopens the listing', async () => {
+            expect(await escrow.isListed(1)).to.be.equal(false)
+        })
+
+        it('Clears the committed buyer', async () => {
+            expect(await escrow.buyer(1)).to.be.equal(ethers.constants.AddressZero)
+        })
+
+        it('Allows the seller to re-list', async () => {
+            let transaction = await realEstate.connect(seller).approve(escrow.address, 1)
+            await transaction.wait()
+
+            transaction = await escrow.connect(seller).list(1, tokens(10), tokens(5))
+            await transaction.wait()
+
+            expect(await escrow.isListed(1)).to.be.equal(true)
         })
     })
 

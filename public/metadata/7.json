@@ -1,0 +1,33 @@
+{
+    "name": "Coastal Modern Villa",
+    "address": "31267 Pacific Coast Hwy, Malibu, CA 90265",
+    "description": "Modern oceanfront villa with panoramic views",
+    "image": "/images/7.jpg",
+    "id": "7",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 22
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 4
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 4
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 4200
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2015
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Modern Townhouse",
+    "address": "842 E Thomas St, Seattle, WA 98102",
+    "description": "Contemporary townhouse minutes from downtown",
+    "image": "/images/14.jpg",
+    "id": "14",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 12
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Townhouse"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1900
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2017
+        }
+    ]
+}

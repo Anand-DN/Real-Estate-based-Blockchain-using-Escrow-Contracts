@@ -45,3 +45,8 @@ typechain-types
 cache
 artifacts
 
+#AI generated artifacts
+/ai/models/
+/ai/properties.json
+__pycache__/
+

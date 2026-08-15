@@ -1,0 +1,33 @@
+{
+    "name": "Historic Brownstone",
+    "address": "132 Prospect Park W, Brooklyn, NY 11215",
+    "description": "Classic brownstone with original details",
+    "image": "/images/13.jpg",
+    "id": "13",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 19
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Townhouse"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 4
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 3100
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1901
+        }
+    ]
+}

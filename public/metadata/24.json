@@ -1,0 +1,33 @@
+{
+    "name": "Historic Rowhouse",
+    "address": "510 S 5th St, Philadelphia, PA 19147",
+    "description": "Historic rowhouse renovated with modern interiors",
+    "image": "/images/24.jpg",
+    "id": "24",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 18
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Townhouse"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1900
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1904
+        }
+    ]
+}

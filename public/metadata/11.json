@@ -1,0 +1,33 @@
+{
+    "name": "City Condo",
+    "address": "225 N Wabash Ave APT 1802, Chicago, IL 60601",
+    "description": "High-rise condo with skyline views",
+    "image": "/images/11.jpg",
+    "id": "11",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 13
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Condo"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1350
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2021
+        }
+    ]
+}

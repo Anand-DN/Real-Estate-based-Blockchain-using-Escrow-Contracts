@@ -1,0 +1,33 @@
+{
+    "name": "Downtown Loft",
+    "address": "220 W 6th St APT 12C, Austin, TX 78701",
+    "description": "Open-concept loft in the heart of downtown",
+    "image": "/images/8.jpg",
+    "id": "8",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 9
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Condo"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1450
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2019
+        }
+    ]
+}

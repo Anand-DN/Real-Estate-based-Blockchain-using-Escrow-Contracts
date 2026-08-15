@@ -1,0 +1,33 @@
+{
+    "name": "Lakefront Cabin",
+    "address": "889 Lakeshore Dr, South Lake Tahoe, CA 96150",
+    "description": "Cozy cabin with direct lake access",
+    "image": "/images/10.jpg",
+    "id": "10",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 11
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 1
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1100
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1995
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Desert Modern Home",
+    "address": "7702 E Thunderbird Rd, Phoenix, AZ 85032",
+    "description": "Desert modern home with canyon views and solar",
+    "image": "/images/22.jpg",
+    "id": "22",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 25
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 4
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 3300
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2021
+        }
+    ]
+}
