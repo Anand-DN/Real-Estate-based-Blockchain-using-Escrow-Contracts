@@ -1,0 +1,33 @@
+{
+    "name": "Downtown Penthouse",
+    "address": "2200 Biscayne Blvd, Miami, FL 33137",
+    "description": "Sky-high penthouse with wraparound terraces",
+    "image": "/images/19.jpg",
+    "id": "19",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 35
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Condo"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 2900
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2023
+        }
+    ]
+}

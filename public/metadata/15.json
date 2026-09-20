@@ -1,0 +1,33 @@
+{
+    "name": "Beach Bungalow",
+    "address": "1520 Ocean Dr, Miami Beach, FL 33139",
+    "description": "Sun-drenched bungalow steps from the sand",
+    "image": "/images/15.jpg",
+    "id": "15",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 10
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1500
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1988
+        }
+    ]
+}

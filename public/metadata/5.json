@@ -1,0 +1,33 @@
+{
+    "name": "Denver Mountain Retreat",
+    "address": "7405 Aspen Ridge Rd, Denver, CO 80214",
+    "description": "Cozy mountain retreat with stunning views",
+    "image": "/images/5.jpg",
+    "id": "5",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 8
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Cabin"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 1
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1240
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1995
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Mountain Cabin",
+    "address": "44 Maroon Creek Rd, Aspen, CO 81611",
+    "description": "Rustic mountain cabin steps from the ski lift",
+    "image": "/images/23.jpg",
+    "id": "23",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 32
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Cabin"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1600
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2016
+        }
+    ]
+}

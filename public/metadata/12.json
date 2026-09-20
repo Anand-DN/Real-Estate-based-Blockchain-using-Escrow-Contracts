@@ -1,0 +1,33 @@
+{
+    "name": "Ranch Estate",
+    "address": "10989 E Via Linda, Scottsdale, AZ 85259",
+    "description": "Sprawling ranch estate with desert views",
+    "image": "/images/12.jpg",
+    "id": "12",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 26
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 5
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 5
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 5600
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2012
+        }
+    ]
+}
