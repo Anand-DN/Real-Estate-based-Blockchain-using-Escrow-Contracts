@@ -1,0 +1,64 @@
+Amenity_ID,Amenity_Name,Category,Premium_Level,Indoor_Outdoor,Eco_Friendly,Family_Friendly,Description
+AM001,24x7 Security,Security,Standard,Outdoor,No,Yes,24x7 Security facility
+AM002,CCTV Surveillance,Security,Standard,Outdoor,No,Yes,CCTV Surveillance facility
+AM003,Video Door Phone,Security,Standard,Outdoor,No,Yes,Video Door Phone facility
+AM004,Gated Community,Security,Standard,Outdoor,No,Yes,Gated Community facility
+AM005,Intercom,Security,Standard,Outdoor,No,Yes,Intercom facility
+AM006,Gymnasium,Fitness,Standard,Indoor,No,Yes,Gymnasium facility
+AM007,Yoga Room,Fitness,Standard,Outdoor,No,Yes,Yoga Room facility
+AM008,Jogging Track,Fitness,Standard,Outdoor,No,Yes,Jogging Track facility
+AM009,Swimming Pool,Fitness,Standard,Outdoor,No,Yes,Swimming Pool facility
+AM010,Fitness Center,Fitness,Standard,Outdoor,No,Yes,Fitness Center facility
+AM011,Clubhouse,Recreation,Standard,Outdoor,No,Yes,Clubhouse facility
+AM012,Indoor Games,Recreation,Standard,Outdoor,No,Yes,Indoor Games facility
+AM013,Outdoor Sports Court,Recreation,Standard,Outdoor,No,Yes,Outdoor Sports Court facility
+AM014,Children Play Area,Recreation,Standard,Outdoor,No,Yes,Children Play Area facility
+AM015,Amphitheatre,Recreation,Standard,Outdoor,No,Yes,Amphitheatre facility
+AM016,Party Hall,Recreation,Standard,Outdoor,No,Yes,Party Hall facility
+AM017,Library,Recreation,Standard,Indoor,No,Yes,Library facility
+AM018,Mini Theatre,Recreation,Standard,Indoor,No,Yes,Mini Theatre facility
+AM019,Lift,Convenience,Standard,Indoor,No,Yes,Lift facility
+AM020,Power Backup,Convenience,Standard,Outdoor,No,Yes,Power Backup facility
+AM021,Visitor Parking,Convenience,Standard,Outdoor,No,Yes,Visitor Parking facility
+AM022,Reserved Parking,Convenience,Standard,Outdoor,No,Yes,Reserved Parking facility
+AM023,High Speed Internet,Convenience,Standard,Outdoor,No,Yes,High Speed Internet facility
+AM024,Co-working Space,Convenience,Standard,Indoor,No,Yes,Co-working Space facility
+AM025,Laundry,Convenience,Standard,Indoor,No,Yes,Laundry facility
+AM026,ATM,Convenience,Standard,Indoor,No,Yes,ATM facility
+AM027,Rainwater Harvesting,Green,Standard,Outdoor,Yes,Yes,Rainwater Harvesting facility
+AM028,Solar Panels,Green,Standard,Outdoor,Yes,Yes,Solar Panels facility
+AM029,Waste Management,Green,Standard,Outdoor,Yes,Yes,Waste Management facility
+AM030,Organic Garden,Green,Standard,Outdoor,Yes,Yes,Organic Garden facility
+AM031,EV Charging Station,Green,Standard,Outdoor,Yes,Yes,EV Charging Station facility
+AM032,Water Recycling,Green,Standard,Outdoor,Yes,Yes,Water Recycling facility
+AM033,Green Building,Green,Standard,Outdoor,Yes,Yes,Green Building facility
+AM034,Spa,Lifestyle,Premium,Indoor,No,Yes,Spa facility
+AM035,Sauna,Lifestyle,Premium,Indoor,No,Yes,Sauna facility
+AM036,Jacuzzi,Lifestyle,Premium,Indoor,No,Yes,Jacuzzi facility
+AM037,Pet Park,Lifestyle,Premium,Outdoor,No,Yes,Pet Park facility
+AM038,Cafe,Lifestyle,Premium,Indoor,No,Yes,Cafe facility
+AM039,Restaurant,Lifestyle,Premium,Indoor,No,Yes,Restaurant facility
+AM040,Shopping Arcade,Lifestyle,Premium,Outdoor,No,Yes,Shopping Arcade facility
+AM041,Rooftop Lounge,Lifestyle,Premium,Outdoor,No,Yes,Rooftop Lounge facility
+AM042,Fire Safety,Utilities,Standard,Outdoor,No,Yes,Fire Safety facility
+AM043,Gas Pipeline,Utilities,Standard,Outdoor,No,Yes,Gas Pipeline facility
+AM044,RO Water System,Utilities,Standard,Outdoor,No,Yes,RO Water System facility
+AM045,Maintenance Staff,Utilities,Standard,Outdoor,No,Yes,Maintenance Staff facility
+AM046,Housekeeping,Utilities,Standard,Outdoor,No,Yes,Housekeeping facility
+AM047,Concierge,Utilities,Standard,Outdoor,No,Yes,Concierge facility
+AM048,Conference Room,Business,Premium,Indoor,No,Yes,Conference Room facility
+AM049,Business Center,Business,Premium,Indoor,No,Yes,Business Center facility
+AM050,Cricket Net,Sports,Standard,Outdoor,No,Yes,Cricket Net facility
+AM051,Badminton Court,Sports,Standard,Outdoor,No,Yes,Badminton Court facility
+AM052,Basketball Court,Sports,Standard,Outdoor,No,Yes,Basketball Court facility
+AM053,Tennis Court,Sports,Standard,Outdoor,No,Yes,Tennis Court facility
+AM054,Skating Rink,Sports,Standard,Outdoor,No,Yes,Skating Rink facility
+AM055,Cycling Track,Sports,Standard,Outdoor,No,Yes,Cycling Track facility
+AM056,Private Pool,Luxury,Luxury,Outdoor,No,Yes,Private Pool facility
+AM057,Private Garden,Luxury,Luxury,Outdoor,No,Yes,Private Garden facility
+AM058,Smart Home Automation,Luxury,Luxury,Outdoor,No,Yes,Smart Home Automation facility
+AM059,Home Theatre Room,Luxury,Luxury,Indoor,No,Yes,Home Theatre Room facility
+AM060,Wine Cellar,Luxury,Luxury,Outdoor,No,Yes,Wine Cellar facility
+AM061,Helipad,Luxury,Luxury,Outdoor,No,Yes,Helipad facility
+AM062,Golf Course,Luxury,Luxury,Outdoor,No,Yes,Golf Course facility
+AM063,Infinity Pool,Luxury,Luxury,Outdoor,No,Yes,Infinity Pool facility

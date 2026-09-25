@@ -1,0 +1,37 @@
+State_ID,State_Name,Capital,Region,Population_Million,Area_sq_km,GDP_USD_Billion,Literacy_Rate,Urbanization_Percent,Population_Density,Official_Language,Statehood_Year,Coastal_State,Smart_Cities,International_Airports,Metro_System,Major_Industry,Tourism_Score,Investment_Score,Ease_of_Doing_Business
+ST001,Andhra Pradesh,Amaravati,South,54.0,162975,180.0,67.4,33.4,308,Telugu,1956,Yes,4,2,No,Agriculture & IT,78,82,81
+ST002,Arunachal Pradesh,Itanagar,North East,1.7,83743,4.0,65.4,22.7,17,English,1987,No,1,1,No,Tourism,88,60,62
+ST003,Assam,Dispur,North East,35.6,78438,68.0,73.2,14.1,397,Assamese,1950,No,2,1,No,Tea & Oil,80,68,70
+ST004,Bihar,Patna,East,130.0,94163,110.0,61.8,11.3,1402,Hindi,1950,No,3,1,No,Agriculture,62,64,63
+ST005,Chhattisgarh,Raipur,Central,30.0,135192,56.0,70.3,24.0,189,Hindi,2000,No,2,1,No,Steel & Mining,68,73,72
+ST006,Goa,Panaji,West,1.6,3702,16.0,88.7,62.2,394,Konkani,1987,Yes,1,1,No,Tourism,96,85,86
+ST007,Gujarat,Gandhinagar,West,71.5,196024,340.0,78.0,43.0,363,Gujarati,1960,Yes,6,3,Yes,Manufacturing,84,94,92
+ST008,Haryana,Chandigarh,North,30.0,44212,150.0,76.6,35.0,573,Hindi,1966,No,2,1,Yes,Automobile,80,92,91
+ST009,Himachal Pradesh,Shimla,North,7.5,55673,23.0,83.8,10.0,123,Hindi,1971,No,1,0,No,Tourism,92,72,74
+ST010,Jharkhand,Ranchi,East,39.7,79716,55.0,67.6,24.1,497,Hindi,2000,No,1,1,No,Mining,65,70,69
+ST011,Karnataka,Bengaluru,South,68.0,191791,340.0,75.4,39.0,356,Kannada,1956,Yes,7,2,Yes,IT & Software,90,95,94
+ST012,Kerala,Thiruvananthapuram,South,35.0,38863,140.0,96.2,47.7,860,Malayalam,1956,Yes,4,4,Yes,Tourism,95,88,87
+ST013,Madhya Pradesh,Bhopal,Central,86.0,308252,160.0,69.3,28.0,236,Hindi,1956,No,4,1,Yes,Agriculture,76,78,79
+ST014,Maharashtra,Mumbai,West,126.0,307713,490.0,82.3,45.2,410,Marathi,1960,Yes,8,3,Yes,Finance,94,97,96
+ST015,Manipur,Imphal,North East,3.3,22327,5.0,79.8,30.0,128,Manipuri,1972,No,1,1,No,Handloom,82,61,60
+ST016,Meghalaya,Shillong,North East,3.5,22429,6.0,74.4,20.0,132,English,1972,No,1,1,No,Tourism,90,63,62
+ST017,Mizoram,Aizawl,North East,1.3,21081,3.0,91.3,52.0,52,Mizo,1987,No,1,1,No,Bamboo,87,60,61
+ST018,Nagaland,Kohima,North East,2.3,16579,4.0,79.6,29.0,119,English,1963,No,1,1,No,Handicrafts,84,62,61
+ST019,Odisha,Bhubaneswar,East,47.0,155707,95.0,72.9,17.0,269,Odia,1950,Yes,2,1,No,Mining,80,77,78
+ST020,Punjab,Chandigarh,North,31.0,50362,92.0,75.8,37.5,551,Punjabi,1966,No,3,1,Yes,Agriculture,74,84,83
+ST021,Rajasthan,Jaipur,West,82.0,342239,180.0,66.1,24.9,201,Hindi,1956,No,4,1,Yes,Tourism,96,86,85
+ST022,Sikkim,Gangtok,North East,0.7,7096,5.0,81.4,25.0,98,English,1975,No,1,0,No,Tourism,93,65,66
+ST023,Tamil Nadu,Chennai,South,78.0,130058,330.0,80.1,48.4,555,Tamil,1956,Yes,7,4,Yes,Automobile,91,94,93
+ST024,Telangana,Hyderabad,South,39.0,112077,220.0,72.8,38.9,312,Telugu,2014,No,3,1,Yes,IT,89,93,92
+ST025,Tripura,Agartala,North East,4.2,10486,7.0,87.2,26.0,350,Bengali,1972,No,1,1,No,Agriculture,82,64,63
+ST026,Uttar Pradesh,Lucknow,North,240.0,240928,330.0,67.7,22.3,829,Hindi,1950,No,10,2,Yes,Manufacturing,77,82,80
+ST027,Uttarakhand,Dehradun,North,11.5,53483,42.0,78.8,30.6,189,Hindi,2000,No,2,1,No,Tourism,94,80,81
+ST028,West Bengal,Kolkata,East,100.0,88752,220.0,76.3,31.9,1128,Bengali,1950,Yes,4,1,Yes,Manufacturing,86,84,83
+UT001,Andaman and Nicobar Islands,Port Blair,Island,0.4,8249,2.0,86.3,62.0,46,English,1956,Yes,1,1,No,Tourism,95,60,62
+UT002,Chandigarh,Chandigarh,North,1.2,114,6.0,86.4,97.0,9258,English,1966,No,1,1,Yes,Services,82,90,91
+UT003,Dadra and Nagar Haveli and Daman and Diu,Daman,West,0.8,603,5.0,87.1,46.0,970,Gujarati,2020,Yes,1,1,No,Manufacturing,74,82,83
+UT004,Delhi,New Delhi,North,34.0,1484,293.0,88.7,97.5,11320,Hindi,1956,No,2,1,Yes,Services,88,96,95
+UT005,Jammu and Kashmir,Srinagar,North,13.5,42241,25.0,67.2,27.0,124,Urdu,2019,No,1,1,No,Tourism,95,70,69
+UT006,Ladakh,Leh,North,0.3,59146,1.0,77.3,24.0,5,English,2019,No,1,1,No,Tourism,97,58,60
+UT007,Lakshadweep,Kavaratti,Island,0.07,32,0.5,91.8,78.0,2148,Malayalam,1956,Yes,0,0,No,Fisheries,93,55,57
+UT008,Puducherry,Puducherry,South,1.6,479,8.0,85.8,68.3,3231,Tamil,1963,Yes,1,1,No,Tourism,89,78,79

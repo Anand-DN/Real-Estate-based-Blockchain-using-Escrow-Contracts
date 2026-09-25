@@ -1,0 +1,1001 @@
+﻿Metro_ID,Station_Name,Metro_Line,State_Name,City_Name,Locality_Name,Latitude,Longitude,Platform_Count,Interchange,Parking,Lift,Escalator,Disabled_Access,Daily_Footfall,Opening_Year,Operator,Nearby_Bus_Stop,Nearby_Railway_Station_km,Nearby_Airport_km,Nearby_Mall_km,Nearby_Hospital_km,Nearby_School_km,Nearby_IT_Park_km,Property_Price_Impact,Smart_City_Area,Zone
+MET000001,Sector 74,Yellow Line,Tamil Nadu,Chennai,Sector 67,9.553691,78.84818,3,Yes,No,Yes,Yes,Yes,221527,2021,CMRL,Yes,2.82,31.65,1.32,2.62,5.0,7.58,Medium,No,East
+MET000002,Park 54,Pink Line,Delhi,New Delhi,Sector 46,12.889634,83.011481,5,No,No,Yes,Yes,No,110698,2022,DMRC,Yes,5.55,7.42,5.54,4.23,4.61,19.04,Medium,No,Central
+MET000003,Lake 55,Red Line,Tamil Nadu,Chennai,Sector 78,26.216668,75.417577,6,No,Yes,Yes,Yes,Yes,93552,2006,CMRL,Yes,9.91,32.93,0.27,2.47,3.84,19.87,Low,Yes,East
+MET000004,Lake 26,Red Line,Tamil Nadu,Chennai,Sector 12,23.928839,77.939276,2,No,No,Yes,Yes,No,232601,2005,CMRL,Yes,4.55,30.18,2.32,4.99,4.62,8.56,Low,Yes,South
+MET000005,City 99,Green Line,Delhi,New Delhi,Sector 25,22.803628,79.522842,5,Yes,No,Yes,Yes,Yes,75471,2018,DMRC,Yes,9.74,23.88,7.87,4.17,4.42,7.47,Low,Yes,East
+MET000006,Park 5,Green Line,Delhi,New Delhi,Sector 63,20.266176,85.235996,4,No,Yes,Yes,Yes,Yes,109328,2003,DMRC,Yes,8.77,26.23,1.36,2.72,1.61,13.15,Medium,No,Central
+MET000007,Park 86,Purple Line,Karnataka,Bengaluru,Sector 33,21.11708,80.642135,3,Yes,No,Yes,Yes,Yes,67796,2017,BMRCL,Yes,0.32,10.5,1.75,0.42,2.43,6.32,High,Yes,South
+MET000008,Market 23,Yellow Line,Delhi,New Delhi,Sector 73,12.251379,83.105013,6,Yes,No,Yes,Yes,Yes,163314,2018,DMRC,Yes,1.47,19.78,5.79,2.76,1.16,9.21,Low,No,Central
+MET000009,Sector 28,Pink Line,Telangana,Hyderabad,Sector 40,11.936296,81.205692,3,Yes,Yes,Yes,Yes,No,209754,2019,HMRL,Yes,7.95,5.25,1.35,3.13,1.87,9.99,Medium,Yes,South
+MET000010,Sector 49,Green Line,Telangana,Hyderabad,Sector 2,26.055803,81.146207,4,No,Yes,Yes,Yes,No,170748,2014,HMRL,Yes,8.86,26.21,2.37,1.67,0.27,13.32,Medium,No,North
+MET000011,Sector 96,Orange Line,Maharashtra,Mumbai,Sector 74,14.333678,87.540158,5,Yes,Yes,Yes,Yes,Yes,194235,2024,MMRC,Yes,6.48,17.31,4.2,1.27,4.96,11.74,Medium,Yes,North
+MET000012,Market 99,Blue Line,Delhi,New Delhi,Sector 2,20.155964,72.876745,6,Yes,Yes,Yes,Yes,No,242652,2010,DMRC,Yes,7.84,29.85,0.21,1.62,3.6,7.0,High,No,West
+MET000013,Sector 25,Pink Line,Tamil Nadu,Chennai,Sector 62,29.761234,82.775038,3,Yes,No,Yes,Yes,Yes,115951,2024,CMRL,Yes,7.98,12.32,1.75,3.22,2.85,12.46,High,No,West
+MET000014,Market 32,Red Line,Telangana,Hyderabad,Sector 57,19.793801,75.950871,2,Yes,Yes,Yes,Yes,No,60696,2002,HMRL,Yes,2.85,29.61,0.71,2.63,4.17,9.77,High,No,North
+MET000015,Lake 72,Orange Line,Tamil Nadu,Chennai,Sector 70,12.848687,83.843626,3,Yes,No,Yes,Yes,Yes,77043,2013,CMRL,Yes,8.83,31.14,5.32,3.18,1.58,14.83,Medium,Yes,Central
+MET000016,Park 20,Pink Line,Karnataka,Bengaluru,Sector 58,18.750215,78.021063,2,Yes,No,Yes,Yes,Yes,98502,2018,BMRCL,Yes,0.34,11.6,3.27,1.41,4.34,10.16,Medium,No,Central
+MET000017,City 77,Red Line,Karnataka,Bengaluru,Sector 72,16.43965,86.032929,6,Yes,Yes,Yes,Yes,No,115650,2019,BMRCL,Yes,1.85,25.54,2.26,4.45,0.49,7.41,Low,No,North
+MET000018,Market 99,Pink Line,Tamil Nadu,Chennai,Sector 75,13.363023,73.481559,2,No,No,Yes,Yes,Yes,135181,2016,CMRL,Yes,3.37,12.6,6.55,4.32,4.77,4.53,High,No,West
+MET000019,Central 90,Orange Line,Maharashtra,Mumbai,Sector 9,22.08725,80.243358,5,No,No,Yes,Yes,Yes,38962,2002,MMRC,Yes,0.95,10.94,0.49,3.25,0.35,1.31,High,Yes,East
+MET000020,City 66,Green Line,Telangana,Hyderabad,Sector 46,22.286216,81.458757,2,Yes,Yes,Yes,Yes,No,163301,2005,HMRL,Yes,6.09,39.53,0.61,0.8,2.15,14.89,High,Yes,North
+MET000021,Market 86,Purple Line,Telangana,Hyderabad,Sector 61,23.257836,79.064699,3,No,No,Yes,Yes,Yes,76188,2003,HMRL,Yes,6.44,18.22,0.69,0.22,1.78,10.31,Low,No,Central
+MET000022,City 12,Blue Line,Maharashtra,Mumbai,Sector 38,20.719395,77.612362,5,Yes,No,Yes,Yes,No,243547,2007,MMRC,Yes,8.7,12.39,0.48,4.22,3.94,11.86,Medium,Yes,East
+MET000023,Central 69,Green Line,Karnataka,Bengaluru,Sector 68,22.004858,83.101067,6,No,Yes,Yes,Yes,Yes,151287,2012,BMRCL,Yes,6.01,30.63,7.7,4.13,4.08,15.45,High,No,Central
+MET000024,City 19,Pink Line,Telangana,Hyderabad,Sector 65,17.092991,80.695812,3,No,Yes,Yes,Yes,No,10018,2005,HMRL,Yes,3.48,32.0,2.09,3.41,4.63,3.67,Medium,Yes,West
+MET000025,City 15,Orange Line,Karnataka,Bengaluru,Sector 31,23.544358,82.980664,4,No,Yes,Yes,Yes,Yes,98347,2025,BMRCL,Yes,5.17,24.3,0.17,1.58,0.57,4.17,Low,No,South
+MET000026,Market 82,Yellow Line,Telangana,Hyderabad,Sector 48,19.986551,74.786474,3,Yes,Yes,Yes,Yes,No,135963,2022,HMRL,Yes,2.34,21.72,3.1,1.99,4.34,12.27,High,Yes,South
+MET000027,Market 76,Orange Line,Delhi,New Delhi,Sector 28,22.014389,83.368084,6,Yes,No,Yes,Yes,Yes,104657,2004,DMRC,Yes,8.41,11.26,1.83,2.99,3.92,15.22,Low,No,South
+MET000028,Market 29,Orange Line,Telangana,Hyderabad,Sector 33,13.701969,83.587121,5,Yes,Yes,Yes,Yes,Yes,245361,2022,HMRL,Yes,6.17,22.47,4.34,2.39,4.41,11.83,High,Yes,Central
+MET000029,Market 94,Green Line,Karnataka,Bengaluru,Sector 24,8.754516,76.381332,5,Yes,Yes,Yes,Yes,No,27228,2002,BMRCL,Yes,2.33,15.23,0.85,2.38,4.46,14.99,Low,Yes,Central
+MET000030,Central 35,Green Line,Tamil Nadu,Chennai,Sector 16,29.569187,75.673451,3,Yes,No,Yes,Yes,No,16483,2013,CMRL,Yes,2.97,15.0,1.55,2.45,3.72,4.55,Medium,No,North
+MET000031,Park 64,Orange Line,Maharashtra,Mumbai,Sector 51,29.192456,75.717065,2,Yes,No,Yes,Yes,Yes,217335,2016,MMRC,Yes,3.15,27.86,0.19,1.51,4.9,18.17,Medium,No,North
+MET000032,Lake 75,Pink Line,Karnataka,Bengaluru,Sector 4,8.170932,82.991325,5,No,No,Yes,Yes,Yes,102277,2025,BMRCL,Yes,6.3,17.11,7.91,2.28,0.38,11.71,Low,No,South
+MET000033,Sector 19,Yellow Line,Tamil Nadu,Chennai,Sector 77,14.715574,80.102037,2,No,Yes,Yes,Yes,No,193349,2025,CMRL,Yes,1.05,21.22,6.49,3.03,4.58,13.82,Medium,No,North
+MET000034,Market 25,Yellow Line,Karnataka,Bengaluru,Sector 59,21.390458,74.582988,2,No,Yes,Yes,Yes,No,113652,2016,BMRCL,Yes,8.0,16.86,2.41,0.21,4.5,7.23,High,Yes,Central
+MET000035,City 67,Purple Line,Tamil Nadu,Chennai,Sector 36,11.3511,78.932313,2,Yes,No,Yes,Yes,Yes,7876,2012,CMRL,Yes,2.13,8.12,6.73,4.7,1.85,10.85,Low,No,Central
+MET000036,Sector 14,Yellow Line,Karnataka,Bengaluru,Sector 73,28.588997,77.706896,5,Yes,No,Yes,Yes,Yes,105939,2016,BMRCL,Yes,2.45,27.42,5.38,0.97,4.05,10.57,Medium,No,West
+MET000037,Park 50,Yellow Line,Tamil Nadu,Chennai,Sector 43,10.930821,87.912561,4,Yes,No,Yes,Yes,Yes,136579,2017,CMRL,Yes,1.13,38.64,7.98,0.79,2.8,16.49,Medium,Yes,Central
+MET000038,Sector 20,Yellow Line,Delhi,New Delhi,Sector 7,16.472973,79.72235,4,No,No,Yes,Yes,Yes,142681,2025,DMRC,Yes,4.27,12.4,1.35,3.99,2.43,8.35,High,Yes,East
+MET000039,Sector 74,Red Line,Karnataka,Bengaluru,Sector 16,20.116087,87.798659,4,No,No,Yes,Yes,Yes,43039,2018,BMRCL,Yes,1.46,36.87,3.03,3.32,3.85,7.81,Medium,Yes,East
+MET000040,City 15,Orange Line,Karnataka,Bengaluru,Sector 50,9.147344,85.037777,5,No,No,Yes,Yes,No,76704,2013,BMRCL,Yes,0.22,23.38,0.83,2.23,4.85,12.56,Medium,No,Central
+MET000041,Central 64,Blue Line,Tamil Nadu,Chennai,Sector 71,20.615806,78.541603,6,Yes,Yes,Yes,Yes,No,101482,2004,CMRL,Yes,9.71,24.9,4.04,3.77,4.46,11.31,High,Yes,Central
+MET000042,Lake 98,Green Line,Tamil Nadu,Chennai,Sector 4,28.062217,84.057434,4,No,No,Yes,Yes,No,157646,2017,CMRL,Yes,4.75,29.91,0.2,4.87,1.14,17.2,Low,Yes,East
+MET000043,Sector 15,Red Line,Maharashtra,Mumbai,Sector 30,22.094061,81.969548,3,No,Yes,Yes,Yes,Yes,142515,2010,MMRC,Yes,2.15,18.43,0.94,4.98,1.72,3.92,High,Yes,Central
+MET000044,Market 87,Pink Line,Maharashtra,Mumbai,Sector 59,20.396658,78.656186,4,Yes,Yes,Yes,Yes,Yes,235999,2004,MMRC,Yes,3.36,34.17,4.25,4.54,4.9,5.23,Medium,Yes,South
+MET000045,City 81,Orange Line,Maharashtra,Mumbai,Sector 65,23.903867,87.933134,2,Yes,No,Yes,Yes,Yes,60540,2003,MMRC,Yes,9.1,32.98,5.16,4.08,0.93,8.93,High,Yes,West
+MET000046,Park 12,Green Line,Delhi,New Delhi,Sector 48,17.948964,76.301333,4,No,Yes,Yes,Yes,Yes,176591,2011,DMRC,Yes,5.89,29.38,3.22,3.26,0.64,19.78,Medium,Yes,South
+MET000047,Market 88,Purple Line,Delhi,New Delhi,Sector 37,13.844859,77.448865,5,Yes,Yes,Yes,Yes,No,248785,2008,DMRC,Yes,4.91,12.42,5.05,1.68,2.61,15.95,High,Yes,North
+MET000048,Park 23,Yellow Line,Karnataka,Bengaluru,Sector 60,8.160948,87.458697,5,No,No,Yes,Yes,Yes,110519,2015,BMRCL,Yes,3.81,32.93,6.42,4.56,4.17,14.9,Medium,Yes,East
+MET000049,Market 69,Green Line,Tamil Nadu,Chennai,Sector 40,24.206738,84.095865,3,Yes,No,Yes,Yes,No,245560,2005,CMRL,Yes,9.49,12.99,5.52,4.4,3.28,12.15,Medium,No,West
+MET000050,Market 58,Orange Line,Telangana,Hyderabad,Sector 16,27.289998,86.940041,4,No,Yes,Yes,Yes,No,137040,2003,HMRL,Yes,1.95,19.26,0.58,1.7,2.34,2.26,High,No,North
+MET000051,Sector 81,Blue Line,Maharashtra,Mumbai,Sector 67,27.248685,76.414504,6,No,Yes,Yes,Yes,No,235862,2006,MMRC,Yes,5.73,23.19,2.98,0.11,1.81,16.12,Medium,Yes,West
+MET000052,Park 42,Red Line,Maharashtra,Mumbai,Sector 62,21.743757,81.682354,2,No,Yes,Yes,Yes,Yes,89344,2003,MMRC,Yes,0.28,7.68,3.8,4.11,3.68,12.93,Medium,Yes,Central
+MET000053,City 95,Orange Line,Telangana,Hyderabad,Sector 57,19.636939,77.866339,5,No,Yes,Yes,Yes,Yes,192740,2016,HMRL,Yes,4.08,6.82,5.32,3.39,1.97,5.97,Medium,No,Central
+MET000054,City 22,Green Line,Tamil Nadu,Chennai,Sector 23,9.755572,76.929357,4,No,No,Yes,Yes,Yes,69152,2022,CMRL,Yes,0.86,7.32,1.22,2.61,2.96,6.16,Medium,Yes,Central
+MET000055,Park 75,Red Line,Telangana,Hyderabad,Sector 75,27.083446,75.77425,4,No,Yes,Yes,Yes,Yes,138773,2005,HMRL,Yes,8.31,15.3,2.67,0.62,4.22,7.28,High,Yes,North
+MET000056,Central 21,Blue Line,Maharashtra,Mumbai,Sector 7,14.321818,81.540423,2,Yes,Yes,Yes,Yes,No,220301,2015,MMRC,Yes,4.42,32.37,7.98,1.01,1.89,9.11,High,Yes,Central
+MET000057,Park 58,Blue Line,Delhi,New Delhi,Sector 75,26.681628,76.614866,5,No,No,Yes,Yes,Yes,219305,2013,DMRC,Yes,0.82,20.38,5.51,0.96,4.09,10.01,High,No,West
+MET000058,Market 72,Yellow Line,Telangana,Hyderabad,Sector 38,27.670533,77.081439,4,No,Yes,Yes,Yes,Yes,101718,2003,HMRL,Yes,3.82,18.08,1.8,3.92,1.12,4.81,High,Yes,North
+MET000059,Sector 88,Pink Line,Tamil Nadu,Chennai,Sector 6,11.974415,86.222924,2,Yes,Yes,Yes,Yes,No,21055,2019,CMRL,Yes,8.25,9.68,7.92,3.14,3.99,16.34,Medium,No,West
+MET000060,Central 70,Red Line,Karnataka,Bengaluru,Sector 73,13.931344,75.306654,2,No,Yes,Yes,Yes,No,117330,2010,BMRCL,Yes,9.32,30.15,5.67,3.41,4.1,15.27,High,Yes,South
+MET000061,Central 2,Red Line,Delhi,New Delhi,Sector 36,10.644575,75.226174,3,No,Yes,Yes,Yes,No,224383,2016,DMRC,Yes,9.32,33.1,4.4,4.94,2.26,13.25,Low,No,South
+MET000062,Lake 8,Yellow Line,Delhi,New Delhi,Sector 38,23.424396,77.352835,5,Yes,Yes,Yes,Yes,No,231974,2023,DMRC,Yes,9.06,7.93,1.55,1.25,3.49,15.58,Low,No,North
+MET000063,City 19,Blue Line,Karnataka,Bengaluru,Sector 61,14.143588,82.347212,3,Yes,No,Yes,Yes,Yes,56415,2015,BMRCL,Yes,7.24,37.88,6.85,4.02,1.87,19.52,High,Yes,North
+MET000064,Central 20,Red Line,Karnataka,Bengaluru,Sector 80,25.713795,81.970153,3,No,No,Yes,Yes,No,31899,2021,BMRCL,Yes,2.23,33.34,0.66,2.31,0.89,16.52,Low,No,North
+MET000065,City 2,Blue Line,Karnataka,Bengaluru,Sector 21,12.535467,72.963098,3,No,No,Yes,Yes,No,140623,2004,BMRCL,Yes,3.34,34.95,4.47,3.81,2.97,5.91,Low,Yes,South
+MET000066,Lake 65,Orange Line,Maharashtra,Mumbai,Sector 23,14.762174,72.618473,5,Yes,No,Yes,Yes,No,5067,2017,MMRC,Yes,9.58,21.77,1.68,2.91,1.33,8.36,Low,Yes,East
+MET000067,Lake 71,Green Line,Tamil Nadu,Chennai,Sector 57,10.241939,84.274301,5,No,Yes,Yes,Yes,No,244650,2010,CMRL,Yes,0.2,23.37,3.71,3.59,0.96,9.06,High,No,South
+MET000068,Market 88,Blue Line,Telangana,Hyderabad,Sector 35,14.070771,83.453233,6,No,No,Yes,Yes,No,118548,2003,HMRL,Yes,0.93,10.23,4.45,2.31,4.28,16.99,Low,Yes,South
+MET000069,Lake 90,Yellow Line,Delhi,New Delhi,Sector 18,28.459275,74.374974,3,No,No,Yes,Yes,No,225777,2015,DMRC,Yes,2.88,12.5,5.15,0.74,3.85,12.27,High,No,East
+MET000070,Park 18,Purple Line,Maharashtra,Mumbai,Sector 47,20.550504,85.241031,6,Yes,Yes,Yes,Yes,Yes,235702,2018,MMRC,Yes,5.16,19.59,7.73,2.08,2.46,2.01,Low,No,East
+MET000071,Sector 39,Yellow Line,Delhi,New Delhi,Sector 25,25.942551,84.562252,2,No,Yes,Yes,Yes,No,83602,2017,DMRC,Yes,6.42,27.54,4.41,3.99,1.26,5.82,Low,Yes,North
+MET000072,Lake 28,Green Line,Delhi,New Delhi,Sector 56,11.479125,74.159764,2,No,No,Yes,Yes,Yes,37083,2024,DMRC,Yes,8.76,25.14,7.6,3.46,4.55,5.37,High,Yes,South
+MET000073,Market 36,Blue Line,Delhi,New Delhi,Sector 41,22.782871,75.755884,2,Yes,No,Yes,Yes,No,56357,2025,DMRC,Yes,2.5,26.6,7.14,3.11,3.46,7.8,Low,No,South
+MET000074,Central 18,Green Line,Maharashtra,Mumbai,Sector 66,8.72776,74.119455,3,No,No,Yes,Yes,No,159539,2002,MMRC,Yes,8.8,14.55,7.14,2.47,2.91,4.01,Low,Yes,Central
+MET000075,Sector 31,Purple Line,Maharashtra,Mumbai,Sector 6,12.417726,83.548191,6,No,No,Yes,Yes,Yes,234922,2025,MMRC,Yes,6.03,10.63,6.01,0.81,2.47,10.46,High,No,North
+MET000076,Central 34,Red Line,Karnataka,Bengaluru,Sector 35,18.160858,86.287914,3,Yes,Yes,Yes,Yes,No,13889,2003,BMRCL,Yes,9.74,7.25,1.4,2.59,0.62,17.95,Medium,Yes,South
+MET000077,Market 49,Red Line,Delhi,New Delhi,Sector 33,29.112262,84.192414,6,Yes,Yes,Yes,Yes,Yes,150899,2019,DMRC,Yes,4.37,32.33,6.02,0.62,4.79,11.38,Low,No,East
+MET000078,Lake 39,Purple Line,Maharashtra,Mumbai,Sector 31,9.563614,73.778121,4,No,Yes,Yes,Yes,Yes,198147,2006,MMRC,Yes,3.81,23.72,5.71,3.42,4.14,14.39,High,Yes,East
+MET000079,Park 91,Red Line,Maharashtra,Mumbai,Sector 19,15.777948,81.410166,2,Yes,No,Yes,Yes,No,184464,2011,MMRC,Yes,9.47,7.09,7.61,1.78,3.3,14.17,High,No,Central
+MET000080,Market 6,Yellow Line,Telangana,Hyderabad,Sector 37,26.979701,77.65879,2,Yes,No,Yes,Yes,No,149947,2024,HMRL,Yes,9.45,27.93,3.05,2.38,2.94,2.74,Low,Yes,West
+MET000081,Market 41,Purple Line,Karnataka,Bengaluru,Sector 50,19.57916,83.332713,6,No,Yes,Yes,Yes,No,30163,2003,BMRCL,Yes,3.77,24.06,4.98,0.52,4.22,7.71,Low,No,West
+MET000082,City 79,Green Line,Maharashtra,Mumbai,Sector 2,27.096513,74.008169,3,Yes,No,Yes,Yes,No,171870,2019,MMRC,Yes,8.03,19.45,7.78,0.49,4.78,9.47,Medium,Yes,South
+MET000083,Park 65,Purple Line,Karnataka,Bengaluru,Sector 76,15.085877,77.107271,4,Yes,No,Yes,Yes,Yes,93506,2011,BMRCL,Yes,1.1,15.09,7.96,3.38,3.22,10.83,High,No,Central
+MET000084,Market 85,Orange Line,Tamil Nadu,Chennai,Sector 26,22.702553,85.049998,4,No,No,Yes,Yes,No,196815,2015,CMRL,Yes,0.8,14.59,4.98,2.59,0.52,18.33,High,No,East
+MET000085,City 39,Purple Line,Maharashtra,Mumbai,Sector 19,28.12835,73.255725,6,Yes,Yes,Yes,Yes,Yes,165462,2004,MMRC,Yes,3.19,24.13,3.57,4.17,1.22,14.03,Low,No,Central
+MET000086,Central 16,Yellow Line,Telangana,Hyderabad,Sector 21,13.800541,78.196607,5,No,No,Yes,Yes,Yes,130461,2006,HMRL,Yes,8.98,28.95,4.91,3.45,0.39,5.42,High,No,South
+MET000087,Central 77,Orange Line,Maharashtra,Mumbai,Sector 11,22.673478,85.053967,4,No,Yes,Yes,Yes,No,73576,2018,MMRC,Yes,7.89,33.32,0.92,1.91,1.25,19.1,Medium,No,South
+MET000088,Park 42,Orange Line,Delhi,New Delhi,Sector 9,12.938153,87.479363,5,Yes,No,Yes,Yes,No,135741,2013,DMRC,Yes,8.62,7.39,7.82,3.44,0.55,6.58,Medium,No,North
+MET000089,City 31,Purple Line,Tamil Nadu,Chennai,Sector 49,19.698914,87.10418,3,Yes,Yes,Yes,Yes,Yes,72246,2012,CMRL,Yes,4.48,16.25,0.55,2.6,1.41,6.32,Medium,No,West
+MET000090,Market 7,Green Line,Karnataka,Bengaluru,Sector 48,13.024367,87.419264,2,No,Yes,Yes,Yes,No,25743,2007,BMRCL,Yes,0.94,30.0,3.58,1.59,4.36,17.58,Medium,No,West
+MET000091,Sector 34,Pink Line,Telangana,Hyderabad,Sector 71,25.299706,75.94267,5,No,Yes,Yes,Yes,No,180221,2023,HMRL,Yes,4.82,36.53,2.67,3.17,1.41,1.71,High,No,Central
+MET000092,Sector 22,Orange Line,Delhi,New Delhi,Sector 64,10.747455,81.087432,5,No,Yes,Yes,Yes,Yes,230283,2015,DMRC,Yes,3.14,28.24,0.38,4.65,4.87,12.86,Medium,Yes,Central
+MET000093,Central 82,Blue Line,Telangana,Hyderabad,Sector 53,12.954897,85.069548,5,Yes,No,Yes,Yes,Yes,235128,2017,HMRL,Yes,7.04,24.68,7.57,1.68,2.93,19.69,High,Yes,West
+MET000094,Central 18,Orange Line,Karnataka,Bengaluru,Sector 63,29.781744,76.324607,5,Yes,No,Yes,Yes,No,71933,2021,BMRCL,Yes,1.73,23.85,3.48,4.03,0.41,1.29,Medium,Yes,Central
+MET000095,City 2,Orange Line,Maharashtra,Mumbai,Sector 22,14.376588,86.702082,5,No,No,Yes,Yes,Yes,7236,2003,MMRC,Yes,2.36,20.88,4.4,1.33,3.31,11.83,Medium,Yes,Central
+MET000096,Park 31,Purple Line,Tamil Nadu,Chennai,Sector 65,19.052941,78.656496,6,Yes,Yes,Yes,Yes,No,207528,2023,CMRL,Yes,1.7,31.11,0.61,4.93,2.86,19.54,Low,No,Central
+MET000097,Park 33,Pink Line,Tamil Nadu,Chennai,Sector 31,29.476778,78.426257,5,Yes,No,Yes,Yes,No,85757,2004,CMRL,Yes,2.26,22.37,4.28,2.25,2.61,1.14,Low,No,Central
+MET000098,Lake 18,Yellow Line,Tamil Nadu,Chennai,Sector 54,14.629871,73.207353,2,No,No,Yes,Yes,No,121727,2007,CMRL,Yes,3.37,22.35,0.46,0.8,4.05,8.09,Low,Yes,South
+MET000099,Market 75,Pink Line,Telangana,Hyderabad,Sector 76,24.611724,75.236193,2,No,No,Yes,Yes,No,110958,2022,HMRL,Yes,6.81,28.6,6.11,1.6,3.66,0.56,Medium,No,South
+MET000100,City 19,Red Line,Delhi,New Delhi,Sector 57,29.9715,73.230228,4,Yes,No,Yes,Yes,Yes,234651,2014,DMRC,Yes,8.78,9.05,7.86,3.56,0.14,4.97,Medium,Yes,North
+MET000101,Market 49,Orange Line,Tamil Nadu,Chennai,Sector 19,8.263597,76.416771,3,No,No,Yes,Yes,No,183028,2012,CMRL,Yes,1.6,14.71,4.69,1.62,4.65,12.82,High,No,South
+MET000102,Market 20,Green Line,Maharashtra,Mumbai,Sector 24,12.766951,81.262088,3,No,Yes,Yes,Yes,Yes,138296,2024,MMRC,Yes,2.94,17.84,7.84,0.75,0.94,9.37,High,Yes,West
+MET000103,Park 36,Yellow Line,Telangana,Hyderabad,Sector 49,15.604451,73.084554,3,Yes,No,Yes,Yes,No,31723,2003,HMRL,Yes,3.0,9.12,7.71,3.98,3.97,5.97,Medium,Yes,South
+MET000104,Central 40,Yellow Line,Telangana,Hyderabad,Sector 79,19.19606,83.871268,4,Yes,Yes,Yes,Yes,No,89214,2003,HMRL,Yes,4.22,32.64,0.59,2.6,2.81,10.06,Medium,Yes,Central
+MET000105,Lake 27,Red Line,Delhi,New Delhi,Sector 48,28.268895,85.276633,5,Yes,Yes,Yes,Yes,No,244486,2006,DMRC,Yes,9.93,32.8,2.04,0.52,4.32,15.78,Medium,Yes,West
+MET000106,City 68,Pink Line,Maharashtra,Mumbai,Sector 70,27.15463,74.395795,3,Yes,Yes,Yes,Yes,Yes,44527,2012,MMRC,Yes,2.39,29.58,4.79,2.99,4.03,12.02,Low,Yes,East
+MET000107,Sector 50,Orange Line,Telangana,Hyderabad,Sector 31,26.72047,75.142252,5,No,Yes,Yes,Yes,Yes,75111,2005,HMRL,Yes,2.95,19.91,0.18,4.27,0.18,9.58,High,No,South
+MET000108,Park 61,Yellow Line,Karnataka,Bengaluru,Sector 32,13.721996,73.74241,4,Yes,Yes,Yes,Yes,No,219373,2023,BMRCL,Yes,7.9,28.06,2.16,3.85,2.06,15.05,Low,Yes,East
+MET000109,City 16,Green Line,Telangana,Hyderabad,Sector 2,14.825838,72.035606,4,Yes,Yes,Yes,Yes,Yes,172426,2018,HMRL,Yes,6.63,39.05,1.05,0.34,2.22,11.89,Medium,No,West
+MET000110,Market 38,Orange Line,Telangana,Hyderabad,Sector 9,25.103585,83.500793,4,No,No,Yes,Yes,Yes,88658,2023,HMRL,Yes,5.35,27.38,4.29,0.73,2.53,16.11,Low,Yes,Central
+MET000111,Park 15,Blue Line,Tamil Nadu,Chennai,Sector 23,13.008898,72.329268,4,No,No,Yes,Yes,No,152637,2019,CMRL,Yes,5.74,35.88,7.86,3.9,2.25,6.39,Low,Yes,West
+MET000112,Lake 1,Purple Line,Karnataka,Bengaluru,Sector 15,24.231484,82.302202,6,Yes,No,Yes,Yes,No,8134,2018,BMRCL,Yes,7.98,32.13,2.66,4.42,0.56,8.69,Low,Yes,South
+MET000113,Lake 52,Red Line,Tamil Nadu,Chennai,Sector 80,11.356117,84.354446,4,No,Yes,Yes,Yes,Yes,130424,2010,CMRL,Yes,0.22,14.3,2.43,1.78,1.65,18.86,High,Yes,South
+MET000114,Lake 35,Red Line,Karnataka,Bengaluru,Sector 10,9.870209,76.643587,5,No,No,Yes,Yes,Yes,147115,2017,BMRCL,Yes,1.89,16.1,1.97,3.49,1.59,9.97,Medium,No,Central
+MET000115,Lake 49,Yellow Line,Delhi,New Delhi,Sector 37,29.172554,81.861018,3,Yes,Yes,Yes,Yes,Yes,173802,2003,DMRC,Yes,0.69,18.9,1.57,3.58,4.06,19.73,Low,Yes,South
+MET000116,Market 41,Green Line,Telangana,Hyderabad,Sector 44,16.365236,83.309439,3,Yes,Yes,Yes,Yes,Yes,237697,2013,HMRL,Yes,7.46,37.87,6.72,3.59,4.66,19.46,Medium,No,South
+MET000117,Park 85,Pink Line,Tamil Nadu,Chennai,Sector 67,14.614499,74.355365,3,Yes,No,Yes,Yes,No,189193,2008,CMRL,Yes,9.18,21.03,6.46,0.48,3.36,17.7,High,No,East
+MET000118,Lake 43,Green Line,Delhi,New Delhi,Sector 20,17.242771,73.881113,4,No,No,Yes,Yes,No,54245,2002,DMRC,Yes,1.92,15.36,0.68,3.01,4.22,12.19,Low,No,East
+MET000119,City 17,Yellow Line,Tamil Nadu,Chennai,Sector 71,22.752088,73.507504,4,Yes,No,Yes,Yes,Yes,210952,2009,CMRL,Yes,7.96,8.98,2.41,2.37,4.67,8.32,High,No,South
+MET000120,Lake 8,Purple Line,Delhi,New Delhi,Sector 54,21.594526,75.937521,2,Yes,No,Yes,Yes,No,185499,2004,DMRC,Yes,9.75,16.53,5.22,3.92,0.87,4.11,High,No,Central
+MET000121,Lake 74,Orange Line,Maharashtra,Mumbai,Sector 12,14.296822,72.56037,4,Yes,Yes,Yes,Yes,Yes,147275,2023,MMRC,Yes,5.31,27.96,0.7,1.65,4.75,3.77,Medium,No,North
+MET000122,Sector 6,Purple Line,Telangana,Hyderabad,Sector 2,16.607263,83.744522,3,No,Yes,Yes,Yes,No,113451,2022,HMRL,Yes,5.28,12.47,5.78,1.1,2.44,10.71,High,Yes,Central
+MET000123,Park 47,Blue Line,Telangana,Hyderabad,Sector 21,23.996629,84.316782,4,Yes,No,Yes,Yes,Yes,88471,2012,HMRL,Yes,7.59,11.12,0.23,1.17,0.5,12.11,Low,Yes,South
+MET000124,Park 75,Blue Line,Tamil Nadu,Chennai,Sector 22,8.533969,83.016749,6,No,Yes,Yes,Yes,No,185428,2021,CMRL,Yes,9.6,27.83,3.91,1.79,0.38,14.27,Low,Yes,West
+MET000125,City 6,Yellow Line,Maharashtra,Mumbai,Sector 27,24.16679,73.899949,2,Yes,No,Yes,Yes,No,109662,2014,MMRC,Yes,4.71,5.67,3.16,1.46,2.24,5.61,Low,Yes,East
+MET000126,Park 53,Blue Line,Telangana,Hyderabad,Sector 15,17.505137,87.860467,3,Yes,Yes,Yes,Yes,Yes,26862,2024,HMRL,Yes,6.39,12.53,6.15,0.75,0.72,15.38,High,No,Central
+MET000127,City 93,Blue Line,Tamil Nadu,Chennai,Sector 11,29.599732,87.966622,3,No,Yes,Yes,Yes,No,194604,2007,CMRL,Yes,4.02,8.94,7.55,1.98,2.91,0.72,Low,Yes,East
+MET000128,Central 95,Pink Line,Maharashtra,Mumbai,Sector 32,27.315674,76.628245,2,Yes,No,Yes,Yes,Yes,194282,2023,MMRC,Yes,2.16,14.72,4.11,2.5,4.81,4.48,Low,Yes,Central
+MET000129,Park 47,Orange Line,Telangana,Hyderabad,Sector 46,13.90338,73.52185,4,No,Yes,Yes,Yes,Yes,192741,2013,HMRL,Yes,0.38,34.91,3.87,1.82,1.34,1.19,High,No,North
+MET000130,Lake 54,Pink Line,Karnataka,Bengaluru,Sector 7,21.323136,82.671895,3,No,Yes,Yes,Yes,No,118270,2022,BMRCL,Yes,8.53,13.34,1.83,1.72,4.99,5.82,High,No,North
+MET000131,Central 86,Blue Line,Telangana,Hyderabad,Sector 22,12.764046,82.790658,3,No,Yes,Yes,Yes,No,36026,2004,HMRL,Yes,0.63,26.19,7.62,0.18,2.34,5.96,Medium,No,East
+MET000132,Market 5,Red Line,Maharashtra,Mumbai,Sector 72,10.30302,75.963546,5,No,Yes,Yes,Yes,Yes,110768,2017,MMRC,Yes,2.41,5.17,6.82,0.92,2.64,2.24,Low,No,South
+MET000133,Sector 11,Blue Line,Karnataka,Bengaluru,Sector 15,10.792639,80.194994,4,Yes,No,Yes,Yes,No,108689,2025,BMRCL,Yes,2.93,35.46,1.55,4.25,0.59,7.71,High,No,East
+MET000134,Central 90,Purple Line,Karnataka,Bengaluru,Sector 17,23.960792,82.797508,6,No,Yes,Yes,Yes,Yes,124102,2007,BMRCL,Yes,6.39,5.25,6.5,1.29,2.9,1.06,Medium,No,South
+MET000135,Park 95,Green Line,Tamil Nadu,Chennai,Sector 45,15.18632,81.316804,6,Yes,Yes,Yes,Yes,No,203133,2006,CMRL,Yes,7.25,16.02,7.58,2.22,3.3,10.64,Medium,No,West
+MET000136,Lake 27,Pink Line,Telangana,Hyderabad,Sector 48,8.186746,74.608137,6,Yes,Yes,Yes,Yes,Yes,190842,2003,HMRL,Yes,7.35,25.8,6.98,0.54,1.13,14.74,High,Yes,South
+MET000137,Central 21,Red Line,Delhi,New Delhi,Sector 30,12.92598,80.091831,4,Yes,Yes,Yes,Yes,No,68705,2010,DMRC,Yes,2.2,10.53,1.16,1.63,4.33,3.42,Low,No,West
+MET000138,Park 57,Orange Line,Karnataka,Bengaluru,Sector 32,9.065852,76.871743,2,No,Yes,Yes,Yes,Yes,210276,2013,BMRCL,Yes,8.68,9.33,5.16,0.15,3.6,8.63,Medium,Yes,Central
+MET000139,Sector 53,Orange Line,Maharashtra,Mumbai,Sector 69,21.394437,81.794625,6,Yes,No,Yes,Yes,No,145903,2011,MMRC,Yes,2.38,14.51,6.74,2.08,2.22,18.95,Medium,No,South
+MET000140,Central 62,Purple Line,Maharashtra,Mumbai,Sector 17,28.988581,76.282929,2,No,Yes,Yes,Yes,Yes,100414,2019,MMRC,Yes,9.36,18.46,3.32,1.1,0.91,11.28,Medium,Yes,East
+MET000141,Market 10,Green Line,Karnataka,Bengaluru,Sector 46,24.900111,79.688516,6,Yes,Yes,Yes,Yes,Yes,210587,2006,BMRCL,Yes,3.01,20.89,2.17,0.29,1.38,1.94,Medium,Yes,North
+MET000142,Lake 25,Pink Line,Karnataka,Bengaluru,Sector 46,20.947383,72.53261,4,Yes,Yes,Yes,Yes,Yes,67203,2010,BMRCL,Yes,2.31,36.68,1.2,4.72,1.93,16.78,Low,No,West
+MET000143,Lake 79,Blue Line,Tamil Nadu,Chennai,Sector 63,12.248509,77.381127,4,No,Yes,Yes,Yes,Yes,55530,2014,CMRL,Yes,2.83,25.78,2.38,3.16,2.83,16.58,Low,Yes,North
+MET000144,City 93,Red Line,Telangana,Hyderabad,Sector 65,29.343652,87.815989,3,Yes,Yes,Yes,Yes,Yes,31296,2023,HMRL,Yes,6.98,17.97,5.1,4.57,2.32,16.74,High,Yes,East
+MET000145,Market 73,Orange Line,Delhi,New Delhi,Sector 68,23.59699,73.031276,3,Yes,Yes,Yes,Yes,No,81680,2016,DMRC,Yes,2.55,27.02,1.92,2.21,2.28,16.74,Low,No,Central
+MET000146,Market 74,Pink Line,Karnataka,Bengaluru,Sector 46,12.686009,84.506813,5,No,No,Yes,Yes,No,194111,2009,BMRCL,Yes,3.49,9.6,7.18,3.83,4.68,2.7,Low,No,North
+MET000147,Park 71,Pink Line,Telangana,Hyderabad,Sector 56,17.944534,77.852456,4,No,Yes,Yes,Yes,No,135279,2018,HMRL,Yes,5.07,16.89,6.37,4.88,0.56,14.73,High,Yes,Central
+MET000148,City 52,Purple Line,Karnataka,Bengaluru,Sector 19,18.371984,87.500462,4,Yes,No,Yes,Yes,Yes,31879,2019,BMRCL,Yes,5.76,26.42,6.98,4.05,4.78,13.01,High,Yes,East
+MET000149,Central 64,Yellow Line,Telangana,Hyderabad,Sector 14,15.236718,74.063361,6,No,No,Yes,Yes,No,175037,2015,HMRL,Yes,5.77,30.57,4.28,4.17,3.67,7.97,High,Yes,South
+MET000150,Park 40,Pink Line,Delhi,New Delhi,Sector 77,13.715899,86.564088,4,Yes,Yes,Yes,Yes,No,228517,2021,DMRC,Yes,6.51,27.49,3.99,2.61,3.62,6.1,Low,No,East
+MET000151,City 36,Purple Line,Tamil Nadu,Chennai,Sector 34,19.079641,79.276979,4,Yes,No,Yes,Yes,No,208277,2010,CMRL,Yes,8.96,16.79,5.71,4.89,1.17,8.97,Low,Yes,Central
+MET000152,Sector 54,Yellow Line,Karnataka,Bengaluru,Sector 80,16.409228,78.321483,5,No,Yes,Yes,Yes,Yes,117817,2003,BMRCL,Yes,8.99,25.13,6.19,3.87,0.67,11.93,Low,Yes,South
+MET000153,Central 19,Green Line,Tamil Nadu,Chennai,Sector 70,24.457616,77.695291,4,No,Yes,Yes,Yes,Yes,201975,2008,CMRL,Yes,7.73,32.16,4.11,1.88,0.35,6.64,Medium,No,West
+MET000154,Central 13,Pink Line,Maharashtra,Mumbai,Sector 31,23.900919,87.369173,6,No,No,Yes,Yes,No,108099,2014,MMRC,Yes,9.53,9.74,1.35,2.28,3.62,12.39,High,Yes,East
+MET000155,Lake 62,Yellow Line,Delhi,New Delhi,Sector 4,25.983057,85.624523,6,No,No,Yes,Yes,Yes,151914,2009,DMRC,Yes,3.2,7.61,1.08,2.0,1.58,18.46,Low,No,North
+MET000156,Market 61,Blue Line,Tamil Nadu,Chennai,Sector 66,22.457489,81.053327,3,Yes,No,Yes,Yes,No,39980,2022,CMRL,Yes,1.6,20.93,5.34,3.84,0.82,9.49,Medium,No,South
+MET000157,Park 21,Red Line,Karnataka,Bengaluru,Sector 62,26.13368,75.003069,6,Yes,No,Yes,Yes,Yes,194640,2022,BMRCL,Yes,4.56,29.75,4.95,4.92,2.45,14.71,Low,No,West
+MET000158,Market 26,Red Line,Karnataka,Bengaluru,Sector 38,12.936162,86.624998,3,Yes,Yes,Yes,Yes,No,121198,2002,BMRCL,Yes,7.91,16.55,1.0,1.15,4.58,17.28,Medium,Yes,Central
+MET000159,City 17,Red Line,Telangana,Hyderabad,Sector 42,14.174551,85.061436,4,Yes,No,Yes,Yes,Yes,143908,2020,HMRL,Yes,8.22,36.29,5.69,1.26,2.51,19.01,High,No,South
+MET000160,Central 3,Pink Line,Telangana,Hyderabad,Sector 64,28.138328,85.081683,2,Yes,Yes,Yes,Yes,Yes,133249,2019,HMRL,Yes,7.29,20.39,3.03,4.56,0.93,19.15,High,No,South
+MET000161,City 27,Red Line,Delhi,New Delhi,Sector 64,12.852046,77.044859,5,No,No,Yes,Yes,No,161331,2016,DMRC,Yes,3.36,26.13,2.44,4.26,0.78,19.87,Medium,Yes,South
+MET000162,Lake 27,Green Line,Karnataka,Bengaluru,Sector 71,29.648347,86.307972,2,Yes,Yes,Yes,Yes,Yes,155934,2006,BMRCL,Yes,1.06,17.23,5.62,4.79,1.52,8.75,High,No,North
+MET000163,Lake 75,Purple Line,Maharashtra,Mumbai,Sector 59,24.481962,79.538258,4,No,Yes,Yes,Yes,No,83603,2022,MMRC,Yes,6.53,29.74,4.67,4.75,3.96,3.21,Low,Yes,North
+MET000164,Lake 43,Green Line,Telangana,Hyderabad,Sector 65,11.625837,80.357485,2,Yes,No,Yes,Yes,Yes,234742,2009,HMRL,Yes,7.45,18.66,2.34,3.15,0.63,8.66,Low,Yes,South
+MET000165,Park 2,Orange Line,Tamil Nadu,Chennai,Sector 21,25.532664,79.955484,3,No,No,Yes,Yes,Yes,46853,2009,CMRL,Yes,4.92,36.47,1.76,3.45,0.19,1.82,Low,No,Central
+MET000166,Park 47,Purple Line,Telangana,Hyderabad,Sector 4,25.007032,72.616226,2,No,Yes,Yes,Yes,No,96131,2015,HMRL,Yes,7.01,20.49,1.69,3.17,1.01,6.4,High,No,South
+MET000167,Central 69,Orange Line,Delhi,New Delhi,Sector 74,17.745239,73.249665,5,No,No,Yes,Yes,Yes,118732,2019,DMRC,Yes,5.84,37.4,4.92,2.76,0.93,0.83,Low,Yes,Central
+MET000168,Lake 20,Green Line,Karnataka,Bengaluru,Sector 24,18.83601,74.79146,3,Yes,No,Yes,Yes,No,249570,2017,BMRCL,Yes,0.71,6.28,7.63,1.07,4.06,9.35,Low,No,South
+MET000169,Park 67,Orange Line,Tamil Nadu,Chennai,Sector 28,17.377088,82.578847,5,Yes,Yes,Yes,Yes,No,221734,2024,CMRL,Yes,4.31,17.25,4.48,1.74,1.1,13.23,Medium,No,West
+MET000170,Lake 65,Red Line,Telangana,Hyderabad,Sector 26,29.248735,72.65343,4,Yes,Yes,Yes,Yes,Yes,80302,2009,HMRL,Yes,5.35,12.76,1.35,0.5,3.39,18.63,Medium,Yes,Central
+MET000171,City 72,Red Line,Maharashtra,Mumbai,Sector 40,26.415621,87.087252,4,No,No,Yes,Yes,No,59823,2015,MMRC,Yes,0.89,23.42,3.0,3.75,3.91,11.64,Medium,No,Central
+MET000172,Central 21,Blue Line,Delhi,New Delhi,Sector 3,11.662999,82.420118,6,No,Yes,Yes,Yes,No,73033,2009,DMRC,Yes,4.85,16.59,4.11,2.01,3.52,6.14,Low,No,South
+MET000173,City 54,Yellow Line,Maharashtra,Mumbai,Sector 43,21.272734,84.938626,6,No,No,Yes,Yes,No,225104,2008,MMRC,Yes,5.34,15.91,2.85,3.56,0.89,11.02,Medium,No,Central
+MET000174,Sector 46,Red Line,Maharashtra,Mumbai,Sector 1,23.585881,83.3347,5,No,Yes,Yes,Yes,Yes,9093,2024,MMRC,Yes,8.65,14.95,5.3,0.36,4.01,5.31,Low,Yes,South
+MET000175,Central 96,Red Line,Karnataka,Bengaluru,Sector 24,13.130423,87.64989,4,No,Yes,Yes,Yes,No,89949,2010,BMRCL,Yes,2.86,37.76,3.44,3.54,1.49,8.0,High,Yes,Central
+MET000176,City 87,Green Line,Delhi,New Delhi,Sector 11,10.366915,79.247827,2,Yes,Yes,Yes,Yes,Yes,47272,2023,DMRC,Yes,9.65,9.81,2.3,4.8,1.26,6.36,High,Yes,East
+MET000177,Lake 36,Purple Line,Maharashtra,Mumbai,Sector 25,20.684429,82.980918,5,No,No,Yes,Yes,Yes,135646,2007,MMRC,Yes,3.62,19.73,6.44,3.13,3.91,11.94,Medium,Yes,Central
+MET000178,Sector 71,Red Line,Telangana,Hyderabad,Sector 30,14.961674,82.072875,3,Yes,Yes,Yes,Yes,Yes,61685,2007,HMRL,Yes,1.03,25.2,6.1,4.69,4.52,7.76,Medium,Yes,Central
+MET000179,Central 59,Green Line,Tamil Nadu,Chennai,Sector 60,8.654883,79.310693,6,No,No,Yes,Yes,No,238703,2019,CMRL,Yes,3.36,37.33,1.78,2.17,3.2,19.92,High,No,West
+MET000180,Market 57,Green Line,Telangana,Hyderabad,Sector 59,11.67928,75.342397,5,Yes,No,Yes,Yes,Yes,246332,2024,HMRL,Yes,9.51,8.97,7.59,3.45,1.22,11.33,High,No,East
+MET000181,Market 89,Purple Line,Telangana,Hyderabad,Sector 73,22.127506,86.45279,5,No,Yes,Yes,Yes,Yes,74692,2021,HMRL,Yes,2.08,36.59,6.13,4.94,4.27,6.09,High,No,Central
+MET000182,Lake 12,Red Line,Karnataka,Bengaluru,Sector 70,11.897772,81.839815,5,Yes,No,Yes,Yes,No,10487,2003,BMRCL,Yes,1.59,29.73,0.5,2.55,4.39,5.01,Low,Yes,South
+MET000183,Market 85,Blue Line,Telangana,Hyderabad,Sector 35,11.177848,84.37686,4,Yes,No,Yes,Yes,No,242038,2007,HMRL,Yes,1.23,15.76,0.5,2.22,2.23,12.02,Medium,Yes,West
+MET000184,Sector 62,Red Line,Maharashtra,Mumbai,Sector 33,24.611509,78.517783,6,Yes,No,Yes,Yes,No,133304,2021,MMRC,Yes,8.94,9.33,1.66,1.94,3.61,9.3,Medium,No,West
+MET000185,Market 59,Pink Line,Telangana,Hyderabad,Sector 41,10.861807,85.594486,6,Yes,Yes,Yes,Yes,No,141933,2013,HMRL,Yes,6.96,29.75,4.94,1.21,4.11,11.42,Medium,No,West
+MET000186,Lake 46,Yellow Line,Telangana,Hyderabad,Sector 57,8.600712,84.706937,5,Yes,No,Yes,Yes,No,115978,2003,HMRL,Yes,5.76,14.71,2.24,4.32,3.08,18.79,High,Yes,Central
+MET000187,Central 98,Red Line,Delhi,New Delhi,Sector 42,17.539091,87.183824,2,No,No,Yes,Yes,No,104307,2021,DMRC,Yes,8.02,21.28,1.6,4.93,2.29,18.77,Medium,No,East
+MET000188,Park 31,Green Line,Karnataka,Bengaluru,Sector 39,14.747391,74.485979,2,Yes,Yes,Yes,Yes,Yes,50782,2005,BMRCL,Yes,3.8,28.32,5.03,4.58,2.57,4.5,Low,No,Central
+MET000189,Lake 53,Yellow Line,Maharashtra,Mumbai,Sector 68,11.089971,83.614589,4,Yes,Yes,Yes,Yes,Yes,105781,2017,MMRC,Yes,8.35,32.5,4.68,1.06,1.74,16.3,High,No,North
+MET000190,City 33,Blue Line,Tamil Nadu,Chennai,Sector 32,17.909493,78.489767,4,Yes,Yes,Yes,Yes,No,236563,2008,CMRL,Yes,0.93,12.78,2.53,2.71,3.65,13.3,Medium,No,East
+MET000191,City 47,Green Line,Telangana,Hyderabad,Sector 44,23.199724,84.120997,2,No,No,Yes,Yes,No,20230,2024,HMRL,Yes,3.67,22.43,7.37,2.9,0.16,9.72,Medium,Yes,West
+MET000192,Market 82,Yellow Line,Tamil Nadu,Chennai,Sector 32,26.048568,84.198217,3,No,No,Yes,Yes,No,73164,2009,CMRL,Yes,0.65,6.06,0.69,1.97,0.16,2.74,High,No,West
+MET000193,Lake 85,Orange Line,Delhi,New Delhi,Sector 38,17.302168,85.726322,2,No,Yes,Yes,Yes,No,38868,2006,DMRC,Yes,9.39,33.95,1.43,4.7,1.96,18.04,Medium,Yes,West
+MET000194,Sector 51,Green Line,Karnataka,Bengaluru,Sector 78,16.639357,85.054286,6,No,Yes,Yes,Yes,Yes,99899,2016,BMRCL,Yes,5.11,34.33,3.64,1.95,4.24,14.72,High,Yes,West
+MET000195,Sector 37,Red Line,Maharashtra,Mumbai,Sector 35,9.882173,79.393737,3,Yes,No,Yes,Yes,Yes,198231,2019,MMRC,Yes,0.79,5.26,7.27,4.16,4.33,11.26,Medium,Yes,Central
+MET000196,Lake 73,Pink Line,Karnataka,Bengaluru,Sector 40,24.985183,77.255154,2,No,Yes,Yes,Yes,No,14468,2017,BMRCL,Yes,7.36,33.06,0.76,4.2,0.97,6.06,Low,No,West
+MET000197,Lake 29,Red Line,Maharashtra,Mumbai,Sector 55,17.009191,76.036961,5,Yes,Yes,Yes,Yes,Yes,38905,2007,MMRC,Yes,6.55,6.54,3.29,4.83,3.28,3.2,Low,Yes,West
+MET000198,City 75,Yellow Line,Maharashtra,Mumbai,Sector 22,19.883196,73.960793,3,No,No,Yes,Yes,No,147041,2011,MMRC,Yes,2.1,26.02,3.12,1.06,2.23,2.87,High,No,East
+MET000199,City 99,Yellow Line,Telangana,Hyderabad,Sector 33,25.971984,72.943922,5,No,Yes,Yes,Yes,Yes,117977,2007,HMRL,Yes,3.96,39.08,7.96,3.29,1.97,4.23,High,Yes,Central
+MET000200,Park 49,Purple Line,Delhi,New Delhi,Sector 40,15.05412,79.325017,2,Yes,Yes,Yes,Yes,No,193483,2011,DMRC,Yes,7.97,39.58,7.41,1.41,0.14,12.13,High,No,West
+MET000201,Lake 54,Purple Line,Karnataka,Bengaluru,Sector 40,24.057227,76.926087,2,Yes,No,Yes,Yes,No,74631,2021,BMRCL,Yes,0.93,16.13,7.97,1.66,1.18,11.15,Low,Yes,North
+MET000202,Sector 8,Blue Line,Delhi,New Delhi,Sector 30,15.020159,83.069314,3,Yes,No,Yes,Yes,No,62443,2005,DMRC,Yes,1.32,39.88,3.39,2.58,4.21,14.42,Low,Yes,South
+MET000203,Park 68,Blue Line,Delhi,New Delhi,Sector 43,8.466771,77.905198,2,Yes,No,Yes,Yes,No,97824,2011,DMRC,Yes,1.53,15.5,7.89,1.17,3.33,3.7,Low,Yes,North
+MET000204,Sector 88,Yellow Line,Karnataka,Bengaluru,Sector 70,14.398465,76.231985,2,Yes,No,Yes,Yes,No,122926,2023,BMRCL,Yes,7.0,9.77,7.76,2.84,4.6,10.09,High,No,West
+MET000205,Lake 68,Yellow Line,Maharashtra,Mumbai,Sector 11,23.238934,82.91399,2,Yes,No,Yes,Yes,Yes,119544,2012,MMRC,Yes,2.25,22.13,3.99,3.6,1.17,17.3,Medium,No,West
+MET000206,Sector 79,Green Line,Delhi,New Delhi,Sector 41,8.070937,73.034728,4,Yes,Yes,Yes,Yes,No,36715,2014,DMRC,Yes,1.58,6.85,2.21,2.73,1.4,7.24,High,Yes,Central
+MET000207,Park 9,Purple Line,Telangana,Hyderabad,Sector 60,29.656959,72.427458,3,No,Yes,Yes,Yes,Yes,147632,2009,HMRL,Yes,5.01,28.26,0.55,1.93,1.97,7.0,High,Yes,West
+MET000208,City 1,Orange Line,Delhi,New Delhi,Sector 41,9.260813,81.216225,5,Yes,Yes,Yes,Yes,No,122999,2024,DMRC,Yes,7.78,24.37,4.92,1.54,2.74,17.89,High,No,South
+MET000209,Lake 37,Blue Line,Delhi,New Delhi,Sector 57,10.219185,72.336847,4,Yes,Yes,Yes,Yes,Yes,137612,2012,DMRC,Yes,1.3,8.71,7.98,3.56,1.04,19.7,High,No,North
+MET000210,Lake 51,Green Line,Delhi,New Delhi,Sector 75,20.94736,79.835358,5,No,No,Yes,Yes,Yes,226700,2008,DMRC,Yes,5.74,24.58,5.84,0.72,3.49,6.11,Low,Yes,East
+MET000211,Park 98,Green Line,Tamil Nadu,Chennai,Sector 59,28.693247,74.310472,3,No,Yes,Yes,Yes,No,95803,2009,CMRL,Yes,1.11,10.89,2.34,3.72,4.28,0.72,Low,No,Central
+MET000212,Park 3,Red Line,Delhi,New Delhi,Sector 35,12.16484,73.445777,6,Yes,No,Yes,Yes,No,107030,2015,DMRC,Yes,8.66,21.69,4.31,4.71,0.34,19.76,High,No,South
+MET000213,Park 70,Orange Line,Telangana,Hyderabad,Sector 60,19.7668,84.76403,4,No,Yes,Yes,Yes,No,128237,2023,HMRL,Yes,9.01,36.7,4.47,1.85,0.87,1.2,Medium,No,East
+MET000214,Park 43,Green Line,Maharashtra,Mumbai,Sector 58,12.843205,73.112694,4,Yes,Yes,Yes,Yes,Yes,161633,2011,MMRC,Yes,5.49,38.36,1.38,4.04,1.46,8.35,High,Yes,North
+MET000215,Sector 27,Orange Line,Maharashtra,Mumbai,Sector 14,28.354806,80.397673,3,No,No,Yes,Yes,Yes,95070,2025,MMRC,Yes,5.46,12.31,2.26,4.79,2.1,7.81,Low,Yes,East
+MET000216,City 59,Blue Line,Delhi,New Delhi,Sector 52,17.775441,79.095901,2,Yes,No,Yes,Yes,Yes,193910,2020,DMRC,Yes,7.35,5.2,5.99,2.33,0.15,2.16,Medium,No,West
+MET000217,Park 38,Blue Line,Maharashtra,Mumbai,Sector 17,24.143303,74.916324,5,Yes,Yes,Yes,Yes,Yes,128507,2007,MMRC,Yes,9.16,16.67,0.82,2.23,2.57,19.56,Medium,No,Central
+MET000218,Sector 24,Red Line,Telangana,Hyderabad,Sector 8,26.348726,75.871945,3,Yes,No,Yes,Yes,Yes,196075,2005,HMRL,Yes,6.03,27.77,4.66,0.96,1.04,13.02,High,No,West
+MET000219,Sector 89,Yellow Line,Delhi,New Delhi,Sector 1,27.045308,81.058684,5,Yes,No,Yes,Yes,Yes,23731,2017,DMRC,Yes,0.91,25.65,6.13,1.19,0.31,2.01,High,Yes,Central
+MET000220,Lake 85,Purple Line,Maharashtra,Mumbai,Sector 35,15.821921,76.280942,6,No,Yes,Yes,Yes,No,180836,2010,MMRC,Yes,3.08,5.84,2.91,1.42,1.94,14.35,Medium,No,North
+MET000221,Sector 23,Red Line,Tamil Nadu,Chennai,Sector 19,10.532829,84.708671,2,Yes,No,Yes,Yes,Yes,19495,2010,CMRL,Yes,3.86,21.88,7.79,1.48,0.45,3.42,Medium,Yes,East
+MET000222,Central 39,Purple Line,Delhi,New Delhi,Sector 43,22.700193,86.815042,2,No,Yes,Yes,Yes,No,113764,2021,DMRC,Yes,7.74,35.91,7.78,1.06,2.4,4.74,Low,No,East
+MET000223,Sector 63,Purple Line,Telangana,Hyderabad,Sector 24,24.307532,82.311388,5,Yes,Yes,Yes,Yes,Yes,172079,2007,HMRL,Yes,9.79,27.81,4.34,1.33,1.38,6.49,High,No,East
+MET000224,City 44,Pink Line,Telangana,Hyderabad,Sector 55,25.930196,87.415223,4,No,No,Yes,Yes,Yes,249678,2006,HMRL,Yes,8.16,6.57,3.31,2.34,1.13,13.82,High,Yes,Central
+MET000225,Sector 64,Red Line,Tamil Nadu,Chennai,Sector 62,12.680966,75.731137,4,No,No,Yes,Yes,Yes,37858,2007,CMRL,Yes,9.68,26.11,3.95,3.37,4.79,18.79,High,No,North
+MET000226,Lake 94,Green Line,Tamil Nadu,Chennai,Sector 30,28.363256,85.359459,5,Yes,No,Yes,Yes,Yes,122303,2014,CMRL,Yes,1.74,16.36,6.66,2.12,3.37,12.05,High,Yes,South
+MET000227,Sector 86,Yellow Line,Delhi,New Delhi,Sector 42,15.11778,83.765136,6,Yes,Yes,Yes,Yes,Yes,60658,2003,DMRC,Yes,6.9,26.44,0.27,1.26,4.06,1.17,High,Yes,South
+MET000228,Lake 64,Blue Line,Delhi,New Delhi,Sector 54,11.330234,84.82173,3,No,No,Yes,Yes,No,35280,2005,DMRC,Yes,1.72,5.44,1.52,3.77,0.54,4.39,High,No,North
+MET000229,City 84,Blue Line,Karnataka,Bengaluru,Sector 9,18.839908,84.148511,3,No,Yes,Yes,Yes,No,136556,2006,BMRCL,Yes,7.96,24.25,3.63,4.51,3.52,8.24,High,Yes,Central
+MET000230,Market 58,Blue Line,Maharashtra,Mumbai,Sector 3,28.659766,74.967445,4,No,No,Yes,Yes,Yes,21341,2025,MMRC,Yes,2.95,28.79,5.98,3.77,4.69,14.42,High,Yes,West
+MET000231,Central 48,Purple Line,Maharashtra,Mumbai,Sector 28,18.092256,84.710736,6,No,Yes,Yes,Yes,Yes,20888,2006,MMRC,Yes,1.53,32.31,7.24,2.07,0.91,16.47,Low,No,South
+MET000232,Sector 86,Yellow Line,Maharashtra,Mumbai,Sector 43,21.928341,82.193481,4,Yes,Yes,Yes,Yes,No,87810,2014,MMRC,Yes,6.92,20.74,5.66,0.95,1.86,14.64,High,No,East
+MET000233,Central 22,Green Line,Delhi,New Delhi,Sector 73,27.924507,83.550328,6,Yes,Yes,Yes,Yes,Yes,144407,2014,DMRC,Yes,6.22,37.33,0.22,2.44,4.66,7.48,Low,Yes,East
+MET000234,Market 93,Red Line,Maharashtra,Mumbai,Sector 48,21.470571,86.09548,3,Yes,Yes,Yes,Yes,Yes,187722,2005,MMRC,Yes,3.63,17.35,4.63,3.84,1.06,4.44,Low,Yes,North
+MET000235,Sector 93,Yellow Line,Maharashtra,Mumbai,Sector 58,24.24079,83.357333,6,Yes,Yes,Yes,Yes,Yes,159859,2005,MMRC,Yes,3.97,20.84,1.92,0.1,1.3,17.55,Low,Yes,South
+MET000236,Sector 81,Purple Line,Tamil Nadu,Chennai,Sector 63,29.338593,76.722236,6,No,No,Yes,Yes,Yes,143705,2025,CMRL,Yes,1.13,6.54,4.51,1.8,4.58,13.66,Low,Yes,North
+MET000237,Lake 47,Pink Line,Delhi,New Delhi,Sector 58,8.188052,83.11891,4,No,No,Yes,Yes,Yes,90137,2004,DMRC,Yes,1.05,9.73,2.28,4.9,2.48,7.5,Medium,No,East
+MET000238,Market 70,Blue Line,Maharashtra,Mumbai,Sector 35,14.344626,72.758165,6,No,No,Yes,Yes,Yes,191999,2005,MMRC,Yes,7.08,28.99,0.14,3.25,0.18,3.1,Low,Yes,West
+MET000239,Lake 65,Green Line,Telangana,Hyderabad,Sector 63,18.072448,80.131768,6,Yes,Yes,Yes,Yes,Yes,91524,2017,HMRL,Yes,1.63,11.68,4.79,4.37,2.7,3.57,Medium,No,Central
+MET000240,Lake 61,Orange Line,Maharashtra,Mumbai,Sector 75,17.135068,86.53778,3,No,Yes,Yes,Yes,No,103328,2004,MMRC,Yes,0.45,37.27,2.46,2.41,4.21,18.94,High,Yes,East
+MET000241,Market 5,Green Line,Tamil Nadu,Chennai,Sector 75,12.522231,83.504954,4,Yes,Yes,Yes,Yes,No,139378,2003,CMRL,Yes,5.28,35.65,2.31,4.12,3.73,11.19,Low,No,West
+MET000242,Park 59,Orange Line,Karnataka,Bengaluru,Sector 45,28.390418,84.260977,4,Yes,Yes,Yes,Yes,No,247881,2022,BMRCL,Yes,2.54,22.99,1.76,0.7,0.33,18.88,Low,Yes,West
+MET000243,City 78,Green Line,Tamil Nadu,Chennai,Sector 48,24.112006,77.352136,2,Yes,Yes,Yes,Yes,Yes,34689,2020,CMRL,Yes,6.55,11.39,1.35,2.43,4.87,14.99,High,No,North
+MET000244,Park 73,Red Line,Maharashtra,Mumbai,Sector 24,22.111537,86.396542,6,Yes,Yes,Yes,Yes,No,232339,2008,MMRC,Yes,9.86,28.56,3.37,3.3,0.33,15.99,High,No,East
+MET000245,Sector 67,Orange Line,Telangana,Hyderabad,Sector 22,22.546118,80.392205,6,No,No,Yes,Yes,Yes,188409,2015,HMRL,Yes,8.97,8.35,6.22,2.01,0.26,11.79,High,Yes,West
+MET000246,Central 9,Red Line,Maharashtra,Mumbai,Sector 69,29.402652,72.011416,3,No,Yes,Yes,Yes,Yes,247484,2025,MMRC,Yes,7.97,39.26,1.21,0.92,2.89,15.97,Low,No,East
+MET000247,City 47,Purple Line,Telangana,Hyderabad,Sector 22,17.156044,80.404924,5,No,Yes,Yes,Yes,Yes,11343,2020,HMRL,Yes,7.37,5.69,5.05,4.68,4.64,13.99,High,Yes,Central
+MET000248,Park 97,Yellow Line,Telangana,Hyderabad,Sector 71,20.498243,87.790757,3,No,No,Yes,Yes,No,130065,2005,HMRL,Yes,9.04,38.05,5.89,4.4,3.47,4.15,Low,No,North
+MET000249,Central 68,Purple Line,Maharashtra,Mumbai,Sector 59,9.287602,73.332414,3,No,No,Yes,Yes,Yes,231126,2019,MMRC,Yes,2.27,14.35,4.06,1.52,4.26,11.85,High,No,South
+MET000250,Central 89,Green Line,Maharashtra,Mumbai,Sector 55,8.986026,72.62618,2,No,No,Yes,Yes,Yes,188342,2002,MMRC,Yes,9.51,26.69,0.72,2.28,4.84,7.62,High,No,East
+MET000251,Park 74,Green Line,Maharashtra,Mumbai,Sector 16,21.835892,82.274379,2,Yes,No,Yes,Yes,No,101759,2015,MMRC,Yes,1.02,32.98,7.36,1.78,2.9,13.68,Low,No,East
+MET000252,Market 80,Purple Line,Telangana,Hyderabad,Sector 32,28.496172,80.164816,3,Yes,No,Yes,Yes,Yes,52941,2011,HMRL,Yes,9.55,17.3,5.0,0.53,0.81,3.06,Medium,No,East
+MET000253,Sector 13,Yellow Line,Karnataka,Bengaluru,Sector 62,27.699386,76.2702,6,Yes,No,Yes,Yes,Yes,61828,2012,BMRCL,Yes,1.59,33.67,4.9,1.54,1.25,19.41,Medium,Yes,West
+MET000254,Central 42,Purple Line,Tamil Nadu,Chennai,Sector 31,16.07456,85.463251,6,Yes,Yes,Yes,Yes,No,190516,2020,CMRL,Yes,9.8,8.27,2.07,3.92,3.81,3.26,Medium,No,Central
+MET000255,Park 59,Green Line,Maharashtra,Mumbai,Sector 38,13.885217,81.223744,4,Yes,Yes,Yes,Yes,Yes,10147,2006,MMRC,Yes,2.39,18.12,6.29,1.91,3.17,16.1,Medium,No,East
+MET000256,Central 22,Yellow Line,Karnataka,Bengaluru,Sector 24,23.747316,83.014674,5,Yes,No,Yes,Yes,No,213471,2011,BMRCL,Yes,3.91,10.98,2.87,2.25,0.8,15.44,Medium,No,West
+MET000257,Lake 36,Red Line,Delhi,New Delhi,Sector 62,19.797637,83.769972,6,Yes,Yes,Yes,Yes,No,50577,2024,DMRC,Yes,8.19,8.71,7.18,0.84,2.79,11.29,Low,No,North
+MET000258,Market 84,Yellow Line,Tamil Nadu,Chennai,Sector 19,14.8513,73.344951,3,Yes,No,Yes,Yes,Yes,165817,2012,CMRL,Yes,2.93,36.89,3.42,1.87,2.07,19.84,Low,No,South
+MET000259,City 82,Green Line,Karnataka,Bengaluru,Sector 53,26.420341,73.373413,6,Yes,No,Yes,Yes,Yes,99994,2020,BMRCL,Yes,2.82,7.89,5.46,0.6,2.84,6.85,Medium,No,South
+MET000260,Park 15,Purple Line,Delhi,New Delhi,Sector 68,19.18572,78.583777,3,No,Yes,Yes,Yes,No,73179,2004,DMRC,Yes,6.56,19.69,4.3,2.43,4.07,4.08,High,Yes,East
+MET000261,Market 26,Red Line,Tamil Nadu,Chennai,Sector 49,21.215789,74.531736,3,Yes,No,Yes,Yes,Yes,73637,2017,CMRL,Yes,9.19,18.14,7.35,4.05,1.61,2.79,High,No,South
+MET000262,Sector 92,Pink Line,Telangana,Hyderabad,Sector 71,18.057033,81.700766,2,No,Yes,Yes,Yes,Yes,223696,2016,HMRL,Yes,8.85,17.15,2.34,3.03,1.78,3.53,Low,Yes,East
+MET000263,Sector 35,Green Line,Tamil Nadu,Chennai,Sector 49,23.935315,72.33398,3,No,No,Yes,Yes,No,141913,2017,CMRL,Yes,9.82,12.67,6.11,2.84,2.42,15.95,High,No,East
+MET000264,City 52,Yellow Line,Tamil Nadu,Chennai,Sector 79,23.801693,86.870814,6,No,Yes,Yes,Yes,No,49804,2006,CMRL,Yes,1.86,14.75,3.32,2.25,0.38,9.02,Medium,No,South
+MET000265,Central 98,Orange Line,Telangana,Hyderabad,Sector 74,29.027295,87.013026,4,Yes,No,Yes,Yes,No,113326,2004,HMRL,Yes,5.81,10.96,2.81,1.4,4.1,9.49,High,No,West
+MET000266,Sector 40,Green Line,Karnataka,Bengaluru,Sector 66,28.059955,78.32913,4,No,Yes,Yes,Yes,Yes,135903,2015,BMRCL,Yes,4.12,30.92,5.44,1.65,2.22,4.8,Low,No,North
+MET000267,Sector 62,Blue Line,Karnataka,Bengaluru,Sector 76,16.961575,76.197131,6,No,No,Yes,Yes,No,68464,2017,BMRCL,Yes,1.65,37.33,6.59,2.98,2.72,14.61,High,Yes,East
+MET000268,Market 75,Orange Line,Karnataka,Bengaluru,Sector 69,8.950863,86.309588,6,Yes,No,Yes,Yes,Yes,136192,2025,BMRCL,Yes,9.12,8.0,3.52,2.02,4.61,17.97,High,No,North
+MET000269,City 83,Pink Line,Tamil Nadu,Chennai,Sector 36,25.787769,77.398535,5,Yes,Yes,Yes,Yes,No,100685,2003,CMRL,Yes,3.28,5.69,0.46,0.24,2.8,16.06,Low,No,West
+MET000270,City 28,Blue Line,Delhi,New Delhi,Sector 28,25.873975,76.149653,3,No,No,Yes,Yes,Yes,101962,2024,DMRC,Yes,8.09,29.74,1.22,0.63,3.5,3.77,Medium,No,South
+MET000271,Central 76,Purple Line,Telangana,Hyderabad,Sector 64,9.516251,78.740888,2,No,Yes,Yes,Yes,No,223373,2005,HMRL,Yes,0.69,24.51,5.56,2.59,2.74,14.31,Low,Yes,North
+MET000272,City 19,Blue Line,Delhi,New Delhi,Sector 76,23.574382,82.622162,4,No,Yes,Yes,Yes,Yes,155961,2006,DMRC,Yes,4.07,26.2,3.46,1.26,1.37,1.14,Low,Yes,South
+MET000273,City 44,Pink Line,Karnataka,Bengaluru,Sector 64,27.539803,80.323948,4,No,No,Yes,Yes,No,241861,2025,BMRCL,Yes,7.78,26.67,6.64,2.02,2.17,9.92,Medium,No,East
+MET000274,Park 60,Red Line,Tamil Nadu,Chennai,Sector 72,28.956735,76.830308,3,Yes,Yes,Yes,Yes,Yes,6904,2016,CMRL,Yes,0.94,27.45,2.15,2.5,2.34,10.69,High,Yes,Central
+MET000275,Market 6,Green Line,Karnataka,Bengaluru,Sector 39,9.004564,72.117458,2,Yes,No,Yes,Yes,Yes,129098,2016,BMRCL,Yes,3.27,31.18,2.62,4.84,1.23,2.81,Medium,Yes,East
+MET000276,City 93,Pink Line,Karnataka,Bengaluru,Sector 64,17.123285,74.108651,6,Yes,No,Yes,Yes,Yes,29068,2017,BMRCL,Yes,9.38,24.6,7.8,0.18,3.6,4.07,Medium,No,North
+MET000277,Sector 17,Blue Line,Delhi,New Delhi,Sector 27,21.757771,84.978182,6,No,Yes,Yes,Yes,No,131480,2014,DMRC,Yes,4.64,35.89,3.5,0.18,4.4,2.37,Low,No,West
+MET000278,City 73,Green Line,Tamil Nadu,Chennai,Sector 16,26.063254,74.81944,2,No,No,Yes,Yes,No,170072,2023,CMRL,Yes,9.61,13.13,5.44,2.29,4.47,5.4,High,No,West
+MET000279,City 95,Purple Line,Maharashtra,Mumbai,Sector 18,29.554175,78.118313,2,No,Yes,Yes,Yes,No,238700,2013,MMRC,Yes,6.67,14.66,5.2,0.57,2.98,13.24,Low,No,North
+MET000280,City 86,Blue Line,Karnataka,Bengaluru,Sector 77,28.26651,86.992083,2,Yes,No,Yes,Yes,Yes,143486,2011,BMRCL,Yes,9.23,19.43,5.35,1.86,0.97,1.87,High,No,Central
+MET000281,Park 95,Red Line,Telangana,Hyderabad,Sector 59,12.868671,74.299021,4,No,No,Yes,Yes,Yes,188282,2022,HMRL,Yes,3.81,22.51,3.7,0.34,1.27,9.7,High,Yes,East
+MET000282,Market 53,Blue Line,Delhi,New Delhi,Sector 29,22.895723,86.371379,3,Yes,No,Yes,Yes,No,151408,2018,DMRC,Yes,7.04,32.86,5.38,2.4,0.25,3.48,Medium,No,West
+MET000283,City 10,Blue Line,Tamil Nadu,Chennai,Sector 23,22.210893,80.338846,3,Yes,No,Yes,Yes,Yes,9242,2004,CMRL,Yes,9.82,25.0,5.3,3.07,4.98,18.29,High,Yes,Central
+MET000284,City 18,Purple Line,Tamil Nadu,Chennai,Sector 12,21.826307,76.151799,6,Yes,Yes,Yes,Yes,No,11408,2016,CMRL,Yes,3.65,19.01,0.81,2.48,1.66,14.7,Medium,No,East
+MET000285,Park 33,Purple Line,Telangana,Hyderabad,Sector 54,23.566018,83.86398,4,Yes,Yes,Yes,Yes,No,117317,2020,HMRL,Yes,3.23,37.29,2.95,1.86,4.03,5.34,Low,Yes,West
+MET000286,Central 5,Green Line,Karnataka,Bengaluru,Sector 63,23.563977,72.423136,5,Yes,Yes,Yes,Yes,Yes,75116,2012,BMRCL,Yes,8.4,23.66,4.68,2.28,1.92,7.5,High,Yes,West
+MET000287,Central 12,Blue Line,Tamil Nadu,Chennai,Sector 63,10.223582,77.748994,3,Yes,No,Yes,Yes,Yes,176596,2005,CMRL,Yes,3.21,12.92,4.84,4.84,1.0,6.83,Low,Yes,West
+MET000288,Central 55,Green Line,Karnataka,Bengaluru,Sector 24,11.223469,75.002119,5,No,No,Yes,Yes,No,110414,2005,BMRCL,Yes,2.15,6.21,7.19,1.22,0.27,9.98,Medium,No,West
+MET000289,Lake 68,Orange Line,Delhi,New Delhi,Sector 38,28.971902,84.392512,4,No,Yes,Yes,Yes,No,212969,2024,DMRC,Yes,7.92,14.4,6.31,2.95,4.18,16.86,High,No,North
+MET000290,City 63,Yellow Line,Karnataka,Bengaluru,Sector 6,24.774945,76.238373,6,Yes,No,Yes,Yes,No,108080,2024,BMRCL,Yes,0.48,8.75,0.42,4.66,3.1,16.27,High,Yes,South
+MET000291,Market 86,Green Line,Karnataka,Bengaluru,Sector 18,23.752385,83.493576,4,No,No,Yes,Yes,Yes,33983,2021,BMRCL,Yes,5.89,12.72,1.91,2.74,2.96,6.33,Low,Yes,North
+MET000292,Market 99,Yellow Line,Telangana,Hyderabad,Sector 57,11.233494,77.496035,6,Yes,Yes,Yes,Yes,No,200170,2003,HMRL,Yes,9.25,12.78,3.78,3.61,1.02,5.0,High,No,East
+MET000293,Lake 70,Blue Line,Tamil Nadu,Chennai,Sector 3,27.555908,81.931518,2,Yes,Yes,Yes,Yes,Yes,92869,2022,CMRL,Yes,9.24,12.47,4.5,1.91,4.55,13.76,Low,Yes,North
+MET000294,Market 47,Green Line,Maharashtra,Mumbai,Sector 27,12.484369,87.327083,6,No,Yes,Yes,Yes,Yes,90550,2023,MMRC,Yes,1.37,16.61,0.53,1.39,2.9,17.57,Low,No,East
+MET000295,Lake 25,Purple Line,Karnataka,Bengaluru,Sector 26,21.659231,76.112799,4,No,Yes,Yes,Yes,Yes,74956,2021,BMRCL,Yes,4.94,35.16,5.2,3.97,3.91,0.57,High,No,Central
+MET000296,Park 24,Pink Line,Karnataka,Bengaluru,Sector 70,15.84751,76.215465,2,No,No,Yes,Yes,Yes,98747,2022,BMRCL,Yes,5.93,28.69,0.31,2.34,2.17,9.2,High,No,West
+MET000297,Central 17,Purple Line,Delhi,New Delhi,Sector 18,27.350427,87.173723,6,Yes,Yes,Yes,Yes,Yes,229324,2013,DMRC,Yes,8.78,15.33,1.99,2.7,3.24,6.03,Medium,No,East
+MET000298,Sector 22,Blue Line,Maharashtra,Mumbai,Sector 52,26.894092,75.84189,3,Yes,Yes,Yes,Yes,Yes,91651,2003,MMRC,Yes,4.71,7.95,1.47,1.82,1.15,1.74,Medium,Yes,North
+MET000299,Sector 5,Yellow Line,Tamil Nadu,Chennai,Sector 71,12.15887,85.281724,2,Yes,No,Yes,Yes,Yes,132822,2018,CMRL,Yes,6.22,10.09,1.2,0.64,0.56,6.83,Low,No,South
+MET000300,Central 38,Purple Line,Telangana,Hyderabad,Sector 40,29.361669,87.633763,6,No,No,Yes,Yes,Yes,248232,2010,HMRL,Yes,0.36,12.91,2.18,2.8,1.29,1.94,Medium,Yes,South
+MET000301,Park 61,Pink Line,Karnataka,Bengaluru,Sector 23,27.690835,80.933549,4,No,No,Yes,Yes,No,68153,2025,BMRCL,Yes,6.74,34.6,4.7,2.92,4.65,10.15,Medium,Yes,West
+MET000302,Lake 51,Blue Line,Delhi,New Delhi,Sector 66,13.321544,82.882706,3,No,No,Yes,Yes,Yes,67883,2023,DMRC,Yes,3.12,9.83,1.07,4.17,4.14,9.34,High,Yes,West
+MET000303,Market 19,Yellow Line,Tamil Nadu,Chennai,Sector 4,12.95153,84.162852,6,No,Yes,Yes,Yes,Yes,233030,2012,CMRL,Yes,5.23,11.25,7.92,0.34,3.61,5.38,Low,No,South
+MET000304,Lake 46,Yellow Line,Telangana,Hyderabad,Sector 25,28.608765,72.369088,4,Yes,Yes,Yes,Yes,No,219476,2007,HMRL,Yes,8.25,17.24,5.77,2.87,4.75,11.36,Medium,Yes,North
+MET000305,Lake 54,Pink Line,Delhi,New Delhi,Sector 8,12.747972,72.160518,5,Yes,No,Yes,Yes,No,156303,2011,DMRC,Yes,3.3,28.4,7.68,0.23,3.49,0.78,High,No,Central
+MET000306,Park 44,Blue Line,Maharashtra,Mumbai,Sector 43,21.737816,73.762577,2,No,No,Yes,Yes,No,18786,2020,MMRC,Yes,4.84,19.98,0.63,1.32,0.41,17.63,High,Yes,South
+MET000307,Central 9,Pink Line,Maharashtra,Mumbai,Sector 50,21.881733,73.519698,4,Yes,Yes,Yes,Yes,Yes,232600,2016,MMRC,Yes,1.56,28.14,5.62,3.09,3.96,6.02,High,No,East
+MET000308,Park 34,Blue Line,Karnataka,Bengaluru,Sector 22,28.572008,86.442729,6,No,Yes,Yes,Yes,No,132900,2021,BMRCL,Yes,4.69,32.96,1.84,1.76,0.81,1.34,High,Yes,West
+MET000309,City 25,Red Line,Maharashtra,Mumbai,Sector 18,14.2022,87.374397,4,No,Yes,Yes,Yes,Yes,36240,2010,MMRC,Yes,1.3,12.51,6.56,0.78,4.04,14.73,Medium,Yes,North
+MET000310,Market 14,Blue Line,Tamil Nadu,Chennai,Sector 41,24.662097,73.348745,4,No,No,Yes,Yes,No,77340,2012,CMRL,Yes,3.58,9.5,5.6,2.82,3.97,14.56,Medium,Yes,North
+MET000311,Sector 81,Green Line,Telangana,Hyderabad,Sector 41,26.218164,76.948166,4,Yes,No,Yes,Yes,Yes,92971,2007,HMRL,Yes,3.07,27.01,2.34,0.28,3.02,10.47,Medium,Yes,West
+MET000312,Sector 36,Yellow Line,Delhi,New Delhi,Sector 60,19.351451,72.749456,4,Yes,Yes,Yes,Yes,Yes,76179,2025,DMRC,Yes,8.93,19.46,3.97,3.98,4.22,17.97,High,No,East
+MET000313,City 41,Blue Line,Telangana,Hyderabad,Sector 77,14.721736,72.808281,4,No,No,Yes,Yes,Yes,40805,2012,HMRL,Yes,7.69,35.49,7.87,1.08,4.27,9.86,High,Yes,North
+MET000314,Lake 3,Purple Line,Maharashtra,Mumbai,Sector 11,21.159806,76.368574,5,Yes,No,Yes,Yes,Yes,5886,2009,MMRC,Yes,2.87,38.67,1.49,3.63,0.48,5.45,Medium,No,North
+MET000315,Central 58,Pink Line,Karnataka,Bengaluru,Sector 14,11.036503,84.992791,3,Yes,Yes,Yes,Yes,No,121425,2007,BMRCL,Yes,1.09,22.63,3.78,4.17,4.35,4.07,High,Yes,South
+MET000316,Sector 71,Orange Line,Delhi,New Delhi,Sector 55,11.646147,75.02189,5,No,No,Yes,Yes,Yes,80630,2003,DMRC,Yes,7.63,27.64,0.91,1.68,0.99,3.76,Low,Yes,South
+MET000317,Market 17,Orange Line,Telangana,Hyderabad,Sector 77,22.544538,87.413619,5,Yes,Yes,Yes,Yes,Yes,74593,2013,HMRL,Yes,7.34,25.42,0.36,4.62,3.97,16.5,Medium,No,North
+MET000318,Central 42,Yellow Line,Delhi,New Delhi,Sector 37,10.853552,77.074647,5,No,No,Yes,Yes,No,167431,2021,DMRC,Yes,1.0,31.47,2.97,1.04,4.28,9.28,High,No,Central
+MET000319,Market 73,Blue Line,Tamil Nadu,Chennai,Sector 35,9.547347,82.717463,3,Yes,Yes,Yes,Yes,Yes,103300,2006,CMRL,Yes,8.7,30.38,5.51,2.8,4.81,16.08,Low,Yes,West
+MET000320,Park 64,Yellow Line,Maharashtra,Mumbai,Sector 71,11.138989,85.11415,3,Yes,No,Yes,Yes,Yes,201555,2016,MMRC,Yes,7.21,7.8,7.28,2.65,4.29,18.89,Medium,Yes,North
+MET000321,City 76,Red Line,Telangana,Hyderabad,Sector 6,25.008222,79.346526,3,No,Yes,Yes,Yes,Yes,182777,2025,HMRL,Yes,0.72,38.99,7.86,2.39,4.72,5.5,Low,Yes,North
+MET000322,Lake 3,Blue Line,Karnataka,Bengaluru,Sector 27,29.107471,82.0475,4,Yes,No,Yes,Yes,No,119442,2008,BMRCL,Yes,2.29,25.54,4.17,1.44,3.68,3.9,High,Yes,West
+MET000323,Park 9,Pink Line,Tamil Nadu,Chennai,Sector 65,28.508679,84.679234,3,Yes,No,Yes,Yes,Yes,62231,2002,CMRL,Yes,1.01,31.46,5.93,0.31,4.08,19.79,High,Yes,South
+MET000324,Park 3,Purple Line,Telangana,Hyderabad,Sector 56,12.524703,84.618113,6,No,Yes,Yes,Yes,No,159439,2018,HMRL,Yes,9.74,14.74,6.52,4.86,0.93,7.87,Low,Yes,North
+MET000325,City 55,Red Line,Karnataka,Bengaluru,Sector 51,27.38422,84.132308,5,No,Yes,Yes,Yes,Yes,50850,2003,BMRCL,Yes,3.34,14.58,0.83,2.91,3.7,19.66,Medium,No,South
+MET000326,Market 36,Yellow Line,Telangana,Hyderabad,Sector 27,17.621038,73.811952,4,Yes,Yes,Yes,Yes,Yes,228769,2017,HMRL,Yes,7.1,20.76,5.02,3.31,3.97,4.02,Medium,Yes,South
+MET000327,Park 39,Orange Line,Tamil Nadu,Chennai,Sector 46,21.320492,76.171557,4,No,Yes,Yes,Yes,No,186036,2011,CMRL,Yes,1.04,37.37,0.21,3.32,2.21,5.85,High,Yes,North
+MET000328,Lake 49,Blue Line,Tamil Nadu,Chennai,Sector 22,17.330864,82.685795,4,No,No,Yes,Yes,Yes,198249,2017,CMRL,Yes,8.34,29.85,6.37,1.35,4.73,12.39,Low,Yes,Central
+MET000329,Lake 49,Red Line,Delhi,New Delhi,Sector 12,28.707101,73.911866,3,Yes,No,Yes,Yes,Yes,157956,2004,DMRC,Yes,8.1,9.59,1.13,4.16,0.21,3.99,High,Yes,East
+MET000330,Sector 18,Pink Line,Maharashtra,Mumbai,Sector 73,18.900172,73.889753,3,Yes,No,Yes,Yes,No,8550,2024,MMRC,Yes,7.65,21.14,1.32,0.57,3.69,19.5,Low,Yes,East
+MET000331,Lake 57,Purple Line,Delhi,New Delhi,Sector 14,11.629084,86.373716,3,Yes,Yes,Yes,Yes,No,62034,2002,DMRC,Yes,2.83,35.27,5.57,3.35,3.49,12.59,Medium,Yes,West
+MET000332,Lake 52,Pink Line,Karnataka,Bengaluru,Sector 51,14.827729,76.845886,6,Yes,Yes,Yes,Yes,No,183165,2009,BMRCL,Yes,4.59,16.31,7.52,3.5,1.37,12.26,Medium,No,Central
+MET000333,Lake 10,Yellow Line,Delhi,New Delhi,Sector 18,26.890066,72.185417,4,Yes,No,Yes,Yes,Yes,241480,2008,DMRC,Yes,9.99,6.04,4.23,0.74,2.25,11.61,High,No,Central
+MET000334,Central 18,Red Line,Karnataka,Bengaluru,Sector 49,14.482253,79.792249,2,No,No,Yes,Yes,No,32039,2015,BMRCL,Yes,5.05,7.12,3.0,2.75,3.93,7.59,Medium,Yes,East
+MET000335,Park 67,Orange Line,Telangana,Hyderabad,Sector 34,17.907557,84.835208,4,No,Yes,Yes,Yes,Yes,145666,2009,HMRL,Yes,9.07,10.31,0.66,3.97,4.94,0.98,Medium,No,North
+MET000336,City 83,Blue Line,Delhi,New Delhi,Sector 33,24.531882,81.57837,3,Yes,No,Yes,Yes,No,20144,2010,DMRC,Yes,4.02,31.44,1.83,3.92,2.29,16.79,High,No,Central
+MET000337,Park 52,Blue Line,Telangana,Hyderabad,Sector 50,22.487669,85.793863,5,No,No,Yes,Yes,Yes,113301,2002,HMRL,Yes,9.61,17.36,4.27,2.9,4.64,16.64,High,Yes,North
+MET000338,Market 42,Orange Line,Tamil Nadu,Chennai,Sector 5,23.299761,80.188044,2,No,No,Yes,Yes,Yes,192122,2025,CMRL,Yes,4.09,23.05,7.91,4.34,3.05,1.22,Medium,Yes,North
+MET000339,Market 65,Orange Line,Tamil Nadu,Chennai,Sector 52,22.683792,77.531237,6,Yes,No,Yes,Yes,No,159402,2016,CMRL,Yes,4.17,30.63,2.36,0.49,2.11,16.04,Medium,No,South
+MET000340,Market 27,Pink Line,Delhi,New Delhi,Sector 23,13.942541,74.349409,4,No,No,Yes,Yes,No,181190,2018,DMRC,Yes,7.84,26.9,7.34,3.91,3.35,18.9,Low,Yes,East
+MET000341,Park 88,Orange Line,Karnataka,Bengaluru,Sector 78,19.956519,78.850127,2,No,Yes,Yes,Yes,Yes,222290,2015,BMRCL,Yes,2.61,23.03,5.47,3.03,1.99,13.32,Medium,No,East
+MET000342,Market 62,Orange Line,Tamil Nadu,Chennai,Sector 74,26.10533,81.643749,2,Yes,No,Yes,Yes,Yes,238771,2006,CMRL,Yes,1.88,6.84,0.69,3.38,2.13,1.85,High,Yes,South
+MET000343,Park 55,Green Line,Karnataka,Bengaluru,Sector 36,22.716224,85.979143,4,Yes,No,Yes,Yes,No,18470,2023,BMRCL,Yes,1.62,21.35,6.51,3.37,2.71,2.45,Medium,No,South
+MET000344,Market 67,Red Line,Maharashtra,Mumbai,Sector 19,8.360295,78.518289,2,No,Yes,Yes,Yes,No,67574,2012,MMRC,Yes,6.23,35.69,0.61,1.64,2.05,12.08,High,Yes,North
+MET000345,Market 91,Pink Line,Delhi,New Delhi,Sector 13,21.918824,80.011858,6,Yes,Yes,Yes,Yes,Yes,56043,2008,DMRC,Yes,1.12,27.89,0.4,3.18,0.25,2.64,Medium,Yes,North
+MET000346,Lake 95,Red Line,Delhi,New Delhi,Sector 75,12.270292,86.18174,6,No,Yes,Yes,Yes,Yes,167767,2015,DMRC,Yes,3.1,18.21,4.96,1.81,2.72,6.03,Low,No,Central
+MET000347,Central 50,Yellow Line,Delhi,New Delhi,Sector 43,19.835085,84.820666,2,No,Yes,Yes,Yes,No,51994,2014,DMRC,Yes,4.23,26.76,7.52,1.95,2.33,9.09,High,No,Central
+MET000348,Park 24,Green Line,Tamil Nadu,Chennai,Sector 62,28.293705,81.863531,3,No,Yes,Yes,Yes,No,88950,2011,CMRL,Yes,0.71,38.67,5.19,2.75,4.29,13.93,Medium,No,West
+MET000349,Central 73,Purple Line,Maharashtra,Mumbai,Sector 55,23.45365,72.154473,3,No,No,Yes,Yes,No,27260,2004,MMRC,Yes,9.15,5.22,7.55,1.31,3.87,9.74,High,Yes,North
+MET000350,City 61,Purple Line,Maharashtra,Mumbai,Sector 61,17.63379,73.416482,3,Yes,Yes,Yes,Yes,No,221089,2015,MMRC,Yes,8.92,7.35,0.53,1.48,4.55,15.17,Low,No,East
+MET000351,Market 42,Blue Line,Maharashtra,Mumbai,Sector 56,16.135459,72.348601,5,Yes,Yes,Yes,Yes,Yes,189457,2025,MMRC,Yes,7.44,18.47,4.32,3.11,4.46,2.08,Low,No,North
+MET000352,Park 73,Green Line,Delhi,New Delhi,Sector 52,17.015281,86.948614,2,No,Yes,Yes,Yes,No,218059,2012,DMRC,Yes,4.08,35.88,6.14,0.56,0.43,17.65,Medium,Yes,North
+MET000353,Market 50,Green Line,Tamil Nadu,Chennai,Sector 41,12.695801,85.981899,5,No,No,Yes,Yes,Yes,170566,2003,CMRL,Yes,3.56,30.78,3.48,2.83,2.58,19.38,Low,No,East
+MET000354,Sector 75,Orange Line,Telangana,Hyderabad,Sector 24,27.518251,86.740059,3,No,No,Yes,Yes,Yes,141495,2010,HMRL,Yes,6.97,9.75,5.01,1.34,3.72,7.92,Medium,No,South
+MET000355,Park 33,Yellow Line,Delhi,New Delhi,Sector 50,18.924612,87.548616,4,No,Yes,Yes,Yes,No,218797,2007,DMRC,Yes,9.03,29.1,7.81,1.23,0.46,10.26,Medium,No,Central
+MET000356,Park 80,Green Line,Tamil Nadu,Chennai,Sector 36,23.478725,74.647806,3,Yes,Yes,Yes,Yes,No,37934,2006,CMRL,Yes,3.59,11.21,3.81,0.37,2.09,11.85,Low,No,North
+MET000357,City 10,Green Line,Tamil Nadu,Chennai,Sector 49,27.112863,84.478472,6,Yes,Yes,Yes,Yes,No,200053,2023,CMRL,Yes,6.81,26.04,6.53,0.4,1.01,19.39,High,Yes,Central
+MET000358,Lake 50,Green Line,Karnataka,Bengaluru,Sector 24,20.602173,75.576202,3,Yes,No,Yes,Yes,No,105843,2019,BMRCL,Yes,0.64,36.02,5.59,1.64,1.18,15.16,Medium,No,South
+MET000359,Central 91,Green Line,Karnataka,Bengaluru,Sector 42,16.158469,79.324551,3,Yes,Yes,Yes,Yes,No,162125,2005,BMRCL,Yes,5.99,33.65,6.55,2.21,2.92,1.92,Low,No,North
+MET000360,Lake 50,Pink Line,Delhi,New Delhi,Sector 16,13.327334,78.229996,2,Yes,No,Yes,Yes,No,129978,2009,DMRC,Yes,9.95,16.23,0.87,4.31,1.0,7.36,High,Yes,East
+MET000361,City 13,Green Line,Karnataka,Bengaluru,Sector 53,23.257645,79.673712,4,No,No,Yes,Yes,Yes,241711,2004,BMRCL,Yes,5.94,32.09,0.94,4.66,0.31,8.04,High,Yes,North
+MET000362,Lake 14,Green Line,Delhi,New Delhi,Sector 51,8.367068,79.297021,4,No,Yes,Yes,Yes,No,177985,2024,DMRC,Yes,9.7,25.0,0.26,3.2,2.19,17.45,Medium,No,Central
+MET000363,City 22,Yellow Line,Tamil Nadu,Chennai,Sector 27,24.131671,75.757655,6,Yes,Yes,Yes,Yes,Yes,214465,2012,CMRL,Yes,7.19,15.75,0.32,4.75,3.61,11.36,High,Yes,Central
+MET000364,Central 22,Blue Line,Tamil Nadu,Chennai,Sector 6,18.65561,74.231571,2,No,No,Yes,Yes,No,115201,2020,CMRL,Yes,9.1,30.99,1.33,3.5,3.52,14.42,Low,No,Central
+MET000365,Lake 72,Green Line,Telangana,Hyderabad,Sector 66,26.714176,83.371242,2,Yes,No,Yes,Yes,No,173616,2005,HMRL,Yes,6.51,9.23,0.33,3.21,4.62,4.03,High,No,South
+MET000366,Lake 58,Red Line,Delhi,New Delhi,Sector 11,14.205177,74.076625,4,Yes,No,Yes,Yes,No,86129,2022,DMRC,Yes,7.25,27.65,7.29,0.74,0.72,4.02,Low,No,North
+MET000367,Central 3,Purple Line,Telangana,Hyderabad,Sector 18,9.606676,73.181535,2,Yes,Yes,Yes,Yes,Yes,101110,2002,HMRL,Yes,6.54,30.0,6.27,1.87,2.67,12.15,High,No,Central
+MET000368,Central 11,Orange Line,Telangana,Hyderabad,Sector 70,15.535542,76.915502,2,No,Yes,Yes,Yes,No,236917,2016,HMRL,Yes,6.13,17.16,0.96,4.64,0.96,6.79,Low,No,West
+MET000369,Market 27,Red Line,Maharashtra,Mumbai,Sector 62,11.983861,86.482572,2,Yes,No,Yes,Yes,Yes,195591,2011,MMRC,Yes,6.95,26.42,5.7,4.35,1.74,10.41,Low,Yes,West
+MET000370,Market 53,Yellow Line,Tamil Nadu,Chennai,Sector 28,8.23409,73.467665,4,No,No,Yes,Yes,Yes,63891,2008,CMRL,Yes,8.83,11.84,4.63,4.47,4.51,0.54,Medium,Yes,West
+MET000371,City 89,Red Line,Maharashtra,Mumbai,Sector 55,15.280316,78.764707,6,Yes,Yes,Yes,Yes,No,176189,2010,MMRC,Yes,4.67,35.68,2.51,0.35,1.35,11.64,Low,Yes,West
+MET000372,Market 90,Orange Line,Telangana,Hyderabad,Sector 68,10.837862,76.381019,5,No,Yes,Yes,Yes,No,48651,2024,HMRL,Yes,7.59,19.04,0.41,2.27,2.81,3.71,Medium,Yes,West
+MET000373,Market 89,Red Line,Maharashtra,Mumbai,Sector 8,29.810864,85.20477,2,No,Yes,Yes,Yes,No,226226,2024,MMRC,Yes,7.6,12.46,1.44,3.39,4.6,3.9,Low,No,Central
+MET000374,Park 94,Purple Line,Karnataka,Bengaluru,Sector 31,12.686062,78.068964,2,No,No,Yes,Yes,No,221378,2016,BMRCL,Yes,2.08,10.03,7.9,1.18,4.5,2.88,High,Yes,South
+MET000375,City 73,Purple Line,Karnataka,Bengaluru,Sector 25,13.652423,81.264624,5,Yes,No,Yes,Yes,Yes,85552,2005,BMRCL,Yes,8.15,38.47,7.52,0.42,2.71,15.04,High,Yes,North
+MET000376,Park 48,Yellow Line,Maharashtra,Mumbai,Sector 67,12.755603,87.902154,2,No,No,Yes,Yes,No,149449,2019,MMRC,Yes,7.34,39.02,0.7,2.88,1.65,5.81,High,Yes,East
+MET000377,Sector 64,Orange Line,Delhi,New Delhi,Sector 6,17.222449,87.579704,2,Yes,No,Yes,Yes,No,185773,2020,DMRC,Yes,3.79,31.76,7.26,4.5,2.52,0.82,Medium,Yes,North
+MET000378,Market 26,Yellow Line,Maharashtra,Mumbai,Sector 58,27.266624,73.786162,5,No,Yes,Yes,Yes,Yes,194846,2005,MMRC,Yes,4.56,34.39,3.16,1.1,4.39,16.55,Low,Yes,East
+MET000379,City 87,Purple Line,Maharashtra,Mumbai,Sector 70,18.217347,73.082285,5,No,Yes,Yes,Yes,Yes,153363,2009,MMRC,Yes,1.74,31.74,7.1,4.57,1.69,9.38,Low,Yes,Central
+MET000380,City 58,Blue Line,Maharashtra,Mumbai,Sector 80,19.333354,87.000264,3,No,Yes,Yes,Yes,No,108787,2017,MMRC,Yes,8.42,11.52,2.33,1.72,4.42,17.22,Low,No,West
+MET000381,Market 68,Green Line,Telangana,Hyderabad,Sector 24,26.909289,78.765703,4,No,No,Yes,Yes,Yes,181140,2022,HMRL,Yes,4.07,36.01,4.12,3.03,4.4,19.73,Low,Yes,West
+MET000382,Central 94,Red Line,Delhi,New Delhi,Sector 46,26.103685,72.678944,3,No,Yes,Yes,Yes,No,158052,2004,DMRC,Yes,2.48,18.65,2.04,4.99,1.85,0.96,Low,Yes,East
+MET000383,Central 48,Green Line,Telangana,Hyderabad,Sector 73,12.521897,76.496912,5,No,No,Yes,Yes,No,207214,2005,HMRL,Yes,9.91,22.71,5.89,2.31,1.37,5.29,Low,Yes,South
+MET000384,Lake 4,Orange Line,Karnataka,Bengaluru,Sector 43,16.9827,85.096743,5,No,No,Yes,Yes,No,232898,2010,BMRCL,Yes,5.37,7.96,2.3,2.83,3.42,0.9,High,Yes,East
+MET000385,Lake 36,Orange Line,Maharashtra,Mumbai,Sector 57,21.912861,86.775431,2,No,Yes,Yes,Yes,Yes,95704,2006,MMRC,Yes,7.98,35.5,4.26,4.88,2.35,2.02,High,Yes,East
+MET000386,Lake 91,Pink Line,Telangana,Hyderabad,Sector 15,19.292838,81.646197,2,No,Yes,Yes,Yes,Yes,128437,2016,HMRL,Yes,2.64,5.6,7.4,0.62,0.87,9.97,Low,No,Central
+MET000387,Sector 3,Yellow Line,Karnataka,Bengaluru,Sector 53,23.648394,85.028692,4,No,Yes,Yes,Yes,Yes,183397,2014,BMRCL,Yes,5.88,38.67,2.63,4.07,0.67,15.05,Low,No,North
+MET000388,Central 7,Orange Line,Maharashtra,Mumbai,Sector 31,11.753601,87.266056,2,Yes,Yes,Yes,Yes,Yes,180119,2003,MMRC,Yes,9.37,9.14,1.04,3.7,1.55,10.71,High,No,West
+MET000389,Central 8,Orange Line,Karnataka,Bengaluru,Sector 42,16.292079,86.991511,5,Yes,Yes,Yes,Yes,Yes,205326,2019,BMRCL,Yes,4.52,33.09,3.73,0.15,1.02,8.78,Medium,No,Central
+MET000390,Lake 46,Yellow Line,Maharashtra,Mumbai,Sector 19,18.217569,86.585456,3,Yes,Yes,Yes,Yes,No,31782,2019,MMRC,Yes,5.5,36.13,3.09,4.0,1.5,3.16,Low,No,East
+MET000391,Market 13,Yellow Line,Karnataka,Bengaluru,Sector 3,24.116541,83.140996,4,No,No,Yes,Yes,Yes,87299,2002,BMRCL,Yes,8.28,34.12,5.03,4.89,2.82,10.73,Medium,No,East
+MET000392,Park 95,Red Line,Karnataka,Bengaluru,Sector 16,19.130171,86.256936,3,No,No,Yes,Yes,No,23045,2009,BMRCL,Yes,5.94,14.51,1.48,1.43,4.25,8.67,High,No,East
+MET000393,Market 68,Blue Line,Telangana,Hyderabad,Sector 48,16.675683,81.209364,5,No,No,Yes,Yes,No,201122,2011,HMRL,Yes,2.42,37.79,4.67,4.6,3.59,17.14,High,Yes,South
+MET000394,Sector 29,Green Line,Telangana,Hyderabad,Sector 53,22.238429,73.797629,2,No,Yes,Yes,Yes,Yes,49402,2016,HMRL,Yes,6.16,7.82,4.61,2.76,0.94,18.34,Low,No,North
+MET000395,Market 52,Pink Line,Karnataka,Bengaluru,Sector 76,29.72487,84.381892,6,No,Yes,Yes,Yes,Yes,101286,2013,BMRCL,Yes,2.56,34.1,6.02,3.01,1.58,4.21,Low,Yes,Central
+MET000396,Park 9,Orange Line,Telangana,Hyderabad,Sector 73,8.215059,78.434106,2,No,No,Yes,Yes,Yes,102910,2019,HMRL,Yes,6.93,25.31,3.55,3.31,0.67,2.54,Low,No,Central
+MET000397,City 38,Green Line,Delhi,New Delhi,Sector 61,22.677647,83.417709,6,Yes,No,Yes,Yes,No,42874,2009,DMRC,Yes,4.63,7.9,6.61,2.69,1.4,14.27,High,Yes,Central
+MET000398,Lake 19,Yellow Line,Karnataka,Bengaluru,Sector 5,24.530988,76.524147,6,No,Yes,Yes,Yes,Yes,159469,2025,BMRCL,Yes,2.22,16.39,5.44,1.89,0.56,6.44,High,No,North
+MET000399,Lake 98,Blue Line,Maharashtra,Mumbai,Sector 79,19.617976,87.58017,2,Yes,Yes,Yes,Yes,No,121912,2002,MMRC,Yes,5.4,28.04,2.58,4.21,0.68,5.08,Medium,No,Central
+MET000400,Park 98,Blue Line,Telangana,Hyderabad,Sector 66,13.3309,87.872441,3,No,Yes,Yes,Yes,Yes,81307,2020,HMRL,Yes,5.11,28.02,6.55,3.14,4.74,17.97,High,Yes,East
+MET000401,City 99,Purple Line,Delhi,New Delhi,Sector 60,18.872364,87.36628,4,Yes,Yes,Yes,Yes,Yes,24120,2008,DMRC,Yes,6.13,27.85,6.68,4.4,2.63,9.1,Medium,No,West
+MET000402,Market 12,Blue Line,Telangana,Hyderabad,Sector 59,19.136297,85.249153,2,Yes,Yes,Yes,Yes,No,105458,2002,HMRL,Yes,6.47,17.38,5.31,0.21,3.21,5.17,Medium,No,North
+MET000403,Park 94,Pink Line,Telangana,Hyderabad,Sector 41,12.37077,83.493707,4,Yes,Yes,Yes,Yes,No,108081,2013,HMRL,Yes,2.87,35.49,2.31,2.23,2.61,14.27,High,No,West
+MET000404,City 5,Pink Line,Maharashtra,Mumbai,Sector 36,16.62068,81.929809,3,Yes,Yes,Yes,Yes,No,93621,2020,MMRC,Yes,6.16,9.22,7.72,4.07,2.86,2.85,Medium,Yes,East
+MET000405,Central 21,Blue Line,Telangana,Hyderabad,Sector 21,28.255529,83.906583,3,No,Yes,Yes,Yes,No,81519,2014,HMRL,Yes,0.6,39.39,5.43,4.59,3.74,17.19,Low,No,South
+MET000406,Park 81,Pink Line,Karnataka,Bengaluru,Sector 29,23.656915,86.847958,6,No,Yes,Yes,Yes,No,48163,2003,BMRCL,Yes,9.51,7.16,7.38,4.99,2.86,5.52,High,Yes,West
+MET000407,Market 20,Green Line,Telangana,Hyderabad,Sector 59,12.955052,83.422931,4,No,No,Yes,Yes,No,231963,2012,HMRL,Yes,4.62,7.49,5.79,1.8,2.5,5.21,High,No,East
+MET000408,Park 56,Purple Line,Delhi,New Delhi,Sector 60,13.231814,75.663697,6,No,No,Yes,Yes,Yes,24345,2015,DMRC,Yes,5.05,12.29,3.39,0.25,4.73,16.45,Medium,No,Central
+MET000409,Park 64,Red Line,Karnataka,Bengaluru,Sector 6,8.092006,77.486962,4,No,No,Yes,Yes,No,72866,2008,BMRCL,Yes,5.72,6.41,3.61,4.36,2.38,17.46,Medium,No,North
+MET000410,Central 42,Pink Line,Maharashtra,Mumbai,Sector 6,11.480262,75.944755,5,Yes,No,Yes,Yes,No,233739,2012,MMRC,Yes,6.61,35.16,0.49,1.49,1.18,16.89,High,No,South
+MET000411,Central 74,Purple Line,Delhi,New Delhi,Sector 4,14.725127,75.5584,5,No,No,Yes,Yes,No,25673,2003,DMRC,Yes,1.83,29.93,5.27,1.99,0.44,14.72,High,No,East
+MET000412,Lake 36,Purple Line,Maharashtra,Mumbai,Sector 3,23.611154,81.17314,5,No,No,Yes,Yes,No,48171,2004,MMRC,Yes,0.65,7.12,1.1,2.15,1.4,13.71,Low,Yes,South
+MET000413,Sector 38,Purple Line,Karnataka,Bengaluru,Sector 9,22.819305,82.028677,5,Yes,Yes,Yes,Yes,No,153124,2004,BMRCL,Yes,5.26,39.33,3.07,0.95,2.49,4.88,Medium,No,East
+MET000414,Sector 27,Yellow Line,Telangana,Hyderabad,Sector 36,11.936999,75.940683,4,No,No,Yes,Yes,No,175287,2009,HMRL,Yes,5.37,37.21,5.15,4.92,3.7,12.85,High,Yes,West
+MET000415,Lake 68,Pink Line,Karnataka,Bengaluru,Sector 45,14.014853,78.998313,4,No,Yes,Yes,Yes,No,71901,2014,BMRCL,Yes,6.18,36.93,0.27,4.54,4.88,5.32,Medium,No,East
+MET000416,Central 16,Orange Line,Tamil Nadu,Chennai,Sector 9,28.949042,82.575217,2,Yes,Yes,Yes,Yes,Yes,178181,2025,CMRL,Yes,2.47,32.13,0.11,4.61,1.35,5.78,Medium,No,South
+MET000417,Lake 67,Blue Line,Telangana,Hyderabad,Sector 42,26.115285,82.881749,3,No,Yes,Yes,Yes,No,11483,2003,HMRL,Yes,6.86,5.33,5.42,0.27,4.68,4.87,Low,No,North
+MET000418,Sector 91,Orange Line,Maharashtra,Mumbai,Sector 16,12.50833,74.258486,5,No,Yes,Yes,Yes,Yes,241687,2020,MMRC,Yes,0.53,17.21,0.17,0.49,0.98,14.64,Medium,No,North
+MET000419,Market 96,Pink Line,Karnataka,Bengaluru,Sector 65,22.258423,84.915127,3,No,Yes,Yes,Yes,Yes,41257,2004,BMRCL,Yes,1.13,7.86,6.14,1.55,3.17,10.48,High,No,Central
+MET000420,Central 27,Orange Line,Karnataka,Bengaluru,Sector 64,19.271713,82.981415,4,Yes,Yes,Yes,Yes,No,28936,2010,BMRCL,Yes,9.58,32.25,5.91,2.73,1.44,11.03,Medium,No,West
+MET000421,Lake 77,Orange Line,Delhi,New Delhi,Sector 31,19.408213,85.812061,6,No,Yes,Yes,Yes,Yes,111966,2008,DMRC,Yes,1.92,19.38,4.75,3.78,4.52,1.78,Low,No,Central
+MET000422,Market 96,Red Line,Tamil Nadu,Chennai,Sector 33,24.118086,78.203874,2,Yes,Yes,Yes,Yes,Yes,50380,2022,CMRL,Yes,7.6,22.87,2.69,2.22,4.03,16.33,High,No,West
+MET000423,Park 30,Red Line,Telangana,Hyderabad,Sector 59,11.150398,77.42253,4,No,Yes,Yes,Yes,Yes,112204,2003,HMRL,Yes,1.74,23.41,7.87,1.89,0.84,1.58,Low,Yes,East
+MET000424,Central 19,Pink Line,Telangana,Hyderabad,Sector 11,23.351166,72.365664,4,No,Yes,Yes,Yes,No,248580,2021,HMRL,Yes,8.84,10.38,1.94,1.38,2.02,3.3,Medium,Yes,East
+MET000425,Park 20,Orange Line,Tamil Nadu,Chennai,Sector 22,22.500729,81.986714,5,Yes,No,Yes,Yes,Yes,70475,2017,CMRL,Yes,8.13,10.52,4.43,4.76,1.08,19.89,High,No,East
+MET000426,Market 5,Yellow Line,Tamil Nadu,Chennai,Sector 64,8.706824,79.672954,4,Yes,Yes,Yes,Yes,Yes,119992,2008,CMRL,Yes,5.28,12.08,6.16,1.08,1.23,13.75,Medium,Yes,North
+MET000427,Lake 2,Orange Line,Tamil Nadu,Chennai,Sector 26,13.196615,84.23775,5,No,No,Yes,Yes,No,103217,2016,CMRL,Yes,0.42,10.02,7.56,3.52,1.76,16.79,Low,No,Central
+MET000428,City 59,Blue Line,Karnataka,Bengaluru,Sector 49,8.270033,86.257168,3,No,Yes,Yes,Yes,No,103748,2006,BMRCL,Yes,2.66,11.02,7.22,4.28,4.09,15.95,Low,Yes,North
+MET000429,Sector 39,Yellow Line,Tamil Nadu,Chennai,Sector 67,23.432025,83.682276,5,No,No,Yes,Yes,No,178484,2011,CMRL,Yes,3.03,18.22,7.6,3.15,1.23,11.56,Low,No,South
+MET000430,Sector 17,Purple Line,Tamil Nadu,Chennai,Sector 13,18.237907,77.718403,6,Yes,Yes,Yes,Yes,Yes,202289,2020,CMRL,Yes,5.25,28.72,0.4,1.01,3.17,15.34,High,Yes,Central
+MET000431,Lake 72,Pink Line,Telangana,Hyderabad,Sector 15,12.907949,80.900631,2,Yes,No,Yes,Yes,Yes,51012,2012,HMRL,Yes,7.02,22.45,0.68,4.8,3.75,14.35,Low,No,West
+MET000432,Sector 40,Blue Line,Delhi,New Delhi,Sector 75,20.010644,83.487458,4,No,No,Yes,Yes,No,169805,2016,DMRC,Yes,3.68,26.47,5.65,2.89,2.3,10.65,Low,Yes,North
+MET000433,Park 17,Green Line,Delhi,New Delhi,Sector 45,13.064901,78.816368,3,No,No,Yes,Yes,Yes,171434,2012,DMRC,Yes,7.38,9.96,4.11,0.68,3.9,3.08,Low,Yes,Central
+MET000434,Central 38,Green Line,Tamil Nadu,Chennai,Sector 19,16.916512,80.198444,5,No,No,Yes,Yes,No,78817,2020,CMRL,Yes,7.93,26.79,4.75,4.37,3.78,15.8,Medium,Yes,Central
+MET000435,Sector 60,Green Line,Delhi,New Delhi,Sector 32,20.155006,85.049865,4,Yes,Yes,Yes,Yes,Yes,188778,2009,DMRC,Yes,5.52,24.22,4.85,0.38,3.2,8.89,High,Yes,West
+MET000436,City 67,Yellow Line,Telangana,Hyderabad,Sector 12,16.23833,84.302402,3,Yes,Yes,Yes,Yes,Yes,90769,2004,HMRL,Yes,2.77,17.63,7.0,1.86,1.1,4.3,High,No,South
+MET000437,Sector 10,Green Line,Delhi,New Delhi,Sector 9,21.749896,87.04932,2,No,No,Yes,Yes,No,14696,2025,DMRC,Yes,8.84,37.86,5.45,1.44,2.51,12.69,Low,No,West
+MET000438,Park 20,Pink Line,Tamil Nadu,Chennai,Sector 18,25.442943,73.192907,5,No,No,Yes,Yes,Yes,116568,2015,CMRL,Yes,8.24,6.63,1.18,0.5,4.35,14.17,High,No,East
+MET000439,Central 61,Yellow Line,Maharashtra,Mumbai,Sector 15,22.566757,81.212208,2,Yes,No,Yes,Yes,Yes,50543,2018,MMRC,Yes,2.85,18.78,5.26,1.47,4.55,11.51,High,Yes,Central
+MET000440,Market 96,Orange Line,Telangana,Hyderabad,Sector 12,10.674994,79.535186,2,Yes,No,Yes,Yes,No,248130,2013,HMRL,Yes,5.56,29.22,1.68,3.47,2.75,15.22,High,Yes,Central
+MET000441,Central 85,Red Line,Tamil Nadu,Chennai,Sector 78,22.126496,81.944148,6,Yes,Yes,Yes,Yes,No,130119,2021,CMRL,Yes,7.93,13.52,1.59,0.48,4.37,3.19,Low,Yes,Central
+MET000442,Market 74,Yellow Line,Telangana,Hyderabad,Sector 34,23.472965,73.869892,2,No,No,Yes,Yes,Yes,16000,2008,HMRL,Yes,3.91,36.47,6.84,2.35,0.13,10.22,Low,Yes,North
+MET000443,Park 10,Purple Line,Tamil Nadu,Chennai,Sector 6,22.891302,72.264564,5,No,No,Yes,Yes,No,7819,2022,CMRL,Yes,7.82,7.46,2.38,1.52,4.0,7.87,Medium,Yes,East
+MET000444,Lake 20,Pink Line,Tamil Nadu,Chennai,Sector 70,18.907462,87.811029,6,Yes,Yes,Yes,Yes,Yes,206825,2012,CMRL,Yes,9.13,24.67,7.48,1.58,3.88,14.69,High,Yes,Central
+MET000445,Sector 10,Green Line,Telangana,Hyderabad,Sector 37,23.51193,74.350677,2,Yes,No,Yes,Yes,No,17312,2024,HMRL,Yes,8.27,10.4,6.62,2.76,2.77,12.35,Medium,Yes,Central
+MET000446,Park 13,Blue Line,Telangana,Hyderabad,Sector 52,24.887429,79.962171,4,No,No,Yes,Yes,No,42029,2004,HMRL,Yes,7.84,39.57,2.28,0.99,0.99,9.05,Medium,No,West
+MET000447,Park 59,Yellow Line,Delhi,New Delhi,Sector 47,20.787989,77.160511,4,Yes,Yes,Yes,Yes,Yes,156921,2017,DMRC,Yes,7.37,20.66,1.36,1.79,4.68,18.2,High,Yes,South
+MET000448,Lake 39,Green Line,Telangana,Hyderabad,Sector 17,27.122437,86.351307,6,Yes,Yes,Yes,Yes,No,219817,2008,HMRL,Yes,3.49,29.54,7.92,1.2,1.03,5.96,High,No,West
+MET000449,Sector 57,Red Line,Telangana,Hyderabad,Sector 68,17.893612,84.873155,5,Yes,Yes,Yes,Yes,No,57452,2012,HMRL,Yes,9.22,30.24,6.55,4.54,4.47,13.74,Medium,Yes,North
+MET000450,Park 55,Green Line,Maharashtra,Mumbai,Sector 48,17.374086,82.836981,3,Yes,No,Yes,Yes,No,187295,2024,MMRC,Yes,5.59,39.1,6.16,1.88,0.62,7.17,Low,No,Central
+MET000451,Central 16,Pink Line,Delhi,New Delhi,Sector 2,26.824039,78.215945,3,Yes,Yes,Yes,Yes,Yes,225818,2011,DMRC,Yes,8.08,18.27,4.49,3.98,2.13,5.1,High,No,East
+MET000452,Market 97,Purple Line,Karnataka,Bengaluru,Sector 27,18.363873,82.112414,3,No,No,Yes,Yes,Yes,151535,2025,BMRCL,Yes,0.37,8.05,3.79,4.81,2.08,7.7,High,Yes,West
+MET000453,Lake 35,Yellow Line,Delhi,New Delhi,Sector 24,8.499411,75.343334,6,Yes,No,Yes,Yes,No,98277,2012,DMRC,Yes,7.56,39.61,3.37,1.39,0.16,12.58,Low,Yes,South
+MET000454,Lake 6,Purple Line,Telangana,Hyderabad,Sector 56,11.448729,77.288519,2,Yes,No,Yes,Yes,Yes,233865,2010,HMRL,Yes,9.28,27.2,3.96,0.68,0.74,13.03,Medium,No,North
+MET000455,Central 43,Green Line,Delhi,New Delhi,Sector 57,11.757309,85.224229,6,Yes,No,Yes,Yes,Yes,61164,2025,DMRC,Yes,7.37,37.46,7.66,1.38,0.51,12.73,High,Yes,North
+MET000456,Market 26,Red Line,Maharashtra,Mumbai,Sector 27,13.773801,83.54644,3,No,Yes,Yes,Yes,Yes,178383,2007,MMRC,Yes,7.42,28.61,0.65,4.1,3.16,10.89,Medium,Yes,South
+MET000457,City 44,Green Line,Karnataka,Bengaluru,Sector 79,25.158416,82.531646,5,Yes,Yes,Yes,Yes,Yes,158181,2022,BMRCL,Yes,2.01,9.55,1.08,3.08,2.45,17.59,Medium,No,West
+MET000458,Market 55,Pink Line,Maharashtra,Mumbai,Sector 4,21.464725,87.656619,4,Yes,Yes,Yes,Yes,Yes,21720,2016,MMRC,Yes,7.15,38.74,0.84,3.95,2.73,12.49,Medium,Yes,South
+MET000459,Sector 55,Pink Line,Tamil Nadu,Chennai,Sector 66,16.890639,72.508781,6,Yes,Yes,Yes,Yes,No,182105,2008,CMRL,Yes,2.65,28.58,3.0,2.99,0.9,6.11,High,Yes,North
+MET000460,Sector 53,Red Line,Karnataka,Bengaluru,Sector 13,22.965965,82.070423,2,No,Yes,Yes,Yes,No,218072,2018,BMRCL,Yes,8.97,38.15,2.44,4.17,1.51,7.65,Medium,Yes,Central
+MET000461,Park 52,Red Line,Tamil Nadu,Chennai,Sector 78,10.438454,83.471215,5,No,Yes,Yes,Yes,No,143522,2017,CMRL,Yes,6.71,20.47,4.16,2.92,0.74,10.56,Low,No,South
+MET000462,Park 87,Orange Line,Tamil Nadu,Chennai,Sector 26,11.725347,83.788247,3,Yes,Yes,Yes,Yes,No,44840,2007,CMRL,Yes,6.13,37.82,5.43,0.12,0.48,17.35,Medium,No,North
+MET000463,Park 75,Green Line,Delhi,New Delhi,Sector 80,10.210731,79.335325,4,No,Yes,Yes,Yes,Yes,161551,2008,DMRC,Yes,2.48,29.34,7.75,4.3,2.56,12.4,Medium,No,South
+MET000464,Sector 86,Orange Line,Telangana,Hyderabad,Sector 56,24.519756,80.521611,2,Yes,No,Yes,Yes,Yes,103835,2014,HMRL,Yes,5.57,27.65,0.31,1.3,3.96,14.9,Low,No,Central
+MET000465,City 17,Pink Line,Maharashtra,Mumbai,Sector 44,23.039623,74.518812,6,No,No,Yes,Yes,Yes,32014,2007,MMRC,Yes,3.34,7.78,4.63,1.68,1.49,13.83,Low,No,South
+MET000466,City 19,Orange Line,Delhi,New Delhi,Sector 65,26.908742,80.084775,3,Yes,No,Yes,Yes,No,153805,2004,DMRC,Yes,9.05,14.9,0.63,2.56,4.01,5.15,Medium,Yes,West
+MET000467,Lake 53,Red Line,Delhi,New Delhi,Sector 77,29.527244,72.592352,6,Yes,No,Yes,Yes,Yes,152242,2013,DMRC,Yes,6.33,14.33,1.87,2.28,1.31,11.03,Medium,Yes,East
+MET000468,Market 73,Purple Line,Maharashtra,Mumbai,Sector 78,13.150839,72.58921,3,No,Yes,Yes,Yes,No,168525,2015,MMRC,Yes,2.66,35.23,4.07,2.54,2.1,7.75,Low,No,North
+MET000469,Lake 7,Orange Line,Tamil Nadu,Chennai,Sector 54,20.301492,85.371734,4,Yes,Yes,Yes,Yes,Yes,68384,2009,CMRL,Yes,7.78,16.49,6.6,4.05,0.85,10.99,High,No,West
+MET000470,Central 1,Purple Line,Tamil Nadu,Chennai,Sector 5,9.485449,84.558469,4,No,No,Yes,Yes,Yes,28299,2021,CMRL,Yes,5.21,7.04,2.57,4.48,0.76,12.33,Low,No,Central
+MET000471,Central 70,Yellow Line,Tamil Nadu,Chennai,Sector 37,19.937901,85.15169,5,Yes,Yes,Yes,Yes,Yes,67482,2021,CMRL,Yes,3.97,38.03,0.63,4.54,0.8,19.89,Medium,Yes,South
+MET000472,Park 32,Red Line,Maharashtra,Mumbai,Sector 64,10.035294,77.461576,2,No,Yes,Yes,Yes,No,229556,2006,MMRC,Yes,9.26,33.73,4.12,3.48,1.18,17.68,Low,Yes,East
+MET000473,City 87,Green Line,Tamil Nadu,Chennai,Sector 15,22.861306,86.2661,6,No,Yes,Yes,Yes,Yes,104657,2002,CMRL,Yes,6.95,35.89,3.64,3.25,4.03,10.42,Low,Yes,East
+MET000474,Market 49,Blue Line,Tamil Nadu,Chennai,Sector 46,10.410634,79.587786,5,No,No,Yes,Yes,Yes,199103,2014,CMRL,Yes,7.55,38.79,1.97,2.95,2.37,2.96,Medium,No,Central
+MET000475,Central 74,Pink Line,Tamil Nadu,Chennai,Sector 78,18.656216,87.994488,2,Yes,Yes,Yes,Yes,No,207889,2025,CMRL,Yes,1.89,18.82,2.83,3.55,1.21,7.09,Medium,No,Central
+MET000476,Market 36,Pink Line,Delhi,New Delhi,Sector 19,25.711642,77.886272,6,Yes,Yes,Yes,Yes,Yes,13568,2014,DMRC,Yes,6.89,21.07,7.78,3.06,0.44,5.5,Low,Yes,West
+MET000477,Market 59,Red Line,Karnataka,Bengaluru,Sector 2,14.274256,85.467497,2,Yes,No,Yes,Yes,No,108451,2016,BMRCL,Yes,3.88,16.07,0.19,4.97,3.81,5.16,Medium,No,Central
+MET000478,Lake 8,Pink Line,Karnataka,Bengaluru,Sector 34,21.501022,76.850037,6,Yes,No,Yes,Yes,No,188039,2024,BMRCL,Yes,6.13,6.54,6.08,2.34,3.08,2.14,High,Yes,South
+MET000479,Market 65,Red Line,Telangana,Hyderabad,Sector 23,29.299155,87.74122,6,Yes,Yes,Yes,Yes,No,149261,2016,HMRL,Yes,1.24,23.72,6.63,3.89,0.46,12.13,Low,Yes,Central
+MET000480,Central 54,Yellow Line,Delhi,New Delhi,Sector 28,20.93293,77.298308,3,No,No,Yes,Yes,No,236191,2010,DMRC,Yes,2.97,33.3,3.24,0.13,4.78,10.68,High,No,South
+MET000481,Sector 33,Purple Line,Maharashtra,Mumbai,Sector 71,19.846127,79.83133,4,Yes,Yes,Yes,Yes,No,153818,2017,MMRC,Yes,9.17,10.84,1.03,1.64,1.13,10.01,Medium,No,West
+MET000482,Sector 78,Red Line,Karnataka,Bengaluru,Sector 64,15.561421,79.99,5,Yes,Yes,Yes,Yes,Yes,76496,2022,BMRCL,Yes,6.8,11.42,2.77,1.44,3.28,11.07,Low,No,Central
+MET000483,Park 15,Pink Line,Telangana,Hyderabad,Sector 3,9.042431,87.784818,3,No,No,Yes,Yes,No,228823,2016,HMRL,Yes,6.71,8.94,5.9,1.13,2.21,4.33,Medium,No,West
+MET000484,City 60,Green Line,Delhi,New Delhi,Sector 39,13.710033,86.917102,4,Yes,No,Yes,Yes,Yes,35349,2018,DMRC,Yes,2.54,20.51,6.19,3.88,0.6,15.22,High,Yes,East
+MET000485,Central 63,Yellow Line,Tamil Nadu,Chennai,Sector 25,24.434453,81.787779,2,No,Yes,Yes,Yes,No,118844,2011,CMRL,Yes,7.29,14.77,5.16,2.37,1.26,19.5,Low,Yes,North
+MET000486,Lake 99,Orange Line,Tamil Nadu,Chennai,Sector 43,22.838299,85.94373,2,Yes,No,Yes,Yes,No,178013,2006,CMRL,Yes,1.8,19.57,8.0,4.61,4.52,17.07,Medium,No,West
+MET000487,City 61,Pink Line,Telangana,Hyderabad,Sector 65,15.232614,82.280474,6,Yes,Yes,Yes,Yes,Yes,49162,2019,HMRL,Yes,7.95,23.95,6.95,2.78,3.57,16.57,Medium,No,West
+MET000488,Market 20,Green Line,Maharashtra,Mumbai,Sector 50,18.441716,82.521561,2,Yes,No,Yes,Yes,Yes,236956,2024,MMRC,Yes,4.37,5.02,2.34,0.83,4.11,15.73,Medium,Yes,South
+MET000489,Market 34,Yellow Line,Delhi,New Delhi,Sector 28,11.756923,79.824047,4,Yes,Yes,Yes,Yes,Yes,33583,2012,DMRC,Yes,5.62,19.43,1.29,1.88,1.61,6.79,Medium,Yes,South
+MET000490,Central 47,Blue Line,Maharashtra,Mumbai,Sector 16,26.394997,82.23169,6,No,Yes,Yes,Yes,Yes,16953,2014,MMRC,Yes,7.0,36.64,6.75,2.35,2.27,8.26,Medium,Yes,West
+MET000491,Park 61,Green Line,Maharashtra,Mumbai,Sector 18,16.836018,82.234666,2,Yes,Yes,Yes,Yes,Yes,106164,2014,MMRC,Yes,3.4,6.66,0.52,0.91,0.85,15.14,Medium,Yes,South
+MET000492,Lake 64,Pink Line,Karnataka,Bengaluru,Sector 32,18.372826,86.937408,6,No,Yes,Yes,Yes,Yes,128240,2019,BMRCL,Yes,9.62,8.25,5.8,3.92,4.94,1.72,Medium,Yes,Central
+MET000493,Park 57,Yellow Line,Maharashtra,Mumbai,Sector 15,13.486183,82.99038,5,Yes,Yes,Yes,Yes,No,12138,2025,MMRC,Yes,4.02,14.17,4.9,1.05,1.66,14.9,High,Yes,North
+MET000494,Market 14,Yellow Line,Karnataka,Bengaluru,Sector 65,16.862032,81.219271,4,No,No,Yes,Yes,No,204318,2019,BMRCL,Yes,7.92,24.21,5.98,4.03,3.49,10.28,High,No,East
+MET000495,Lake 36,Red Line,Tamil Nadu,Chennai,Sector 21,13.047365,85.354246,3,No,No,Yes,Yes,Yes,7009,2004,CMRL,Yes,9.74,25.18,6.41,2.37,1.61,19.93,High,Yes,Central
+MET000496,City 5,Green Line,Karnataka,Bengaluru,Sector 68,25.022908,76.371284,6,No,Yes,Yes,Yes,Yes,7948,2016,BMRCL,Yes,1.96,27.03,5.55,1.16,0.51,4.92,High,No,East
+MET000497,City 76,Green Line,Delhi,New Delhi,Sector 69,8.838291,84.207707,6,No,No,Yes,Yes,Yes,187548,2018,DMRC,Yes,8.58,12.53,1.22,3.94,1.07,8.15,Low,Yes,East
+MET000498,City 31,Red Line,Delhi,New Delhi,Sector 12,16.217255,78.5593,5,Yes,No,Yes,Yes,Yes,131628,2017,DMRC,Yes,2.68,36.66,7.54,2.86,3.39,6.34,Medium,No,East
+MET000499,City 82,Green Line,Delhi,New Delhi,Sector 43,25.736478,77.000101,4,No,Yes,Yes,Yes,No,45629,2022,DMRC,Yes,3.19,36.68,2.66,3.07,4.67,15.54,Medium,Yes,South
+MET000500,Park 38,Red Line,Maharashtra,Mumbai,Sector 54,9.502056,78.367151,4,No,No,Yes,Yes,No,175531,2015,MMRC,Yes,8.46,10.8,6.0,0.16,4.55,0.57,Low,No,West
+MET000501,City 15,Purple Line,Telangana,Hyderabad,Sector 22,23.770556,76.705596,6,Yes,Yes,Yes,Yes,No,133465,2017,HMRL,Yes,7.8,7.25,2.83,3.22,0.28,0.75,Low,Yes,Central
+MET000502,Central 89,Purple Line,Karnataka,Bengaluru,Sector 74,29.139585,84.652424,5,No,Yes,Yes,Yes,No,164412,2002,BMRCL,Yes,3.05,6.67,3.86,3.71,0.76,14.24,Low,No,North
+MET000503,Lake 28,Red Line,Telangana,Hyderabad,Sector 9,15.554438,72.96801,6,No,Yes,Yes,Yes,Yes,126629,2025,HMRL,Yes,1.93,10.6,1.78,4.53,1.34,14.59,Low,Yes,East
+MET000504,Central 92,Blue Line,Tamil Nadu,Chennai,Sector 15,25.56552,79.539107,4,Yes,No,Yes,Yes,No,186559,2008,CMRL,Yes,8.29,7.92,0.21,3.68,3.9,5.39,Medium,No,South
+MET000505,Market 50,Green Line,Delhi,New Delhi,Sector 7,25.95443,72.61589,3,No,No,Yes,Yes,Yes,36516,2017,DMRC,Yes,3.57,30.17,0.79,0.66,0.29,1.65,High,No,West
+MET000506,Central 28,Purple Line,Delhi,New Delhi,Sector 66,11.372031,72.140029,5,Yes,No,Yes,Yes,Yes,16993,2024,DMRC,Yes,3.55,7.88,2.72,0.86,4.0,7.5,High,Yes,Central
+MET000507,Park 25,Yellow Line,Tamil Nadu,Chennai,Sector 73,23.150641,76.891108,6,No,No,Yes,Yes,Yes,227830,2023,CMRL,Yes,1.5,22.53,1.67,2.56,4.94,14.71,Medium,Yes,West
+MET000508,Central 84,Blue Line,Maharashtra,Mumbai,Sector 56,10.844625,83.383098,5,Yes,Yes,Yes,Yes,No,24548,2016,MMRC,Yes,9.88,21.49,3.78,1.39,2.18,6.69,Medium,No,West
+MET000509,Lake 17,Purple Line,Maharashtra,Mumbai,Sector 2,10.613076,74.004704,3,No,Yes,Yes,Yes,No,212179,2008,MMRC,Yes,0.2,36.26,7.85,1.89,3.4,18.96,High,No,East
+MET000510,Sector 73,Yellow Line,Telangana,Hyderabad,Sector 39,23.085603,84.443968,3,No,No,Yes,Yes,Yes,249864,2016,HMRL,Yes,3.95,30.72,3.18,1.62,4.04,4.42,High,Yes,East
+MET000511,Park 19,Red Line,Karnataka,Bengaluru,Sector 70,14.467879,76.95254,4,Yes,No,Yes,Yes,No,25462,2023,BMRCL,Yes,3.2,14.02,6.13,2.48,4.64,5.2,High,Yes,East
+MET000512,Sector 24,Purple Line,Delhi,New Delhi,Sector 78,19.257942,75.398323,3,No,No,Yes,Yes,Yes,211940,2016,DMRC,Yes,8.94,36.09,0.53,1.5,0.57,11.2,Medium,No,South
+MET000513,Lake 58,Blue Line,Tamil Nadu,Chennai,Sector 64,23.459603,80.030852,5,No,No,Yes,Yes,No,21116,2016,CMRL,Yes,3.23,21.05,3.02,2.23,2.79,5.51,Low,No,East
+MET000514,Lake 74,Yellow Line,Maharashtra,Mumbai,Sector 17,25.290242,76.566571,6,No,Yes,Yes,Yes,Yes,101799,2015,MMRC,Yes,2.2,5.02,1.84,3.38,3.5,8.42,High,Yes,South
+MET000515,Market 62,Red Line,Karnataka,Bengaluru,Sector 25,27.3279,86.081247,3,Yes,No,Yes,Yes,No,149466,2011,BMRCL,Yes,5.25,29.77,7.32,2.75,2.05,7.14,High,No,Central
+MET000516,Lake 15,Pink Line,Telangana,Hyderabad,Sector 79,8.540854,73.622524,3,Yes,No,Yes,Yes,No,71155,2007,HMRL,Yes,2.53,31.64,7.35,3.88,4.15,18.97,Low,Yes,South
+MET000517,Central 12,Purple Line,Delhi,New Delhi,Sector 77,11.076314,87.554449,5,Yes,No,Yes,Yes,Yes,112808,2017,DMRC,Yes,7.76,5.01,0.49,3.16,3.77,11.51,Medium,No,Central
+MET000518,Market 66,Pink Line,Maharashtra,Mumbai,Sector 58,18.198107,84.247046,4,No,Yes,Yes,Yes,Yes,135558,2024,MMRC,Yes,9.26,24.84,3.13,4.89,1.71,17.88,Low,No,Central
+MET000519,Park 16,Yellow Line,Delhi,New Delhi,Sector 62,13.849707,85.916446,6,Yes,Yes,Yes,Yes,Yes,161253,2014,DMRC,Yes,8.69,16.23,2.49,1.9,4.12,16.84,Medium,Yes,South
+MET000520,City 74,Yellow Line,Telangana,Hyderabad,Sector 73,19.799953,83.808035,4,No,No,Yes,Yes,Yes,104411,2018,HMRL,Yes,2.82,12.24,2.18,1.04,1.15,16.06,Low,Yes,East
+MET000521,Central 4,Green Line,Karnataka,Bengaluru,Sector 24,28.91373,79.61606,3,No,Yes,Yes,Yes,Yes,60102,2012,BMRCL,Yes,8.48,37.52,2.38,1.33,3.13,1.79,High,No,East
+MET000522,Park 28,Blue Line,Karnataka,Bengaluru,Sector 79,19.620077,79.299503,5,Yes,Yes,Yes,Yes,No,27901,2014,BMRCL,Yes,5.39,8.93,6.01,2.52,3.62,19.4,Medium,No,South
+MET000523,Market 59,Orange Line,Tamil Nadu,Chennai,Sector 68,23.68331,80.802046,5,No,No,Yes,Yes,Yes,61689,2017,CMRL,Yes,7.93,24.37,2.46,1.04,2.85,5.24,Low,Yes,West
+MET000524,Lake 79,Orange Line,Maharashtra,Mumbai,Sector 3,8.813739,87.676668,6,No,No,Yes,Yes,Yes,129359,2018,MMRC,Yes,9.28,22.3,1.71,4.07,3.66,19.02,Medium,Yes,Central
+MET000525,City 8,Orange Line,Maharashtra,Mumbai,Sector 4,29.502644,79.854452,5,No,Yes,Yes,Yes,No,229009,2005,MMRC,Yes,9.54,39.27,6.38,0.75,3.47,8.27,High,No,West
+MET000526,Sector 48,Orange Line,Delhi,New Delhi,Sector 33,18.352255,77.70139,4,No,Yes,Yes,Yes,No,142925,2006,DMRC,Yes,5.31,21.53,1.33,3.02,2.46,10.61,High,No,West
+MET000527,Central 39,Red Line,Tamil Nadu,Chennai,Sector 1,23.297078,83.569584,5,No,No,Yes,Yes,Yes,113406,2004,CMRL,Yes,1.46,33.7,6.44,3.25,1.34,3.1,High,Yes,South
+MET000528,Lake 55,Red Line,Delhi,New Delhi,Sector 60,20.678073,72.475398,5,Yes,Yes,Yes,Yes,No,116452,2018,DMRC,Yes,4.02,21.05,4.15,3.18,4.74,16.37,Low,No,East
+MET000529,City 82,Green Line,Maharashtra,Mumbai,Sector 48,13.51389,75.629955,3,No,No,Yes,Yes,No,144223,2016,MMRC,Yes,7.02,34.38,6.93,2.77,2.37,10.77,Medium,No,South
+MET000530,Park 93,Red Line,Karnataka,Bengaluru,Sector 34,28.547932,84.161506,3,Yes,Yes,Yes,Yes,No,98938,2017,BMRCL,Yes,7.14,17.61,1.56,3.82,3.11,15.37,Medium,Yes,West
+MET000531,City 22,Yellow Line,Telangana,Hyderabad,Sector 58,27.813398,87.349584,5,No,Yes,Yes,Yes,Yes,231672,2008,HMRL,Yes,7.95,26.83,3.29,0.54,4.58,0.55,High,No,North
+MET000532,Park 39,Purple Line,Karnataka,Bengaluru,Sector 37,17.766185,81.815012,2,No,Yes,Yes,Yes,No,189257,2023,BMRCL,Yes,6.17,38.72,0.11,3.43,3.15,11.46,Medium,No,Central
+MET000533,Sector 26,Purple Line,Delhi,New Delhi,Sector 45,15.936584,75.50173,5,No,Yes,Yes,Yes,Yes,111365,2008,DMRC,Yes,8.83,28.1,0.49,4.7,0.11,13.7,Medium,Yes,East
+MET000534,Park 20,Blue Line,Tamil Nadu,Chennai,Sector 77,21.487459,84.459645,3,No,Yes,Yes,Yes,Yes,230860,2024,CMRL,Yes,6.79,14.02,4.59,2.23,4.34,7.36,Medium,No,South
+MET000535,Central 42,Red Line,Karnataka,Bengaluru,Sector 42,29.162444,73.282407,6,Yes,Yes,Yes,Yes,Yes,150478,2010,BMRCL,Yes,5.66,23.67,3.29,3.25,0.59,13.73,Low,Yes,Central
+MET000536,City 29,Green Line,Delhi,New Delhi,Sector 59,21.416918,82.26304,3,No,Yes,Yes,Yes,Yes,214313,2003,DMRC,Yes,9.81,37.58,1.56,3.47,0.59,7.21,Medium,No,South
+MET000537,City 23,Purple Line,Telangana,Hyderabad,Sector 42,27.303974,78.286343,5,No,Yes,Yes,Yes,No,35310,2008,HMRL,Yes,7.43,15.21,1.47,0.43,4.53,16.12,Medium,No,Central
+MET000538,City 43,Green Line,Maharashtra,Mumbai,Sector 42,28.393892,73.280325,3,No,Yes,Yes,Yes,Yes,16742,2017,MMRC,Yes,5.81,37.77,5.91,4.93,4.87,5.56,Low,No,West
+MET000539,City 87,Red Line,Karnataka,Bengaluru,Sector 63,25.301742,73.700402,3,No,No,Yes,Yes,No,5027,2020,BMRCL,Yes,9.5,20.83,2.22,1.51,0.3,9.54,Medium,No,West
+MET000540,City 71,Blue Line,Tamil Nadu,Chennai,Sector 67,28.447042,74.022283,4,No,Yes,Yes,Yes,Yes,249747,2007,CMRL,Yes,3.71,16.43,0.66,3.92,4.45,1.96,High,Yes,East
+MET000541,Sector 43,Red Line,Tamil Nadu,Chennai,Sector 16,27.449829,85.580487,3,No,Yes,Yes,Yes,No,222748,2014,CMRL,Yes,6.68,18.74,3.58,1.05,3.35,8.33,High,Yes,West
+MET000542,Park 82,Green Line,Karnataka,Bengaluru,Sector 51,21.886388,83.445501,3,Yes,Yes,Yes,Yes,Yes,151447,2022,BMRCL,Yes,7.1,32.85,0.79,3.53,1.92,11.19,Low,No,East
+MET000543,Sector 55,Red Line,Maharashtra,Mumbai,Sector 74,25.526456,73.067385,3,Yes,No,Yes,Yes,No,143962,2010,MMRC,Yes,2.54,29.21,4.42,1.8,1.42,7.61,Low,No,East
+MET000544,Market 59,Orange Line,Karnataka,Bengaluru,Sector 34,25.689837,83.42191,5,Yes,Yes,Yes,Yes,Yes,90397,2020,BMRCL,Yes,0.3,5.31,5.48,3.04,3.5,12.49,Medium,No,East
+MET000545,City 89,Orange Line,Telangana,Hyderabad,Sector 44,27.886402,82.228798,2,Yes,No,Yes,Yes,No,41009,2017,HMRL,Yes,8.65,15.38,0.21,2.89,3.11,19.83,Medium,Yes,West
+MET000546,Park 43,Blue Line,Maharashtra,Mumbai,Sector 10,26.405543,86.6378,5,No,No,Yes,Yes,Yes,130233,2002,MMRC,Yes,6.88,16.62,0.73,0.73,1.58,19.72,Medium,Yes,West
+MET000547,City 83,Red Line,Delhi,New Delhi,Sector 42,25.829118,84.161833,6,No,Yes,Yes,Yes,Yes,192621,2024,DMRC,Yes,6.87,18.3,4.62,2.87,3.04,11.78,Medium,No,South
+MET000548,Central 19,Orange Line,Tamil Nadu,Chennai,Sector 51,29.503178,83.329748,4,Yes,No,Yes,Yes,Yes,108422,2023,CMRL,Yes,3.57,39.16,1.32,4.0,1.84,6.41,Medium,No,South
+MET000549,Park 13,Green Line,Telangana,Hyderabad,Sector 57,17.607895,86.059856,5,No,No,Yes,Yes,Yes,12067,2017,HMRL,Yes,0.26,30.08,7.1,1.2,4.36,15.49,Low,Yes,East
+MET000550,Park 33,Red Line,Karnataka,Bengaluru,Sector 41,11.936859,77.24171,6,Yes,No,Yes,Yes,Yes,240454,2012,BMRCL,Yes,3.65,27.2,6.09,4.0,1.98,13.43,Low,Yes,South
+MET000551,Central 41,Pink Line,Karnataka,Bengaluru,Sector 79,17.822178,72.818168,2,Yes,No,Yes,Yes,Yes,190828,2008,BMRCL,Yes,5.45,13.16,4.05,3.2,4.52,13.94,High,No,East
+MET000552,Central 12,Orange Line,Delhi,New Delhi,Sector 67,23.794387,82.023034,6,Yes,No,Yes,Yes,Yes,232748,2004,DMRC,Yes,4.91,34.0,3.46,2.41,2.02,19.82,Low,Yes,South
+MET000553,Sector 77,Green Line,Tamil Nadu,Chennai,Sector 77,26.015445,85.635818,6,Yes,No,Yes,Yes,Yes,139495,2022,CMRL,Yes,4.6,16.87,0.2,1.88,1.2,6.14,High,Yes,South
+MET000554,Lake 64,Green Line,Karnataka,Bengaluru,Sector 67,14.639612,86.647181,5,No,No,Yes,Yes,No,117964,2016,BMRCL,Yes,7.11,13.61,5.13,2.17,3.68,14.36,Medium,Yes,East
+MET000555,Market 81,Purple Line,Maharashtra,Mumbai,Sector 77,23.013386,83.063048,4,Yes,No,Yes,Yes,No,151182,2007,MMRC,Yes,1.91,15.42,3.0,0.35,4.22,12.75,Medium,No,North
+MET000556,Sector 5,Blue Line,Tamil Nadu,Chennai,Sector 80,24.16286,81.740949,6,Yes,No,Yes,Yes,No,136949,2005,CMRL,Yes,5.17,38.62,7.1,3.54,3.69,5.58,High,Yes,North
+MET000557,Sector 62,Red Line,Karnataka,Bengaluru,Sector 76,16.389016,83.139487,6,No,No,Yes,Yes,Yes,215151,2007,BMRCL,Yes,4.3,34.88,6.77,3.05,0.45,18.67,Low,No,Central
+MET000558,Market 71,Red Line,Tamil Nadu,Chennai,Sector 69,16.325325,83.236241,5,No,No,Yes,Yes,No,214956,2017,CMRL,Yes,6.45,29.02,2.16,1.09,2.94,2.43,Low,No,Central
+MET000559,Lake 12,Green Line,Karnataka,Bengaluru,Sector 52,10.005492,77.829192,6,Yes,No,Yes,Yes,No,176958,2006,BMRCL,Yes,5.21,19.76,7.68,0.18,4.84,9.81,Low,Yes,West
+MET000560,Lake 63,Green Line,Delhi,New Delhi,Sector 22,18.36471,78.04486,6,No,No,Yes,Yes,No,101633,2011,DMRC,Yes,4.01,9.43,4.53,1.51,0.92,1.34,High,Yes,South
+MET000561,City 88,Purple Line,Karnataka,Bengaluru,Sector 49,24.666871,82.099106,5,Yes,Yes,Yes,Yes,No,90200,2006,BMRCL,Yes,1.24,28.79,3.44,2.32,1.8,16.37,Medium,Yes,North
+MET000562,Market 41,Green Line,Tamil Nadu,Chennai,Sector 24,21.39673,78.666845,6,No,No,Yes,Yes,No,172605,2015,CMRL,Yes,2.35,24.79,1.33,4.95,0.34,2.62,Low,No,East
+MET000563,City 73,Purple Line,Karnataka,Bengaluru,Sector 64,22.118891,72.198736,5,Yes,No,Yes,Yes,Yes,201668,2011,BMRCL,Yes,7.44,31.68,2.82,2.18,3.98,14.94,Medium,No,North
+MET000564,Market 57,Purple Line,Tamil Nadu,Chennai,Sector 40,13.311429,84.768628,4,No,Yes,Yes,Yes,No,187080,2004,CMRL,Yes,5.82,30.35,1.77,4.9,3.13,15.75,High,No,East
+MET000565,Park 62,Yellow Line,Tamil Nadu,Chennai,Sector 30,21.655692,77.86567,3,Yes,No,Yes,Yes,No,226694,2011,CMRL,Yes,7.32,22.19,3.37,4.39,1.59,19.05,Low,Yes,West
+MET000566,Lake 66,Green Line,Tamil Nadu,Chennai,Sector 11,22.868699,77.829622,6,Yes,No,Yes,Yes,Yes,22215,2011,CMRL,Yes,0.85,22.3,7.54,1.81,2.66,9.61,Medium,Yes,East
+MET000567,Lake 69,Orange Line,Maharashtra,Mumbai,Sector 77,25.476665,76.803245,3,Yes,Yes,Yes,Yes,Yes,237442,2017,MMRC,Yes,3.82,16.1,2.89,1.38,4.62,5.78,Low,No,North
+MET000568,City 49,Pink Line,Tamil Nadu,Chennai,Sector 36,16.350841,81.41099,2,Yes,No,Yes,Yes,No,151626,2014,CMRL,Yes,7.92,17.34,2.96,0.59,3.21,5.07,Low,Yes,East
+MET000569,Sector 21,Yellow Line,Maharashtra,Mumbai,Sector 21,16.860644,87.327545,2,Yes,Yes,Yes,Yes,No,106442,2014,MMRC,Yes,6.11,8.47,4.43,1.03,3.29,9.64,Low,Yes,South
+MET000570,Sector 75,Purple Line,Karnataka,Bengaluru,Sector 74,21.104903,87.434305,4,No,Yes,Yes,Yes,Yes,54121,2017,BMRCL,Yes,6.54,37.38,4.24,1.07,0.59,9.29,High,No,North
+MET000571,Sector 8,Pink Line,Tamil Nadu,Chennai,Sector 61,27.620897,72.949599,2,Yes,Yes,Yes,Yes,No,53573,2017,CMRL,Yes,5.25,31.27,6.55,4.97,3.39,12.88,High,Yes,East
+MET000572,City 25,Yellow Line,Telangana,Hyderabad,Sector 27,10.956914,76.192286,5,Yes,No,Yes,Yes,No,91201,2014,HMRL,Yes,5.61,5.23,3.16,2.86,4.89,16.83,High,No,South
+MET000573,Lake 92,Pink Line,Maharashtra,Mumbai,Sector 67,18.950852,85.037099,6,No,No,Yes,Yes,Yes,224600,2012,MMRC,Yes,0.67,26.55,5.66,2.77,1.78,17.35,High,Yes,South
+MET000574,City 42,Pink Line,Maharashtra,Mumbai,Sector 7,22.1676,84.099744,4,Yes,Yes,Yes,Yes,Yes,204262,2021,MMRC,Yes,7.33,30.22,2.02,0.96,3.63,14.62,Low,No,West
+MET000575,City 37,Red Line,Telangana,Hyderabad,Sector 15,24.096864,78.423433,5,No,No,Yes,Yes,No,54901,2023,HMRL,Yes,7.79,30.88,7.22,0.67,3.89,12.67,Low,No,South
+MET000576,Sector 87,Orange Line,Karnataka,Bengaluru,Sector 57,18.929144,78.945182,4,Yes,No,Yes,Yes,Yes,78083,2024,BMRCL,Yes,3.62,12.6,3.66,2.34,4.52,13.45,Low,Yes,North
+MET000577,Lake 31,Purple Line,Maharashtra,Mumbai,Sector 50,14.41262,84.081895,3,Yes,Yes,Yes,Yes,No,74934,2009,MMRC,Yes,8.54,20.81,2.56,4.95,3.74,14.89,Medium,Yes,East
+MET000578,Sector 44,Yellow Line,Telangana,Hyderabad,Sector 5,29.945778,84.49443,5,Yes,No,Yes,Yes,No,210048,2023,HMRL,Yes,2.09,31.32,4.01,1.51,1.84,7.4,Low,No,East
+MET000579,Market 65,Red Line,Telangana,Hyderabad,Sector 18,25.269843,72.006565,5,No,Yes,Yes,Yes,Yes,96242,2014,HMRL,Yes,3.42,33.61,0.21,1.35,3.91,0.54,High,Yes,Central
+MET000580,Market 37,Pink Line,Karnataka,Bengaluru,Sector 26,28.884311,78.620054,5,No,No,Yes,Yes,No,200036,2020,BMRCL,Yes,8.87,31.84,7.56,3.13,3.31,13.58,High,No,North
+MET000581,City 48,Purple Line,Karnataka,Bengaluru,Sector 58,20.457749,86.445986,5,Yes,No,Yes,Yes,Yes,171066,2010,BMRCL,Yes,8.56,33.95,6.09,0.74,3.38,8.18,Medium,Yes,West
+MET000582,Central 69,Green Line,Maharashtra,Mumbai,Sector 31,23.56919,72.501485,3,Yes,No,Yes,Yes,No,145905,2018,MMRC,Yes,5.63,24.35,5.71,0.26,4.8,1.75,Low,Yes,Central
+MET000583,City 90,Blue Line,Karnataka,Bengaluru,Sector 80,28.462551,87.119707,4,Yes,Yes,Yes,Yes,No,52559,2004,BMRCL,Yes,9.83,39.51,2.99,0.25,0.31,2.82,Low,No,North
+MET000584,City 65,Blue Line,Karnataka,Bengaluru,Sector 45,11.427666,82.820068,4,No,No,Yes,Yes,No,129437,2009,BMRCL,Yes,8.5,32.36,4.72,4.95,2.76,3.46,High,Yes,East
+MET000585,Lake 61,Yellow Line,Maharashtra,Mumbai,Sector 46,23.011396,84.642385,6,No,No,Yes,Yes,Yes,12376,2013,MMRC,Yes,7.84,10.05,5.28,0.49,0.67,6.9,Medium,No,South
+MET000586,Central 40,Blue Line,Maharashtra,Mumbai,Sector 41,28.158744,86.966552,4,Yes,No,Yes,Yes,No,37215,2006,MMRC,Yes,0.66,13.8,7.99,2.94,1.48,9.9,Medium,No,West
+MET000587,Central 18,Pink Line,Tamil Nadu,Chennai,Sector 68,15.047615,75.839256,2,Yes,No,Yes,Yes,Yes,96799,2006,CMRL,Yes,2.16,33.3,7.46,3.72,1.09,12.7,Low,No,Central
+MET000588,Lake 47,Pink Line,Karnataka,Bengaluru,Sector 57,20.132815,86.432954,6,Yes,No,Yes,Yes,No,108563,2015,BMRCL,Yes,3.55,21.55,1.3,0.48,4.97,14.32,Low,No,North
+MET000589,Park 51,Yellow Line,Tamil Nadu,Chennai,Sector 22,26.739,83.371072,2,Yes,No,Yes,Yes,No,214949,2005,CMRL,Yes,4.75,7.8,7.44,3.1,0.26,17.7,High,Yes,East
+MET000590,City 45,Yellow Line,Tamil Nadu,Chennai,Sector 59,10.373519,76.40287,4,Yes,No,Yes,Yes,No,208641,2013,CMRL,Yes,7.32,24.25,3.86,3.46,1.9,16.11,Low,Yes,South
+MET000591,Sector 22,Orange Line,Telangana,Hyderabad,Sector 80,18.00214,73.276064,5,No,Yes,Yes,Yes,Yes,101611,2020,HMRL,Yes,3.0,16.41,5.9,2.12,1.55,7.32,Low,No,West
+MET000592,Sector 14,Red Line,Tamil Nadu,Chennai,Sector 32,29.732724,77.874147,3,Yes,No,Yes,Yes,Yes,135529,2012,CMRL,Yes,0.5,9.2,5.03,0.59,3.46,4.75,Medium,No,West
+MET000593,City 61,Yellow Line,Karnataka,Bengaluru,Sector 39,9.953736,74.98998,5,No,Yes,Yes,Yes,Yes,48475,2013,BMRCL,Yes,1.71,11.03,5.92,4.34,1.01,10.89,Medium,No,North
+MET000594,Lake 4,Orange Line,Karnataka,Bengaluru,Sector 6,18.887405,79.26318,5,Yes,Yes,Yes,Yes,No,24994,2025,BMRCL,Yes,3.94,22.08,5.04,1.08,4.03,4.41,Medium,Yes,West
+MET000595,Market 27,Green Line,Tamil Nadu,Chennai,Sector 14,11.642323,74.028156,3,Yes,No,Yes,Yes,Yes,186116,2025,CMRL,Yes,8.85,12.76,3.25,0.73,1.02,8.05,Medium,No,North
+MET000596,Lake 63,Blue Line,Maharashtra,Mumbai,Sector 80,15.026699,72.739401,5,No,No,Yes,Yes,No,233138,2020,MMRC,Yes,8.0,31.55,2.51,2.49,2.52,13.75,High,Yes,South
+MET000597,Lake 78,Orange Line,Maharashtra,Mumbai,Sector 1,17.619189,79.440793,5,No,No,Yes,Yes,No,51316,2016,MMRC,Yes,4.68,25.79,4.48,3.35,4.84,7.31,Medium,Yes,South
+MET000598,Lake 4,Red Line,Maharashtra,Mumbai,Sector 54,22.519619,75.806935,5,No,Yes,Yes,Yes,Yes,32380,2023,MMRC,Yes,9.39,39.47,3.26,0.23,0.83,8.75,High,No,East
+MET000599,Market 20,Orange Line,Telangana,Hyderabad,Sector 60,20.027026,86.348488,5,No,Yes,Yes,Yes,No,134262,2021,HMRL,Yes,2.51,20.99,3.73,2.78,3.31,1.88,Medium,Yes,East
+MET000600,Lake 81,Red Line,Telangana,Hyderabad,Sector 3,22.893993,80.687733,5,No,Yes,Yes,Yes,No,189784,2024,HMRL,Yes,4.18,34.02,3.33,3.26,3.95,3.57,Medium,Yes,South
+MET000601,City 17,Yellow Line,Maharashtra,Mumbai,Sector 56,11.659591,76.70983,2,Yes,No,Yes,Yes,No,146163,2004,MMRC,Yes,5.53,8.45,1.41,1.79,2.5,4.45,Low,Yes,North
+MET000602,Central 50,Purple Line,Telangana,Hyderabad,Sector 43,29.963568,83.055844,5,No,Yes,Yes,Yes,No,40196,2006,HMRL,Yes,4.21,8.67,2.53,2.94,1.85,5.48,Medium,Yes,North
+MET000603,Market 54,Blue Line,Karnataka,Bengaluru,Sector 63,14.750771,78.935367,2,No,Yes,Yes,Yes,No,148973,2005,BMRCL,Yes,7.7,28.15,6.73,3.85,3.95,7.58,Low,Yes,South
+MET000604,Park 45,Purple Line,Delhi,New Delhi,Sector 26,10.758129,73.858914,6,Yes,No,Yes,Yes,No,122654,2023,DMRC,Yes,1.39,34.49,7.18,0.65,2.09,9.7,High,No,Central
+MET000605,City 14,Pink Line,Tamil Nadu,Chennai,Sector 42,27.602075,78.501301,5,Yes,No,Yes,Yes,Yes,132403,2012,CMRL,Yes,3.51,12.86,7.89,1.12,4.63,16.59,High,No,North
+MET000606,Central 2,Purple Line,Maharashtra,Mumbai,Sector 68,8.49943,82.995848,5,No,Yes,Yes,Yes,No,242580,2005,MMRC,Yes,6.38,8.7,1.74,0.79,4.53,3.99,Low,Yes,West
+MET000607,Lake 1,Blue Line,Delhi,New Delhi,Sector 16,23.027964,80.746194,4,Yes,Yes,Yes,Yes,No,138141,2012,DMRC,Yes,8.38,38.25,3.57,1.82,1.4,2.76,High,No,South
+MET000608,Sector 16,Pink Line,Delhi,New Delhi,Sector 68,28.914362,80.693091,5,Yes,No,Yes,Yes,No,63097,2016,DMRC,Yes,7.33,20.86,5.71,4.99,0.28,19.28,Low,Yes,South
+MET000609,Market 34,Purple Line,Delhi,New Delhi,Sector 16,24.945135,79.34919,5,No,No,Yes,Yes,No,86472,2019,DMRC,Yes,7.66,23.23,1.49,2.44,4.57,2.77,High,Yes,East
+MET000610,City 65,Purple Line,Tamil Nadu,Chennai,Sector 22,25.71435,80.058911,4,No,Yes,Yes,Yes,No,31299,2014,CMRL,Yes,6.7,26.82,5.46,2.55,1.13,19.79,Medium,No,West
+MET000611,Park 89,Orange Line,Tamil Nadu,Chennai,Sector 62,11.9043,83.970515,5,Yes,No,Yes,Yes,Yes,25038,2021,CMRL,Yes,7.31,34.67,2.96,2.24,3.56,6.31,High,No,Central
+MET000612,Lake 58,Purple Line,Maharashtra,Mumbai,Sector 40,13.567757,83.995015,5,Yes,Yes,Yes,Yes,No,236721,2016,MMRC,Yes,3.46,18.0,2.79,4.35,0.61,10.49,Low,No,East
+MET000613,Park 71,Yellow Line,Telangana,Hyderabad,Sector 39,21.297585,81.085382,6,No,Yes,Yes,Yes,No,54338,2023,HMRL,Yes,0.27,26.55,7.17,1.72,4.72,9.2,Low,No,South
+MET000614,Central 55,Blue Line,Delhi,New Delhi,Sector 40,9.588402,72.364262,4,No,No,Yes,Yes,Yes,136083,2004,DMRC,Yes,6.45,33.35,5.76,0.58,4.71,2.84,Medium,Yes,South
+MET000615,Park 91,Purple Line,Telangana,Hyderabad,Sector 76,17.208759,80.618853,4,No,Yes,Yes,Yes,No,134195,2014,HMRL,Yes,6.92,22.53,7.28,2.53,0.46,6.82,High,No,East
+MET000616,Park 44,Yellow Line,Delhi,New Delhi,Sector 53,10.104257,75.249737,3,No,Yes,Yes,Yes,No,25835,2012,DMRC,Yes,6.27,19.41,4.67,1.68,1.19,8.48,High,No,North
+MET000617,Market 56,Red Line,Maharashtra,Mumbai,Sector 48,20.955951,86.325072,4,Yes,Yes,Yes,Yes,Yes,110293,2008,MMRC,Yes,9.82,25.67,2.51,1.74,1.74,9.37,High,No,South
+MET000618,Lake 98,Blue Line,Tamil Nadu,Chennai,Sector 2,20.979826,73.607726,6,Yes,Yes,Yes,Yes,No,101823,2017,CMRL,Yes,7.89,20.97,0.76,0.63,4.2,14.57,High,Yes,Central
+MET000619,Park 47,Green Line,Karnataka,Bengaluru,Sector 50,15.340387,80.747145,5,Yes,No,Yes,Yes,Yes,174460,2003,BMRCL,Yes,5.17,12.72,6.03,0.17,3.43,9.74,Low,Yes,South
+MET000620,Market 48,Orange Line,Tamil Nadu,Chennai,Sector 5,22.691214,78.148362,3,Yes,No,Yes,Yes,No,209593,2012,CMRL,Yes,3.26,16.26,6.01,2.83,1.34,17.97,Low,No,North
+MET000621,Lake 48,Orange Line,Tamil Nadu,Chennai,Sector 18,21.160589,73.758579,6,Yes,No,Yes,Yes,Yes,118885,2006,CMRL,Yes,2.64,29.59,1.6,3.15,0.83,2.59,Low,Yes,West
+MET000622,Central 72,Pink Line,Delhi,New Delhi,Sector 67,19.350939,78.731018,2,No,Yes,Yes,Yes,No,15792,2024,DMRC,Yes,7.57,38.29,7.52,1.85,4.98,12.5,Medium,No,Central
+MET000623,City 24,Purple Line,Delhi,New Delhi,Sector 20,15.625466,76.044814,2,Yes,Yes,Yes,Yes,No,77631,2007,DMRC,Yes,1.06,38.85,5.32,4.38,1.12,18.89,High,Yes,Central
+MET000624,City 37,Red Line,Karnataka,Bengaluru,Sector 40,23.922799,75.562734,6,Yes,Yes,Yes,Yes,Yes,82035,2007,BMRCL,Yes,6.02,37.05,0.73,1.08,4.92,3.01,Low,No,East
+MET000625,Sector 81,Red Line,Karnataka,Bengaluru,Sector 65,28.067785,72.683601,4,No,No,Yes,Yes,No,125058,2018,BMRCL,Yes,3.24,7.95,2.21,1.55,3.72,10.61,Low,No,West
+MET000626,Park 80,Green Line,Delhi,New Delhi,Sector 44,9.057508,84.209275,6,No,Yes,Yes,Yes,Yes,58002,2018,DMRC,Yes,8.05,5.97,3.22,4.62,4.31,14.33,Medium,No,East
+MET000627,Sector 30,Yellow Line,Telangana,Hyderabad,Sector 37,15.61828,86.306954,3,Yes,Yes,Yes,Yes,Yes,102569,2016,HMRL,Yes,9.99,9.47,5.43,1.93,3.72,19.75,High,No,West
+MET000628,Market 38,Orange Line,Delhi,New Delhi,Sector 12,19.837962,78.121945,5,No,No,Yes,Yes,Yes,91931,2018,DMRC,Yes,7.81,10.29,3.53,2.2,0.12,17.17,High,Yes,South
+MET000629,Central 76,Pink Line,Tamil Nadu,Chennai,Sector 28,8.576686,78.689313,5,No,No,Yes,Yes,No,149754,2004,CMRL,Yes,0.82,33.63,6.26,3.04,0.67,7.01,High,No,East
+MET000630,Park 70,Pink Line,Telangana,Hyderabad,Sector 80,10.907248,79.732698,5,Yes,Yes,Yes,Yes,No,211532,2017,HMRL,Yes,5.37,16.87,2.46,0.43,2.88,4.46,High,Yes,North
+MET000631,Park 27,Purple Line,Telangana,Hyderabad,Sector 69,24.55679,79.202945,3,Yes,No,Yes,Yes,No,146308,2019,HMRL,Yes,1.93,27.34,6.72,1.55,2.68,14.12,Low,Yes,South
+MET000632,Central 75,Orange Line,Tamil Nadu,Chennai,Sector 76,9.519673,76.411581,3,No,Yes,Yes,Yes,No,47320,2021,CMRL,Yes,8.99,17.78,5.36,4.12,0.77,7.05,Low,Yes,South
+MET000633,Market 61,Yellow Line,Delhi,New Delhi,Sector 7,13.693587,74.646941,4,Yes,Yes,Yes,Yes,Yes,58212,2016,DMRC,Yes,6.38,33.32,5.56,2.19,1.63,9.16,Medium,Yes,South
+MET000634,Park 10,Yellow Line,Tamil Nadu,Chennai,Sector 54,17.211621,75.827555,3,Yes,No,Yes,Yes,Yes,138788,2024,CMRL,Yes,7.9,36.78,6.15,1.71,2.68,14.19,Medium,Yes,North
+MET000635,Sector 82,Purple Line,Tamil Nadu,Chennai,Sector 5,16.481072,85.597285,3,No,Yes,Yes,Yes,Yes,101648,2018,CMRL,Yes,3.5,38.86,5.14,3.58,4.25,18.33,Medium,Yes,North
+MET000636,City 99,Purple Line,Delhi,New Delhi,Sector 5,10.78001,72.968779,2,No,Yes,Yes,Yes,No,238506,2005,DMRC,Yes,7.41,38.0,6.77,3.9,3.4,14.47,Medium,No,Central
+MET000637,Lake 47,Blue Line,Karnataka,Bengaluru,Sector 39,9.249267,76.062822,5,Yes,Yes,Yes,Yes,No,195653,2014,BMRCL,Yes,9.87,27.11,7.21,3.69,2.7,13.19,Low,No,East
+MET000638,Market 61,Purple Line,Delhi,New Delhi,Sector 18,20.662461,77.34316,4,No,Yes,Yes,Yes,No,7248,2008,DMRC,Yes,1.31,27.88,5.99,2.16,4.93,5.05,High,Yes,North
+MET000639,City 41,Yellow Line,Telangana,Hyderabad,Sector 18,13.703827,82.13427,4,Yes,No,Yes,Yes,No,53865,2005,HMRL,Yes,1.91,8.93,5.2,3.18,3.18,5.8,High,No,North
+MET000640,Lake 2,Purple Line,Tamil Nadu,Chennai,Sector 34,14.227858,77.250882,4,No,No,Yes,Yes,No,132309,2013,CMRL,Yes,3.63,17.7,1.46,1.29,2.94,10.79,Low,Yes,East
+MET000641,Market 34,Purple Line,Maharashtra,Mumbai,Sector 3,22.699965,81.146263,3,Yes,No,Yes,Yes,Yes,248902,2018,MMRC,Yes,6.45,36.1,0.25,0.8,1.92,16.25,Low,Yes,South
+MET000642,City 84,Green Line,Maharashtra,Mumbai,Sector 49,17.71196,84.17843,6,No,Yes,Yes,Yes,No,240517,2025,MMRC,Yes,6.14,14.25,6.94,2.59,0.84,19.54,Low,Yes,Central
+MET000643,Park 65,Purple Line,Delhi,New Delhi,Sector 32,20.566817,84.338955,2,Yes,Yes,Yes,Yes,Yes,180456,2016,DMRC,Yes,1.79,39.81,2.99,1.11,3.83,10.9,Medium,No,North
+MET000644,Sector 92,Green Line,Telangana,Hyderabad,Sector 31,13.448277,84.448056,5,Yes,No,Yes,Yes,Yes,220402,2010,HMRL,Yes,3.26,7.38,6.7,1.67,3.99,3.62,High,No,East
+MET000645,Park 50,Red Line,Tamil Nadu,Chennai,Sector 59,13.297811,80.976259,3,Yes,Yes,Yes,Yes,Yes,9513,2018,CMRL,Yes,4.06,25.87,1.22,0.55,1.37,13.06,Medium,No,East
+MET000646,Lake 86,Red Line,Delhi,New Delhi,Sector 67,23.313378,78.873327,2,Yes,No,Yes,Yes,Yes,121683,2024,DMRC,Yes,9.25,22.75,6.28,4.28,3.11,16.45,High,No,North
+MET000647,Sector 88,Pink Line,Telangana,Hyderabad,Sector 47,9.44226,87.091049,6,No,No,Yes,Yes,Yes,98769,2022,HMRL,Yes,7.93,39.07,2.66,2.82,1.55,4.03,High,No,Central
+MET000648,Market 2,Yellow Line,Karnataka,Bengaluru,Sector 57,13.920678,81.476182,3,No,Yes,Yes,Yes,Yes,184937,2018,BMRCL,Yes,5.7,16.31,5.48,2.77,3.48,9.72,High,No,North
+MET000649,City 22,Red Line,Maharashtra,Mumbai,Sector 49,22.805522,87.622497,6,No,No,Yes,Yes,No,89561,2024,MMRC,Yes,1.32,39.61,4.71,0.18,2.4,18.33,Low,Yes,West
+MET000650,Park 99,Green Line,Karnataka,Bengaluru,Sector 26,29.528259,84.801268,5,Yes,Yes,Yes,Yes,No,166332,2009,BMRCL,Yes,6.02,10.12,6.95,1.63,4.49,6.62,Low,Yes,Central
+MET000651,Sector 28,Green Line,Telangana,Hyderabad,Sector 15,19.316243,80.138575,2,Yes,No,Yes,Yes,No,241910,2015,HMRL,Yes,9.79,6.49,2.98,4.69,3.01,3.7,Medium,Yes,East
+MET000652,Sector 38,Red Line,Maharashtra,Mumbai,Sector 36,16.54563,87.284788,5,Yes,No,Yes,Yes,No,115092,2023,MMRC,Yes,9.8,37.34,7.32,0.34,1.08,13.13,High,Yes,West
+MET000653,City 31,Purple Line,Karnataka,Bengaluru,Sector 33,19.084679,81.372972,5,Yes,No,Yes,Yes,Yes,108593,2002,BMRCL,Yes,9.47,33.99,0.4,4.04,3.56,9.66,High,No,North
+MET000654,Market 46,Green Line,Karnataka,Bengaluru,Sector 56,15.398818,85.402797,6,Yes,No,Yes,Yes,No,92684,2014,BMRCL,Yes,7.03,14.94,6.37,3.3,2.6,4.72,High,No,Central
+MET000655,Lake 42,Blue Line,Telangana,Hyderabad,Sector 56,26.623511,87.364348,6,Yes,No,Yes,Yes,No,123557,2009,HMRL,Yes,6.25,19.85,2.41,4.75,4.58,8.46,Medium,Yes,North
+MET000656,Central 42,Orange Line,Delhi,New Delhi,Sector 21,13.351645,83.140568,3,No,No,Yes,Yes,Yes,96364,2020,DMRC,Yes,7.25,35.48,5.83,3.26,2.72,12.7,Medium,No,South
+MET000657,Park 38,Pink Line,Telangana,Hyderabad,Sector 47,25.01706,85.074042,4,Yes,No,Yes,Yes,Yes,42658,2008,HMRL,Yes,4.98,39.28,6.27,1.54,1.0,12.7,Low,Yes,West
+MET000658,Lake 50,Red Line,Delhi,New Delhi,Sector 60,15.15707,72.439521,4,No,No,Yes,Yes,Yes,161243,2023,DMRC,Yes,0.4,23.71,1.99,0.66,0.44,2.18,Medium,No,East
+MET000659,Market 96,Green Line,Tamil Nadu,Chennai,Sector 76,25.922198,76.500161,5,No,No,Yes,Yes,Yes,100419,2019,CMRL,Yes,8.43,14.07,1.3,0.83,1.0,12.68,Low,No,East
+MET000660,Sector 41,Yellow Line,Karnataka,Bengaluru,Sector 14,18.328411,73.977509,4,No,No,Yes,Yes,No,216481,2019,BMRCL,Yes,0.68,8.63,2.29,4.04,0.43,6.79,Low,Yes,North
+MET000661,City 36,Yellow Line,Maharashtra,Mumbai,Sector 58,15.788201,81.101916,3,Yes,Yes,Yes,Yes,No,232497,2021,MMRC,Yes,7.28,27.61,1.14,4.57,3.99,2.74,Low,Yes,East
+MET000662,Lake 59,Green Line,Karnataka,Bengaluru,Sector 58,26.703083,76.557679,5,Yes,No,Yes,Yes,Yes,105500,2019,BMRCL,Yes,6.66,22.63,6.99,3.25,4.34,3.19,Low,Yes,South
+MET000663,City 51,Purple Line,Delhi,New Delhi,Sector 46,14.372865,76.664779,3,No,Yes,Yes,Yes,Yes,32476,2010,DMRC,Yes,7.69,7.59,4.43,0.44,3.14,19.24,Medium,No,South
+MET000664,Park 18,Blue Line,Maharashtra,Mumbai,Sector 63,19.449074,83.762176,3,Yes,Yes,Yes,Yes,Yes,49639,2017,MMRC,Yes,5.36,28.97,1.51,0.85,3.15,9.23,Medium,No,East
+MET000665,Sector 75,Pink Line,Maharashtra,Mumbai,Sector 17,12.996072,82.068667,4,No,Yes,Yes,Yes,Yes,236623,2010,MMRC,Yes,8.73,27.69,1.36,1.69,4.17,11.71,High,No,South
+MET000666,Market 47,Purple Line,Delhi,New Delhi,Sector 79,19.033393,78.09955,4,No,No,Yes,Yes,Yes,9234,2021,DMRC,Yes,3.5,24.58,2.76,2.16,1.18,7.6,Medium,No,East
+MET000667,Market 23,Green Line,Telangana,Hyderabad,Sector 44,27.742362,72.674842,6,No,Yes,Yes,Yes,No,99756,2007,HMRL,Yes,0.92,21.2,7.1,2.1,2.2,2.9,Low,Yes,South
+MET000668,Market 99,Green Line,Maharashtra,Mumbai,Sector 1,9.81289,78.920103,4,No,No,Yes,Yes,Yes,50598,2008,MMRC,Yes,6.46,16.44,3.68,3.57,0.22,1.91,Low,Yes,South
+MET000669,Park 62,Blue Line,Telangana,Hyderabad,Sector 43,16.972795,77.353699,4,Yes,No,Yes,Yes,No,57157,2012,HMRL,Yes,8.31,10.2,7.07,3.98,3.12,18.93,Medium,Yes,East
+MET000670,Central 24,Green Line,Telangana,Hyderabad,Sector 74,16.919151,73.660125,4,No,No,Yes,Yes,Yes,169226,2009,HMRL,Yes,7.3,32.7,3.18,0.98,2.3,7.85,High,No,Central
+MET000671,Central 72,Purple Line,Maharashtra,Mumbai,Sector 45,22.351896,74.26292,2,No,No,Yes,Yes,Yes,223149,2002,MMRC,Yes,7.17,28.34,4.25,0.55,1.6,13.35,High,No,East
+MET000672,Park 31,Pink Line,Tamil Nadu,Chennai,Sector 48,21.556089,74.343246,2,No,Yes,Yes,Yes,No,45481,2008,CMRL,Yes,9.17,17.48,1.03,3.78,0.6,15.49,Medium,No,East
+MET000673,Market 8,Red Line,Tamil Nadu,Chennai,Sector 13,27.411885,83.226413,4,Yes,No,Yes,Yes,No,202256,2025,CMRL,Yes,4.05,23.11,3.25,1.23,3.91,15.29,Medium,Yes,West
+MET000674,Central 53,Orange Line,Maharashtra,Mumbai,Sector 70,18.058788,76.00015,5,No,Yes,Yes,Yes,Yes,91054,2023,MMRC,Yes,2.69,31.68,2.3,4.99,1.16,9.85,High,No,East
+MET000675,Park 95,Blue Line,Karnataka,Bengaluru,Sector 19,21.242889,73.323203,4,Yes,Yes,Yes,Yes,No,229291,2019,BMRCL,Yes,0.71,25.52,7.48,2.05,1.37,4.77,Medium,No,North
+MET000676,Lake 26,Blue Line,Delhi,New Delhi,Sector 24,29.696106,86.44128,2,No,Yes,Yes,Yes,Yes,210454,2022,DMRC,Yes,8.43,25.76,1.56,3.93,4.91,17.73,High,No,West
+MET000677,Central 63,Pink Line,Maharashtra,Mumbai,Sector 63,20.458402,78.425618,3,Yes,Yes,Yes,Yes,Yes,128369,2022,MMRC,Yes,3.25,39.9,4.45,2.55,2.33,8.01,Low,No,North
+MET000678,Central 20,Orange Line,Karnataka,Bengaluru,Sector 3,10.761924,81.113767,6,No,No,Yes,Yes,No,76781,2021,BMRCL,Yes,4.88,7.29,6.13,1.28,4.34,4.43,Low,No,South
+MET000679,Sector 62,Blue Line,Telangana,Hyderabad,Sector 67,9.527154,76.558553,4,Yes,No,Yes,Yes,No,66134,2003,HMRL,Yes,9.15,7.01,5.61,4.84,4.39,16.29,High,No,South
+MET000680,Market 29,Yellow Line,Maharashtra,Mumbai,Sector 74,21.83918,82.157382,3,No,No,Yes,Yes,No,127356,2017,MMRC,Yes,6.34,6.64,2.41,0.32,1.65,15.93,Medium,No,South
+MET000681,Sector 59,Purple Line,Telangana,Hyderabad,Sector 63,11.868402,77.334284,6,Yes,No,Yes,Yes,Yes,79685,2010,HMRL,Yes,3.31,23.26,1.77,0.57,2.9,19.81,High,No,Central
+MET000682,Central 86,Yellow Line,Delhi,New Delhi,Sector 31,13.645718,80.083463,4,No,No,Yes,Yes,No,201514,2020,DMRC,Yes,3.26,21.03,5.36,2.79,0.25,13.29,Low,No,West
+MET000683,Lake 14,Yellow Line,Delhi,New Delhi,Sector 73,12.575046,84.562224,2,No,No,Yes,Yes,No,126216,2018,DMRC,Yes,8.23,6.51,6.6,3.71,3.05,8.9,Medium,No,West
+MET000684,Market 50,Purple Line,Tamil Nadu,Chennai,Sector 46,23.218351,72.741431,3,No,No,Yes,Yes,No,35381,2010,CMRL,Yes,7.64,27.83,7.8,3.62,3.35,12.85,High,Yes,East
+MET000685,Central 2,Purple Line,Delhi,New Delhi,Sector 41,8.59818,87.210233,6,Yes,Yes,Yes,Yes,No,23385,2022,DMRC,Yes,8.55,11.1,1.04,2.55,1.48,15.03,Medium,Yes,North
+MET000686,Park 50,Purple Line,Karnataka,Bengaluru,Sector 31,14.142244,77.104792,4,Yes,No,Yes,Yes,Yes,104995,2019,BMRCL,Yes,4.83,9.44,0.82,1.88,4.16,8.76,Low,Yes,South
+MET000687,Park 97,Pink Line,Karnataka,Bengaluru,Sector 66,10.757683,80.214739,2,Yes,Yes,Yes,Yes,No,210088,2016,BMRCL,Yes,1.16,34.66,2.19,3.98,0.7,15.19,Medium,No,West
+MET000688,Sector 28,Green Line,Telangana,Hyderabad,Sector 22,24.126727,76.135361,6,Yes,No,Yes,Yes,No,138078,2005,HMRL,Yes,6.45,13.12,6.27,3.21,2.08,16.61,Low,No,West
+MET000689,Park 61,Orange Line,Telangana,Hyderabad,Sector 14,12.241786,74.760915,5,Yes,Yes,Yes,Yes,Yes,10689,2025,HMRL,Yes,0.37,37.2,7.44,2.22,2.93,8.4,High,No,East
+MET000690,City 94,Orange Line,Karnataka,Bengaluru,Sector 55,16.464924,73.586465,6,Yes,No,Yes,Yes,No,171577,2022,BMRCL,Yes,1.67,29.72,1.14,0.84,3.91,13.3,Low,Yes,West
+MET000691,Central 90,Green Line,Delhi,New Delhi,Sector 11,27.417103,82.106733,4,No,Yes,Yes,Yes,No,83828,2011,DMRC,Yes,7.99,37.95,0.12,2.08,2.82,16.41,Medium,No,South
+MET000692,Sector 38,Yellow Line,Telangana,Hyderabad,Sector 53,10.651627,87.468943,5,Yes,Yes,Yes,Yes,Yes,133103,2010,HMRL,Yes,6.34,11.44,6.38,3.23,4.45,16.56,Low,Yes,Central
+MET000693,Park 76,Yellow Line,Telangana,Hyderabad,Sector 4,8.352936,85.720622,5,No,Yes,Yes,Yes,Yes,47137,2019,HMRL,Yes,6.88,34.01,7.69,4.81,1.23,19.12,High,No,West
+MET000694,Sector 98,Orange Line,Delhi,New Delhi,Sector 20,29.560422,75.894418,5,Yes,No,Yes,Yes,No,190495,2003,DMRC,Yes,9.74,31.49,2.8,0.56,2.1,15.21,High,Yes,West
+MET000695,City 10,Purple Line,Maharashtra,Mumbai,Sector 22,23.937625,86.820823,4,No,Yes,Yes,Yes,No,168103,2006,MMRC,Yes,4.51,10.89,7.82,2.94,3.22,18.21,Medium,Yes,East
+MET000696,Lake 10,Orange Line,Karnataka,Bengaluru,Sector 26,22.773153,78.932274,4,Yes,No,Yes,Yes,Yes,134122,2017,BMRCL,Yes,4.54,19.51,6.07,1.84,1.79,2.27,Low,No,East
+MET000697,Sector 13,Purple Line,Delhi,New Delhi,Sector 35,16.019899,84.518667,2,No,Yes,Yes,Yes,No,132119,2005,DMRC,Yes,5.52,19.76,4.26,1.83,2.24,7.75,Medium,No,East
+MET000698,City 42,Purple Line,Karnataka,Bengaluru,Sector 64,28.991397,80.783524,4,Yes,No,Yes,Yes,Yes,25662,2010,BMRCL,Yes,2.62,5.25,3.4,3.8,2.43,12.91,High,Yes,West
+MET000699,Park 12,Purple Line,Tamil Nadu,Chennai,Sector 7,28.105153,87.640102,3,No,Yes,Yes,Yes,Yes,156050,2015,CMRL,Yes,5.15,27.19,5.4,0.74,0.6,9.62,High,Yes,South
+MET000700,Lake 12,Pink Line,Karnataka,Bengaluru,Sector 32,20.203169,77.162741,5,Yes,No,Yes,Yes,No,34493,2003,BMRCL,Yes,4.84,18.46,1.79,1.16,2.59,6.08,Medium,Yes,West
+MET000701,Central 37,Red Line,Delhi,New Delhi,Sector 46,22.119268,79.605667,2,Yes,Yes,Yes,Yes,No,40996,2015,DMRC,Yes,3.64,7.87,5.52,4.43,0.39,15.14,Low,No,South
+MET000702,Park 49,Green Line,Karnataka,Bengaluru,Sector 33,23.034955,83.598687,2,No,No,Yes,Yes,No,163299,2016,BMRCL,Yes,7.42,15.42,6.64,0.76,2.63,11.6,Medium,Yes,North
+MET000703,Market 73,Purple Line,Karnataka,Bengaluru,Sector 40,11.556324,74.698863,4,Yes,Yes,Yes,Yes,Yes,88862,2009,BMRCL,Yes,0.48,24.77,4.4,3.83,4.08,3.53,High,No,South
+MET000704,Lake 40,Green Line,Delhi,New Delhi,Sector 38,14.822826,73.842495,6,No,No,Yes,Yes,No,93129,2017,DMRC,Yes,6.58,25.4,5.34,4.54,1.13,2.06,High,No,West
+MET000705,Park 59,Blue Line,Maharashtra,Mumbai,Sector 1,9.772966,83.804906,3,Yes,Yes,Yes,Yes,Yes,174929,2003,MMRC,Yes,8.6,11.66,0.22,0.8,3.6,13.98,High,Yes,North
+MET000706,Market 76,Red Line,Tamil Nadu,Chennai,Sector 53,19.930818,83.806233,6,No,No,Yes,Yes,No,161315,2003,CMRL,Yes,2.88,19.94,6.92,3.89,1.39,15.03,Low,Yes,South
+MET000707,Central 29,Blue Line,Maharashtra,Mumbai,Sector 55,28.212469,77.415641,3,Yes,No,Yes,Yes,Yes,15053,2005,MMRC,Yes,8.3,34.1,4.69,1.92,4.18,15.25,Medium,Yes,North
+MET000708,Lake 82,Red Line,Karnataka,Bengaluru,Sector 14,19.324719,79.204318,5,Yes,Yes,Yes,Yes,Yes,148066,2009,BMRCL,Yes,4.35,38.18,7.53,3.05,0.51,14.37,Low,Yes,Central
+MET000709,Central 18,Blue Line,Maharashtra,Mumbai,Sector 65,21.160469,82.7198,4,No,No,Yes,Yes,Yes,53415,2019,MMRC,Yes,7.19,18.99,1.35,1.21,3.46,18.05,High,No,South
+MET000710,Lake 58,Orange Line,Delhi,New Delhi,Sector 30,21.431625,87.873428,3,Yes,No,Yes,Yes,Yes,183628,2018,DMRC,Yes,4.77,39.93,5.5,1.85,3.25,7.54,Low,No,East
+MET000711,Market 5,Yellow Line,Karnataka,Bengaluru,Sector 59,27.85603,73.221851,6,No,Yes,Yes,Yes,No,112195,2008,BMRCL,Yes,3.57,28.5,6.92,1.56,2.98,10.42,High,Yes,East
+MET000712,Central 20,Orange Line,Telangana,Hyderabad,Sector 12,16.503265,74.778995,5,No,No,Yes,Yes,No,213779,2003,HMRL,Yes,2.02,15.6,4.05,1.27,1.1,19.68,Low,No,East
+MET000713,Park 86,Green Line,Tamil Nadu,Chennai,Sector 18,27.999102,81.731988,2,Yes,Yes,Yes,Yes,No,84933,2022,CMRL,Yes,7.89,30.07,2.35,3.94,0.4,17.01,High,Yes,Central
+MET000714,Lake 60,Green Line,Tamil Nadu,Chennai,Sector 54,11.880714,86.618064,4,No,Yes,Yes,Yes,Yes,206017,2014,CMRL,Yes,6.91,39.98,5.96,3.48,4.25,8.89,High,No,West
+MET000715,Sector 64,Orange Line,Telangana,Hyderabad,Sector 35,8.285597,74.567635,4,No,No,Yes,Yes,Yes,243029,2007,HMRL,Yes,7.12,39.57,7.51,3.76,1.45,19.4,Medium,No,East
+MET000716,Park 8,Pink Line,Maharashtra,Mumbai,Sector 3,28.785917,78.711753,4,No,Yes,Yes,Yes,No,232110,2003,MMRC,Yes,0.52,25.84,6.5,0.17,3.29,12.36,Low,No,North
+MET000717,Lake 69,Purple Line,Karnataka,Bengaluru,Sector 7,25.386411,76.79133,6,Yes,No,Yes,Yes,No,106297,2002,BMRCL,Yes,4.95,19.52,3.82,0.41,2.62,6.4,Medium,No,North
+MET000718,City 41,Purple Line,Tamil Nadu,Chennai,Sector 20,28.586472,74.517104,2,Yes,Yes,Yes,Yes,No,106597,2015,CMRL,Yes,9.24,17.73,3.72,3.43,0.21,9.72,Medium,Yes,Central
+MET000719,Park 2,Green Line,Karnataka,Bengaluru,Sector 60,13.165972,84.447606,6,Yes,No,Yes,Yes,Yes,229456,2025,BMRCL,Yes,5.71,23.13,1.12,1.93,1.93,4.57,High,No,North
+MET000720,Market 84,Yellow Line,Telangana,Hyderabad,Sector 24,10.915049,81.586966,5,No,No,Yes,Yes,Yes,9136,2007,HMRL,Yes,6.1,30.63,1.24,1.35,2.47,12.91,High,No,North
+MET000721,Market 44,Yellow Line,Maharashtra,Mumbai,Sector 71,8.801489,84.924982,2,Yes,Yes,Yes,Yes,Yes,203333,2004,MMRC,Yes,5.25,35.81,2.51,0.69,1.54,2.26,Medium,No,West
+MET000722,Market 47,Orange Line,Karnataka,Bengaluru,Sector 67,17.958249,86.304391,6,Yes,No,Yes,Yes,No,212514,2025,BMRCL,Yes,8.85,15.44,6.52,4.33,1.77,6.63,Medium,No,South
+MET000723,Lake 23,Blue Line,Telangana,Hyderabad,Sector 24,28.793201,81.064798,5,Yes,No,Yes,Yes,No,146483,2008,HMRL,Yes,8.21,8.71,7.24,2.23,0.16,19.22,High,No,Central
+MET000724,Park 85,Pink Line,Maharashtra,Mumbai,Sector 51,22.919251,73.484824,2,Yes,No,Yes,Yes,Yes,229808,2015,MMRC,Yes,1.57,17.41,0.37,4.77,1.96,18.68,Medium,No,Central
+MET000725,City 76,Orange Line,Telangana,Hyderabad,Sector 57,15.849707,82.581272,5,No,No,Yes,Yes,No,119641,2006,HMRL,Yes,6.45,30.67,5.36,1.45,4.8,3.83,Medium,No,South
+MET000726,Park 89,Purple Line,Tamil Nadu,Chennai,Sector 22,18.238782,75.394195,4,No,Yes,Yes,Yes,No,182867,2021,CMRL,Yes,0.25,37.84,4.14,1.06,1.22,16.78,Low,No,Central
+MET000727,Sector 76,Green Line,Delhi,New Delhi,Sector 18,17.451454,72.634389,4,No,Yes,Yes,Yes,Yes,200774,2019,DMRC,Yes,0.68,7.44,4.76,4.1,3.96,19.16,High,Yes,East
+MET000728,Central 81,Green Line,Tamil Nadu,Chennai,Sector 59,27.415307,77.659617,3,No,Yes,Yes,Yes,No,127725,2023,CMRL,Yes,7.81,37.99,1.9,4.48,1.74,16.14,Medium,Yes,South
+MET000729,Central 76,Yellow Line,Delhi,New Delhi,Sector 45,26.634726,81.994784,5,Yes,Yes,Yes,Yes,Yes,209534,2021,DMRC,Yes,4.35,31.43,7.36,3.59,1.36,14.82,High,No,South
+MET000730,Lake 58,Green Line,Tamil Nadu,Chennai,Sector 78,20.53325,83.594382,2,Yes,Yes,Yes,Yes,No,54156,2016,CMRL,Yes,7.49,14.1,7.22,3.23,1.46,10.92,Medium,Yes,West
+MET000731,Lake 68,Orange Line,Maharashtra,Mumbai,Sector 61,24.709496,75.698032,2,No,No,Yes,Yes,Yes,140268,2006,MMRC,Yes,2.94,20.43,7.21,0.65,4.18,6.91,High,No,North
+MET000732,Park 93,Orange Line,Maharashtra,Mumbai,Sector 9,21.585498,74.685825,5,No,Yes,Yes,Yes,No,221588,2017,MMRC,Yes,5.31,7.95,2.13,3.97,0.32,15.65,High,No,East
+MET000733,Central 50,Green Line,Maharashtra,Mumbai,Sector 41,9.23475,83.635267,4,Yes,No,Yes,Yes,Yes,157456,2012,MMRC,Yes,5.68,28.29,0.51,2.61,4.62,17.04,Medium,Yes,West
+MET000734,Park 78,Pink Line,Maharashtra,Mumbai,Sector 17,22.051112,81.303845,5,Yes,Yes,Yes,Yes,Yes,21886,2012,MMRC,Yes,4.91,26.87,1.08,1.63,0.24,3.16,Medium,No,East
+MET000735,City 8,Red Line,Tamil Nadu,Chennai,Sector 53,20.361181,78.508333,6,Yes,Yes,Yes,Yes,No,67735,2024,CMRL,Yes,3.77,14.57,7.05,0.91,2.57,15.86,High,No,South
+MET000736,City 59,Orange Line,Maharashtra,Mumbai,Sector 72,16.417761,84.575536,6,Yes,No,Yes,Yes,No,208428,2005,MMRC,Yes,1.67,11.3,6.45,2.97,4.76,9.14,Medium,Yes,West
+MET000737,Lake 47,Red Line,Delhi,New Delhi,Sector 62,17.21332,72.322355,6,No,Yes,Yes,Yes,Yes,77264,2015,DMRC,Yes,2.69,34.61,7.35,1.9,3.26,6.55,Low,No,South
+MET000738,Park 21,Blue Line,Tamil Nadu,Chennai,Sector 34,26.731794,86.086278,6,No,No,Yes,Yes,Yes,243300,2023,CMRL,Yes,6.77,34.52,7.66,1.77,2.64,14.71,Medium,No,East
+MET000739,Central 47,Red Line,Telangana,Hyderabad,Sector 50,12.502824,72.846744,2,Yes,Yes,Yes,Yes,No,212151,2014,HMRL,Yes,4.55,16.19,5.67,4.12,3.47,4.95,Low,No,South
+MET000740,Central 82,Purple Line,Maharashtra,Mumbai,Sector 32,14.084451,84.965929,3,No,No,Yes,Yes,Yes,102645,2009,MMRC,Yes,8.03,17.0,7.63,4.38,2.44,9.87,High,No,South
+MET000741,Park 27,Orange Line,Telangana,Hyderabad,Sector 31,21.925763,72.775855,6,No,Yes,Yes,Yes,Yes,143192,2011,HMRL,Yes,6.69,16.44,0.24,3.24,0.83,17.65,Low,Yes,West
+MET000742,Lake 98,Blue Line,Karnataka,Bengaluru,Sector 72,16.588282,81.245499,4,No,No,Yes,Yes,Yes,100854,2017,BMRCL,Yes,1.01,17.32,4.59,2.47,2.66,11.47,High,No,Central
+MET000743,Market 96,Red Line,Karnataka,Bengaluru,Sector 71,17.077962,73.801946,4,Yes,No,Yes,Yes,Yes,154755,2010,BMRCL,Yes,0.67,5.11,7.12,3.57,0.35,1.12,Low,No,East
+MET000744,Park 37,Red Line,Telangana,Hyderabad,Sector 76,16.180736,87.904208,2,No,No,Yes,Yes,Yes,177827,2018,HMRL,Yes,3.44,32.37,3.19,0.33,3.91,15.84,Low,Yes,Central
+MET000745,Central 94,Yellow Line,Maharashtra,Mumbai,Sector 56,20.945249,87.26886,6,No,No,Yes,Yes,Yes,80416,2013,MMRC,Yes,3.7,21.78,5.12,2.11,1.78,6.62,Medium,Yes,East
+MET000746,Lake 21,Blue Line,Tamil Nadu,Chennai,Sector 48,16.643391,72.964046,3,No,Yes,Yes,Yes,Yes,218497,2011,CMRL,Yes,1.17,23.89,6.82,3.65,2.37,14.12,Low,No,West
+MET000747,Market 97,Green Line,Delhi,New Delhi,Sector 63,24.410962,77.938019,5,Yes,Yes,Yes,Yes,Yes,187037,2011,DMRC,Yes,5.56,34.16,2.23,4.48,3.34,17.87,Low,Yes,West
+MET000748,Lake 57,Yellow Line,Maharashtra,Mumbai,Sector 19,16.83604,77.872455,3,Yes,Yes,Yes,Yes,Yes,120655,2011,MMRC,Yes,1.51,5.37,6.25,4.47,3.38,6.85,Medium,No,Central
+MET000749,Park 31,Orange Line,Tamil Nadu,Chennai,Sector 12,9.963873,77.302392,3,Yes,No,Yes,Yes,No,240847,2008,CMRL,Yes,6.28,38.8,7.15,4.0,2.89,6.81,Low,Yes,Central
+MET000750,Central 31,Blue Line,Tamil Nadu,Chennai,Sector 50,22.113008,72.866089,4,Yes,No,Yes,Yes,No,78827,2008,CMRL,Yes,6.43,22.88,2.59,4.03,1.1,19.08,High,Yes,East
+MET000751,Central 66,Pink Line,Maharashtra,Mumbai,Sector 39,21.222848,77.92539,4,No,Yes,Yes,Yes,Yes,71846,2012,MMRC,Yes,5.32,20.15,2.88,2.82,0.73,10.68,High,Yes,Central
+MET000752,Market 70,Purple Line,Karnataka,Bengaluru,Sector 75,17.548883,72.541359,2,Yes,No,Yes,Yes,Yes,160764,2025,BMRCL,Yes,6.65,11.07,2.61,2.57,1.89,2.93,Medium,No,Central
+MET000753,Market 45,Yellow Line,Telangana,Hyderabad,Sector 24,19.139881,73.869748,6,No,Yes,Yes,Yes,No,244664,2021,HMRL,Yes,2.31,36.25,1.28,4.31,0.13,3.31,Low,No,South
+MET000754,Park 2,Blue Line,Tamil Nadu,Chennai,Sector 49,13.338105,79.330614,2,No,Yes,Yes,Yes,No,63990,2016,CMRL,Yes,0.79,22.3,7.47,0.64,2.62,19.25,High,No,East
+MET000755,Lake 90,Yellow Line,Tamil Nadu,Chennai,Sector 65,18.625267,76.447631,3,No,No,Yes,Yes,No,203613,2011,CMRL,Yes,6.52,8.14,7.18,3.37,2.89,17.41,Low,No,South
+MET000756,Central 41,Pink Line,Maharashtra,Mumbai,Sector 69,24.360584,77.743538,3,Yes,Yes,Yes,Yes,Yes,145311,2024,MMRC,Yes,7.28,29.68,4.25,0.59,4.88,12.49,High,Yes,West
+MET000757,Central 99,Yellow Line,Telangana,Hyderabad,Sector 20,25.863976,80.57294,3,Yes,Yes,Yes,Yes,No,222594,2008,HMRL,Yes,6.79,37.08,1.11,3.44,4.34,13.31,High,No,East
+MET000758,Park 85,Green Line,Telangana,Hyderabad,Sector 29,26.530083,86.175954,6,No,No,Yes,Yes,No,245558,2021,HMRL,Yes,6.24,9.03,7.68,1.55,3.35,16.52,Medium,No,South
+MET000759,Central 21,Yellow Line,Telangana,Hyderabad,Sector 28,25.170014,86.850452,5,Yes,Yes,Yes,Yes,No,203508,2007,HMRL,Yes,1.95,7.88,1.39,2.55,3.4,1.39,Medium,No,South
+MET000760,Sector 65,Orange Line,Karnataka,Bengaluru,Sector 69,24.937776,81.368088,6,Yes,No,Yes,Yes,Yes,177012,2010,BMRCL,Yes,7.57,26.92,3.58,4.05,1.3,5.21,High,No,West
+MET000761,Lake 79,Green Line,Telangana,Hyderabad,Sector 3,21.76578,84.690531,5,No,Yes,Yes,Yes,No,31850,2017,HMRL,Yes,1.42,25.55,1.56,1.93,0.68,2.5,Low,No,South
+MET000762,Lake 68,Pink Line,Delhi,New Delhi,Sector 25,15.481535,87.464336,6,Yes,No,Yes,Yes,Yes,130805,2012,DMRC,Yes,4.04,11.18,7.98,0.55,0.99,4.38,Medium,No,Central
+MET000763,City 45,Green Line,Karnataka,Bengaluru,Sector 13,17.861917,79.817095,6,Yes,Yes,Yes,Yes,Yes,123025,2021,BMRCL,Yes,7.75,9.72,4.78,4.29,3.65,5.69,High,Yes,South
+MET000764,Central 46,Yellow Line,Delhi,New Delhi,Sector 16,24.025238,85.345597,4,No,No,Yes,Yes,Yes,39611,2023,DMRC,Yes,0.52,20.34,6.39,0.91,3.43,0.53,Medium,Yes,East
+MET000765,City 22,Green Line,Maharashtra,Mumbai,Sector 26,27.381413,75.550729,2,No,Yes,Yes,Yes,Yes,97536,2002,MMRC,Yes,0.58,16.58,4.77,0.78,2.1,15.33,High,Yes,East
+MET000766,City 33,Orange Line,Maharashtra,Mumbai,Sector 61,18.243961,74.651969,4,Yes,No,Yes,Yes,Yes,78133,2012,MMRC,Yes,3.74,5.06,3.5,2.26,1.24,10.85,High,No,North
+MET000767,Sector 80,Blue Line,Maharashtra,Mumbai,Sector 34,15.30719,82.887419,2,No,No,Yes,Yes,No,102661,2018,MMRC,Yes,0.69,9.8,2.46,2.09,2.91,1.4,High,No,West
+MET000768,Lake 95,Red Line,Tamil Nadu,Chennai,Sector 61,20.062102,78.802373,6,Yes,Yes,Yes,Yes,No,178858,2020,CMRL,Yes,8.73,28.88,3.86,3.26,4.54,18.19,Medium,Yes,South
+MET000769,Lake 13,Purple Line,Telangana,Hyderabad,Sector 63,23.26352,75.878308,5,No,Yes,Yes,Yes,Yes,117045,2012,HMRL,Yes,2.42,26.52,4.18,1.14,4.13,3.42,Low,Yes,East
+MET000770,Lake 5,Purple Line,Maharashtra,Mumbai,Sector 78,15.296075,80.625706,4,No,No,Yes,Yes,Yes,14450,2021,MMRC,Yes,7.33,8.04,5.16,4.53,2.29,18.38,Medium,No,West
+MET000771,Market 3,Red Line,Maharashtra,Mumbai,Sector 38,18.308187,87.583354,4,No,Yes,Yes,Yes,Yes,206471,2017,MMRC,Yes,5.66,39.0,2.51,1.32,1.08,12.09,Medium,No,East
+MET000772,Park 63,Yellow Line,Karnataka,Bengaluru,Sector 2,18.646385,83.08335,3,No,No,Yes,Yes,No,132800,2025,BMRCL,Yes,3.02,26.75,0.5,4.48,0.35,12.85,Low,No,East
+MET000773,Lake 3,Green Line,Tamil Nadu,Chennai,Sector 46,17.584979,81.08207,3,No,Yes,Yes,Yes,Yes,153592,2008,CMRL,Yes,7.5,36.17,7.73,4.69,4.04,0.54,High,No,North
+MET000774,Central 20,Yellow Line,Karnataka,Bengaluru,Sector 53,12.288702,83.463512,6,Yes,No,Yes,Yes,Yes,88116,2011,BMRCL,Yes,1.9,11.15,0.83,1.32,3.0,8.04,Medium,No,West
+MET000775,Park 23,Red Line,Karnataka,Bengaluru,Sector 13,26.044436,74.897074,3,Yes,No,Yes,Yes,No,244803,2010,BMRCL,Yes,4.85,6.38,0.98,4.29,2.03,13.9,Medium,No,East
+MET000776,Park 52,Orange Line,Telangana,Hyderabad,Sector 66,17.153164,81.651987,2,Yes,Yes,Yes,Yes,Yes,202558,2024,HMRL,Yes,1.29,38.05,4.41,4.13,4.41,19.31,Medium,No,West
+MET000777,City 5,Yellow Line,Maharashtra,Mumbai,Sector 63,25.11437,80.333089,5,Yes,No,Yes,Yes,Yes,219556,2003,MMRC,Yes,9.85,17.33,7.8,0.7,4.33,5.33,High,No,West
+MET000778,Central 8,Pink Line,Maharashtra,Mumbai,Sector 15,21.833865,77.640536,6,No,No,Yes,Yes,Yes,105832,2013,MMRC,Yes,3.4,11.24,2.38,4.64,0.98,14.61,Low,No,Central
+MET000779,Park 27,Green Line,Tamil Nadu,Chennai,Sector 36,23.079101,75.922183,5,Yes,Yes,Yes,Yes,No,81648,2003,CMRL,Yes,0.21,9.5,1.01,1.61,1.86,10.97,High,No,South
+MET000780,Park 38,Orange Line,Tamil Nadu,Chennai,Sector 54,9.363442,77.682938,4,No,No,Yes,Yes,No,115157,2005,CMRL,Yes,1.28,29.97,1.44,1.86,2.25,1.71,High,No,East
+MET000781,Lake 44,Green Line,Karnataka,Bengaluru,Sector 62,9.673928,72.418957,3,No,Yes,Yes,Yes,Yes,122399,2002,BMRCL,Yes,5.23,31.44,3.68,0.75,0.25,9.53,Medium,Yes,Central
+MET000782,City 70,Red Line,Delhi,New Delhi,Sector 24,16.203953,85.533374,4,No,Yes,Yes,Yes,No,9222,2017,DMRC,Yes,8.48,34.05,7.96,2.76,4.18,1.28,Low,Yes,East
+MET000783,Central 83,Pink Line,Karnataka,Bengaluru,Sector 59,24.194732,79.77737,5,No,No,Yes,Yes,Yes,226938,2025,BMRCL,Yes,1.34,5.86,3.2,1.27,2.67,4.63,Medium,Yes,West
+MET000784,Sector 4,Orange Line,Tamil Nadu,Chennai,Sector 22,15.557414,77.786839,6,No,No,Yes,Yes,Yes,245185,2006,CMRL,Yes,5.71,28.99,0.42,3.81,2.28,9.8,Low,Yes,East
+MET000785,Lake 62,Pink Line,Tamil Nadu,Chennai,Sector 13,15.736891,85.947859,2,Yes,Yes,Yes,Yes,Yes,235959,2006,CMRL,Yes,5.68,38.6,6.79,3.12,2.16,17.54,High,No,West
+MET000786,Park 26,Pink Line,Karnataka,Bengaluru,Sector 71,21.365968,78.098226,3,No,No,Yes,Yes,Yes,162925,2017,BMRCL,Yes,6.56,25.68,0.17,4.6,1.91,1.64,Medium,Yes,South
+MET000787,Market 42,Purple Line,Maharashtra,Mumbai,Sector 10,12.2648,80.880388,2,Yes,Yes,Yes,Yes,No,173352,2021,MMRC,Yes,8.46,7.83,6.18,2.95,1.07,3.94,Medium,Yes,West
+MET000788,Lake 79,Yellow Line,Delhi,New Delhi,Sector 49,13.406635,74.696425,6,Yes,Yes,Yes,Yes,Yes,84395,2015,DMRC,Yes,6.49,5.69,6.67,0.13,3.6,8.54,Medium,No,Central
+MET000789,City 16,Blue Line,Tamil Nadu,Chennai,Sector 70,23.494958,85.705855,6,Yes,Yes,Yes,Yes,Yes,89515,2013,CMRL,Yes,9.77,16.79,6.84,3.8,2.73,16.38,Medium,Yes,East
+MET000790,Sector 12,Blue Line,Delhi,New Delhi,Sector 2,20.763414,86.43919,6,Yes,Yes,Yes,Yes,No,102799,2014,DMRC,Yes,5.09,29.19,2.92,3.32,0.58,15.57,Medium,No,East
+MET000791,Park 85,Yellow Line,Maharashtra,Mumbai,Sector 13,9.818767,75.477618,4,Yes,Yes,Yes,Yes,Yes,137100,2003,MMRC,Yes,8.29,19.75,3.64,4.17,4.45,8.27,High,No,Central
+MET000792,Central 51,Yellow Line,Delhi,New Delhi,Sector 62,21.844512,76.856788,6,Yes,Yes,Yes,Yes,Yes,208944,2024,DMRC,Yes,3.31,6.75,6.63,4.9,2.33,4.97,High,Yes,North
+MET000793,Lake 47,Red Line,Maharashtra,Mumbai,Sector 72,29.111058,81.886692,2,Yes,No,Yes,Yes,No,108379,2020,MMRC,Yes,1.61,22.69,1.74,2.18,0.7,18.6,High,No,West
+MET000794,Sector 55,Orange Line,Maharashtra,Mumbai,Sector 41,17.274439,80.074506,3,Yes,No,Yes,Yes,No,218763,2025,MMRC,Yes,7.16,11.56,7.85,3.64,3.72,2.81,Low,Yes,East
+MET000795,Central 43,Green Line,Telangana,Hyderabad,Sector 76,15.425037,75.100631,4,Yes,Yes,Yes,Yes,Yes,110655,2019,HMRL,Yes,8.01,39.33,2.99,3.31,1.64,14.44,High,No,West
+MET000796,Park 72,Purple Line,Maharashtra,Mumbai,Sector 55,11.324069,80.664785,4,No,Yes,Yes,Yes,No,194898,2002,MMRC,Yes,1.64,36.73,2.7,1.22,0.68,14.49,Medium,No,North
+MET000797,Lake 20,Green Line,Telangana,Hyderabad,Sector 69,18.611627,73.487229,4,Yes,No,Yes,Yes,No,242929,2002,HMRL,Yes,9.83,37.98,3.89,4.3,1.53,8.59,Low,No,East
+MET000798,City 67,Red Line,Delhi,New Delhi,Sector 48,15.495779,79.966227,2,No,No,Yes,Yes,No,64639,2015,DMRC,Yes,3.42,25.26,7.76,1.49,1.75,3.69,Low,Yes,West
+MET000799,Park 91,Green Line,Maharashtra,Mumbai,Sector 70,10.204943,87.784481,6,No,No,Yes,Yes,No,158441,2011,MMRC,Yes,2.83,26.79,4.08,4.41,0.83,10.17,Low,Yes,East
+MET000800,Sector 42,Red Line,Maharashtra,Mumbai,Sector 25,8.010108,82.712942,4,Yes,Yes,Yes,Yes,Yes,186837,2004,MMRC,Yes,4.82,7.35,3.42,0.18,4.76,3.19,High,No,Central
+MET000801,Park 57,Red Line,Delhi,New Delhi,Sector 63,27.65429,79.576509,4,No,No,Yes,Yes,No,109288,2003,DMRC,Yes,2.17,13.94,2.85,0.38,4.59,14.45,Low,Yes,North
+MET000802,Market 30,Red Line,Maharashtra,Mumbai,Sector 25,11.725034,77.135909,4,No,No,Yes,Yes,No,168169,2014,MMRC,Yes,4.79,26.95,3.86,2.39,0.43,2.14,Medium,No,North
+MET000803,City 73,Green Line,Maharashtra,Mumbai,Sector 43,20.549604,81.406541,6,No,No,Yes,Yes,Yes,226102,2024,MMRC,Yes,6.55,15.82,6.15,3.03,2.46,13.98,Low,No,West
+MET000804,Central 83,Pink Line,Maharashtra,Mumbai,Sector 22,27.82784,83.566735,5,Yes,No,Yes,Yes,No,77763,2012,MMRC,Yes,2.6,23.65,0.84,2.57,1.14,2.6,High,No,South
+MET000805,Sector 92,Yellow Line,Tamil Nadu,Chennai,Sector 3,12.978161,73.797797,4,Yes,Yes,Yes,Yes,Yes,104376,2017,CMRL,Yes,2.69,19.22,6.76,4.71,2.76,10.92,High,Yes,East
+MET000806,Lake 11,Orange Line,Tamil Nadu,Chennai,Sector 9,26.019997,87.715212,3,No,Yes,Yes,Yes,No,6327,2020,CMRL,Yes,9.64,25.37,5.33,2.4,3.51,3.28,Medium,No,West
+MET000807,Sector 19,Blue Line,Karnataka,Bengaluru,Sector 29,16.911037,85.322816,4,No,No,Yes,Yes,Yes,158442,2023,BMRCL,Yes,3.09,20.51,3.43,2.94,3.81,19.03,Medium,Yes,East
+MET000808,Park 73,Orange Line,Delhi,New Delhi,Sector 7,29.964592,81.750328,5,Yes,Yes,Yes,Yes,No,58789,2002,DMRC,Yes,7.38,9.0,7.0,0.73,3.63,19.01,High,Yes,East
+MET000809,Park 3,Purple Line,Telangana,Hyderabad,Sector 74,17.655949,74.238987,5,Yes,No,Yes,Yes,No,84510,2016,HMRL,Yes,2.45,14.06,6.34,4.6,0.22,11.05,Low,No,North
+MET000810,Lake 18,Purple Line,Karnataka,Bengaluru,Sector 40,9.111969,80.763525,2,No,No,Yes,Yes,Yes,48325,2004,BMRCL,Yes,2.6,33.53,7.11,1.56,4.81,15.26,Medium,Yes,North
+MET000811,Lake 30,Blue Line,Tamil Nadu,Chennai,Sector 9,22.613923,79.748682,4,No,No,Yes,Yes,Yes,6188,2004,CMRL,Yes,1.8,7.41,1.29,2.11,0.96,11.03,High,No,East
+MET000812,Sector 37,Purple Line,Karnataka,Bengaluru,Sector 78,26.46307,84.293009,2,Yes,No,Yes,Yes,Yes,165356,2002,BMRCL,Yes,5.29,5.51,1.94,2.99,3.41,15.26,Medium,No,South
+MET000813,Park 70,Purple Line,Telangana,Hyderabad,Sector 59,27.526525,87.951657,5,No,No,Yes,Yes,Yes,131498,2023,HMRL,Yes,9.72,27.94,7.01,0.64,2.96,2.7,Low,No,North
+MET000814,City 2,Orange Line,Tamil Nadu,Chennai,Sector 56,27.466572,77.264354,3,No,Yes,Yes,Yes,Yes,79706,2007,CMRL,Yes,6.29,13.24,3.58,1.12,1.57,8.66,Low,No,North
+MET000815,Park 99,Purple Line,Tamil Nadu,Chennai,Sector 30,13.025717,78.499743,3,No,Yes,Yes,Yes,Yes,47305,2022,CMRL,Yes,0.76,8.96,5.05,1.48,1.89,15.24,High,No,South
+MET000816,Lake 96,Blue Line,Tamil Nadu,Chennai,Sector 7,23.653034,81.026109,5,No,Yes,Yes,Yes,Yes,175819,2016,CMRL,Yes,6.73,13.59,5.48,2.7,2.23,19.18,Medium,Yes,Central
+MET000817,City 66,Pink Line,Maharashtra,Mumbai,Sector 51,23.644322,87.339207,4,Yes,Yes,Yes,Yes,Yes,112967,2017,MMRC,Yes,1.59,11.43,3.76,3.97,0.27,0.75,Low,Yes,West
+MET000818,Sector 36,Yellow Line,Telangana,Hyderabad,Sector 59,14.634374,80.896041,2,Yes,Yes,Yes,Yes,Yes,201319,2014,HMRL,Yes,5.91,31.1,0.4,3.84,1.06,4.79,Low,No,East
+MET000819,Central 13,Orange Line,Maharashtra,Mumbai,Sector 46,20.989585,74.98341,5,No,No,Yes,Yes,Yes,34106,2024,MMRC,Yes,5.07,23.8,6.84,4.4,1.4,12.68,High,No,Central
+MET000820,Park 51,Green Line,Tamil Nadu,Chennai,Sector 49,12.182705,75.192157,6,Yes,No,Yes,Yes,No,205496,2021,CMRL,Yes,0.4,10.26,6.65,0.16,1.99,0.73,High,Yes,South
+MET000821,Market 39,Yellow Line,Delhi,New Delhi,Sector 10,10.433447,74.110399,2,Yes,Yes,Yes,Yes,Yes,76871,2009,DMRC,Yes,2.53,13.92,0.8,3.25,3.43,18.94,High,No,North
+MET000822,Lake 8,Yellow Line,Karnataka,Bengaluru,Sector 44,17.49152,86.565657,4,No,No,Yes,Yes,Yes,178138,2005,BMRCL,Yes,8.21,12.7,2.34,0.83,4.41,10.89,Low,Yes,West
+MET000823,Central 98,Orange Line,Telangana,Hyderabad,Sector 64,26.804311,85.928032,5,No,No,Yes,Yes,No,114589,2022,HMRL,Yes,8.32,16.14,0.97,0.32,1.04,7.53,Low,No,South
+MET000824,Market 16,Red Line,Tamil Nadu,Chennai,Sector 20,23.000365,80.907445,3,Yes,No,Yes,Yes,Yes,29619,2006,CMRL,Yes,9.91,22.05,7.57,1.5,3.83,2.83,Medium,No,South
+MET000825,Lake 37,Purple Line,Karnataka,Bengaluru,Sector 23,13.614506,78.409764,3,Yes,No,Yes,Yes,No,55172,2010,BMRCL,Yes,2.31,25.14,7.77,3.74,0.94,14.46,High,Yes,South
+MET000826,City 74,Purple Line,Telangana,Hyderabad,Sector 36,29.799726,87.06644,3,No,Yes,Yes,Yes,No,22306,2021,HMRL,Yes,4.96,5.48,4.69,2.82,2.86,4.19,Low,Yes,North
+MET000827,Park 38,Blue Line,Delhi,New Delhi,Sector 74,13.338097,72.690889,2,Yes,No,Yes,Yes,Yes,166789,2022,DMRC,Yes,7.44,15.41,0.92,3.91,4.33,7.84,Low,Yes,Central
+MET000828,Market 16,Orange Line,Tamil Nadu,Chennai,Sector 13,14.76249,77.139162,3,Yes,Yes,Yes,Yes,Yes,167510,2003,CMRL,Yes,6.11,10.66,0.44,4.54,2.45,1.79,Low,No,Central
+MET000829,Lake 91,Green Line,Delhi,New Delhi,Sector 30,10.30871,83.346058,3,Yes,No,Yes,Yes,No,20137,2004,DMRC,Yes,0.23,37.02,1.98,2.22,0.97,5.11,High,No,East
+MET000830,Central 83,Green Line,Karnataka,Bengaluru,Sector 68,16.997147,84.72186,4,Yes,No,Yes,Yes,Yes,18933,2003,BMRCL,Yes,1.55,38.23,2.56,1.27,4.37,3.72,High,No,West
+MET000831,City 34,Blue Line,Delhi,New Delhi,Sector 42,8.223925,86.263603,4,Yes,No,Yes,Yes,No,183696,2015,DMRC,Yes,2.1,8.23,3.94,1.82,3.19,15.09,Low,Yes,East
+MET000832,Lake 16,Orange Line,Delhi,New Delhi,Sector 19,26.732481,85.348758,4,No,No,Yes,Yes,No,94232,2003,DMRC,Yes,4.63,33.78,1.2,2.96,1.62,8.75,High,Yes,Central
+MET000833,Sector 29,Green Line,Telangana,Hyderabad,Sector 47,25.93489,76.221815,6,Yes,Yes,Yes,Yes,No,240983,2017,HMRL,Yes,6.81,39.27,2.42,0.71,1.81,19.36,Medium,No,West
+MET000834,City 96,Orange Line,Telangana,Hyderabad,Sector 74,10.064605,79.564568,3,Yes,No,Yes,Yes,Yes,153741,2006,HMRL,Yes,8.41,13.99,3.97,1.87,2.99,11.8,Low,Yes,Central
+MET000835,City 92,Yellow Line,Maharashtra,Mumbai,Sector 22,13.893528,86.743052,4,Yes,Yes,Yes,Yes,Yes,194246,2023,MMRC,Yes,9.42,6.4,6.18,0.35,2.29,16.54,Low,No,North
+MET000836,Lake 9,Red Line,Telangana,Hyderabad,Sector 61,20.068644,82.308691,3,Yes,No,Yes,Yes,Yes,45496,2008,HMRL,Yes,0.81,16.49,6.06,3.63,1.93,3.21,Low,Yes,North
+MET000837,Sector 94,Purple Line,Telangana,Hyderabad,Sector 72,16.979184,85.526367,3,No,No,Yes,Yes,No,219572,2017,HMRL,Yes,8.28,8.15,6.48,2.52,0.19,5.64,Low,No,East
+MET000838,Park 29,Purple Line,Telangana,Hyderabad,Sector 69,17.994859,83.249364,4,No,Yes,Yes,Yes,No,165570,2015,HMRL,Yes,8.62,30.65,1.14,4.42,0.45,7.83,Medium,Yes,West
+MET000839,City 30,Red Line,Karnataka,Bengaluru,Sector 31,19.217123,84.605065,6,No,Yes,Yes,Yes,Yes,203823,2009,BMRCL,Yes,3.13,21.26,2.75,4.15,3.16,7.56,High,Yes,West
+MET000840,City 54,Yellow Line,Telangana,Hyderabad,Sector 71,26.939297,76.124968,5,Yes,Yes,Yes,Yes,No,135166,2022,HMRL,Yes,4.48,33.25,1.7,0.5,2.77,17.45,High,Yes,West
+MET000841,City 1,Blue Line,Telangana,Hyderabad,Sector 15,12.383935,72.417012,4,Yes,No,Yes,Yes,Yes,216152,2019,HMRL,Yes,9.74,36.37,3.25,2.98,4.7,8.41,Low,Yes,East
+MET000842,Sector 19,Pink Line,Telangana,Hyderabad,Sector 71,27.918769,76.353239,5,Yes,Yes,Yes,Yes,Yes,248020,2002,HMRL,Yes,1.0,12.52,4.1,1.4,2.12,2.19,Medium,No,North
+MET000843,Market 50,Green Line,Delhi,New Delhi,Sector 57,28.70136,79.728358,2,Yes,Yes,Yes,Yes,No,222731,2022,DMRC,Yes,3.86,19.26,2.03,2.49,0.53,16.73,High,Yes,South
+MET000844,City 75,Yellow Line,Telangana,Hyderabad,Sector 53,15.050144,77.380254,5,Yes,Yes,Yes,Yes,No,79754,2004,HMRL,Yes,2.2,13.59,0.84,1.77,2.2,18.01,Low,No,East
+MET000845,Lake 41,Pink Line,Telangana,Hyderabad,Sector 3,23.623274,81.346459,6,Yes,No,Yes,Yes,No,120885,2020,HMRL,Yes,0.72,5.36,6.99,2.05,1.44,1.25,Medium,Yes,Central
+MET000846,Central 18,Purple Line,Delhi,New Delhi,Sector 3,29.142241,78.561678,5,Yes,Yes,Yes,Yes,No,136365,2006,DMRC,Yes,2.14,32.01,3.44,1.67,2.13,10.59,Medium,Yes,South
+MET000847,Lake 69,Green Line,Maharashtra,Mumbai,Sector 50,17.426096,79.524208,5,Yes,No,Yes,Yes,No,65096,2004,MMRC,Yes,1.74,11.45,1.3,4.95,1.99,3.54,Low,No,West
+MET000848,Lake 65,Blue Line,Tamil Nadu,Chennai,Sector 53,15.569821,81.068639,6,No,No,Yes,Yes,No,190970,2010,CMRL,Yes,7.97,26.93,5.11,0.87,3.88,14.45,Low,No,East
+MET000849,Sector 32,Orange Line,Delhi,New Delhi,Sector 50,21.592292,78.126875,4,No,No,Yes,Yes,No,165787,2011,DMRC,Yes,8.24,19.49,4.95,3.69,2.2,18.85,High,Yes,Central
+MET000850,Central 48,Orange Line,Telangana,Hyderabad,Sector 40,14.55339,86.943619,6,No,No,Yes,Yes,Yes,199439,2012,HMRL,Yes,7.78,27.3,1.91,2.43,4.77,18.24,Medium,Yes,North
+MET000851,City 14,Purple Line,Maharashtra,Mumbai,Sector 11,26.97397,77.911702,3,No,No,Yes,Yes,No,39663,2009,MMRC,Yes,5.18,32.19,6.65,3.75,0.38,18.45,High,Yes,East
+MET000852,City 24,Orange Line,Karnataka,Bengaluru,Sector 70,16.079194,84.449672,2,Yes,Yes,Yes,Yes,No,154087,2024,BMRCL,Yes,0.67,28.72,3.51,0.34,4.39,4.86,Low,Yes,Central
+MET000853,City 16,Orange Line,Tamil Nadu,Chennai,Sector 48,19.721622,74.82521,2,Yes,No,Yes,Yes,Yes,171168,2021,CMRL,Yes,1.0,29.79,4.69,0.39,3.71,19.99,Low,Yes,North
+MET000854,Sector 31,Orange Line,Tamil Nadu,Chennai,Sector 41,23.965358,80.522845,2,No,No,Yes,Yes,Yes,15612,2022,CMRL,Yes,9.09,38.63,7.49,2.6,1.5,17.1,Low,Yes,Central
+MET000855,Central 1,Blue Line,Delhi,New Delhi,Sector 69,28.946749,78.095197,4,Yes,No,Yes,Yes,No,83869,2005,DMRC,Yes,4.69,20.61,6.07,2.99,0.59,15.2,Low,No,North
+MET000856,Market 72,Orange Line,Tamil Nadu,Chennai,Sector 22,21.500097,77.533085,2,Yes,Yes,Yes,Yes,No,72692,2012,CMRL,Yes,8.36,19.18,1.19,4.4,4.04,18.17,Medium,No,West
+MET000857,Market 67,Blue Line,Karnataka,Bengaluru,Sector 18,12.185293,82.275593,5,Yes,No,Yes,Yes,Yes,229317,2008,BMRCL,Yes,2.45,18.5,3.98,3.21,0.84,11.53,Low,No,North
+MET000858,Central 64,Orange Line,Delhi,New Delhi,Sector 54,22.87717,81.035985,2,Yes,Yes,Yes,Yes,No,145545,2003,DMRC,Yes,6.01,36.67,4.62,3.45,0.63,18.14,Medium,No,North
+MET000859,Market 75,Yellow Line,Telangana,Hyderabad,Sector 8,15.456964,73.580267,2,Yes,Yes,Yes,Yes,No,139400,2022,HMRL,Yes,1.08,18.49,7.08,0.49,4.33,7.45,Low,No,North
+MET000860,Park 34,Blue Line,Telangana,Hyderabad,Sector 43,11.566243,84.339996,6,No,No,Yes,Yes,Yes,80481,2012,HMRL,Yes,5.86,33.75,1.85,2.34,2.51,7.33,Low,No,Central
+MET000861,Lake 77,Yellow Line,Maharashtra,Mumbai,Sector 9,20.744981,85.751459,3,No,No,Yes,Yes,No,180132,2007,MMRC,Yes,4.92,23.42,2.07,2.15,3.6,6.47,High,No,South
+MET000862,Market 72,Blue Line,Tamil Nadu,Chennai,Sector 22,8.229215,86.54341,5,No,Yes,Yes,Yes,No,103356,2024,CMRL,Yes,2.18,38.83,3.24,3.81,1.59,10.58,High,No,North
+MET000863,Market 17,Purple Line,Karnataka,Bengaluru,Sector 75,14.560187,76.663258,5,Yes,No,Yes,Yes,Yes,40961,2005,BMRCL,Yes,7.51,26.7,6.28,1.73,3.34,17.42,Low,No,Central
+MET000864,Central 10,Green Line,Telangana,Hyderabad,Sector 25,10.431216,75.957368,4,No,Yes,Yes,Yes,No,27206,2007,HMRL,Yes,3.13,33.41,5.23,4.96,2.91,17.08,Medium,Yes,Central
+MET000865,Central 72,Pink Line,Karnataka,Bengaluru,Sector 71,8.16904,85.549798,4,Yes,Yes,Yes,Yes,No,178433,2015,BMRCL,Yes,7.32,20.24,4.7,4.61,3.65,18.26,Medium,No,North
+MET000866,Sector 75,Green Line,Telangana,Hyderabad,Sector 51,15.394071,82.020244,3,Yes,Yes,Yes,Yes,No,133139,2025,HMRL,Yes,8.36,18.9,6.81,1.02,2.51,12.05,Low,Yes,Central
+MET000867,Sector 44,Green Line,Delhi,New Delhi,Sector 34,20.563836,76.745626,4,No,No,Yes,Yes,Yes,11574,2002,DMRC,Yes,9.54,29.59,3.52,3.47,1.16,3.88,Low,No,Central
+MET000868,Park 83,Orange Line,Karnataka,Bengaluru,Sector 78,27.350559,78.027894,2,No,No,Yes,Yes,No,94317,2024,BMRCL,Yes,8.07,39.29,4.2,3.33,4.77,0.68,Low,No,South
+MET000869,Park 44,Yellow Line,Telangana,Hyderabad,Sector 23,8.844627,79.876385,2,Yes,Yes,Yes,Yes,No,26083,2024,HMRL,Yes,7.53,9.57,6.53,2.22,3.96,9.88,Low,Yes,Central
+MET000870,Lake 86,Orange Line,Delhi,New Delhi,Sector 61,14.448102,85.593114,5,No,Yes,Yes,Yes,No,72961,2014,DMRC,Yes,0.49,6.46,6.81,3.89,3.48,10.26,High,No,East
+MET000871,Central 95,Orange Line,Karnataka,Bengaluru,Sector 70,17.646429,77.248182,5,Yes,Yes,Yes,Yes,Yes,97803,2003,BMRCL,Yes,6.58,13.63,7.59,2.1,2.19,9.74,Medium,Yes,South
+MET000872,Market 29,Pink Line,Tamil Nadu,Chennai,Sector 48,13.321598,86.38701,4,No,Yes,Yes,Yes,No,247368,2021,CMRL,Yes,1.56,16.79,4.42,2.53,3.05,12.76,Low,No,Central
+MET000873,Sector 57,Red Line,Telangana,Hyderabad,Sector 49,14.701067,75.893194,6,Yes,Yes,Yes,Yes,Yes,17731,2024,HMRL,Yes,3.07,35.67,6.27,4.5,1.61,15.2,Low,Yes,East
+MET000874,Central 32,Orange Line,Maharashtra,Mumbai,Sector 20,15.630678,76.90841,6,No,Yes,Yes,Yes,No,130308,2014,MMRC,Yes,6.68,33.85,4.53,3.8,0.64,15.17,High,No,East
+MET000875,City 89,Green Line,Telangana,Hyderabad,Sector 26,8.842283,87.76176,3,No,Yes,Yes,Yes,No,22044,2016,HMRL,Yes,3.84,30.01,7.92,4.52,1.17,12.66,Medium,Yes,Central
+MET000876,Lake 34,Orange Line,Delhi,New Delhi,Sector 76,27.496841,84.649552,3,Yes,Yes,Yes,Yes,No,44971,2011,DMRC,Yes,5.54,14.37,0.59,4.16,2.53,1.5,Low,No,West
+MET000877,Market 11,Orange Line,Maharashtra,Mumbai,Sector 60,11.99851,82.656437,3,Yes,Yes,Yes,Yes,Yes,42126,2021,MMRC,Yes,4.56,5.85,6.59,1.46,4.51,12.26,Low,No,East
+MET000878,City 39,Blue Line,Tamil Nadu,Chennai,Sector 22,16.79446,85.563587,6,No,No,Yes,Yes,Yes,113762,2006,CMRL,Yes,5.15,13.82,3.75,4.73,3.48,18.02,Low,Yes,North
+MET000879,Sector 81,Purple Line,Telangana,Hyderabad,Sector 76,13.067938,74.852857,6,Yes,No,Yes,Yes,Yes,166211,2019,HMRL,Yes,4.37,18.86,4.72,1.13,1.28,13.89,High,No,East
+MET000880,Central 34,Orange Line,Telangana,Hyderabad,Sector 23,24.890562,75.598698,2,No,No,Yes,Yes,No,108378,2018,HMRL,Yes,5.77,8.04,3.3,4.55,2.65,5.81,Low,Yes,North
+MET000881,Central 23,Blue Line,Tamil Nadu,Chennai,Sector 62,16.207856,82.876736,5,Yes,No,Yes,Yes,No,154248,2002,CMRL,Yes,8.86,29.07,2.32,2.41,4.91,10.9,High,No,South
+MET000882,Central 57,Pink Line,Telangana,Hyderabad,Sector 9,11.060739,86.34666,3,Yes,Yes,Yes,Yes,No,219657,2016,HMRL,Yes,2.72,9.75,3.84,4.5,0.51,6.13,Medium,Yes,East
+MET000883,Sector 71,Red Line,Maharashtra,Mumbai,Sector 75,8.448392,83.39398,6,Yes,Yes,Yes,Yes,No,110434,2003,MMRC,Yes,8.83,6.81,0.93,1.76,3.41,14.3,Low,Yes,East
+MET000884,Central 35,Yellow Line,Karnataka,Bengaluru,Sector 27,29.340713,79.556283,4,No,Yes,Yes,Yes,Yes,194924,2011,BMRCL,Yes,2.15,6.92,7.69,1.83,0.98,7.95,Low,No,South
+MET000885,Market 62,Green Line,Delhi,New Delhi,Sector 5,8.589215,78.353262,5,Yes,Yes,Yes,Yes,Yes,60985,2015,DMRC,Yes,4.95,31.31,5.85,1.22,4.29,10.28,Medium,No,East
+MET000886,Central 25,Purple Line,Karnataka,Bengaluru,Sector 20,17.052995,84.82726,3,Yes,No,Yes,Yes,No,151217,2003,BMRCL,Yes,0.63,12.95,1.63,2.77,1.19,9.84,Medium,Yes,North
+MET000887,City 67,Pink Line,Telangana,Hyderabad,Sector 19,20.011584,86.421367,4,Yes,No,Yes,Yes,Yes,19493,2002,HMRL,Yes,8.93,34.55,6.73,4.67,4.13,6.51,Low,No,West
+MET000888,City 9,Green Line,Maharashtra,Mumbai,Sector 32,23.050974,81.585794,2,Yes,No,Yes,Yes,Yes,102033,2017,MMRC,Yes,0.54,9.15,6.95,1.3,1.38,19.22,Medium,Yes,Central
+MET000889,Market 93,Green Line,Delhi,New Delhi,Sector 59,27.943238,83.717296,5,Yes,No,Yes,Yes,Yes,60057,2008,DMRC,Yes,7.3,13.26,1.66,4.04,3.2,16.34,Low,No,South
+MET000890,Park 99,Yellow Line,Delhi,New Delhi,Sector 16,10.656242,76.717653,3,No,No,Yes,Yes,Yes,88919,2019,DMRC,Yes,0.31,31.04,7.13,2.61,3.68,9.75,Low,Yes,Central
+MET000891,Park 14,Red Line,Telangana,Hyderabad,Sector 36,27.739867,86.729413,3,Yes,Yes,Yes,Yes,No,6763,2008,HMRL,Yes,8.77,16.91,7.63,3.74,1.73,11.14,Low,No,North
+MET000892,Park 53,Pink Line,Tamil Nadu,Chennai,Sector 68,17.334884,76.984846,4,Yes,No,Yes,Yes,No,147453,2005,CMRL,Yes,0.95,10.75,2.57,3.62,1.41,6.21,Medium,Yes,Central
+MET000893,Lake 52,Pink Line,Telangana,Hyderabad,Sector 21,25.374551,78.593976,4,Yes,Yes,Yes,Yes,No,234065,2024,HMRL,Yes,8.38,15.55,1.25,4.75,0.6,7.41,Low,No,South
+MET000894,Sector 34,Yellow Line,Tamil Nadu,Chennai,Sector 37,23.769491,78.459945,5,No,Yes,Yes,Yes,Yes,172457,2004,CMRL,Yes,2.79,22.69,1.96,3.48,4.01,3.26,Low,No,North
+MET000895,Park 26,Yellow Line,Delhi,New Delhi,Sector 8,12.005271,73.877748,2,No,No,Yes,Yes,No,105091,2022,DMRC,Yes,8.89,19.99,4.54,4.41,4.81,1.98,Low,No,East
+MET000896,Central 58,Pink Line,Maharashtra,Mumbai,Sector 9,23.452434,85.024202,2,Yes,Yes,Yes,Yes,No,131037,2018,MMRC,Yes,7.74,8.42,7.65,3.03,2.45,14.75,Medium,Yes,West
+MET000897,Sector 70,Pink Line,Tamil Nadu,Chennai,Sector 53,9.537259,80.180978,2,Yes,Yes,Yes,Yes,Yes,240514,2012,CMRL,Yes,7.26,34.49,1.75,2.58,3.29,16.2,High,Yes,Central
+MET000898,Central 23,Green Line,Maharashtra,Mumbai,Sector 8,9.506084,82.480278,4,Yes,Yes,Yes,Yes,Yes,113579,2023,MMRC,Yes,5.73,30.76,6.63,0.6,1.38,7.02,Low,Yes,West
+MET000899,Market 17,Blue Line,Karnataka,Bengaluru,Sector 11,12.638722,80.272936,3,No,Yes,Yes,Yes,No,18883,2010,BMRCL,Yes,10.0,10.82,2.52,2.39,4.85,18.12,High,Yes,West
+MET000900,Sector 97,Green Line,Maharashtra,Mumbai,Sector 43,14.037254,85.82979,5,No,No,Yes,Yes,Yes,104431,2002,MMRC,Yes,3.65,13.64,4.47,0.37,3.13,6.16,Medium,Yes,East
+MET000901,Market 56,Pink Line,Tamil Nadu,Chennai,Sector 52,17.362338,84.891305,6,Yes,Yes,Yes,Yes,No,230194,2020,CMRL,Yes,3.62,37.79,6.76,2.5,0.91,15.61,Medium,Yes,North
+MET000902,Market 49,Yellow Line,Tamil Nadu,Chennai,Sector 79,17.257845,86.357329,6,No,No,Yes,Yes,No,138092,2013,CMRL,Yes,2.19,27.18,6.33,4.22,1.58,3.46,High,No,North
+MET000903,Lake 12,Purple Line,Telangana,Hyderabad,Sector 61,14.155809,78.127879,2,No,Yes,Yes,Yes,Yes,166413,2015,HMRL,Yes,9.51,32.37,4.96,3.92,1.32,19.93,High,Yes,East
+MET000904,Sector 65,Pink Line,Karnataka,Bengaluru,Sector 19,11.482877,80.660542,3,No,Yes,Yes,Yes,No,214463,2009,BMRCL,Yes,6.36,28.23,4.97,1.39,3.69,14.72,High,Yes,East
+MET000905,City 35,Orange Line,Tamil Nadu,Chennai,Sector 55,27.250257,72.124165,2,Yes,Yes,Yes,Yes,Yes,212915,2021,CMRL,Yes,6.16,38.8,4.78,4.39,0.85,11.69,High,Yes,South
+MET000906,City 9,Blue Line,Telangana,Hyderabad,Sector 46,25.29601,82.242047,2,No,No,Yes,Yes,Yes,25933,2024,HMRL,Yes,1.05,21.55,7.81,0.51,4.33,3.52,Low,Yes,Central
+MET000907,Lake 13,Yellow Line,Karnataka,Bengaluru,Sector 48,8.037318,86.871837,2,Yes,Yes,Yes,Yes,Yes,44751,2004,BMRCL,Yes,0.47,20.49,3.62,4.18,0.81,15.94,High,Yes,East
+MET000908,Market 3,Pink Line,Tamil Nadu,Chennai,Sector 49,17.939331,73.042118,6,Yes,No,Yes,Yes,No,43186,2008,CMRL,Yes,9.85,10.85,6.14,3.13,2.37,19.4,Low,Yes,North
+MET000909,City 30,Pink Line,Maharashtra,Mumbai,Sector 72,26.273621,85.987255,3,Yes,Yes,Yes,Yes,Yes,74812,2009,MMRC,Yes,1.17,32.57,0.48,1.94,2.95,11.07,High,No,North
+MET000910,Lake 55,Yellow Line,Telangana,Hyderabad,Sector 15,15.856038,86.933442,4,No,No,Yes,Yes,No,212358,2013,HMRL,Yes,8.9,22.93,1.74,0.98,0.4,3.33,Low,No,South
+MET000911,Lake 90,Red Line,Delhi,New Delhi,Sector 77,13.009011,78.613269,3,Yes,Yes,Yes,Yes,No,86515,2017,DMRC,Yes,0.25,37.63,7.39,0.89,3.76,17.67,Medium,Yes,West
+MET000912,City 79,Purple Line,Tamil Nadu,Chennai,Sector 23,16.525831,84.46082,5,Yes,Yes,Yes,Yes,Yes,72721,2007,CMRL,Yes,9.29,28.6,3.84,3.75,2.8,9.87,Medium,No,North
+MET000913,Sector 79,Green Line,Maharashtra,Mumbai,Sector 27,24.771927,86.262499,5,Yes,Yes,Yes,Yes,Yes,207472,2006,MMRC,Yes,5.74,5.14,7.57,1.58,1.61,10.64,Low,No,West
+MET000914,Market 79,Purple Line,Delhi,New Delhi,Sector 55,27.814875,85.106641,2,Yes,No,Yes,Yes,No,37295,2005,DMRC,Yes,5.78,27.67,1.66,3.66,0.15,12.46,Low,Yes,West
+MET000915,Lake 12,Yellow Line,Maharashtra,Mumbai,Sector 59,25.103827,86.759309,3,No,No,Yes,Yes,Yes,235457,2019,MMRC,Yes,3.83,37.19,6.01,1.84,2.42,13.17,Medium,Yes,North
+MET000916,Central 15,Red Line,Tamil Nadu,Chennai,Sector 40,8.528323,76.972404,6,Yes,Yes,Yes,Yes,Yes,133581,2002,CMRL,Yes,5.25,35.38,1.86,0.61,0.49,18.94,Medium,Yes,West
+MET000917,Market 68,Pink Line,Maharashtra,Mumbai,Sector 53,16.031589,79.375296,3,No,No,Yes,Yes,No,211931,2011,MMRC,Yes,0.75,38.95,4.57,1.15,2.8,16.74,Low,Yes,South
+MET000918,Park 51,Red Line,Telangana,Hyderabad,Sector 61,13.792602,83.665669,5,No,Yes,Yes,Yes,Yes,16491,2004,HMRL,Yes,8.34,20.39,5.15,4.15,0.32,3.91,High,Yes,West
+MET000919,Lake 41,Orange Line,Maharashtra,Mumbai,Sector 43,25.161921,75.551039,2,No,Yes,Yes,Yes,No,150002,2003,MMRC,Yes,6.47,37.79,2.9,0.44,0.13,4.29,Medium,No,East
+MET000920,Sector 86,Green Line,Delhi,New Delhi,Sector 59,12.223371,73.229096,3,Yes,Yes,Yes,Yes,Yes,171568,2023,DMRC,Yes,4.0,34.93,2.02,2.79,1.67,0.91,Low,No,East
+MET000921,Park 65,Pink Line,Karnataka,Bengaluru,Sector 63,10.392041,82.00194,6,Yes,Yes,Yes,Yes,Yes,54907,2019,BMRCL,Yes,6.85,14.46,1.74,1.68,1.38,6.87,High,No,East
+MET000922,Lake 48,Red Line,Tamil Nadu,Chennai,Sector 20,29.11125,75.855066,4,No,Yes,Yes,Yes,No,19278,2023,CMRL,Yes,0.34,37.98,2.07,1.33,3.84,14.14,Medium,Yes,East
+MET000923,Lake 94,Pink Line,Maharashtra,Mumbai,Sector 9,24.191423,75.90567,3,No,Yes,Yes,Yes,Yes,153340,2015,MMRC,Yes,2.25,36.79,4.15,1.49,0.34,4.43,Low,Yes,Central
+MET000924,Central 81,Orange Line,Tamil Nadu,Chennai,Sector 32,10.65037,86.875186,2,No,No,Yes,Yes,Yes,165158,2010,CMRL,Yes,0.51,26.76,2.55,3.05,4.02,1.67,High,No,North
+MET000925,Lake 15,Blue Line,Tamil Nadu,Chennai,Sector 44,11.798368,77.394045,6,No,Yes,Yes,Yes,Yes,6945,2009,CMRL,Yes,5.48,32.05,7.29,2.86,4.51,6.97,Medium,Yes,North
+MET000926,City 77,Yellow Line,Delhi,New Delhi,Sector 79,9.383493,79.532496,3,Yes,No,Yes,Yes,No,179777,2019,DMRC,Yes,3.77,30.8,7.42,1.67,1.35,16.44,Medium,Yes,East
+MET000927,City 58,Yellow Line,Tamil Nadu,Chennai,Sector 75,15.799532,85.738741,4,Yes,Yes,Yes,Yes,Yes,135684,2007,CMRL,Yes,1.99,11.33,2.98,2.23,4.77,5.65,Medium,No,West
+MET000928,Park 85,Orange Line,Maharashtra,Mumbai,Sector 8,26.376068,83.468064,6,Yes,Yes,Yes,Yes,No,167222,2022,MMRC,Yes,9.18,22.96,3.76,3.74,1.36,17.64,Medium,No,West
+MET000929,Market 31,Green Line,Tamil Nadu,Chennai,Sector 36,16.990795,76.323314,2,Yes,Yes,Yes,Yes,Yes,211777,2021,CMRL,Yes,7.48,27.24,0.95,2.91,4.29,3.91,High,No,Central
+MET000930,Market 38,Blue Line,Telangana,Hyderabad,Sector 30,25.508498,83.410971,2,Yes,No,Yes,Yes,No,126653,2011,HMRL,Yes,3.7,30.52,2.39,0.25,3.69,5.2,High,Yes,North
+MET000931,Sector 65,Blue Line,Tamil Nadu,Chennai,Sector 9,15.079319,87.623739,5,No,Yes,Yes,Yes,No,244898,2008,CMRL,Yes,6.67,9.35,1.96,1.89,0.18,18.37,High,No,West
+MET000932,Sector 33,Red Line,Karnataka,Bengaluru,Sector 39,14.930689,83.135554,4,No,Yes,Yes,Yes,Yes,22346,2023,BMRCL,Yes,6.42,8.09,3.67,0.23,3.09,14.1,Low,Yes,South
+MET000933,Market 54,Orange Line,Maharashtra,Mumbai,Sector 80,15.337494,72.762221,5,Yes,No,Yes,Yes,No,63994,2015,MMRC,Yes,1.37,22.99,0.53,2.36,4.08,19.43,High,No,East
+MET000934,Lake 19,Purple Line,Telangana,Hyderabad,Sector 37,19.279238,85.134155,2,No,No,Yes,Yes,Yes,38295,2015,HMRL,Yes,7.86,24.43,4.19,1.62,2.25,2.97,High,Yes,West
+MET000935,City 9,Blue Line,Karnataka,Bengaluru,Sector 74,24.184658,75.320281,6,Yes,Yes,Yes,Yes,No,48849,2009,BMRCL,Yes,0.33,13.27,6.27,1.9,4.06,12.03,High,No,Central
+MET000936,Market 17,Green Line,Tamil Nadu,Chennai,Sector 79,9.340523,82.248557,3,No,Yes,Yes,Yes,Yes,139080,2024,CMRL,Yes,4.17,16.57,3.83,4.51,1.66,0.55,Medium,No,North
+MET000937,City 84,Red Line,Karnataka,Bengaluru,Sector 80,18.24735,79.125919,3,Yes,No,Yes,Yes,Yes,87574,2019,BMRCL,Yes,5.9,25.41,7.39,0.17,4.1,19.48,Low,No,North
+MET000938,Market 5,Blue Line,Maharashtra,Mumbai,Sector 57,12.477425,82.998622,5,Yes,Yes,Yes,Yes,No,106636,2010,MMRC,Yes,1.22,5.18,6.9,0.67,3.98,19.04,Medium,Yes,Central
+MET000939,Market 97,Orange Line,Tamil Nadu,Chennai,Sector 80,10.502021,75.805921,2,No,Yes,Yes,Yes,No,197360,2012,CMRL,Yes,3.04,25.28,5.07,4.2,1.94,5.08,High,No,Central
+MET000940,Park 86,Blue Line,Delhi,New Delhi,Sector 26,15.124571,72.707022,2,Yes,No,Yes,Yes,No,162274,2024,DMRC,Yes,3.52,13.84,1.01,2.73,2.12,10.25,Low,No,Central
+MET000941,Lake 88,Purple Line,Karnataka,Bengaluru,Sector 40,18.965144,79.156036,5,No,Yes,Yes,Yes,No,216641,2020,BMRCL,Yes,8.38,24.92,1.48,4.7,0.53,4.93,Medium,No,Central
+MET000942,Sector 22,Yellow Line,Telangana,Hyderabad,Sector 64,8.311858,72.568767,3,No,No,Yes,Yes,No,195540,2020,HMRL,Yes,2.28,19.5,6.86,4.13,3.69,1.5,Low,No,South
+MET000943,Market 38,Orange Line,Karnataka,Bengaluru,Sector 39,25.160382,78.192309,5,No,Yes,Yes,Yes,No,216372,2025,BMRCL,Yes,9.36,13.36,6.97,1.97,4.78,3.22,High,Yes,Central
+MET000944,Central 31,Orange Line,Maharashtra,Mumbai,Sector 57,22.990199,82.543705,4,Yes,No,Yes,Yes,No,143830,2002,MMRC,Yes,7.63,7.69,1.74,2.0,0.92,19.39,Low,Yes,West
+MET000945,Lake 95,Yellow Line,Telangana,Hyderabad,Sector 76,13.219291,80.724055,2,Yes,Yes,Yes,Yes,Yes,57253,2023,HMRL,Yes,7.96,25.69,0.36,0.59,2.44,11.0,Medium,Yes,Central
+MET000946,Sector 71,Purple Line,Maharashtra,Mumbai,Sector 70,16.852872,80.919704,6,No,No,Yes,Yes,No,177652,2002,MMRC,Yes,7.77,37.78,1.67,4.44,1.15,17.76,High,No,East
+MET000947,Central 63,Green Line,Karnataka,Bengaluru,Sector 52,12.290827,76.505056,6,No,No,Yes,Yes,Yes,130863,2019,BMRCL,Yes,4.29,36.14,2.63,1.23,4.79,11.14,High,Yes,West
+MET000948,City 39,Orange Line,Telangana,Hyderabad,Sector 59,27.413353,80.916513,4,Yes,Yes,Yes,Yes,Yes,121151,2023,HMRL,Yes,5.47,39.91,5.25,4.24,0.3,6.03,Low,No,North
+MET000949,City 6,Purple Line,Tamil Nadu,Chennai,Sector 70,25.876252,84.614712,4,No,No,Yes,Yes,No,114890,2018,CMRL,Yes,9.63,24.19,0.75,2.58,1.93,4.57,Low,Yes,East
+MET000950,Lake 81,Blue Line,Karnataka,Bengaluru,Sector 25,8.31192,78.794355,4,Yes,Yes,Yes,Yes,No,31467,2006,BMRCL,Yes,8.0,20.31,7.23,3.49,4.64,19.88,Medium,No,Central
+MET000951,Sector 77,Blue Line,Telangana,Hyderabad,Sector 53,20.005143,83.795102,6,Yes,Yes,Yes,Yes,No,151891,2023,HMRL,Yes,8.32,37.17,4.77,1.37,4.13,11.13,Low,Yes,Central
+MET000952,City 30,Green Line,Delhi,New Delhi,Sector 37,13.639201,82.216624,6,No,No,Yes,Yes,No,233402,2013,DMRC,Yes,2.96,8.95,1.83,0.38,3.89,1.69,Medium,Yes,North
+MET000953,Market 24,Yellow Line,Delhi,New Delhi,Sector 47,8.437622,84.576176,5,No,No,Yes,Yes,Yes,195438,2012,DMRC,Yes,4.62,12.98,4.27,4.07,2.32,3.49,Low,No,East
+MET000954,Central 28,Orange Line,Karnataka,Bengaluru,Sector 46,18.033945,73.700669,3,No,No,Yes,Yes,Yes,102722,2025,BMRCL,Yes,2.84,21.36,0.66,4.46,0.52,19.4,Low,Yes,Central
+MET000955,City 35,Purple Line,Telangana,Hyderabad,Sector 57,20.166101,84.309341,2,Yes,Yes,Yes,Yes,No,104600,2005,HMRL,Yes,6.12,19.97,3.88,1.26,1.09,11.52,High,No,North
+MET000956,Sector 79,Green Line,Karnataka,Bengaluru,Sector 50,23.608784,73.501271,5,No,Yes,Yes,Yes,Yes,228102,2002,BMRCL,Yes,8.7,14.17,5.15,4.19,0.46,8.28,High,No,West
+MET000957,Sector 95,Orange Line,Delhi,New Delhi,Sector 26,24.422975,72.026835,2,No,No,Yes,Yes,No,235879,2013,DMRC,Yes,8.68,31.43,7.12,3.08,4.03,3.38,Medium,No,Central
+MET000958,Central 2,Red Line,Karnataka,Bengaluru,Sector 36,27.136259,81.535881,3,Yes,No,Yes,Yes,No,202497,2021,BMRCL,Yes,8.43,9.33,4.3,0.27,1.8,10.68,Low,Yes,Central
+MET000959,Sector 59,Purple Line,Karnataka,Bengaluru,Sector 20,28.652629,85.564302,6,No,No,Yes,Yes,Yes,126846,2022,BMRCL,Yes,6.92,26.94,0.87,1.67,0.2,10.0,Medium,No,South
+MET000960,Sector 24,Orange Line,Karnataka,Bengaluru,Sector 31,28.731169,72.038519,2,No,No,Yes,Yes,No,100926,2012,BMRCL,Yes,6.73,15.99,2.67,4.18,0.21,13.48,Low,Yes,Central
+MET000961,Park 82,Orange Line,Telangana,Hyderabad,Sector 49,22.566307,81.459101,2,Yes,No,Yes,Yes,No,215765,2017,HMRL,Yes,7.59,23.36,1.43,2.19,1.87,1.37,High,Yes,East
+MET000962,Market 82,Orange Line,Tamil Nadu,Chennai,Sector 73,23.510338,86.108079,5,Yes,No,Yes,Yes,No,241538,2005,CMRL,Yes,3.92,33.44,4.84,2.59,1.95,14.59,Low,No,West
+MET000963,Central 19,Purple Line,Telangana,Hyderabad,Sector 9,26.885571,77.346181,3,Yes,No,Yes,Yes,Yes,205009,2003,HMRL,Yes,4.51,12.4,3.44,2.81,0.45,19.54,Medium,No,West
+MET000964,City 65,Green Line,Karnataka,Bengaluru,Sector 8,29.851977,79.386395,5,Yes,Yes,Yes,Yes,No,187643,2010,BMRCL,Yes,9.0,7.59,5.99,4.23,3.53,7.18,Medium,No,West
+MET000965,Market 97,Purple Line,Telangana,Hyderabad,Sector 2,28.891,75.905996,4,No,No,Yes,Yes,No,182810,2017,HMRL,Yes,0.34,37.82,3.41,4.8,4.16,3.93,High,No,North
+MET000966,Central 7,Red Line,Delhi,New Delhi,Sector 38,17.098915,74.162925,2,No,Yes,Yes,Yes,Yes,227021,2007,DMRC,Yes,4.0,12.82,7.47,3.55,3.4,7.31,High,Yes,North
+MET000967,Park 18,Red Line,Telangana,Hyderabad,Sector 34,16.701058,77.220425,5,No,Yes,Yes,Yes,No,59395,2014,HMRL,Yes,8.21,20.03,5.75,3.01,1.49,17.88,High,Yes,West
+MET000968,Central 70,Green Line,Karnataka,Bengaluru,Sector 39,13.702198,83.487086,3,No,Yes,Yes,Yes,No,52472,2018,BMRCL,Yes,6.99,22.11,0.89,2.17,1.48,16.87,High,No,West
+MET000969,Market 37,Yellow Line,Karnataka,Bengaluru,Sector 79,27.079226,74.975478,6,No,Yes,Yes,Yes,No,154820,2005,BMRCL,Yes,1.93,8.26,7.47,4.76,0.6,17.98,Low,No,North
+MET000970,Lake 60,Pink Line,Maharashtra,Mumbai,Sector 33,22.627837,81.506092,5,Yes,Yes,Yes,Yes,Yes,127017,2006,MMRC,Yes,8.99,6.55,0.52,2.41,3.25,6.01,High,Yes,Central
+MET000971,Central 65,Pink Line,Tamil Nadu,Chennai,Sector 64,8.841719,87.642715,2,No,No,Yes,Yes,No,198068,2004,CMRL,Yes,6.23,30.21,5.78,2.12,4.33,8.52,Medium,No,East
+MET000972,Central 15,Purple Line,Tamil Nadu,Chennai,Sector 78,13.049959,74.725152,5,Yes,No,Yes,Yes,Yes,63984,2013,CMRL,Yes,5.19,5.2,5.8,3.93,3.49,16.6,Low,No,East
+MET000973,Central 51,Orange Line,Maharashtra,Mumbai,Sector 55,18.898228,78.495803,5,No,Yes,Yes,Yes,Yes,233808,2021,MMRC,Yes,8.29,27.78,1.33,0.39,1.4,6.81,Medium,No,Central
+MET000974,City 87,Green Line,Maharashtra,Mumbai,Sector 65,27.958632,75.740641,3,Yes,Yes,Yes,Yes,No,233638,2003,MMRC,Yes,5.06,36.07,2.26,2.28,4.29,11.87,High,No,Central
+MET000975,Sector 42,Orange Line,Telangana,Hyderabad,Sector 38,8.98857,73.388845,4,No,No,Yes,Yes,Yes,179212,2004,HMRL,Yes,6.8,39.37,7.44,2.2,3.39,7.19,High,No,East
+MET000976,City 60,Green Line,Tamil Nadu,Chennai,Sector 56,20.493528,74.144312,2,No,No,Yes,Yes,No,49567,2023,CMRL,Yes,1.32,14.44,6.64,2.87,1.61,9.17,High,Yes,Central
+MET000977,City 7,Blue Line,Tamil Nadu,Chennai,Sector 28,19.559729,77.284388,4,No,No,Yes,Yes,No,28688,2007,CMRL,Yes,9.86,24.15,0.48,4.02,0.54,4.6,Low,No,East
+MET000978,Sector 38,Purple Line,Maharashtra,Mumbai,Sector 18,9.684919,81.939034,2,No,No,Yes,Yes,No,223624,2018,MMRC,Yes,7.06,33.29,7.94,3.55,0.67,4.3,High,No,North
+MET000979,Market 14,Red Line,Tamil Nadu,Chennai,Sector 7,13.646737,87.22573,6,No,No,Yes,Yes,Yes,123078,2014,CMRL,Yes,9.61,21.04,7.34,4.09,3.52,8.11,Medium,Yes,East
+MET000980,Park 5,Pink Line,Delhi,New Delhi,Sector 17,21.705545,86.72761,5,Yes,Yes,Yes,Yes,No,182850,2013,DMRC,Yes,1.24,25.61,7.44,4.81,3.24,6.36,Medium,Yes,South
+MET000981,Lake 77,Red Line,Maharashtra,Mumbai,Sector 8,17.408372,75.864702,2,Yes,No,Yes,Yes,No,201096,2025,MMRC,Yes,6.79,5.24,4.99,0.77,4.8,19.09,Medium,Yes,Central
+MET000982,Market 18,Pink Line,Delhi,New Delhi,Sector 8,28.046927,82.551433,6,Yes,Yes,Yes,Yes,Yes,11860,2004,DMRC,Yes,0.9,23.29,6.09,1.94,0.53,14.56,Low,Yes,Central
+MET000983,Market 26,Pink Line,Delhi,New Delhi,Sector 43,12.75714,86.510705,3,No,No,Yes,Yes,No,217622,2019,DMRC,Yes,8.13,33.69,4.98,4.21,2.86,12.28,High,No,Central
+MET000984,City 7,Red Line,Tamil Nadu,Chennai,Sector 40,14.413636,72.017674,6,No,Yes,Yes,Yes,No,140286,2002,CMRL,Yes,3.61,23.99,6.25,0.66,0.28,16.83,Medium,No,South
+MET000985,Market 15,Orange Line,Karnataka,Bengaluru,Sector 24,9.260504,79.537245,5,Yes,Yes,Yes,Yes,No,118285,2011,BMRCL,Yes,1.18,18.56,4.5,1.49,0.53,9.9,Low,No,Central
+MET000986,Central 30,Blue Line,Delhi,New Delhi,Sector 21,26.598648,84.030113,4,Yes,Yes,Yes,Yes,Yes,94510,2008,DMRC,Yes,7.43,30.61,2.12,0.8,4.6,15.68,Low,Yes,South
+MET000987,Lake 94,Pink Line,Maharashtra,Mumbai,Sector 54,20.107397,79.797416,5,Yes,Yes,Yes,Yes,Yes,220836,2006,MMRC,Yes,6.41,5.65,7.28,3.51,1.45,4.12,Low,Yes,East
+MET000988,Central 54,Orange Line,Delhi,New Delhi,Sector 26,12.859012,78.149229,4,Yes,No,Yes,Yes,No,140997,2007,DMRC,Yes,2.99,30.86,6.84,1.53,1.97,12.2,High,No,South
+MET000989,Lake 75,Purple Line,Delhi,New Delhi,Sector 80,8.258562,81.359113,6,Yes,No,Yes,Yes,No,85666,2005,DMRC,Yes,8.93,10.79,5.74,4.45,1.64,19.71,Low,No,South
+MET000990,Central 71,Red Line,Telangana,Hyderabad,Sector 54,11.540448,82.888655,5,Yes,No,Yes,Yes,Yes,85088,2007,HMRL,Yes,2.65,16.57,4.07,2.83,3.32,3.14,Medium,Yes,Central
+MET000991,Lake 96,Blue Line,Maharashtra,Mumbai,Sector 30,27.591166,82.478507,6,Yes,Yes,Yes,Yes,No,96479,2003,MMRC,Yes,7.2,36.14,4.38,1.86,2.66,7.2,High,Yes,Central
+MET000992,Sector 36,Blue Line,Telangana,Hyderabad,Sector 48,21.130154,86.47793,5,No,No,Yes,Yes,No,233264,2006,HMRL,Yes,1.51,7.08,5.17,0.61,2.44,14.41,Low,No,North
+MET000993,Park 3,Pink Line,Maharashtra,Mumbai,Sector 48,15.31517,75.437035,4,Yes,Yes,Yes,Yes,Yes,27022,2009,MMRC,Yes,7.04,16.99,5.65,0.29,3.39,3.53,Low,Yes,East
+MET000994,Central 84,Yellow Line,Telangana,Hyderabad,Sector 43,15.774074,75.833866,6,Yes,Yes,Yes,Yes,No,132116,2013,HMRL,Yes,9.49,24.71,2.6,3.63,1.29,8.48,Medium,Yes,South
+MET000995,Central 75,Yellow Line,Karnataka,Bengaluru,Sector 15,9.950393,72.276195,5,Yes,No,Yes,Yes,No,193073,2021,BMRCL,Yes,6.01,6.04,4.41,0.57,4.45,18.14,Low,No,West
+MET000996,Lake 58,Green Line,Maharashtra,Mumbai,Sector 32,16.545356,72.521171,2,No,No,Yes,Yes,Yes,96479,2011,MMRC,Yes,0.56,17.14,2.57,2.14,2.46,16.51,High,No,Central
+MET000997,Sector 43,Red Line,Karnataka,Bengaluru,Sector 32,23.340242,85.224021,2,Yes,No,Yes,Yes,Yes,7017,2015,BMRCL,Yes,6.39,25.49,2.2,1.78,2.81,5.78,Low,No,Central
+MET000998,Central 16,Orange Line,Karnataka,Bengaluru,Sector 6,8.243873,87.017782,5,Yes,No,Yes,Yes,Yes,151182,2020,BMRCL,Yes,1.41,25.87,0.2,0.24,3.49,12.77,Medium,No,South
+MET000999,Lake 27,Pink Line,Telangana,Hyderabad,Sector 31,24.270734,73.547149,5,Yes,Yes,Yes,Yes,No,215962,2004,HMRL,Yes,7.57,35.93,2.36,3.34,4.56,17.17,High,Yes,Central
+MET001000,Park 78,Orange Line,Telangana,Hyderabad,Sector 72,13.984691,74.55542,4,Yes,Yes,Yes,Yes,Yes,184517,2018,HMRL,Yes,4.48,31.43,7.79,3.18,4.64,1.53,Low,Yes,West

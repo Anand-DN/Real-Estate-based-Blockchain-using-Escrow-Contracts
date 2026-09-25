@@ -1,0 +1,24 @@
+{
+  "name": "MILLOW Property MREID_0004420",
+  "property_identifier": "MREID_0004420",
+  "description": "Digital property representation of a MILLOW MREID listing (technical proof-of-concept). Blockchain-based ownership record for the prototype. Legal ownership remains subject to applicable Indian property and registration law.",
+  "image": "/images/18.jpg",
+  "attributes": [
+    {
+      "trait_type": "City",
+      "value": "Bangalore"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Yelahanka New Town"
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 2
+    },
+    {
+      "trait_type": "Area (sqft)",
+      "value": 1150
+    }
+  ]
+}

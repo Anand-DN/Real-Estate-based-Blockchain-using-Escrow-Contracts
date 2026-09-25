@@ -1,0 +1,33 @@
+{
+    "name": "Coastal FL Beach House",
+    "address": "221 Ocean Drive, Miami Beach, FL 33139",
+    "description": "Sun-soaked beach house steps from the ocean",
+    "image": "/images/4.jpg",
+    "id": "4",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 12
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 1850
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2008
+        }
+    ]
+}

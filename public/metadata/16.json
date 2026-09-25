@@ -1,0 +1,33 @@
+{
+    "name": "Country Estate",
+    "address": "7701 Old Hickory Blvd, Nashville, TN 37221",
+    "description": "Gated country estate with private grounds",
+    "image": "/images/16.jpg",
+    "id": "16",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 24
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 6
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 6
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 7200
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2023
+        }
+    ]
+}

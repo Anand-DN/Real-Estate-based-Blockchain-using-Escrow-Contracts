@@ -1,0 +1,33 @@
+{
+    "name": "Modern Villa",
+    "address": "4809 Hill Country Ln, Austin, TX 78731",
+    "description": "Sleek modern villa with pool and skyline views",
+    "image": "/images/17.jpg",
+    "id": "17",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 30
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 5
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 4
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 4200
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2022
+        }
+    ]
+}

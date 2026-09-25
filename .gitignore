@@ -1,0 +1,75 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+#Hardhat files
+cache
+artifacts
+
+
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+#Hardhat files
+cache
+artifacts
+
+#AI generated artifacts
+/ai/models/
+/ai/properties.json
+__pycache__/
+.venv/
+.pytest_cache/
+*.py[cod]
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+private-keys/
+private_keys/
+keystore/
+hardhat-node.log
+build_log.txt
+*.tmp
+*.bak
+.eslintcache
+/data/processed/chain_index.json
+/data/raw/horizon/archive.zip
+/data/raw/horizon/extracted/archive/Property_Transactions.csv
+/data/raw/horizon/extracted/archive/Properties.csv
+/data/processed/risk/horizon_transaction_summary.pkl
+

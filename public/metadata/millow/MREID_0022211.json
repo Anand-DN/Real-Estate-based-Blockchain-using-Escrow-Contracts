@@ -1,0 +1,23 @@
+{
+  "name": "MILLOW Property MREID_0022211",
+  "property_identifier": "MREID_0022211",
+  "description": "Digital property representation of a MILLOW MREID listing (technical proof-of-concept). Blockchain-based ownership record for the prototype. Legal ownership remains subject to applicable Indian property and registration law.",
+  "attributes": [
+    {
+      "trait_type": "City",
+      "value": "Mumbai"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Kharghar"
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 1
+    },
+    {
+      "trait_type": "Area (sqft)",
+      "value": 720.0
+    }
+  ]
+}

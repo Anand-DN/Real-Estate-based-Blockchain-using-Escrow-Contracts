@@ -1,0 +1,60 @@
+{
+    "model_name": "MILLOW V5 Log-Price XGBoost",
+    "target": "log1p(price)",
+    "inverse_transform": "expm1(prediction)",
+    "dataset": "data/processed/MREID_property.csv",
+    "training_rows": 29135,
+    "cities": [
+        "Bangalore",
+        "Chennai",
+        "Delhi",
+        "Hyderabad",
+        "Kolkata",
+        "Mumbai"
+    ],
+    "location_count": 1776,
+    "features": {
+        "categorical": [
+            "location"
+        ],
+        "numerical": [
+            "log_area",
+            "log_bedrooms",
+            "area_per_bedroom",
+            "area_bedroom_interaction",
+            "amenity_yes_count",
+            "amenity_known_count",
+            "amenity_unknown_count"
+        ]
+    },
+    "excluded_target_derived_features": [
+        "derived_price_per_sqft"
+    ],
+    "amenity_encoding": {
+        "0": "No",
+        "1": "Yes",
+        "9": "Unknown / not specified"
+    },
+    "model_parameters": {
+        "n_estimators": 900,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 0.85,
+        "colsample_bytree": 0.85,
+        "min_child_weight": 5,
+        "reg_alpha": 0.1,
+        "reg_lambda": 2,
+        "tree_method": "hist",
+        "random_state": 42
+    },
+    "validation": {
+        "split": "GroupShuffleSplit by location",
+        "test_size": 0.2,
+        "random_state": 42,
+        "location_overlap": 0,
+        "mean_MAE": 5810457.416666667,
+        "mean_RMSE": 15857144.838309476,
+        "mean_R2": 0.1425162653128306,
+        "mean_MAPE": 54.899146028691256
+    }
+}

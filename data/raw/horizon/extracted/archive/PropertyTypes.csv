@@ -1,0 +1,31 @@
+Property_Type_ID,Property_Category,Property_Type,Sub_Type,Luxury_Level,Typical_Area_Min_sqft,Typical_Area_Max_sqft,Ownership_Type,Common_Usage,Popular_In,Price_Category,Maintenance_Level,Parking_Available,Garden_Available,Typical_Floors,Suitable_For
+PT001,Residential,Apartment,Apartment,Medium,450,2500,Freehold,Residential,All Metro Cities,Medium,Medium,Yes,No,20+,Families
+PT002,Residential,Flat,Flat,Medium,400,2200,Freehold,Residential,All Cities,Budget,Low,Yes,No,15+,Families
+PT003,Residential,Studio Apartment,Studio,Budget,250,650,Freehold,Residential,Metro Cities,Budget,Low,Yes,No,20+,Students
+PT004,Residential,Builder Floor,Builder Floor,Premium,900,3500,Freehold,Residential,Delhi NCR,Premium,Medium,Yes,No,4,Families
+PT005,Residential,Independent House,House,Premium,1000,6000,Freehold,Residential,All India,Premium,Medium,Yes,Yes,2,Families
+PT006,Residential,Villa,Villa,Luxury,2000,8000,Freehold,Residential,Gated Communities,Luxury,High,Yes,Yes,2,HNI
+PT007,Residential,Bungalow,Bungalow,Luxury,2500,12000,Freehold,Residential,Premium Areas,Luxury,High,Yes,Yes,2,HNI
+PT008,Residential,Duplex,Duplex,Premium,1200,5000,Freehold,Residential,Urban Areas,Premium,Medium,Yes,Yes,2,Joint Families
+PT009,Residential,Penthouse,Penthouse,Ultra Luxury,1800,7000,Freehold,Residential,Metro Cities,Ultra Luxury,High,Yes,No,Top Floor,HNI
+PT010,Residential,Row House,Row House,Premium,1000,3500,Freehold,Residential,Tier-1 Cities,Premium,Medium,Yes,Yes,2,Families
+PT011,Residential,Cottage,Cottage,Premium,700,2500,Freehold,Residential,Hill Stations,Premium,Medium,Yes,Yes,2,Vacation
+PT012,Residential,Farmhouse,Farmhouse,Ultra Luxury,3000,50000,Freehold,Residential,Rural Areas,Ultra Luxury,High,Yes,Yes,2,HNI
+PT013,Residential,Haveli,Traditional,Luxury,2500,15000,Freehold,Residential,Rajasthan,Luxury,High,Yes,Yes,3,Heritage
+PT014,Residential,Kutcha House,Traditional,Basic,200,900,Freehold,Residential,Rural India,Budget,Low,No,No,1,Rural Families
+PT015,Residential,Pucca House,Traditional,Medium,500,2500,Freehold,Residential,All India,Medium,Low,Yes,Yes,2,Families
+PT016,Residential,Chawl,Traditional,Budget,250,600,Leasehold,Residential,Mumbai,Budget,Low,No,No,4,Workers
+PT017,Residential,Stilt House,Traditional,Premium,600,2000,Freehold,Residential,Northeast India,Premium,Medium,Yes,Yes,2,Flood Areas
+PT018,Residential,Houseboat,Traditional,Luxury,400,1500,Leasehold,Tourism,Kerala & Kashmir,Luxury,High,No,No,1,Tourism
+PT019,Residential,Courtyard House,Traditional,Premium,1200,5000,Freehold,Residential,Kerala,Premium,Medium,Yes,Yes,2,Families
+PT020,Residential,Indo-Portuguese House,Traditional,Luxury,1500,5000,Freehold,Residential,Goa,Luxury,Medium,Yes,Yes,2,Vacation
+PT021,Residential,Pahari House,Traditional,Premium,700,2500,Freehold,Residential,Himachal & Uttarakhand,Premium,Medium,Yes,Yes,2,Families
+PT022,Commercial,Office,Office,Premium,500,50000,Freehold,Commercial,Business Districts,Premium,Medium,Yes,No,High-rise,Businesses
+PT023,Commercial,Retail Shop,Retail,Medium,150,3000,Freehold,Commercial,Markets,Medium,Low,No,No,1,Retailers
+PT024,Commercial,Warehouse,Warehouse,Medium,1000,100000,Freehold,Commercial,Industrial Areas,Medium,Low,Yes,No,1,Logistics
+PT025,Industrial,Factory,Industrial,Medium,5000,200000,Freehold,Industrial,Industrial Zones,High,Medium,Yes,No,1,Manufacturing
+PT026,Industrial,Industrial Shed,Industrial,Medium,2000,50000,Freehold,Industrial,Industrial Zones,Medium,Low,Yes,No,1,Manufacturing
+PT027,Land,Residential Plot,Plot,NA,600,10000,Freehold,Residential,All India,Variable,Low,No,No,0,Investment
+PT028,Land,Commercial Plot,Plot,NA,600,50000,Freehold,Commercial,Urban Areas,Variable,Low,No,No,0,Investment
+PT029,Land,Agricultural Land,Farmland,NA,5000,1000000,Freehold,Agriculture,Rural India,Variable,Low,No,No,0,Farming
+PT030,Residential,Serviced Apartment,Serviced,Premium,350,1800,Leasehold,Residential,Metro Cities,Premium,High,Yes,No,20+,Professionals

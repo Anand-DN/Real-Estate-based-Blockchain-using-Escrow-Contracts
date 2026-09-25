@@ -1,0 +1,15 @@
+relative_path,extension,size_mb
+archive\Amenities_Master.csv,.csv,0.005
+archive\Cities.csv,.csv,0.196
+archive\Developers.csv,.csv,0.011
+archive\Hospitals.csv,.csv,9.127
+archive\Localities.csv,.csv,2.848
+archive\Metro_Stations.csv,.csv,0.159
+archive\Properties.csv,.csv,210.074
+archive\PropertyTypes.csv,.csv,0.004
+archive\Property_Transactions.csv,.csv,589.092
+archive\Schools.csv,.csv,6.289
+archive\Shopping_Malls.csv,.csv,0.095
+archive\States.csv,.csv,0.004
+archive_(1)\real_estate_dataset.csv,.csv,0.049
+archive_(1)\real_estate_dataset.json,.json,0.11

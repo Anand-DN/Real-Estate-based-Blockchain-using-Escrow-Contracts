@@ -1,0 +1,15 @@
+{
+    "dataset_name": "MREID Property Dataset",
+    "rows": 29135,
+    "columns": 44,
+    "cities": [
+        "Bangalore",
+        "Chennai",
+        "Delhi",
+        "Hyderabad",
+        "Kolkata",
+        "Mumbai"
+    ],
+    "missing_cells": 0,
+    "duplicate_rows": 0
+}

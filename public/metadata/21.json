@@ -1,0 +1,33 @@
+{
+    "name": "Craftsman Bungalow",
+    "address": "902 NE Alberta St, Portland, OR 97211",
+    "description": "Charming craftsman bungalow with original woodwork",
+    "image": "/images/21.jpg",
+    "id": "21",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 21
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 2100
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1935
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Suburban Family Home",
+    "address": "4801 Windy Hill Dr, Plano, TX 75093",
+    "description": "Quiet family home on a tree-lined street",
+    "image": "/images/9.jpg",
+    "id": "9",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 14
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 3
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 2400
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2008
+        }
+    ]
+}
