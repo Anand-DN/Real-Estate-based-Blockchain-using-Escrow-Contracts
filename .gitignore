@@ -74,6 +74,19 @@ exportChainIndex.err.log
 !yarn-debug.log*
 !yarn-error.log*
 build_log.txt
+
+#persistent local chain (Anvil) runtime state and generated artifacts
+#Never commit: contains the whole chain and is machine-specific.
+.chain/
+*.chainstate.json
+anvil-state*.json
+anvil-state*.json.gz
+anvil-state*.json.gz.sha256
+anvil-state*.json.gz.meta.json
+.chain/**/*.sha256
+.chain/**/*.meta.json
+foundry.toml.local
+.cache/
 *.tmp
 *.bak
 .eslintcache

@@ -7,9 +7,27 @@
 // Run against a running local node, after deployMillow.js + tokenizeAllMreid.js:
 //     npx hardhat run scripts/exportChainIndex.js --network localhost
 //
+// On a persistent Anvil chain (see docs/REPRODUCIBILITY.md) the same command
+// regenerates the snapshot from an IMPORTED state artifact, which is how a
+// second machine populates it without minting anything:
+//     npm run chain:index
+//
+// READ-ONLY BY CONSTRUCTION.  Every chain access below is a view call —
+// totalSupply(), propertyOf(), ownerOf(), isOnOffer() and sales().  This script
+// sends no transaction, deploys nothing, mints nothing and modifies no chain
+// state, so it is safe to run against a populated production-equivalent chain.
+//
 // The snapshot is a point-in-time read: it must be refreshed after seeding /
 // listing / sale activity.  The backend serves the last exported snapshot and
 // the snapshot records when it was written so consumers know its age.
+// chain_index.json is a GENERATED artifact and is deliberately gitignored; it
+// is never committed.
+//
+// MUST be run through Hardhat, which injects the global `ethers`:
+//     npm run chain:index
+//     npx hardhat run scripts/exportChainIndex.js --network localhost
+// Running it with bare `node` leaves `ethers` undefined, so fail with an
+// instruction instead of an opaque ReferenceError further down.
 //
 // Per property the snapshot stores:
 //   tokenized    : has a PropertyNFT token id
@@ -24,6 +42,19 @@ const path = require("path");
 
 const CONCURRENCY = 16;
 const BATCH = 200;
+
+// `ethers` is a global injected by the Hardhat runtime, not a require().  Catch
+// the bare-`node` case up front so the failure explains itself.
+if (typeof ethers === "undefined") {
+  console.error(
+    "exportChainIndex.js must be run through Hardhat, which provides `ethers`.\n" +
+      "  Correct:   npm run chain:index\n" +
+      "  or:        npx hardhat run scripts/exportChainIndex.js --network localhost\n" +
+      "  Wrong:     node scripts/exportChainIndex.js\n" +
+      "  (a running local node is required on 127.0.0.1:8545)",
+  );
+  process.exit(1);
+}
 
 async function main() {
   const config = JSON.parse(

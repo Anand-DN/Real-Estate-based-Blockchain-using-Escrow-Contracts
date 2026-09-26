@@ -1,0 +1,81 @@
+{
+  "schema": "millow-chain-manifest/1",
+  "description": "Canonical reproducibility descriptor for the persistent MILLOW local chain. Scripts read this file; docs/REPRODUCIBILITY.md explains the Computer 1 -> Computer 2 workflow.",
+  "chain_id": 31337,
+  "network_name": "millow-local",
+  "rpc_url": "http://127.0.0.1:8545",
+  "node": {
+    "software": "anvil",
+    "version_required": "1.8.3",
+    "version_checked": "1.8.3",
+    "accounts_flag": "--accounts 20",
+    "accounts_flag_reason": "Anvil defaults to 10 accounts; the MINTER_ROLE holder is account index 10 (0xBcd4042DE499D14e55001CcbB24a551F3b954096) and does not exist unless --accounts 20 is passed.",
+    "start_flags": [
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8545",
+      "--chain-id",
+      "31337",
+      "--accounts",
+      "20"
+    ],
+    "state_flags": [
+      "--state",
+      ".chain/state.json",
+      "--state-interval",
+      "30"
+    ],
+    "state_interval_reason": "Windows cannot deliver SIGTERM to a detached process, so anvil cannot always dump state on exit. --state-interval bounds state loss to the interval.",
+    "state_dump_format": "anvil_dumpState returns hex-encoded gzip; anvil --state requires plain JSON at the path. The distributed artifact is gzip of that JSON. Note: --state is mutually exclusive with both --dump-state and --load-state in anvil 1.8.3, and --state alone already loads and persists.",
+    "forbidden_methods": [
+      "hardhat_reset",
+      "anvil_reset",
+      "evm_revert"
+    ]
+  },
+  "canonical_token_count": 29135,
+  "mapping_manifest": {
+    "path": "data/processed/millow_token_map.csv",
+    "format": "token_id,mreid_id",
+    "order": "token_id ascending (canonical)",
+    "rows": 29135,
+    "permuted_token_ids": 1396,
+    "sha256": "91fcb8a3346d89a91360ce531b685e2e97683b7f80f2ac2c44dedf83042106f4",
+    "note": "MREID numeric suffix is NOT the token id. 1,396 token ids are intentionally permuted relative to dataset order and must be reproduced exactly. Replay in manifest order to reproduce them."
+  },
+  "contracts": {
+    "property_nft": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "property_registry": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "millow_escrow": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+  },
+  "address_determinism": "Anvil's default mnemonic is the same test phrase Hardhat uses, so accounts 0/1/2/3/10 resolve to the same addresses. Deployment from account 0 with a fixed nonce sequence therefore reproduces these addresses byte-for-byte.",
+  "roles": {
+    "minter_role_holder": "0xBcd4042DE499D14e55001CcbB24a551F3b954096",
+    "seller": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "buyer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "inspector": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "lender": "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+  },
+  "expected_code_bytes": {
+    "property_nft": 7818,
+    "property_registry": 3934,
+    "millow_escrow": 17716
+  },
+  "state_artifact": {
+    "filename": "millow-anvil-state-29135.json.gz",
+    "distribution": "github-release",
+    "distribution_note": "Never commit the state artifact to git history. Repo carries only this manifest, the mapping CSV, and the scripts.",
+    "status": "completed",
+    "token_count": 29135,
+    "block": 592,
+    "transactions": 58278,
+    "measured_bytes": 23055700,
+    "measured_bytes_uncompressed": 279704354,
+    "sha256": "8ab24ca333102284ff1a933882508bc7f9403bb1cf840a5e2dc1b4654cdb4946",
+    "anvil_version": "1.8.3",
+    "verification": "Produced by a full production run: 8 deploy + 29135 mint + 29135 transfer = 58278 txs. Full 21/21 audit passed before AND after an Anvil stop/restart from .chain/state.json, with zero deployments and zero mints on the restarted process.",
+    "export_command": "npm run chain:export",
+    "import_command": "npm run chain:import -- --artifact=millow-anvil-state-29135.json.gz"
+  }
+}

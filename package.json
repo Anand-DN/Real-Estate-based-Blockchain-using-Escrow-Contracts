@@ -13,6 +13,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "chain:test": "node scripts/testTokenizeResume.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -20,7 +21,15 @@
     "ai": "python ai/app.py",
     "ai:train": "python ai/train.py",
     "valuation": "python backend/app.py",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "chain:start": "node scripts/chainStart.js",
+    "chain:stop": "node scripts/chainStop.js",
+    "chain:status": "node scripts/chainStatus.js",
+    "chain:export": "node scripts/chainExport.js",
+    "chain:import": "node scripts/restoreChain.js",
+    "chain:tokenize": "node scripts/tokenizeChain.js",
+    "chain:verify": "node scripts/verifyChain.js",
+    "chain:index": "hardhat run scripts/exportChainIndex.js --network localhost"
   },
   "eslintConfig": {
     "extends": [
