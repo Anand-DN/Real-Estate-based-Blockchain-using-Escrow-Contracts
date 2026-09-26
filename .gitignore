@@ -62,7 +62,17 @@ secrets/
 private-keys/
 private_keys/
 keystore/
+#runtime logs
 hardhat-node.log
+hardhat-node.err.log
+tokenize.log
+tokenize.err.log
+exportChainIndex.log
+exportChainIndex.err.log
+*.log
+!npm-debug.log*
+!yarn-debug.log*
+!yarn-error.log*
 build_log.txt
 *.tmp
 *.bak
