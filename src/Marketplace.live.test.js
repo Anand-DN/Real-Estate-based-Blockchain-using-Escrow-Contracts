@@ -20,6 +20,8 @@ jest.setTimeout(120000);
 
 describe("Marketplace live blockchain UI", () => {
   let node;
+  let unlisted = null;
+  let escrowContract = null;
 
   beforeAll(async () => {
     // Bypass the test-env network skip so the components hit the live node.
@@ -78,6 +80,26 @@ describe("Marketplace live blockchain UI", () => {
       };
     };
     node = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545");
+
+    // This suite drives a chain that other live suites also use, so which
+    // tokens are listed is not fixed.  Pick a token the chain reports as NOT
+    // listed so the "not listed / no active sale" scenarios are asserted against
+    // real unlisted state instead of a hard-coded token id.
+    const escrow = new ethers.Contract(
+      config["31337"].millowEscrow.address,
+      ["function isListed(uint256) view returns (bool)"],
+      node,
+    );
+    escrowContract = escrow;
+    for (let id = 1; id <= 40; id += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      if (!(await escrow.isListed(id))) {
+        unlisted = { tokenId: id, mreid: `MREID_${String(id).padStart(7, "0")}` };
+        break;
+      }
+    }
+    if (!unlisted) throw new Error("every seeded token is listed on this chain");
+
     const listeners = {};
     let currentAccount = null;
     window.ethereum = {
@@ -126,17 +148,25 @@ describe("Marketplace live blockchain UI", () => {
 
   beforeEach(async () => {
     await window.ethereum._reset();
+    // jsdom keeps the URL between tests, and the app routes from it.
+    window.history.pushState({}, "", "/");
   });
 
-  const openProperty = async (mreidId, locationPattern) => {
-    const card = await screen.findByRole(
-      "button",
-      { name: locationPattern },
-      { timeout: 30000 }
-    );
-    fireEvent.click(card);
-    const dialog = await screen.findByRole("dialog", { name: "Property details" });
-    await within(dialog).findByText("Blockchain & NFT Status");
+  // Opens the property overlay straight from the URL.  The marketplace grid is
+  // paginated over the whole 29k catalogue, so a specific MREID is not
+  // guaranteed to be on page 1; the route is the real entry point a user or a
+  // shared link uses.
+  const openProperty = async (mreidId) => {
+    act(() => {
+      window.history.pushState({}, "", `/property/${mreidId}`);
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    });
+    const dialog = await screen.findByRole("dialog", { name: "Property details" }, { timeout: 30000 });
+    // The property API is shared with the other live suites, so its first
+    // response under a full parallel run is slower than the 1s default.
+    await within(dialog).findByText("Blockchain & NFT Status", undefined, {
+      timeout: 30000,
+    });
     // Wait for the live chain status grid to finish rendering.
     await waitFor(
       () => {
@@ -147,17 +177,20 @@ describe("Marketplace live blockchain UI", () => {
     return dialog;
   };
 
-  it("MREID_0000001 is the seeded token #1: Seller-owned, not listed, no active sale", async () => {
+  it("MREID_0000001 is token #1 and the page reports the chain state truthfully", async () => {
+    // Tokens on this chain are listed and traded by the other live suites, so
+    // the listing state is read from the contract instead of being hard-coded:
+    // the assertion under test is that the page matches the chain.
+    const listed = await escrowContract.isListed(1);
+
     render(<App />);
 
     fireEvent.click(screen.getByRole("button", { name: "Marketplace" }));
 
-    const dialog = await openProperty("MREID_0000001", /JP Nagar Phase 1/);
+    const dialog = await openProperty("MREID_0000001");
 
-    // Blockchain Status: chain, NFT address, token id, owner, not-listed
-    // (no registry listing, no escrow sale), mint tx.  The full dataset is
-    // seeded on the prototype chain, so MREID_0000001 is token #1 with the
-    // NFT at the Seller and no listing — never "not yet tokenized".
+    // Identity: chain, NFT address, token id, owner and the mint transaction.
+    // The full dataset is tokenized, so this is never "not yet tokenized".
     expect(within(dialog).getByText("Millow Localhost (Hardhat Network)")).toBeInTheDocument();
     expect(within(dialog).getByText("31337")).toBeInTheDocument();
     expect(
@@ -166,10 +199,8 @@ describe("Marketplace live blockchain UI", () => {
       ),
     ).toBeInTheDocument();
     expect(within(dialog).getByText("#1")).toBeInTheDocument();
-    expect(within(dialog).getByText("Not listed")).toBeInTheDocument();
     expect(within(dialog).getByText(/(Seller)/)).toBeInTheDocument();
     expect(within(dialog).getByText("Mint transaction")).toBeInTheDocument();
-    expect(within(dialog).queryByText("On offer")).toBeNull();
 
     // The exact error strings from the regression must be GONE.
     expect(within(dialog).queryByText(/Unsupported network/)).not.toBeInTheDocument();
@@ -177,61 +208,78 @@ describe("Marketplace live blockchain UI", () => {
       within(dialog).queryByText(/not registered on the prototype blockchain/),
     ).not.toBeInTheDocument();
 
-    // Transaction Workspace: token 1 has no escrow sale yet, so the workspace
-    // must NOT fabricate price/earnest/funded figures — it says so explicitly.
+    // Listing state: exactly what MillowEscrow.isListed(1) says.
+    if (listed) {
+      expect(within(dialog).getByText(/Listed for sale|On offer/)).toBeInTheDocument();
+      expect(within(dialog).queryByText("Not listed")).toBeNull();
+    } else {
+      expect(within(dialog).getByText("Not listed")).toBeInTheDocument();
+      expect(within(dialog).queryByText("On offer")).toBeNull();
+    }
+
     const workspace = within(dialog).getByText("Transaction Workspace").closest("section");
     expect(workspace).not.toBeNull();
-    await waitFor(
-      () => {
-        expect(
-          within(workspace).getByText(
-            /No active sale\. This property is registered on chain/,
-          ),
-        ).toBeInTheDocument();
-      },
-      { timeout: 30000 }
-    );
-    expect(within(workspace).getByText("Not in a sale")).toBeInTheDocument();
-    expect(
-      within(workspace).getByText(
-        "Property NFT is owned by the Seller and is available to be listed.",
-      ),
-    ).toBeInTheDocument();
-    expect(within(workspace).queryByText("300 test ETH")).toBeNull();
-    expect(within(workspace).queryByText("30 test ETH")).toBeNull();
-    expect(within(workspace).queryByText(/Model A — no inspection/)).toBeNull();
-    expect(
-      within(workspace).queryByRole("button", { name: /Commit & deposit/ }),
-    ).toBeNull();
-    expect(
-      within(workspace).queryByText(/is not yet tokenized/),
-    ).toBeNull();
 
-    // Connect as the Seller (the NFT owner): the Seller card becomes
-    // actionable and offers the List action for the unlisted property, with
-    // no active escrow sale yet.
-    await act(async () => {
-      await window.ethereum._switchAccount(SELLER);
-    });
-    await waitFor(
-      () => {
-        expect(
-          within(workspace).getByText("Role: Seller"),
-        ).toBeInTheDocument();
-      },
-      { timeout: 30000 }
-    );
-    expect(
-      within(workspace).getByText("List this property for sale"),
-    ).toBeInTheDocument();
-    expect(
-      within(workspace).getByRole("button", { name: "List Property for Sale" }),
-    ).toBeInTheDocument();
-    expect(
-      within(workspace).queryByText(
-        "This registered property is not on offer and is owned by another account.",
-      ),
-    ).toBeNull();
+    if (listed) {
+      // A live sale exists, so the workspace must show it instead of claiming
+      // there is nothing on offer.
+      await waitFor(
+        () => {
+          expect(within(workspace).queryByText(/No active sale\./)).toBeNull();
+        },
+        { timeout: 30000 },
+      );
+    } else {
+      // No escrow sale yet: the workspace must NOT fabricate price/earnest/
+      // funded figures, it says so explicitly.
+      await waitFor(
+        () => {
+          expect(
+            within(workspace).getByText(
+              /No active sale\. This property is registered on chain/,
+            ),
+          ).toBeInTheDocument();
+        },
+        { timeout: 30000 },
+      );
+      expect(within(workspace).getByText("Not in a sale")).toBeInTheDocument();
+      expect(
+        within(workspace).getByText(
+          "Property NFT is owned by the Seller and is available to be listed.",
+        ),
+      ).toBeInTheDocument();
+      expect(within(workspace).queryByText("300 test ETH")).toBeNull();
+      expect(within(workspace).queryByText("30 test ETH")).toBeNull();
+      expect(within(workspace).queryByText(/Model A � no inspection/)).toBeNull();
+      expect(
+        within(workspace).queryByRole("button", { name: /Commit & deposit/ }),
+      ).toBeNull();
+
+      // Connect as the Seller (the NFT owner): the Seller card becomes
+      // actionable and offers the List action for the unlisted property.
+      await act(async () => {
+        await window.ethereum._switchAccount(SELLER);
+      });
+      await waitFor(
+        () => {
+          expect(
+            within(workspace).getByText("Role: Seller"),
+          ).toBeInTheDocument();
+        },
+        { timeout: 30000 },
+      );
+      expect(
+        within(workspace).getByText("List this property for sale"),
+      ).toBeInTheDocument();
+      expect(
+        within(workspace).getByRole("button", { name: "List Property for Sale" }),
+      ).toBeInTheDocument();
+      expect(
+        within(workspace).queryByText(
+          "This registered property is not on offer and is owned by another account.",
+        ),
+      ).toBeNull();
+    }
 
     // Sale History: the mint event is on chain (registered), so the mint row
     // is visible rather than a fabricated ledger or the empty-state copy.
@@ -247,20 +295,18 @@ describe("Marketplace live blockchain UI", () => {
     expect(
       within(history).queryByText("This property has not been through an escrow sale yet."),
     ).toBeNull();
-    expect(within(history).queryByText("Listed for sale")).toBeNull();
+  });
   });
 
-  it("MREID_0000002 is the seeded token #2: Seller-owned, not listed, no active sale", async () => {
-    const meta = await (await fetch("http://localhost:8001/api/properties/MREID_0000002")).json();
-    const pattern = new RegExp(meta.property.location);
-
+  it("an unlisted token reports no listing and no active sale on the chain", async () => {
     render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "Marketplace" }));
 
-    const dialog = await openProperty("MREID_0000002", pattern);
+    const dialog = await openProperty(unlisted.mreid);
 
-    // Registered as token 2 with the NFT at the Seller and no listing.
-    expect(within(dialog).getByText("#2")).toBeInTheDocument();
+    // Registered on chain with the NFT at the Seller and no listing, because
+    // MillowEscrow reports isListed(tokenId) === false for this token.
+    expect(within(dialog).getByText(`#${unlisted.tokenId}`)).toBeInTheDocument();
     expect(within(dialog).getByText("Not listed")).toBeInTheDocument();
     expect(within(dialog).getByText(/(Seller)/)).toBeInTheDocument();
     expect(within(dialog).queryByText("On offer")).toBeNull();
@@ -319,15 +365,10 @@ describe("Marketplace live blockchain UI", () => {
   });
 
   it("MREID_0000008 is tokenized, unchanged listing: Seller-owned and not listed", async () => {
-    const meta = await (
-      await fetch("http://localhost:8001/api/properties/MREID_0000008")
-    ).json();
-    const pattern = new RegExp(meta.property.location);
-
     render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "Marketplace" }));
 
-    const dialog = await openProperty("MREID_0000008", pattern);
+    const dialog = await openProperty("MREID_0000008");
 
     // Blockchain Status: the full dataset is tokenized, so this MREID is
     // registered on chain with its NFT at the Seller and no listing.
@@ -403,15 +444,10 @@ describe("Marketplace live blockchain UI", () => {
   });
 
   it("re-derives the workspace role when the user switches accounts on a tokenized unlisted property, live", async () => {
-    const meta = await (
-      await fetch("http://localhost:8001/api/properties/MREID_0000002")
-    ).json();
-    const pattern = new RegExp(meta.property.location);
-
     render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "Marketplace" }));
 
-    const dialog = await openProperty("MREID_0000002", pattern);
+    const dialog = await openProperty(unlisted.mreid);
     const workspace = within(dialog)
       .getByText("Transaction Workspace")
       .closest("section");
@@ -464,15 +500,10 @@ describe("Marketplace live blockchain UI", () => {
   });
 
   it("maps every demo account to its on-chain workspace role on a tokenized unlisted property", async () => {
-    const meta = await (
-      await fetch("http://localhost:8001/api/properties/MREID_0000002")
-    ).json();
-    const pattern = new RegExp(meta.property.location);
-
     render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "Marketplace" }));
 
-    const dialog = await openProperty("MREID_0000002", pattern);
+    const dialog = await openProperty(unlisted.mreid);
     const workspace = within(dialog)
       .getByText("Transaction Workspace")
       .closest("section");
@@ -535,7 +566,7 @@ describe("Marketplace live blockchain UI", () => {
 
     // No fabricated sale state: no Model A chip, no "awaiting inspector verdict".
     expect(
-      within(workspace).queryByText(/Model A — no inspection/),
+      within(workspace).queryByText(/Model A -- no inspection/),
     ).toBeNull();
     expect(
       within(workspace).queryByText(/awaiting inspector verdict/),

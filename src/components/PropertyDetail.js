@@ -245,7 +245,12 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
                 </div>
               )}
 
-              {!marketLoading && !marketError && market && (
+              {!marketLoading &&
+                !marketError &&
+                market &&
+                market.market_context &&
+                market.property &&
+                market.millow_ai && (
                 <div className="mkt__nhb">
                   <div className="mkt__nhb-badge">
                     External benchmark - city-level

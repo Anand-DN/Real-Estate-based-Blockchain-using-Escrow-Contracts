@@ -1,43 +1,33 @@
 import { ethers } from 'ethers';
 import logo from '../assets/logo.svg';
 
+const shortAddress = (address) =>
+    `${address.slice(0, 6)}...${address.slice(38, 42)}`;
+
 const Navigation = ({
     account,
     setAccount,
     view,
-    setView,
-    marketSection,
-    setMarketSection,
+    section,
+    onGoMarketplace,
+    onGoDashboard,
+    onGoHome,
     theme,
     onToggleTheme,
 }) => {
     const connectHandler = async () => {
         try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const account = ethers.utils.getAddress(accounts[0])
-            setAccount(account);
+            setAccount(ethers.utils.getAddress(accounts[0]));
         } catch (error) {
             // User rejected the request or no wallet present; keep the button idle
             console.error('Could not connect wallet', error)
         }
     }
 
-    const goMarket = (section) => {
-        setMarketSection(section);
-        setView('marketplace');
-    }
-
-    const demoToggle = () => {
-        if (view === 'marketplace') setView('browse');
-        else setView(view === 'dashboard' ? 'browse' : 'dashboard');
-    }
-
-    const demoLabel =
-        view === 'marketplace'
-            ? 'ETH Demo'
-            : view === 'dashboard'
-            ? 'Browse Demo'
-            : 'Dashboard';
+    const onMarketplace = view === 'marketplace';
+    const link = (target) =>
+        `nav__link ${onMarketplace && section === target ? 'nav__link--active' : ''}`;
 
     return (
         <nav>
@@ -45,8 +35,8 @@ const Navigation = ({
                 <li>
                     <button
                         type="button"
-                        className={`nav__link ${view === 'marketplace' && marketSection === 'buy' ? 'nav__link--active' : ''}`}
-                        onClick={() => goMarket('buy')}
+                        className={link('buy')}
+                        onClick={() => onGoMarketplace('buy')}
                     >
                         Buy
                     </button>
@@ -54,8 +44,8 @@ const Navigation = ({
                 <li>
                     <button
                         type="button"
-                        className={`nav__link ${view === 'marketplace' && marketSection === 'rent' ? 'nav__link--active' : ''}`}
-                        onClick={() => goMarket('rent')}
+                        className={link('rent')}
+                        onClick={() => onGoMarketplace('rent')}
                     >
                         Rent
                     </button>
@@ -63,33 +53,41 @@ const Navigation = ({
                 <li>
                     <button
                         type="button"
-                        className={`nav__link ${view === 'marketplace' && marketSection === 'sell' ? 'nav__link--active' : ''}`}
-                        onClick={() => goMarket('sell')}
+                        className={link('sell')}
+                        onClick={() => onGoMarketplace('sell')}
                     >
                         Sell
                     </button>
                 </li>
             </ul>
 
-            <div className='nav__brand'>
+            <button
+                type="button"
+                className='nav__brand'
+                onClick={onGoHome}
+                aria-label="MILLOW home"
+                title="MILLOW home"
+            >
                 <img src={logo} alt="Logo" />
                 <h1>Millow</h1>
-            </div>
+            </button>
 
             <div className='nav__right'>
                 <button
                     type="button"
-                    className={`nav__btn nav__btn--market ${view === 'marketplace' ? 'nav__btn--active' : ''}`}
-                    onClick={() => goMarket('buy')}
+                    className={`nav__btn ${onMarketplace ? 'nav__btn--active' : ''}`}
+                    onClick={() => onGoMarketplace('buy')}
+                    aria-current={onMarketplace ? 'page' : undefined}
                 >
                     Marketplace
                 </button>
                 <button
                     type="button"
-                    className={`nav__btn ${view === 'marketplace' ? '' : 'nav__btn--active'}`}
-                    onClick={demoToggle}
+                    className={`nav__btn ${view === 'dashboard' ? 'nav__btn--active' : ''}`}
+                    onClick={onGoDashboard}
+                    aria-current={view === 'dashboard' ? 'page' : undefined}
                 >
-                    {demoLabel}
+                    Dashboard
                 </button>
                 <button
                     type="button"
@@ -113,8 +111,9 @@ const Navigation = ({
                     <button
                         type="button"
                         className='nav__connect'
+                        title={account}
                     >
-                        {account.slice(0, 6) + '...' + account.slice(38, 42)}
+                        {shortAddress(account)}
                     </button>
                 ) : (
                     <button

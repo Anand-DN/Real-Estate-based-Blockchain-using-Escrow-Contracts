@@ -359,6 +359,13 @@ def search_properties(
     min_area: float | None = Query(None, ge=0),
     max_area: float | None = Query(None, ge=0),
     bedrooms: int | None = Query(None, ge=1),
+    mreid_ids: str | None = Query(
+        None,
+        description=(
+            "Comma-separated MREIDs to return in the given order. Used by "
+            "favourites and by the listing lookup."
+        ),
+    ),
     ai_signal: str | None = Query(None, pattern=(
         "^(undervalued|overvalued|in_range)$"
     )),
@@ -416,7 +423,33 @@ def search_properties(
     if bedrooms is not None:
         mask &= PROPERTIES["no_of_bedrooms"] == bedrooms
 
+    preserve_order = False
+    if mreid_ids:
+        wanted = [
+            part.strip() for part in str(mreid_ids).split(",") if part.strip()
+        ]
+        if not wanted:
+            raise HTTPException(
+                status_code=400,
+                detail="mreid_ids must contain at least one MREID.",
+            )
+        # Favourites and "list your home" need an exact lookup by identifier,
+        # so the requested order is kept instead of being re-sorted.
+        mask &= PROPERTIES["mreid_id"].isin(wanted)
+        preserve_order = True
+
     filtered = PROPERTIES.loc[mask].copy()
+
+    if preserve_order:
+        order = {
+            str(mreid).strip(): pos
+            for pos, mreid in enumerate(str(mreid_ids).split(","))
+            if str(mreid).strip()
+        }
+        filtered["_mreid_order"] = filtered["mreid_id"].map(order)
+        filtered = filtered.sort_values("_mreid_order").drop(
+            columns=["_mreid_order"]
+        )
 
     if ai_signal:
         full_ai, full_ppsf = _batch_ai_predict(filtered)
@@ -437,37 +470,42 @@ def search_properties(
             ]
         filtered = filtered.iloc[keep].copy()
 
-    if sort == "id":
-        filtered = filtered.sort_values("mreid_id")
-    elif sort == "price_asc":
-        filtered = filtered.sort_values("price", ascending=True)
-    elif sort == "price_desc":
-        filtered = filtered.sort_values("price", ascending=False)
-    elif sort == "area_asc":
-        filtered = filtered.sort_values("area", ascending=True)
-    elif sort == "area_desc":
-        filtered = filtered.sort_values("area", ascending=False)
-    elif sort == "price_per_sqft_asc":
-        filtered = filtered.sort_values("price_per_sqft", ascending=True)
-    elif sort == "price_per_sqft_desc":
-        filtered = filtered.sort_values("price_per_sqft", ascending=False)
-    elif sort in (
-        "ai_estimate_asc",
-        "ai_estimate_desc",
-        "ai_difference_asc",
-        "ai_difference_desc",
-    ):
-        full_ai, _ = _batch_ai_predict(filtered)
-        full_listed = filtered["price"].to_numpy(dtype=float)
-        filtered["_ai_est"] = [float(x) for x in full_ai]
-        filtered["_ai_diff"] = [
-            float(a) - float(l) for a, l in zip(full_ai, full_listed)
-        ]
-        if sort.startswith("ai_estimate"):
-            col, ascending = "_ai_est", sort.endswith("asc")
-        else:
-            col, ascending = "_ai_diff", sort.endswith("asc")
-        filtered = filtered.sort_values(col, ascending=ascending)
+    if not preserve_order:
+        if sort == "id":
+            filtered = filtered.sort_values("mreid_id")
+        elif sort == "price_asc":
+            filtered = filtered.sort_values("price", ascending=True)
+        elif sort == "price_desc":
+            filtered = filtered.sort_values("price", ascending=False)
+        elif sort == "area_asc":
+            filtered = filtered.sort_values("area", ascending=True)
+        elif sort == "area_desc":
+            filtered = filtered.sort_values("area", ascending=False)
+        elif sort == "price_per_sqft_asc":
+            filtered = filtered.sort_values(
+                "price_per_sqft", ascending=True
+            )
+        elif sort == "price_per_sqft_desc":
+            filtered = filtered.sort_values(
+                "price_per_sqft", ascending=False
+            )
+        elif sort in (
+            "ai_estimate_asc",
+            "ai_estimate_desc",
+            "ai_difference_asc",
+            "ai_difference_desc",
+        ):
+            full_ai, _ = _batch_ai_predict(filtered)
+            full_listed = filtered["price"].to_numpy(dtype=float)
+            filtered["_ai_est"] = [float(x) for x in full_ai]
+            filtered["_ai_diff"] = [
+                float(a) - float(l) for a, l in zip(full_ai, full_listed)
+            ]
+            if sort.startswith("ai_estimate"):
+                col, ascending = "_ai_est", sort.endswith("asc")
+            else:
+                col, ascending = "_ai_diff", sort.endswith("asc")
+            filtered = filtered.sort_values(col, ascending=ascending)
 
     total = len(filtered)
 
@@ -491,12 +529,12 @@ def search_properties(
             "min_area": min_area,
             "max_area": max_area,
             "bedrooms": bedrooms,
+            "mreid_ids": mreid_ids,
             "ai_signal": ai_signal,
             "sort": sort,
         },
         "results": results,
     }
-
 
 @router.get("/api/properties/{mreid_id}/chain")
 def property_chain(mreid_id: str):

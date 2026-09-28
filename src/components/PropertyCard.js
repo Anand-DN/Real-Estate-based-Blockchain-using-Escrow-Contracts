@@ -1,7 +1,12 @@
 import PropertyThumb from "./PropertyThumb";
 import { formatInr } from "../lib/format";
 
-const PropertyCard = ({ property, onSelect }) => {
+const PropertyCard = ({
+  property,
+  onSelect,
+  favorited = false,
+  onToggleFavorite,
+}) => {
   const amenityCounts = property.amenities || {};
   const yesCount = Object.values(amenityCounts).filter((v) => v === "Yes").length;
 
@@ -20,6 +25,26 @@ const PropertyCard = ({ property, onSelect }) => {
       }}
     >
       <PropertyThumb mreidId={property.mreid_id} city={property.city} compact />
+
+      {onToggleFavorite && (
+        <button
+          type="button"
+          className={`mkt__fav ${favorited ? "mkt__fav--on" : ""}`}
+          aria-pressed={favorited}
+          aria-label={
+            favorited
+              ? `Remove ${property.location} from favourites`
+              : `Save ${property.location} to favourites`
+          }
+          title={favorited ? "Saved to favourites" : "Save to favourites"}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite(property.mreid_id);
+          }}
+        >
+          {favorited ? "♥" : "♡"}
+        </button>
+      )}
 
       <div className="mkt__card-body">
         <span className="mkt__card-city">{property.city}</span>

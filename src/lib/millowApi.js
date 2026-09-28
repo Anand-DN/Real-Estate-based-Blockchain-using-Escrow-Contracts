@@ -105,3 +105,25 @@ export function marketBreakdown(params) {
 export function dashboardInsights() {
   return request("/api/dashboard/insights");
 }
+
+// The properties a wallet actually owns, from the chain snapshot joined with
+// the catalogue.  Paginated because the provisioner wallet holds the whole
+// catalogue; the portfolio totals always cover every holding.
+export function dashboardHoldings(address, options) {
+  const { limit, offset } = options || {};
+  const qs = new URLSearchParams({ address });
+  if (limit) qs.append("limit", String(limit));
+  if (offset) qs.append("offset", String(offset));
+  return request(`/api/dashboard/holdings?${qs.toString()}`);
+}
+
+// Property summaries for a specific set of MREIDs (favourites, the listing
+// lookup).  Unknown ids are simply absent from the results, so the caller can
+// report them as unavailable instead of inventing rows.
+export function propertiesByIds(mreidIds) {
+  const ids = (mreidIds || []).filter(Boolean);
+  if (!ids.length) return Promise.resolve([]);
+  return searchProperties({ mreid_ids: ids.join(","), page_size: Math.min(ids.length, 100) })
+    .then((d) => d.results || [])
+    .catch(() => []);
+}

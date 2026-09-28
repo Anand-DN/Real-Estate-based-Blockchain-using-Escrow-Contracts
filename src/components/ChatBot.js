@@ -1,175 +1,202 @@
 import { useEffect, useRef, useState } from "react";
+import { propertyById, propertyChain } from "../lib/millowApi";
 
 const AI_BASE = process.env.REACT_APP_AI_URL || "http://localhost:8000";
-const STORAGE_KEY = "millow_chat_history";
-const STORAGE_KEY_MREID = "millow_chat_history_mreid";
+const STORAGE_KEY = "millow_chat_history_mreid";
+const ENDPOINT = "/chat/mreid";
 
 const WELCOME = {
   role: "assistant",
   content:
-    "Hi, I'm Millow AI. Ask me about valuations, risk on a listing, fraud checks, or the best deals on the market.",
+    "Hi, I'm MILLOW AI. I can help you find properties, explain what the AI estimate means, put a price in context with the market, and explain how a purchase, escrow or listing works on chain. Ask me about any listing, or name an MREID like MREID_0000017.",
 };
 
-const WELCOME_MREID = {
-  role: "assistant",
-  content:
-    "Hi, I'm Millow AI on the MREID market. Ask me about a specific property (e.g. MREID_0000017), undervalued listings in a city, market averages, or the best AI-ranked deals.",
-};
-
-const SUGGESTIONS_MREID = [
-  {
-    id: "property",
-    label: "Property",
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 10.5 12 3l9 7.5" />
-        <path d="M5 9.5V21h14V9.5" />
-        <path d="M9 21v-6h6v6" />
-      </svg>
-    ),
-    prompt: "Tell me about property MREID_0000017.",
-  },
-  {
-    id: "deal",
-    label: "Best deals",
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-        <line x1="7" y1="7" x2="7.01" y2="7" />
-      </svg>
-    ),
-    prompt: "Find 3 undervalued 2-bedroom apartments in Mumbai under 1.2 crore.",
-  },
-  {
-    id: "market",
-    label: "Market",
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 3v18h18" />
-        <path d="m7 14 4-4 3 3 5-6" />
-      </svg>
-    ),
-    prompt: "How does the average listed price compare to the AI estimate across cities?",
-  },
-  {
-    id: "insight",
-    label: "Insights",
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="12" y1="16" x2="12" y2="12" />
-        <line x1="12" y1="8" x2="12.01" y2="8" />
-      </svg>
-    ),
-    prompt: "Give me the key market insights for the MREID catalogue.",
-  },
-];
-
-const loadHistory = (mreid) => {
-  const key = mreid ? STORAGE_KEY_MREID : STORAGE_KEY;
+const loadHistory = () => {
   try {
-    const raw = localStorage.getItem(key);
+    const raw = localStorage.getItem(STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : null;
     if (Array.isArray(parsed) && parsed.length) return parsed;
   } catch {
     /* ignore corrupt storage */
   }
-  return [mreid ? WELCOME_MREID : WELCOME];
+  return [WELCOME];
 };
 
-const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState(() => loadHistory(mreid));
+const Icon = {
+  search: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="21" y1="21" x2="16.5" y2="16.5" />
+    </svg>
+  ),
+  tag: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+      <line x1="7" y1="7" x2="7.01" y2="7" />
+    </svg>
+  ),
+  chart: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 3v18h18" />
+      <path d="m7 14 4-4 3 3 5-6" />
+    </svg>
+  ),
+  info: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12.01" y2="8" />
+    </svg>
+  ),
+  alert: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+      <line x1="12" y1="9" x2="12" y2="13" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  ),
+  link: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" />
+      <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
+    </svg>
+  ),
+};
+
+// Quick actions follow the brief: help users find properties, understand
+// valuation, read the market, and follow a transaction.  With a property open
+// they become the questions a buyer actually asks about that listing: what it
+// costs, what is risky about it, what exactly is on offer, and what the
+// location is like.
+const actionsFor = (context) => {
+  const name = context ? `${context.location}, ${context.city}` : null;
+  if (context) {
+    return [
+      {
+        id: "price",
+        label: "Price",
+        icon: Icon.tag,
+        prompt: `What is the price of ${name} (${context.mreid_id})? Give the listed price, the price per sqft, and the MILLOW AI estimate, and say whether the listing is above or below it.`,
+      },
+      {
+        id: "risk",
+        label: "Risk",
+        icon: Icon.alert,
+        prompt: `What are the risks of buying ${name} (${context.mreid_id})? Run your risk analysis and explain the score, the anomaly check and anything a buyer should verify before paying.`,
+      },
+      {
+        id: "details",
+        label: "Details",
+        icon: Icon.info,
+        prompt: `Give me the full details of ${name} (${context.mreid_id}): configuration, area, floor, facing, age, amenities and any other catalogue facts on file.`,
+      },
+      {
+        id: "locality",
+        label: "Locality",
+        icon: Icon.chart,
+        prompt: `How does ${name} compare with other properties in ${context.location}, ${context.city}? Give the median price per sqft and what the locality is like to live in.`,
+      },
+      {
+        id: "chain",
+        label: "On-chain",
+        icon: Icon.link,
+        prompt: `What is the blockchain status of ${name} (${context.mreid_id}) — is it tokenized, who holds the NFT, is it listed for sale, and is there an active escrow sale?`,
+      },
+      {
+        id: "similar",
+        label: "Similar",
+        icon: Icon.search,
+        prompt: `Find properties similar to ${name} that are listed below their AI estimate.`,
+      },
+    ];
+  }
+  return [
+    {
+      id: "find",
+      label: "Find properties",
+      icon: Icon.search,
+      prompt:
+        "Find 3 potentially undervalued 2-bedroom apartments in Mumbai under 1.2 crore.",
+    },
+    {
+      id: "valuation",
+      label: "Explain AI valuation",
+      icon: Icon.tag,
+      prompt:
+        "How does the MILLOW AI estimate work, and how should I read it next to a listed price?",
+    },
+    {
+      id: "market",
+      label: "Market trends",
+      icon: Icon.chart,
+      prompt:
+        "Give me the key market insights for the MREID catalogue, city by city.",
+    },
+    {
+      id: "transaction",
+      label: "How buying works",
+      icon: Icon.info,
+      prompt:
+        "How does buying a property on MILLOW work, from escrow to the transfer of the property NFT?",
+    },
+  ];
+};
+
+// The assistant is told exactly what the user is looking at, with the real
+// numbers the property page is showing, and is told to use them instead of
+// guessing.  The MREID agent still verifies everything through its own tools.
+const buildContext = (detail, chain) => {
+  if (!detail) return null;
+  const ai = detail.ai_estimation || {};
+  const property = detail.property || {};
+  const signal = (detail.ai_market_signal || {}).label;
+  const locality = detail.locality || {};
+  const chainState = (chain && chain.chain) || {};
+
+  const lines = [
+    `The user is looking at ${property.location}, ${property.city} (${detail.mreid_id}).`,
+    `Refer to it as "${property.location}" and answer questions about it in these terms.`,
+    `Catalogue facts: ${property.bedrooms} bedrooms, ${property.area} sqft, listed price ${detail.listed_price_formatted} (${detail.price_per_sqft} per sqft).`,
+    `MILLOW V5 research estimate: ${ai.ai_estimated_price_formatted} (${ai.ai_estimated_price_per_sqft} per sqft). Market signal: ${signal}.`,
+    locality.median_price_per_sqft
+      ? `Locality context: median ${locality.median_price_per_sqft} per sqft across ${locality.count} catalogue records in ${property.location}.`
+      : null,
+    chainState.token_id
+      ? `Blockchain: token #${chainState.token_id}${chainState.owner ? `, held by ${chainState.owner}` : ""}, listed=${Boolean(
+          chainState.listed,
+        )}, active sale=${Boolean(chainState.active_sale)}.`
+      : `Blockchain: tokenization state not reported for this property.`,
+    "Use these numbers, and your own tools, for any question about this property. Never invent a price, area, owner or status, and say so when something is not available. Report prices in Indian Rupees.",
+  ];
+
+  return {
+    text: lines.filter(Boolean).join("\n"),
+    label: `${property.location}, ${property.city}`,
+  };
+};
+
+const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
+  const [messages, setMessages] = useState(loadHistory);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const [provider, setProvider] = useState(null);
   const [unread, setUnread] = useState(true);
-  const [owners, setOwners] = useState([]);
+  const [context, setContext] = useState(null);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
 
-  const initialWelcome = mreid ? WELCOME_MREID : WELCOME;
-  const endpoint = mreid ? "/chat/mreid" : "/chat";
-
-  const propertyId = property?.tokenId ?? property?.id;
-  const propertyName = property?.name || null;
-
-  const SUGGESTIONS = [
-    {
-      id: "price",
-      label: "Price",
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-          <line x1="7" y1="7" x2="7.01" y2="7" />
-        </svg>
-      ),
-      prompt: propertyName
-        ? `Predict the price of ${propertyName}.`
-        : propertyId
-          ? `Predict the price of property with token id ${propertyId}.`
-          : "How does Millow predict a property's price?",
-    },
-    {
-      id: "risk",
-      label: "Risk",
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        </svg>
-      ),
-      prompt: propertyName
-        ? `What is the risk level for ${propertyName}?`
-        : propertyId
-          ? `What is the risk level for property with token id ${propertyId}?`
-          : "How does Millow calculate transaction risk?",
-    },
-    {
-      id: "details",
-      label: "Details",
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="16" x2="12" y2="12" />
-          <line x1="12" y1="8" x2="12.01" y2="8" />
-        </svg>
-      ),
-      prompt: propertyName
-        ? `Give me the AI insights for ${propertyName}.`
-        : propertyId
-          ? `Give me the AI insights for property with token id ${propertyId}.`
-          : "What insights does Millow provide for a property?",
-    },
-    {
-      id: "buy",
-      label: "How to buy",
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <line x1="12" y1="17" x2="12.01" y2="17" />
-        </svg>
-      ),
-      prompt: "How do I buy a property on Millow?",
-    },
-  ];
-
-  const suggestions = mreid ? SUGGESTIONS_MREID : SUGGESTIONS;
-
   useEffect(() => {
     try {
-      localStorage.setItem(
-        mreid ? STORAGE_KEY_MREID : STORAGE_KEY,
-        JSON.stringify(messages.slice(-40)),
-      );
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-40)));
     } catch {
       /* storage full or unavailable */
     }
-  }, [messages, mreid]);
+  }, [messages]);
 
   useEffect(() => {
     if (open && bodyRef.current) {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+      setUnread(false);
     }
   }, [messages, busy, open]);
 
@@ -182,44 +209,39 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
     el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
   }, [draft, open, messages]);
 
-  const toggle = () => {
-    setOpen((prev) => {
-      if (!prev) setUnread(false);
-      return !prev;
-    });
-    if (!open) setTimeout(() => inputRef.current && inputRef.current.focus(), 60);
-  };
-
   useEffect(() => {
-    const closePanel = () => setOpen(false);
-    window.addEventListener("millow:close-chat", closePanel);
-    return () => window.removeEventListener("millow:close-chat", closePanel);
-  }, []);
+    if (open && inputRef.current) {
+      const timer = setTimeout(() => inputRef.current.focus(), 60);
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [open]);
 
-  // Resolve the current on-chain owner of every listing so Millow can answer
-  // "who owns X?" from live contract data (ownerOf) instead of guessing.
-  // Fetched in parallel only when the chat is opened, so we don't hit the
-  // chain on every page load.
+  // Resolve the property the user is looking at, so the assistant answers about
+  // that listing with the same numbers the page shows.
   useEffect(() => {
-    if (!open || !realEstate || !homes.length) return;
+    if (!open || !propertyId) {
+      setContext(null);
+      return undefined;
+    }
     let cancelled = false;
-    Promise.all(
-      homes.map(async (home) => {
-        try {
-          const owner = await realEstate.ownerOf(home.tokenId);
-          return [home.name, home.tokenId, owner];
-        } catch {
-          /* token not found or RPC error: skip it */
-          return null;
-        }
-      }),
-    ).then((rows) => {
-      if (!cancelled) setOwners(rows.filter(Boolean));
+    Promise.all([
+      propertyById(propertyId).catch(() => null),
+      propertyChain(propertyId).catch(() => null),
+    ]).then(([detail, chain]) => {
+      if (cancelled) return;
+      setContext(buildContext(detail, chain));
     });
     return () => {
       cancelled = true;
     };
-  }, [open, realEstate, homes]);
+  }, [open, propertyId]);
+
+  const setOpen = (next) => {
+    if (onOpenChange) onOpenChange(next);
+  };
+
+  const toggle = () => setOpen(!open);
 
   const send = async (override) => {
     const text = (override ?? draft).trim();
@@ -231,47 +253,26 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
     const nextMessages = [...messages, userMessage];
     setMessages(nextMessages);
 
-    // Tell the AI which property is on screen so it refers to it by name,
-    // not as "Property 3".  This context is ETH-demo metadata; the MREID
-    // agent instead pulls its own records from the live backend.
-    const parts = [];
-    if (!mreid && propertyName) {
-      parts.push(
-        `The user is currently viewing the property "${propertyName}" (token id ${propertyId}). When answering their questions, always refer to this property by its name "${propertyName}".`,
-      );
-    }
-    if (!mreid && owners.length) {
-      const list = owners
-        .map(([name, tokenId, owner]) => `- ${name} (token id ${tokenId}): ${owner}`)
-        .join("\n");
-      parts.push(
-        `Known current property owners, read live from the blockchain with ownerOf:\n${list}\n` +
-          `If the user asks who owns a property, answer with its wallet address from this list. ` +
-          `Never invent an owner: if the property is not in this list, say the owner could not be determined.`,
-      );
-    }
-    const context = parts.length ? parts.join("\n\n") : null;
-
     try {
-      const response = await fetch(`${AI_BASE}${endpoint}`, {
+      const response = await fetch(`${AI_BASE}${ENDPOINT}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages, context }),
+        body: JSON.stringify({
+          messages: nextMessages,
+          context: context ? context.text : null,
+        }),
       });
       const data = await response.json();
       const reply = data.reply?.trim() || "I didn't get that. Could you rephrase?";
-      setMessages([
-        ...nextMessages,
-        { role: "assistant", content: reply },
-      ]);
-      setProvider(data.provider || null);
+      setMessages([...nextMessages, { role: "assistant", content: reply }]);
+      setProvider(data.provider || (data.offline ? "offline" : null));
     } catch {
       setMessages([
         ...nextMessages,
         {
           role: "assistant",
           content:
-            "I couldn't reach the Millow AI server. Make sure it's running with `npm run ai`.",
+            "I couldn't reach the MILLOW AI server. Make sure it's running with `npm run ai`.",
         },
       ]);
       setProvider("offline");
@@ -288,9 +289,11 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
   };
 
   const reset = () => {
-    setMessages([initialWelcome]);
+    setMessages([WELCOME]);
     setProvider(null);
   };
+
+  const actions = actionsFor(context);
 
   return (
     <div className="chatbot">
@@ -300,17 +303,24 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
             <div className="chatbot__title">
               <span className="chatbot__avatar">AI</span>
               <div>
-                <strong>Millow AI</strong>
+                <strong>MILLOW AI</strong>
                 <span className="chatbot__status">
                   {busy
                     ? "Thinking..."
                     : provider
                       ? `via ${provider}`
-                      : "Online"}
+                      : context
+                        ? `asking about ${context.label}`
+                        : "Marketplace assistant"}
                 </span>
               </div>
             </div>
-            <button type="button" className="chatbot__reset" title="Clear chat" onClick={reset}>
+            <button
+              type="button"
+              className="chatbot__reset"
+              title="Clear chat"
+              onClick={reset}
+            >
               Clear
             </button>
           </div>
@@ -325,7 +335,11 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
               </div>
             ))}
             {busy && (
-              <div className="chatbot__typing" role="status" aria-label="Millow is typing">
+              <div
+                className="chatbot__typing"
+                role="status"
+                aria-label="MILLOW AI is typing"
+              >
                 <span className="chatbot__dot" />
                 <span className="chatbot__dot" />
                 <span className="chatbot__dot" />
@@ -334,26 +348,33 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
           </div>
 
           <div className="chatbot__chips">
-            {suggestions.map((suggestion) => (
+            {actions.map((action) => (
               <button
-                key={suggestion.id}
+                key={action.id}
                 type="button"
                 className="chatbot__chip"
                 disabled={busy}
-                onClick={() => send(suggestion.prompt)}
+                onClick={() => send(action.prompt)}
               >
-                {suggestion.icon}
-                {suggestion.label}
+                {action.icon}
+                {action.label}
               </button>
             ))}
           </div>
+
+          {context && (
+            <p className="chatbot__context">
+              Asking about <strong>{context.label}</strong> ·{" "}
+              {context.mreid_id}
+            </p>
+          )}
 
           <div className="chatbot__footer">
             <textarea
               ref={inputRef}
               className="chatbot__input"
               rows="1"
-              placeholder="Ask about pricing, risk, fraud..."
+              placeholder="Ask about a property, price, market or transaction..."
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={onKeyDown}
@@ -362,7 +383,7 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
             <button
               type="button"
               className="chatbot__send"
-              onClick={send}
+              onClick={() => send()}
               disabled={busy || !draft.trim()}
             >
               Send
@@ -371,17 +392,29 @@ const ChatBot = ({ property, realEstate, homes, account, mreid = false }) => {
         </div>
       )}
 
-      <button type="button" className="chatbot__fab" onClick={toggle} title="Millow AI assistant">
+      <button
+        type="button"
+        className="chatbot__fab"
+        onClick={toggle}
+        title="Ask MILLOW AI about this property"
+        aria-label={
+          open
+            ? "Close MILLOW AI assistant"
+            : "Open MILLOW AI assistant for this property"
+        }
+      >
         {open ? (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         ) : (
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 10.5 12 3l9 7.5" />
-            <path d="M5 9.5V21h14V9.5" />
-            <path d="M9 21v-6h6v6" />
-          </svg>
+          <>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.5-4.6A8.4 8.4 0 0 1 3.6 11.5a8.4 8.4 0 0 1 8.4-8.4h.5a8.4 8.4 0 0 1 8.5 8.4z" />
+              <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
+            </svg>
+            <span className="chatbot__fab-tag">AI</span>
+          </>
         )}
         {!open && unread && <span className="chatbot__badge" />}
       </button>

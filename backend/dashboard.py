@@ -15,12 +15,18 @@ Routes:
   * GET /api/dashboard/insights
         Short, data-grounded market insight sentences (always tied to real
         computed numbers; clearly marked as research observations).
+  * GET /api/dashboard/holdings?address=0x...
+        The properties a wallet actually owns, read from the chain-index
+        snapshot and joined with the catalogue + MILLOW V5 estimate.  This is
+        what the user's dashboard shows as "My properties"; it never scans the
+        chain per token and never invents holdings.
 
 The V5 predictions across the whole catalogue are computed once and cached:
 a single batched predict over ~29k rows, reused by every dashboard request.
 """
 
 import json
+import re
 import sys
 import time
 from pathlib import Path
@@ -108,6 +114,41 @@ def _chain_counts():
         "finalized": int(counts.get("finalized") or 0),
         "errors": int(counts.get("errors") or 0),
     }
+
+
+# ------------------------------------------------------------
+# WALLET HOLDINGS
+# ------------------------------------------------------------
+
+_ADDRESS_RE = re.compile(r"^0x[0-9a-fA-F]{40}$")
+
+HOLDINGS_UNAVAILABLE_NOTE = (
+    "Chain snapshot not yet available, so wallet holdings cannot be shown. "
+    "Run npx hardhat run scripts/exportChainIndex.js --network localhost "
+    "after provisioning to populate it."
+)
+
+HOLDINGS_NOTE = (
+    "Holdings come from the exported chain-index snapshot and the MREID "
+    "catalogue. Ownership is a point-in-time read of that snapshot; AI values "
+    "are research estimates, not certified appraisals."
+)
+
+
+def _owned_records(address: str):
+    """Chain records owned by `address`, cheapest lookup available."""
+    index = chain_index.load()
+    if index is None:
+        return None
+    wanted = address.lower()
+    records = [
+        (mreid, record)
+        for mreid, record in (index.get("properties") or {}).items()
+        if record.get("owner") and str(record["owner"]).lower() == wanted
+    ]
+    records.sort(key=lambda pair: pair[1].get("token_id") or 0)
+    return records
+
 
 
 # ============================================================
@@ -369,4 +410,125 @@ def dashboard_insights():
             "snapshot. 'MODEL-BASED INTERPRETATION' items are research "
             "signals, not certified valuations or investment advice."
         ),
+    }
+
+
+@router.get("/api/dashboard/holdings")
+def dashboard_holdings(
+    address: str = Query(..., min_length=42, max_length=42),
+    limit: int = Query(24, ge=1, le=100),
+    offset: int = Query(0, ge=0),
+):
+    """
+    Properties owned by one wallet.
+
+    Ownership is read from the exported chain-index snapshot (a single file
+    read, never 29k RPC calls) and joined with the MREID catalogue and the
+    MILLOW V5 estimate so the dashboard can show the same facts the
+    marketplace shows for each property.
+
+    The provisioner wallet holds the whole catalogue, so the response is
+    paginated: the portfolio totals always cover every holding, while only one
+    page of property summaries is sent.
+    """
+    key = address.strip()
+    if not _ADDRESS_RE.match(key):
+        raise HTTPException(
+            status_code=400,
+            detail="address must be a 0x-prefixed 20-byte hex address.",
+        )
+
+    records = _owned_records(key)
+    if records is None:
+        return {
+            "address": key,
+            "available": False,
+            "exported_at": None,
+            "count": 0,
+            "offset": offset,
+            "limit": limit,
+            "has_more": False,
+            "holdings": [],
+            "portfolio": None,
+            "note": HOLDINGS_UNAVAILABLE_NOTE,
+        }
+
+    total = len(records)
+    page = records[offset:offset + limit]
+
+    df = _full_ai()
+    by_mreid = {
+        str(mreid): pos for pos, mreid in enumerate(df["mreid_id"].astype(str))
+    }
+
+    holdings = []
+    for mreid, record in page:
+        chain_state = {
+            "token_id": record.get("token_id"),
+            "tokenized": bool(record.get("tokenized")),
+            "listed": bool(record.get("listed")),
+            "active_sale": bool(record.get("active_sale")),
+            "finalized": bool(record.get("finalized")),
+            "sale_status": record.get("sale_status"),
+        }
+        pos = by_mreid.get(str(mreid))
+        if pos is None:
+            # Tokenized but absent from the catalogue: report the chain fact
+            # and say the valuation is unavailable rather than guessing.
+            holdings.append({
+                "mreid_id": str(mreid),
+                "chain": chain_state,
+                "summary": None,
+                "note": (
+                    "This token is not in the MREID catalogue, so no price, "
+                    "area or AI estimate is available for it."
+                ),
+            })
+            continue
+
+        row = df.iloc[pos]
+        holdings.append({
+            "mreid_id": str(mreid),
+            "chain": chain_state,
+            "summary": properties._summary(
+                row, float(row["_ai_price"]), float(row["_ai_ppsf"])
+            ),
+        })
+
+    # Portfolio totals cover every holding, not just this page.
+    held = [by_mreid[str(mreid)] for mreid, _ in records if str(mreid) in by_mreid]
+    if held:
+        owned = df.iloc[held]
+        listed_total = float(owned["price"].sum())
+        ai_total = float(owned["_ai_price"].sum())
+    else:
+        listed_total = 0.0
+        ai_total = 0.0
+    on_sale = sum(
+        1 for _, record in records
+        if record.get("listed") or record.get("active_sale")
+    )
+
+    return {
+        "address": key,
+        "available": True,
+        "exported_at": chain_index.exported_at(),
+        "count": total,
+        "offset": offset,
+        "limit": limit,
+        "has_more": offset + len(holdings) < total,
+        "holdings": holdings,
+        "portfolio": {
+            "count": total,
+            "on_sale_count": on_sale,
+            "listed_value": float(round(listed_total, 2)),
+            "listed_value_formatted": properties.format_indian_price(
+                listed_total
+            ),
+            "ai_estimated_value": float(round(ai_total, 2)),
+            "ai_estimated_value_formatted": properties.format_indian_price(
+                ai_total
+            ),
+        },
+        "note": HOLDINGS_NOTE,
     }

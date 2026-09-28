@@ -1,18 +1,19 @@
-# MILLOW - Real Estate NFT DApp
+# MILLOW — Real Estate NFT DApp
 
-MILLOW is a real-estate DApp where each property is represented by an on-chain
-token identified by an `MREID_xxxxxxx` identifier. Ownership, listing and escrow
-settlement live in Solidity contracts, the UI is a React app, and valuation /
-risk / recommendation insights are served by Python FastAPI services.
+MILLOW is a real-estate DApp where every property is an on-chain token identified
+by an `MREID_xxxxxxx` id. Ownership, listing and escrow settlement live in
+Solidity contracts, the UI is React, and valuation / risk / recommendation
+insights are served by Python FastAPI services.
 
 ## Technology Stack & Tools
 
-- Solidity 0.8.17 (smart contracts and tests)
-- [Hardhat](https://hardhat.org/) (development network, compilation, tests, deployment)
-- [Ethers.js v5](https://docs.ethers.io/v5/) (contract interaction)
-- [React.js 18](https://reactjs.org/) (frontend)
-- Python + FastAPI (AI valuation API and AI assistant)
-- XGBoost / scikit-learn (valuation, fraud and recommendation models)
+- Solidity 0.8.17 (writing smart contracts & tests)
+- Javascript (React & Testing)
+- [Hardhat](https://hardhat.org/) (compilation, tests, deployment scripts)
+- [Foundry Anvil](https://book.getfoundry.sh/anvil/) (persistent local chain)
+- [Ethers.js v5](https://docs.ethers.io/v5/) (blockchain interaction)
+- [React.js 18](https://reactjs.org/) (frontend framework)
+- Python + FastAPI, XGBoost / scikit-learn (AI valuation & assistant)
 
 ## Contracts
 
@@ -22,15 +23,16 @@ risk / recommendation insights are served by Python FastAPI services.
 | `PropertyRegistry` | Listing status and on/off-offer state per token |
 | `MillowEscrow` | Payment-in-ETH escrow with inspection, approval and settlement |
 
-Legacy demo contracts (`RealEstate`, `Escrow`) are also present and are used by
-the optional legacy deployment script in step 7b.
+Legacy demo contracts (`RealEstate`, `Escrow`) are still present and are used
+only by the optional legacy deployment in step 8b.
 
-## Requirements
+## Requirements For Initial Setup
 
 - [Node.js](https://nodejs.org/en/) 18 or newer (includes `npm`)
 - [Python](https://www.python.org/) 3.9 or newer
 - Git
-- Optional: [Ollama](https://ollama.com/) running locally as the AI fallback provider
+- [Foundry](https://getfoundry.sh) — **Anvil 1.8.3 specifically** (see step 4)
+- Optional: [Ollama](https://ollama.com/) running locally as the AI fallback
 
 ## Setting Up
 
@@ -41,87 +43,88 @@ git clone https://github.com/Anand-DN/Real-Estate-based-Blockchain-using-Escrow-
 cd Real-Estate-based-Blockchain-using-Escrow-Contracts
 ```
 
-### 2. Install JavaScript Dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Install Python Dependencies
+Python dependencies (valuation API + AI service):
 
 ```bash
 python -m venv .venv
-```
 
-Activate the virtual environment:
-
-```bash
 # Windows (PowerShell)
 .\.venv\Scripts\Activate.ps1
 
 # macOS / Linux
 source .venv/bin/activate
-```
 
-Then install the Python packages used by the AI and valuation services:
-
-```bash
 pip install -r ai/requirements.txt
 ```
 
-### 4. Run Tests
-
-Contract and application tests (Hardhat):
+### 3. Run tests
 
 ```bash
-npx hardhat test
+npx hardhat test      # contract tests
+npm test              # frontend tests
 ```
 
-Frontend tests:
+### 4. Start the local chain
+
+The catalogue lives on a **persistent** Anvil chain whose state is saved to
+`.chain/state.json`, so it survives restarts and crashes.
 
 ```bash
-npm test
+anvil --version        # MUST print 1.8.3
+npm run chain:start
+npm run chain:status
 ```
 
-### 5. Start the Hardhat Node
-
-Leave this running in **Terminal 1**:
+Expected status: `chainId 31337`, `totalSupply 29135`, and all three contracts
+present. Other chain commands:
 
 ```bash
-npx hardhat node
+npm run chain:stop        # shut the node down
+npm run chain:verify      # read-only audit (-- --full checks all 29,135)
 ```
 
-### 6. Compile Contracts
+> **Do not use `npx hardhat node` for this project.** Hardhat Network keeps
+> chain state in memory only, so restarting it wipes the whole catalogue and the
+> app falls back to "escrow not deployed". Hardhat is still used for `compile`,
+> `test` and `run --network localhost` — just never as the node.
+>
+> If `anvil` is not on `PATH`, point the tooling at it once per terminal:
+> `$env:MILLOW_ANVIL = "C:\foundry\bin\anvil.exe"` (PowerShell).
 
-In **Terminal 2**:
+### 5. Deploy the contracts
 
-```bash
-npx hardhat compile
-```
-
-### 7. Run the Deployment Script
-
-In **Terminal 2** (while the Hardhat node is running):
+In a separate terminal, while the chain is running:
 
 ```bash
 npx hardhat run ./scripts/deployMillow.js --network localhost
 ```
 
-This deploys `PropertyNFT`, `PropertyRegistry` and `MillowEscrow`, grants the
-demo roles, and writes the deployed addresses into `src/config.json` under the
-active chain id (`31337`).
-
-### 7b. Legacy Demo Deployment (optional)
-
-The original 24-property demo (`RealEstate` + `Escrow`) is still available:
+Deploys `PropertyNFT`, `PropertyRegistry` and `MillowEscrow`, grants the demo
+roles, and writes the addresses into `src/config.json` under chain `31337`.
+Confirm the addresses did not move:
 
 ```bash
-npx hardhat run ./scripts/deploy.js --network localhost
+git diff -- src/config.json     # MUST be empty
 ```
 
-### 8. Seed Property Tokens (optional)
+Run this **once**, on an empty chain. Re-running it on a deployed chain shifts
+the contracts off the addresses in `src/config.json`.
 
-Mint MREID tokens on the local node. A quick four-token run for development:
+### 6. Tokenize properties (seed the catalogue)
+
+Skip if the chain already reports `totalSupply 29135` — it is fully seeded.
+
+```bash
+npm run chain:tokenize        # all 29,135 in canonical token order, resumable
+```
+
+Quick subset for development:
 
 ```bash
 # Windows (PowerShell)
@@ -131,33 +134,46 @@ $env:MILLOW_SEED_LIMIT='4'; npx hardhat run scripts/tokenizeAllMreid.js --networ
 MILLOW_SEED_LIMIT=4 npx hardhat run scripts/tokenizeAllMreid.js --network localhost
 ```
 
-The full dataset (29,135 properties) takes a long time to mint:
+Tuning: `MILLOW_SEED_LIMIT` (`0` = all), `MILLOW_SEED_BATCH` (default 500),
+`MILLOW_SEED_CONCURRENCY` (default 8), `MILLOW_TOKENIZE_BATCH` (default 100).
+
+Refresh the catalogue index the frontend and dashboard read (read-only, view
+calls only):
 
 ```bash
-npx hardhat run scripts/tokenizeAllMreid.js --network localhost
+npm run chain:index
 ```
 
-Optional tuning via environment variables: `MILLOW_SEED_LIMIT` (0 = all),
-`MILLOW_SEED_BATCH` (default 500), `MILLOW_SEED_CONCURRENCY` (default 8).
-
-Refresh the frontend/API chain index after seeding:
+Other seed helpers:
 
 ```bash
-npx hardhat run scripts/exportChainIndex.js --network localhost
+npx hardhat run scripts/mintMreid.js --network localhost    # small seed set, lists first two tokens
+npx hardhat run scripts/verifySeed.js --network localhost   # prints tokenByProperty for MREID_0000001/2
+npm run chain:test                                          # offline resume-planner tests
 ```
 
-### 9. Start the Valuation API (backend)
+> Token ids are **not** the MREID number: 1,396 of the 29,135 tokens are
+> intentionally permuted relative to dataset order. The canonical order is
+> `data/processed/millow_token_map.csv`; regenerate it with
+> `node scripts/buildTokenMap.js`.
+
+### 7. Start the Metadata Server
+
+```bash
+npm run server
+```
+
+Serves property metadata on `http://localhost:3001`.
+
+### 8. Start the Valuation API
 
 ```bash
 npm run valuation
 ```
 
-Equivalent: `python backend/app.py` (or `uvicorn backend.app:app --host 0.0.0.0 --port 8001`).
-Serves the FastAPI valuation/dashboard API on `http://localhost:8001`.
+Equivalent: `python backend/app.py`. Serves `http://localhost:8001`.
 
-### 10. Run the AI Service
-
-Copy the example environment file and add a key (Groq primary, Ollama fallback):
+### 9. Start the AI Service
 
 ```bash
 # Windows (PowerShell)
@@ -167,30 +183,37 @@ Copy-Item ai/.env.example ai/.env
 cp ai/.env.example ai/.env
 ```
 
-Then start the AI assistant service:
+Add your key (Groq primary, Ollama fallback), then:
 
 ```bash
 npm run ai
 ```
 
-Equivalent: `python ai/app.py`. Serves on `http://localhost:8000`. On first
-start it loads or trains its lightweight price/fraud models.
+Equivalent: `python ai/app.py`. Serves `http://localhost:8000` and loads or
+trains its price/fraud models on first start.
 
-### 11. Start the Metadata Server (optional)
-
-```bash
-npm run server
-```
-
-Serves property metadata on `http://localhost:3001`.
-
-### 12. Start the Frontend
+### 10. Start the Frontend
 
 ```bash
 npm run start
 ```
 
-Equivalent: `npm start`. Opens the React app on `http://localhost:3000`.
+Opens `http://localhost:3000`.
+
+In MetaMask add a network named **Millow Localhost**: RPC
+`http://127.0.0.1:8545`, chain ID `31337`, currency ETH. Import the default test
+mnemonic `test test test test test test test test test test test junk`.
+
+### 11. Legacy Demo Deployment (optional)
+
+The original 24-property demo (`RealEstate` + `Escrow`):
+
+```bash
+npx hardhat run ./scripts/deploy.js --network localhost
+```
+
+It overwrites the contract at the canonical `PropertyNFT` address, so never run
+it against the persistent catalogue chain.
 
 ## Quick Command Summary
 
@@ -200,29 +223,33 @@ Equivalent: `npm start`. Opens the React app on `http://localhost:3000`.
 | Install Python dependencies | `pip install -r ai/requirements.txt` |
 | Run Hardhat tests | `npx hardhat test` |
 | Run frontend tests | `npm test` |
-| Start local chain | `npx hardhat node` |
+| Start / stop local chain | `npm run chain:start` / `npm run chain:stop` |
+| Chain health | `npm run chain:status` |
 | Compile contracts | `npx hardhat compile` |
 | Deploy MILLOW contracts | `npx hardhat run ./scripts/deployMillow.js --network localhost` |
-| Deploy legacy demo | `npx hardhat run ./scripts/deploy.js --network localhost` |
-| Seed property tokens | `npx hardhat run scripts/tokenizeAllMreid.js --network localhost` |
-| Export chain index | `npx hardhat run scripts/exportChainIndex.js --network localhost` |
+| Tokenize all properties | `npm run chain:tokenize` |
+| Export chain index | `npm run chain:index` |
+| Audit the chain | `npm run chain:verify` |
+| Export / import portable chain state | `npm run chain:export` / `npm run chain:import` |
+| Start metadata server | `npm run server` |
 | Start valuation API | `npm run valuation` |
 | Start AI service | `npm run ai` |
-| Start metadata server | `npm run server` |
 | Start frontend | `npm run start` |
 | Production frontend build | `npm run build` |
 
 ## Notes
 
-- Keep `npx hardhat node` running in its own terminal while deploying, seeding
-  and using the app against the local network.
-- `src/config.json` is written automatically by the deployment scripts; the
-  frontend reads contract addresses from it for the active chain id.
-- Local demo accounts (Hardhat default mnemonic) map to roles as follows:
-  account 0 = Buyer, account 1 = Seller, account 2 = Inspector,
-  account 3 = Lender. Import the Hardhat test accounts into MetaMask using
-  the default test mnemonic when testing the full workflow.
-- `.env` files are intentionally not committed. Provide your own API keys in
-  `ai/.env` (template: `ai/.env.example`).
-- Reset local chain state by stopping and restarting `npx hardhat node`, then
-  re-running the deployment script.
+- Keep the chain running in its own terminal while deploying, tokenizing and
+  using the app.
+- `src/config.json` is written by the deployment script; the frontend reads
+  contract addresses from it for the active chain id.
+- Demo roles (default test accounts): account 0 = Buyer, 1 = Seller,
+  2 = Inspector, 3 = Lender.
+- `.env` files are not committed. Provide your own API keys in `ai/.env`
+  (template: `ai/.env.example`).
+- Reset local chain state by stopping the node, deleting `.chain/state.json` and
+  re-running steps 4–6.
+- Moving the chain to another machine: `npm run chain:export`, then
+  `npm run chain:import -- --artifact=<file>.json.gz` on the target — 0
+  deployments, 0 mints. See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md)
+  for the full Computer 1 → Computer 2 workflow and the determinism guarantees.

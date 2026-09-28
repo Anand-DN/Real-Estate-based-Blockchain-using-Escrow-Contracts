@@ -3,12 +3,10 @@ import { ethers } from "ethers";
 
 // Components
 import Navigation from "./components/Navigation";
-import Search from "./components/Search";
-import Home from "./components/Home";
-import List from "./components/List";
 import Dashboard from "./components/Dashboard";
 import ChatBot from "./components/ChatBot";
 import Marketplace from "./components/Marketplace";
+import PropertyDetail from "./components/PropertyDetail";
 
 // ABIs
 import PropertyNFT from "./abis/PropertyNFT.json";
@@ -18,12 +16,43 @@ import MillowEscrow from "./abis/MillowEscrow.json";
 // Config
 import config from "./config.json";
 
-// The dataset is fully tokenized (~29k NFTs), so the browse view must not walk
-// the whole token id range.  Homes For You shows the first HOMES_CAP minted
-// tokens; the Marketplace remains the browsable catalogue for everything else.
+// Routing
+import {
+  MARKETPLACE,
+  DASHBOARD,
+  BUY,
+  navigate,
+  pathFor,
+  useRoute,
+} from "./lib/routes";
+
+// The Marketplace is the MILLOW home page.  The only other destination is the
+// user's own dashboard, plus the property details overlay and the AI assistant
+// which are layered on top of the marketplace.
 const HOMES_CAP = 30;
 
+const FAVORITES_KEY = (account) => `millow_favs_${account}`;
+
+// Favorites are MREID identifiers, matching every other marketplace surface.
+// Older builds stored numeric demo token ids, which are not MREIDs and cannot
+// be resolved, so they are dropped instead of being shown as broken rows.
+const readFavorites = (account) => {
+  if (!account) return [];
+  try {
+    const stored = JSON.parse(localStorage.getItem(FAVORITES_KEY(account)));
+    if (!Array.isArray(stored)) return [];
+    return stored.filter((id) => /^MREID_\d+$/i.test(String(id)));
+  } catch {
+    return [];
+  }
+};
+
 function App() {
+  const route = useRoute();
+  const view = route.view;
+  const marketSection = route.section;
+  const propertyId = route.propertyId || null;
+
   const [provider, setProvider] = useState(null);
   const [escrow, setEscrow] = useState(null);
   const [realEstate, setRealEstate] = useState(null);
@@ -32,18 +61,9 @@ function App() {
   const [account, setAccount] = useState(null);
 
   const [homes, setHomes] = useState([]);
-  const [home, setHome] = useState({});
-  const [toggle, setToggle] = useState(false);
   const [networkError, setNetworkError] = useState(null);
   const [notification, setNotification] = useState(null);
-  const [search, setSearch] = useState("");
-  const [showList, setShowList] = useState(false);
-  const [view, setView] = useState("browse");
-  const [marketSection, setMarketSection] = useState("buy");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [sortBy, setSortBy] = useState("default");
   const [favorites, setFavorites] = useState([]);
-  const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [theme, setTheme] = useState(() => {
     const stored = localStorage.getItem("millow_theme");
     if (stored === "dark" || stored === "light") return stored;
@@ -55,10 +75,9 @@ function App() {
   const networkSwitchAttempted = useRef(false);
   const [themeCurtain, setThemeCurtain] = useState(false);
 
-  const viewRef = useRef(view);
-  useEffect(() => {
-    viewRef.current = view;
-  }, [view]);
+  // Where the property overlay was opened from, so closing it returns to the
+  // page the user was actually on rather than always dropping to the home page.
+  const propertyOrigin = useRef(MARKETPLACE);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -72,13 +91,51 @@ function App() {
     setTimeout(() => setThemeCurtain(false), 1220);
   };
 
-  const notify = (text, type) => setNotification({ text, type });
+  const notify = useCallback((text, type) => setNotification({ text, type }), []);
 
   useEffect(() => {
     if (!notification) return;
     const timer = setTimeout(() => setNotification(null), 4000);
     return () => clearTimeout(timer);
   }, [notification]);
+
+  const goMarketplace = useCallback((section = BUY) => {
+    navigate(pathFor({ view: MARKETPLACE, section }));
+  }, []);
+
+  const goDashboard = useCallback(() => {
+    navigate(pathFor({ view: DASHBOARD }));
+  }, []);
+
+  const openProperty = useCallback(
+    (mreidId, from = view) => {
+      if (!mreidId) return;
+      propertyOrigin.current = from === DASHBOARD ? DASHBOARD : MARKETPLACE;
+      navigate(`/property/${encodeURIComponent(mreidId)}`);
+    },
+    [view],
+  );
+
+  const closeProperty = useCallback(() => {
+    navigate(pathFor({ view: propertyOrigin.current, section: marketSection }));
+  }, [marketSection]);
+
+  const setAssistantOpen = useCallback((open) => {
+    if (open) {
+      navigate(
+        pathFor({
+          view,
+          section: marketSection,
+          propertyId,
+          assistant: true,
+        }),
+      );
+    } else {
+      navigate(pathFor({ view, section: marketSection, propertyId }), {
+        replace: true,
+      });
+    }
+  }, [propertyId, view, marketSection]);
 
   const switchNetwork = useCallback(async () => {
     if (networkSwitchAttempted.current) return;
@@ -107,7 +164,7 @@ function App() {
   const loadBlockchainData = useCallback(async () => {
     if (!window.ethereum) {
       setNetworkError(
-        "No wallet detected. Please install MetaMask and connect to the Millow Localhost network.",
+        "No wallet detected. Install a browser wallet to connect. Browsing the marketplace works without one.",
       );
       return;
     }
@@ -175,6 +232,9 @@ function App() {
         }
       };
 
+      // The dashboard resolves the token metadata for the properties that have
+      // on-chain activity, so only those need to be pre-scraped.  Scanning the
+      // whole 29k token range on every marketplace page load would be unusable.
       const scanLimit = Math.min(totalSupply, HOMES_CAP);
 
       for (let i = 1; i <= scanLimit; i++) {
@@ -183,31 +243,18 @@ function App() {
           const metadata = await fetchWithTimeout(uri);
           homes.push({ ...metadata, tokenId: i });
         } catch (error) {
-          console.warn(`Could not load metadata for token ${i}, using fallback`, error);
-          homes.push({
-            id: String(i),
-            tokenId: i,
-            name: `Property #${i}`,
-            address: "123 Localhost St",
-            description: "A luxury property on Millow.",
-            image: `/images/${((i - 1) % 6) + 1}.jpg`,
-            attributes: [
-              { trait_type: "Purchase Price", value: 15 },
-              { trait_type: "Type of Residence", value: "Real Estate" },
-              { trait_type: "Bed Rooms", value: 3 },
-              { trait_type: "Bathrooms", value: 2 },
-              { trait_type: "Square Feet", value: 2000 },
-              { trait_type: "Year Built", value: 2020 },
-            ],
-          });
+          console.warn(`Could not load metadata for token ${i}`, error);
         }
       }
 
       setHomes(homes);
+      // The dashboard reads the same cache; make it re-run now that the
+      // metadata is present instead of waiting for the next account change.
+      window.dispatchEvent(new Event("millow:dashboard-refresh"));
     } catch (error) {
       console.error(error);
       setNetworkError(
-        "Could not connect to the local blockchain. Make sure the Hardhat node is running on http://localhost:8545.",
+        "Could not connect to the local blockchain. Start the persistent chain with `npm run chain:start`.",
       );
     }
   }, [switchNetwork]);
@@ -246,51 +293,32 @@ function App() {
   // update their own state, and account/network changes still reload below.
 
   useEffect(() => {
-    if (!account) {
-      setFavorites([]);
-      return;
-    }
-    try {
-      const stored = JSON.parse(localStorage.getItem(`millow_favs_${account}`));
-      setFavorites(Array.isArray(stored) ? stored : []);
-    } catch {
-      setFavorites([]);
-    }
+    setFavorites(readFavorites(account));
   }, [account]);
 
-  const toggleFavorite = (tokenId) => {
+  const toggleFavorite = (mreidId) => {
     setFavorites((prev) => {
-      const next = prev.includes(tokenId)
-        ? prev.filter((id) => id !== tokenId)
-        : [...prev, tokenId];
-      if (account)
-        localStorage.setItem(`millow_favs_${account}`, JSON.stringify(next));
+      const next = prev.includes(mreidId)
+        ? prev.filter((id) => id !== mreidId)
+        : [...prev, mreidId];
+      if (account) {
+        localStorage.setItem(FAVORITES_KEY(account), JSON.stringify(next));
+      }
       return next;
     });
   };
 
-  const togglePop = (home) => {
-    setHome(home);
-    toggle ? setToggle(false) : setToggle(true);
-  };
-
-  const openHome = (home) => {
-    setHome(home);
-    setToggle(true);
-  };
-
-  // Pressing Escape closes every overlay and returns to the home (browse) page.
+  // Pressing Escape closes every overlay.  The property overlay and the
+  // assistant both live on top of the marketplace, so the marketplace stays the
+  // page Escape returns to.
   useEffect(() => {
     const onEscape = (e) => {
       if (e.key !== "Escape") return;
-      setToggle(false);
-      setShowList(false);
-      window.dispatchEvent(new Event("millow:close-chat"));
-      if (viewRef.current !== "marketplace") setView("browse");
+      setAssistantOpen(false);
     };
     window.addEventListener("keydown", onEscape);
     return () => window.removeEventListener("keydown", onEscape);
-  }, []);
+  }, [setAssistantOpen]);
 
   return (
     <div>
@@ -298,16 +326,18 @@ function App() {
         account={account}
         setAccount={setAccount}
         view={view}
-        setView={setView}
-        setShowList={setShowList}
-        marketSection={marketSection}
-        setMarketSection={setMarketSection}
+        section={marketSection}
+        onGoMarketplace={goMarketplace}
+        onGoDashboard={goDashboard}
+        onGoHome={goMarketplace}
         theme={theme}
         onToggleTheme={toggleTheme}
       />
 
-      {view !== "marketplace" && networkError && (
-        <div className="network__error">{networkError}</div>
+      {networkError && (
+        <div className="network__error" role="status">
+          {networkError}
+        </div>
       )}
 
       {notification && (
@@ -327,147 +357,18 @@ function App() {
         </div>
       )}
 
-      {view === "marketplace" ? (
+      {view === MARKETPLACE ? (
         <Marketplace
           section={marketSection}
-          setSection={setMarketSection}
+          setSection={goMarketplace}
+          favorites={favorites}
+          onToggleFavorite={toggleFavorite}
+          account={account}
+          provider={provider}
+          realEstate={realEstate}
+          escrow={escrow}
+          onSelectProperty={openProperty}
         />
-      ) : view === "browse" ? (
-        <>
-          <Search search={search} setSearch={setSearch} />
-
-          <div className="cards__section">
-            <div className="cards__header">
-              <h3>Homes For You</h3>
-              <button
-                type="button"
-                className="list__button"
-                onClick={() => setShowList(true)}
-              >
-                + List your home
-              </button>
-            </div>
-
-            <div className="cards__toolbar">
-              <input
-                type="number"
-                min="0"
-                step="0.1"
-                className="cards__filter"
-                placeholder="Max price (ETH)"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
-              />
-              <select
-                className="cards__filter"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-              >
-                <option value="default">Sort: Featured</option>
-                <option value="low">Price: Low to High</option>
-                <option value="high">Price: High to Low</option>
-              </select>
-              {account && (
-                <button
-                  type="button"
-                  className={`cards__fav ${
-                    favoritesOnly ? "cards__fav--active" : ""
-                  }`}
-                  onClick={() => setFavoritesOnly((prev) => !prev)}
-                >
-                  {favoritesOnly ? "Showing favorites" : "Show favorites"}
-                </button>
-              )}
-            </div>
-
-            <hr />
-
-            <div className="cards">
-              {homes
-                .filter(
-                  (home) =>
-                    home.name.toLowerCase().includes(search.toLowerCase()) ||
-                    home.address.toLowerCase().includes(search.toLowerCase()),
-                )
-                .filter(
-                  (home) =>
-                    !maxPrice ||
-                    Number(home.attributes[0]?.value ?? Infinity) <=
-                      parseFloat(maxPrice),
-                )
-                .filter(
-                  (home) => !favoritesOnly || favorites.includes(home.tokenId),
-                )
-                .sort((a, b) => {
-                  if (sortBy === "low")
-                    return (
-                      Number(a.attributes[0]?.value ?? 0) -
-                      Number(b.attributes[0]?.value ?? 0)
-                    );
-                  if (sortBy === "high")
-                    return (
-                      Number(b.attributes[0]?.value ?? 0) -
-                      Number(a.attributes[0]?.value ?? 0)
-                    );
-                  return 0;
-                })
-                .map((home, index) => (
-                  <div
-                    className="card"
-                    key={index}
-                    style={{ animationDelay: `${index * 0.08}s` }}
-                    onClick={() => togglePop(home)}
-                  >
-                    <div className="card__image">
-                      <img src={home.image} alt="Home" />
-                      <button
-                        type="button"
-                        className={`card__heart ${
-                          favorites.includes(home.tokenId)
-                            ? "card__heart--active"
-                            : ""
-                        }`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleFavorite(home.tokenId);
-                        }}
-                      >
-                        {favorites.includes(home.tokenId) ? "♥" : "♡"}
-                      </button>
-                    </div>
-                    <div className="card__info">
-                      <h4>{home.attributes[0]?.value ?? "—"} ETH</h4>
-                      <p>
-                        <strong>{home.attributes[2]?.value ?? "—"}</strong> bds |
-                        <strong>{home.attributes[3]?.value ?? "—"}</strong> ba |
-                        <strong>{home.attributes[4]?.value ?? "—"}</strong> sqft
-                      </p>
-                      <p>{home.address}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-
-            {homes.length > 0 &&
-              homes
-                .filter(
-                  (home) =>
-                    home.name.toLowerCase().includes(search.toLowerCase()) ||
-                    home.address.toLowerCase().includes(search.toLowerCase()),
-                )
-                .filter(
-                  (home) =>
-                    !maxPrice ||
-                    Number(home.attributes[0]?.value ?? Infinity) <=
-                      parseFloat(maxPrice),
-                )
-                .filter(
-                  (home) => !favoritesOnly || favorites.includes(home.tokenId),
-                ).length === 0 && (
-                <p className="cards__empty">No properties match your search.</p>
-              )}
-          </div>
-        </>
       ) : (
         <Dashboard
           account={account}
@@ -475,40 +376,27 @@ function App() {
           escrow={escrow}
           registry={registry}
           homes={homes}
-          onSelect={openHome}
+          favorites={favorites}
+          onToggleFavorite={toggleFavorite}
+          onSelectProperty={openProperty}
           setNotification={notify}
         />
       )}
 
-      {toggle && (
-        <Home
-          home={home}
-          provider={provider}
-          account={account}
-          escrow={escrow}
-          togglePop={togglePop}
-          setNotification={notify}
+      {propertyId && (
+        <PropertyDetail
+          key={propertyId}
+          mreidId={propertyId}
+          onClose={closeProperty}
+          onSelectSimilar={openProperty}
         />
       )}
 
-      {showList && (
-        <List
-          provider={provider}
-          account={account}
-          escrow={escrow}
-          realEstate={realEstate}
-          toggleList={() => setShowList(false)}
-          setNotification={notify}
-        />
-      )}
-
-      {view !== "marketplace" && (
+      {propertyId && (
         <ChatBot
-          property={home}
-          realEstate={realEstate}
-          homes={homes}
-          account={account}
-          mreid={view === "dashboard"}
+          open={Boolean(route.assistant)}
+          onOpenChange={setAssistantOpen}
+          propertyId={propertyId}
         />
       )}
 

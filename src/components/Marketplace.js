@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { cities, locations, searchProperties } from "../lib/millowApi";
+import { cities, locations, propertiesByIds, searchProperties } from "../lib/millowApi";
+import ListYourHome from "./ListYourHome";
 import PropertyCard from "./PropertyCard";
-import PropertyDetail from "./PropertyDetail";
 
 const PAGE_SIZES = [12, 24, 48];
 const SORT_OPTIONS = [
@@ -52,34 +52,114 @@ const NumberInput = ({ value, onChange, placeholder, label }) => (
   />
 );
 
-const SectionPlaceholder = ({ section, setSection }) => (
+const RentPanel = ({ setSection }) => (
   <section className="mkt__placeholder-panel">
     <div className="mkt__placeholder-icon" aria-hidden="true">
-      {section === "rent" ? (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <path d="M12 3v18M3 12h18" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
-        </svg>
-      )}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M12 3v18M3 12h18" />
+      </svg>
     </div>
-    <h2>
-      {section === "rent" ? "Rentals are coming soon" : "Sell is coming soon"}
-    </h2>
+    <h2>Rentals are not in the registry yet</h2>
     <p>
-      {section === "rent"
-        ? "Rental listings are not part of this phase. The MILLOW team is building them for a future release."
-        : "User listings and selling flow are not part of this phase. Check back in a future release."}
+      The MILLOW catalogue currently holds sale listings only — the on-chain
+      sale contract has no rental terms, so there is no rental data to show
+      here. Everything that is available is on the buy tab.
     </p>
     <button type="button" className="mkt__retry" onClick={() => setSection("buy")}>
-      Browse Buy listings
+      Browse sale listings
     </button>
   </section>
 );
 
-const Marketplace = ({ section, setSection }) => {
+const SellPanel = ({ account, realEstate, onSelectProperty }) => (
+  <main className="mkt">
+    <ListYourHome
+      account={account}
+      realEstate={realEstate}
+      onSelectProperty={onSelectProperty}
+    />
+  </main>
+);
+
+const Favorites = ({ favorites, onToggleFavorite, onSelectProperty, onShowAll }) => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    propertiesByIds(favorites).then((rows) => {
+      if (cancelled) return;
+      setItems(rows);
+      setLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [favorites]);
+
+  const missing = favorites.filter(
+    (id) => !items.some((row) => row.mreid_id === id),
+  );
+
+  if (!favorites.length) {
+    return (
+      <section className="mkt__state mkt__empty-panel">
+        <div className="mkt__empty-icon">♡</div>
+        <h3>No favourites yet</h3>
+        <p>
+          Tap the heart on any listing to keep it here. Your favourites are
+          stored per wallet on this device.
+        </p>
+        <button type="button" className="mkt__retry" onClick={onShowAll}>
+          Browse properties
+        </button>
+      </section>
+    );
+  }
+
+  return (
+    <>
+      {loading && (
+        <section className="mkt__state">
+          <div className="spinner" />
+          <p>Loading your favourites…</p>
+        </section>
+      )}
+
+      {!loading && items.length > 0 && (
+        <section className="mkt__grid" aria-label="Favourite properties">
+          {items.map((property) => (
+            <PropertyCard
+              key={property.mreid_id}
+              property={property}
+              onSelect={onSelectProperty}
+              favorited
+              onToggleFavorite={onToggleFavorite}
+            />
+          ))}
+        </section>
+      )}
+
+      {!loading && missing.length > 0 && (
+        <p className="mkt__hint">
+          {missing.length} favourite{missing.length === 1 ? "" : "s"} could not
+          be loaded from the registry: {missing.join(", ")}.
+        </p>
+      )}
+    </>
+  );
+};
+
+const Marketplace = ({
+  section,
+  setSection,
+  favorites = [],
+  onToggleFavorite,
+  onSelectProperty,
+  account,
+  realEstate,
+}) => {
   const [cityList, setCityList] = useState([]);
   const [locationOptions, setLocationOptions] = useState([]);
 
@@ -95,12 +175,12 @@ const Marketplace = ({ section, setSection }) => {
   const [sort, setSort] = useState("id");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
+  const [favOnly, setFavOnly] = useState(false);
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [attempt, setAttempt] = useState(0);
-  const [selectedId, setSelectedId] = useState(null);
 
   const controllerRef = useRef(null);
 
@@ -189,11 +269,32 @@ const Marketplace = ({ section, setSection }) => {
   const resetPage = () => setPage(1);
 
   if (!isBuy) {
-    return <SectionPlaceholder section={section} setSection={setSection} />;
+    return section === "sell" ? (
+      <SellPanel
+        account={account}
+        realEstate={realEstate}
+        onSelectProperty={onSelectProperty}
+      />
+    ) : (
+      <RentPanel setSection={setSection} />
+    );
   }
 
   const totalPages = data ? Math.max(data.total_pages, 1) : 1;
   const shownEmpty = !loading && !error && data && data.results.length === 0;
+
+  const clearAll = () => {
+    setQ("");
+    setCity(EMPTY);
+    setSelectedLocation(EMPTY);
+    setMinPrice("");
+    setMaxPrice("");
+    setMinArea("");
+    setMaxArea("");
+    setBedrooms(EMPTY);
+    setSort("id");
+    resetPage();
+  };
 
   return (
     <main className="mkt">
@@ -230,207 +331,218 @@ const Marketplace = ({ section, setSection }) => {
             </button>
           )}
         </div>
-      </div>
-
-      <section className="mkt__filters" aria-label="Property filters">
-        <FilterSelect
-          placeholder="City"
-          value={city}
-          onChange={(e) => {
-            setCity(e.target.value);
-            resetPage();
-          }}
-          options={cityList}
-        />
-        <FilterSelect
-          placeholder="Location"
-          value={selectedLocation}
-          onChange={(e) => {
-            setSelectedLocation(e.target.value);
-            resetPage();
-          }}
-          options={locationOptions}
-          disabled={!city || city === EMPTY}
-        />
-        <NumberInput
-          label="Minimum price (₹)"
-          placeholder="Min price"
-          value={minPrice}
-          onChange={(e) => {
-            setMinPrice(e.target.value);
-            resetPage();
-          }}
-        />
-        <NumberInput
-          label="Maximum price (₹)"
-          placeholder="Max price"
-          value={maxPrice}
-          onChange={(e) => {
-            setMaxPrice(e.target.value);
-            resetPage();
-          }}
-        />
-        <NumberInput
-          label="Minimum area (sqft)"
-          placeholder="Min area"
-          value={minArea}
-          onChange={(e) => {
-            setMinArea(e.target.value);
-            resetPage();
-          }}
-        />
-        <NumberInput
-          label="Maximum area (sqft)"
-          placeholder="Max area"
-          value={maxArea}
-          onChange={(e) => {
-            setMaxArea(e.target.value);
-            resetPage();
-          }}
-        />
-        <FilterSelect
-          placeholder="Bedrooms"
-          value={bedrooms}
-          onChange={(e) => {
-            setBedrooms(e.target.value);
-            resetPage();
-          }}
-          options={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
-        />
-        <FilterSelect
-          placeholder="Sort"
-          value={sort}
-          onChange={(e) => {
-            setSort(e.target.value);
-            resetPage();
-          }}
-          options={SORT_OPTIONS}
-        />
-      </section>
-
-      <div className="mkt__meta">
-        <span>
-          {data && !error ? `${data.total.toLocaleString("en-IN")} properties found` : ""}
-        </span>
-        <span>
-          {!error && data && (
-            <>
-              Page {data.page} of {Math.max(data.total_pages, 1)}
-            </>
-          )}
-        </span>
-      </div>
-
-      {error && (
-        <section className="mkt__state mkt__error-panel">
-          <div className="mkt__error-icon">!</div>
-          <h3>Could not load properties</h3>
-          <p className="mkt__error-msg">{error}</p>
-          <p className="mkt__hint">
-            Start the backend from the project root with <code>npm run valuation</code>.
-          </p>
+        <div className="mkt__hero-actions">
           <button
             type="button"
-            className="mkt__retry"
-            onClick={() => setAttempt((a) => a + 1)}
+            className={`mkt__chip-btn ${favOnly ? "mkt__chip-btn--on" : ""}`}
+            onClick={() => setFavOnly((v) => !v)}
+            aria-pressed={favOnly}
           >
-            Retry
+            ♡ Favourites{favorites.length ? ` (${favorites.length})` : ""}
           </button>
-        </section>
-      )}
-
-      {!error && shownEmpty && (
-        <section className="mkt__state mkt__empty-panel">
-          <div className="mkt__empty-icon">⌂</div>
-          <h3>No properties match your filters</h3>
-          <p>Try widening the price or area range, choosing another city, or clearing the search.</p>
           <button
             type="button"
-            className="mkt__retry"
-            onClick={() => {
-              setQ("");
-              setCity(EMPTY);
-              setSelectedLocation(EMPTY);
-              setMinPrice("");
-              setMaxPrice("");
-              setMinArea("");
-              setMaxArea("");
-              setBedrooms(EMPTY);
-              setSort("id");
-              resetPage();
-            }}
+            className="mkt__chip-btn"
+            onClick={() => setSection("sell")}
           >
-            Clear all filters
+            + List your home
           </button>
-        </section>
-      )}
+        </div>
+      </div>
 
-      {!error && !data && loading && (
-        <section className="mkt__state">
-          <div className="spinner" />
-          <p>Loading properties…</p>
-        </section>
-      )}
-
-      {!error && data && data.results.length > 0 && (
+      {favOnly ? (
+        <Favorites
+          favorites={favorites}
+          onToggleFavorite={onToggleFavorite}
+          onSelectProperty={onSelectProperty}
+          onShowAll={() => setFavOnly(false)}
+        />
+      ) : (
         <>
-          <section className="mkt__grid" aria-label="Property listings">
-            {data.results.map((property) => (
-              <PropertyCard
-                key={property.mreid_id}
-                property={property}
-                onSelect={setSelectedId}
-              />
-            ))}
-          </section>
-
-          <nav className="mkt__pagination" aria-label="Pagination">
-            <button
-              type="button"
-              className="mkt__page-btn"
-              disabled={page <= 1 || loading}
-              onClick={() => setPage((p) => Math.max(p - 1, 1))}
-            >
-              ← Prev
-            </button>
-            <span className="mkt__page-info">
-              {loading ? "Loading…" : `Page ${data.page} of ${totalPages}`}
-            </span>
-            <button
-              type="button"
-              className="mkt__page-btn"
-              disabled={page >= totalPages || loading}
-              onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-            >
-              Next →
-            </button>
-            <select
-              className="mkt__page-size"
-              aria-label="Results per page"
-              value={pageSize}
+          <section className="mkt__filters" aria-label="Property filters">
+            <FilterSelect
+              placeholder="City"
+              value={city}
               onChange={(e) => {
-                setPageSize(Number(e.target.value));
+                setCity(e.target.value);
                 resetPage();
               }}
-            >
-              {PAGE_SIZES.map((size) => (
-                <option key={size} value={size}>
-                  {size} / page
-                </option>
-              ))}
-            </select>
-          </nav>
+              options={cityList}
+            />
+            <FilterSelect
+              placeholder="Location"
+              value={selectedLocation}
+              onChange={(e) => {
+                setSelectedLocation(e.target.value);
+                resetPage();
+              }}
+              options={locationOptions}
+              disabled={!city || city === EMPTY}
+            />
+            <NumberInput
+              label="Minimum price (₹)"
+              placeholder="Min price"
+              value={minPrice}
+              onChange={(e) => {
+                setMinPrice(e.target.value);
+                resetPage();
+              }}
+            />
+            <NumberInput
+              label="Maximum price (₹)"
+              placeholder="Max price"
+              value={maxPrice}
+              onChange={(e) => {
+                setMaxPrice(e.target.value);
+                resetPage();
+              }}
+            />
+            <NumberInput
+              label="Minimum area (sqft)"
+              placeholder="Min area"
+              value={minArea}
+              onChange={(e) => {
+                setMinArea(e.target.value);
+                resetPage();
+              }}
+            />
+            <NumberInput
+              label="Maximum area (sqft)"
+              placeholder="Max area"
+              value={maxArea}
+              onChange={(e) => {
+                setMaxArea(e.target.value);
+                resetPage();
+              }}
+            />
+            <FilterSelect
+              placeholder="Bedrooms"
+              value={bedrooms}
+              onChange={(e) => {
+                setBedrooms(e.target.value);
+                resetPage();
+              }}
+              options={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
+            />
+            <FilterSelect
+              placeholder="Sort"
+              value={sort}
+              onChange={(e) => {
+                setSort(e.target.value);
+                resetPage();
+              }}
+              options={SORT_OPTIONS}
+            />
+          </section>
+
+          <div className="mkt__meta">
+            <span>
+              {data && !error ? `${data.total.toLocaleString("en-IN")} properties found` : ""}
+            </span>
+            <span>
+              {!error && data && (
+                <>
+                  Page {data.page} of {Math.max(data.total_pages, 1)}
+                </>
+              )}
+            </span>
+          </div>
+
+          {error && (
+            <section className="mkt__state mkt__error-panel">
+              <div className="mkt__error-icon">!</div>
+              <h3>Could not load properties</h3>
+              <p className="mkt__error-msg">{error}</p>
+              <p className="mkt__hint">
+                Start the backend from the project root with <code>npm run valuation</code>.
+              </p>
+              <button
+                type="button"
+                className="mkt__retry"
+                onClick={() => setAttempt((a) => a + 1)}
+              >
+                Retry
+              </button>
+            </section>
+          )}
+
+          {!error && shownEmpty && (
+            <section className="mkt__state mkt__empty-panel">
+              <div className="mkt__empty-icon">⌂</div>
+              <h3>No properties match your filters</h3>
+              <p>Try widening the price or area range, choosing another city, or clearing the search.</p>
+              <button type="button" className="mkt__retry" onClick={clearAll}>
+                Clear all filters
+              </button>
+            </section>
+          )}
+
+          {!error && !data && loading && (
+            <section className="mkt__state">
+              <div className="spinner" />
+              <p>Loading properties…</p>
+            </section>
+          )}
+
+          {!error && data && data.results.length > 0 && (
+            <>
+              <section className="mkt__grid" aria-label="Property listings">
+                {data.results.map((property) => (
+                  <PropertyCard
+                    key={property.mreid_id}
+                    property={property}
+                    onSelect={onSelectProperty}
+                    favorited={favorites.includes(property.mreid_id)}
+                    onToggleFavorite={onToggleFavorite}
+                  />
+                ))}
+              </section>
+
+              <nav className="mkt__pagination" aria-label="Pagination">
+                <button
+                  type="button"
+                  className="mkt__page-btn"
+                  disabled={page <= 1 || loading}
+                  onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                >
+                  ← Prev
+                </button>
+                <span className="mkt__page-info">
+                  {loading ? "Loading…" : `Page ${data.page} of ${totalPages}`}
+                </span>
+                <button
+                  type="button"
+                  className="mkt__page-btn"
+                  disabled={page >= totalPages || loading}
+                  onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                >
+                  Next →
+                </button>
+                <select
+                  className="mkt__page-size"
+                  aria-label="Results per page"
+                  value={pageSize}
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                    resetPage();
+                  }}
+                >
+                  {PAGE_SIZES.map((size) => (
+                    <option key={size} value={size}>
+                      {size} / page
+                    </option>
+                  ))}
+                </select>
+              </nav>
+            </>
+          )}
         </>
       )}
 
-      {selectedId && (
-        <PropertyDetail
-          key={selectedId}
-          mreidId={selectedId}
-          onClose={() => setSelectedId(null)}
-          onSelectSimilar={setSelectedId}
-        />
-      )}
+      <p className="mkt__disclaimer">
+        Listed prices come from the MREID dataset. MILLOW AI values are research
+        estimates, not certified appraisals.
+      </p>
     </main>
   );
 };

@@ -1,118 +1,188 @@
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ethers } from "ethers";
 import MarketIntelligence from "./MarketIntelligence";
+import PropertyCard from "./PropertyCard";
+import { dashboardHoldings, dashboardOverview, propertiesByIds } from "../lib/millowApi";
+import { STATUS_NAMES } from "../lib/blockchain";
+import { formatInrCompact } from "../lib/format";
 
 const RPC_TIMEOUT = 5000;
+const HOLDINGS_PAGE = 12;
 
 // MillowEscrow grants these AccessControl roles (keccak256 of the role name)
 // instead of storing fixed inspector/lender addresses.
 const INSPECTOR_ROLE = ethers.utils.id("INSPECTOR_ROLE");
 const LENDER_ROLE = ethers.utils.id("LENDER_ROLE");
 
+const ZERO = ethers.constants.AddressZero;
+const short = (address) =>
+  address && address !== ZERO
+    ? `${address.slice(0, 6)}…${address.slice(-4)}`
+    : "not set";
+
+const isAccount = (value, acct) =>
+  Boolean(value) && value !== ZERO && value.toLowerCase() === acct;
+
+// A listing, purchase or inspection is described with what the chain actually
+// says.  Anything the chain does not record is reported as unavailable rather
+// than filled in from the demo dataset.
+const saleStage = (sale, isListed) => {
+  const status = Number(sale.status);
+  if (isListed) return STATUS_NAMES[1] || "Listed";
+  return STATUS_NAMES[status] || (Number.isFinite(status) ? `Stage ${status}` : null);
+};
+
 const Dashboard = ({
   account,
   realEstate,
   escrow,
   registry,
-  homes,
-  onSelect,
+  favorites = [],
+  onToggleFavorite,
+  onSelectProperty,
   setNotification,
 }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [role, setRole] = useState(null);
+  const [flags, setFlags] = useState({ seller: false, buyer: false });
 
   const [owned, setOwned] = useState([]);
   const [buying, setBuying] = useState([]);
   const [selling, setSelling] = useState([]);
   const [sold, setSold] = useState([]);
-  const [purchases, setPurchases] = useState([]);
   const [inspected, setInspected] = useState([]);
   const [lended, setLended] = useState([]);
 
-  const [aiMarket, setAiMarket] = useState(null);
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiError, setAiError] = useState(false);
-  const [recs, setRecs] = useState([]);
+  const [overview, setOverview] = useState(null);
+  const [overviewError, setOverviewError] = useState(null);
 
-  const AI_BASE = process.env.REACT_APP_AI_URL || "http://localhost:8000";
+  const [holdings, setHoldings] = useState(null);
+  const [holdingsPage, setHoldingsPage] = useState(0);
+  const [holdingsError, setHoldingsError] = useState(null);
+  const [holdingsLoading, setHoldingsLoading] = useState(false);
 
-  const findHome = (tokenId) =>
-    homes.find(
-      (h) => Number(h.tokenId) === tokenId || Number(h.id) === tokenId,
-    );
+  const [favItems, setFavItems] = useState([]);
+  const [favLoading, setFavLoading] = useState(false);
 
   const loadRef = useRef(null);
-  const homesRef = useRef(homes);
   const requestRef = useRef({ key: null, running: false, completed: false });
+  const mreidCache = useRef({});
 
-  useEffect(() => {
-    homesRef.current = homes;
-  }, [homes]);
+  // ---------------------------------------------------------
+  // CATALOGUE OVERVIEW (real MREID + chain snapshot numbers)
+  // ---------------------------------------------------------
 
-  useEffect(() => {
+  const loadOverview = useCallback(() => {
     let cancelled = false;
-    setAiLoading(true);
-    setAiError(false);
-    fetch(`${AI_BASE}/market/insights`)
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error())))
+    dashboardOverview()
       .then((data) => {
-        if (!cancelled) {
-          setAiMarket(data);
-          setAiLoading(false);
-        }
+        if (cancelled) return;
+        setOverview(data);
+        setOverviewError(null);
       })
-      .catch(() => {
-        if (!cancelled) {
-          setAiError(true);
-          setAiLoading(false);
-        }
+      .catch((err) => {
+        if (cancelled) return;
+        setOverview(null);
+        setOverviewError(err.message);
       });
     return () => {
       cancelled = true;
     };
-  }, [AI_BASE]);
+  }, []);
+
+  useEffect(() => loadOverview(), [loadOverview]);
+
+  // ---------------------------------------------------------
+  // WALLET HOLDINGS (chain snapshot joined with the catalogue)
+  // ---------------------------------------------------------
+
+  const loadHoldings = useCallback(
+    (page) => {
+      if (!account) {
+        setHoldings(null);
+        return undefined;
+      }
+      let cancelled = false;
+      setHoldingsLoading(true);
+      dashboardHoldings(account, { limit: HOLDINGS_PAGE, offset: page * HOLDINGS_PAGE })
+        .then((data) => {
+          if (cancelled) return;
+          setHoldings(data);
+          setHoldingsError(data.available ? null : data.note);
+          setHoldingsLoading(false);
+        })
+        .catch((err) => {
+          if (cancelled) return;
+          setHoldings(null);
+          setHoldingsError(err.message);
+          setHoldingsLoading(false);
+        });
+      return () => {
+        cancelled = true;
+      };
+    },
+    [account],
+  );
 
   useEffect(() => {
-    if (loading) return;
-    const sources = [...owned, ...buying];
-    if (!sources.length) {
-      setRecs([]);
-      return;
+    setHoldingsPage(0);
+  }, [account]);
+
+  useEffect(() => loadHoldings(holdingsPage), [loadHoldings, holdingsPage]);
+
+  // ---------------------------------------------------------
+  // FAVOURITES (stored per wallet, resolved against the registry)
+  // ---------------------------------------------------------
+
+  useEffect(() => {
+    if (!favorites.length) {
+      setFavItems([]);
+      return undefined;
     }
     let cancelled = false;
-    const seen = {};
-    const all = [];
-    Promise.all(
-      sources.map(async (p) => {
-        const tokenId = Number(p.meta?.tokenId ?? p.meta?.id);
-        if (!tokenId) return;
-        try {
-          const res = await fetch(`${AI_BASE}/recommendations/${tokenId}`);
-          if (!res.ok) return;
-          const data = await res.json();
-          for (const similar of data.similar) {
-            if (seen[similar.token_id]) {
-              seen[similar.token_id].match = Math.max(
-                seen[similar.token_id].match,
-                similar.match,
-              );
-            } else {
-              seen[similar.token_id] = similar;
-              all.push(similar);
-            }
-          }
-        } catch {}
-      }),
-    ).then(() => {
-      if (!cancelled) {
-        setRecs(all.sort((a, b) => b.match - a.match).slice(0, 3));
-      }
+    setFavLoading(true);
+    propertiesByIds(favorites).then((rows) => {
+      if (cancelled) return;
+      setFavItems(rows);
+      setFavLoading(false);
     });
     return () => {
       cancelled = true;
     };
-  }, [owned, buying, loading, AI_BASE]);
+  }, [favorites]);
+
+  // ---------------------------------------------------------
+  // Utility: prevent a blockchain call from hanging forever
+  // ---------------------------------------------------------
+
+  const withTimeout = (promise, ms = RPC_TIMEOUT) =>
+    Promise.race([
+      promise,
+      new Promise((_, reject) => {
+        setTimeout(
+          () => reject(new Error("Blockchain request timed out")),
+          ms,
+        );
+      }),
+    ]);
+
+  // The MREID behind a token id.  The contract is the source of truth; the
+  // value is cached because the same token shows up in several sections.
+  const mreidFor = useCallback(
+    async (tokenId) => {
+      if (mreidCache.current[tokenId]) return mreidCache.current[tokenId];
+      let mreid = null;
+      try {
+        mreid = await withTimeout(realEstate.propertyOf(tokenId));
+      } catch (err) {
+        console.warn(`No MREID for token ${tokenId}:`, err);
+      }
+      if (mreid) mreidCache.current[tokenId] = mreid;
+      return mreid;
+    },
+    [realEstate],
+  );
 
   useEffect(() => {
     const refresh = () => {
@@ -124,21 +194,6 @@ const Dashboard = ({
     return () =>
       window.removeEventListener("millow:dashboard-refresh", refresh);
   }, []);
-
-  // ---------------------------------------------------------
-  // Utility: prevent a blockchain call from hanging forever
-  // ---------------------------------------------------------
-
-  const withTimeout = (promise, ms = RPC_TIMEOUT) => {
-    return Promise.race([
-      promise,
-      new Promise((_, reject) => {
-        setTimeout(() => {
-          reject(new Error("Blockchain request timed out"));
-        }, ms);
-      }),
-    ]);
-  };
 
   // ---------------------------------------------------------
   // LOAD DASHBOARD
@@ -173,10 +228,31 @@ const Dashboard = ({
       setRole(null);
 
       try {
-        console.log("================================");
-        console.log("Loading Millow Dashboard");
-        console.log("Account:", account);
-        console.log("================================");
+        const acct = account.toLowerCase();
+
+        // -------------------------------------------------
+        // Detect whether the connected account is the global
+        // Inspector or Lender (AccessControl roles).
+        // -------------------------------------------------
+
+        const [acctIsInspector, acctIsLender] = await Promise.all([
+          withTimeout(escrow.hasRole(INSPECTOR_ROLE, acct)),
+          withTimeout(escrow.hasRole(LENDER_ROLE, acct)),
+        ]);
+
+        // -------------------------------------------------
+        // Arrays
+        // -------------------------------------------------
+
+        const ownedList = [];
+        const buyingList = [];
+        const sellingList = [];
+        const soldList = [];
+        const inspectedList = [];
+        const lendedList = [];
+
+        let isSeller = false;
+        let isBuyer = false;
 
         // -------------------------------------------------
         // Discover the tokens this dashboard cares about
@@ -192,35 +268,6 @@ const Dashboard = ({
         // escrow sale, listing) below, which keeps the number
         // of RPC calls bounded by actual activity instead of
         // by total supply.
-
-        const acct = account.toLowerCase();
-
-        // -------------------------------------------------
-        // Detect whether the connected account is the global
-        // Inspector or Lender (AccessControl roles).
-        // -------------------------------------------------
-
-        const [acctIsInspector, acctIsLender] = await Promise.all([
-          withTimeout(escrow.hasRole(INSPECTOR_ROLE, acct)),
-          withTimeout(escrow.hasRole(LENDER_ROLE, acct)),
-        ]);
-
-        console.log("Account is Inspector:", acctIsInspector);
-        console.log("Account is Lender:", acctIsLender);
-
-        // -------------------------------------------------
-        // Arrays
-        // -------------------------------------------------
-
-        const ownedList = [];
-        const buyingList = [];
-        const sellingList = [];
-        const soldList = [];
-        const inspectedList = [];
-        const lendedList = [];
-
-        let isSeller = false;
-        let isBuyer = false;
 
         const candidateSet = new Set();
         const queryEvents = async (contract, topic) => {
@@ -267,23 +314,19 @@ const Dashboard = ({
 
         const candidates = Array.from(candidateSet).sort((a, b) => a - b);
 
-        console.log("Dashboard scan set (from on-chain events):", candidates);
-
         // -------------------------------------------------
         // Load candidate properties
         //
         // IMPORTANT:
         // We still do this one property at a time.
         // This avoids sending dozens of RPC calls
-        // simultaneously to Hardhat.
+        // simultaneously to the local node.
         // -------------------------------------------------
 
         for (const id of candidates) {
           if (!mounted) return;
 
           try {
-            console.log(`Loading property ${id}...`);
-
             const owner = await withTimeout(realEstate.ownerOf(id));
 
             const isListed = await withTimeout(escrow.isListed(id));
@@ -291,35 +334,20 @@ const Dashboard = ({
             const sale = await withTimeout(escrow.sales(id));
 
             const seller = sale.seller;
-
             const buyer = sale.buyer;
-
             const inspectionPassed = sale.inspectionPassed;
-
             const lenderApproved = sale.lenderFundedWei.gt(0);
-
             const price = sale.priceWei;
-
             const escrowAmt = sale.earnestWei;
-
             const lenderFunded = sale.lenderFundedWei;
 
-            // -------------------------------------------------
-            // Find metadata using tokenId first
-            // -------------------------------------------------
-
-            const meta =
-              homesRef.current.find(
-                (h) => Number(h.tokenId) === id || Number(h.id) === id,
-              ) || homesRef.current[id - 1];
-
-            if (!meta) {
-              console.warn(`No metadata found for property ${id}`);
-              continue;
-            }
+            // The MREID is what makes a row meaningful: it is how the
+            // catalogue, the AI estimate and the property page are addressed.
+            const mreid = await mreidFor(id);
 
             const property = {
               id,
+              mreid,
               owner,
               isListed,
               seller,
@@ -329,18 +357,11 @@ const Dashboard = ({
               price,
               escrowAmt,
               lenderFunded,
-              meta,
+              stage: saleStage(sale, isListed),
             };
 
-            const sellerMatch =
-              seller &&
-              seller !== ethers.constants.AddressZero &&
-              seller.toLowerCase() === acct;
-
-            const buyerMatch =
-              buyer &&
-              buyer !== ethers.constants.AddressZero &&
-              buyer.toLowerCase() === acct;
+            const sellerMatch = isAccount(seller, acct);
+            const buyerMatch = isAccount(buyer, acct);
 
             // -------------------------------------------------
             // SELLER
@@ -402,28 +423,13 @@ const Dashboard = ({
 
         if (!mounted) return;
 
-        // -------------------------------------------------
-        // Set dashboard data
-        // -------------------------------------------------
-
         setOwned(ownedList);
         setBuying(buyingList);
         setSelling(sellingList);
         setSold(soldList);
         setInspected(inspectedList);
         setLended(lendedList);
-
-        /*
-         * IMPORTANT:
-         *
-         * We are NOT using queryFilter(Transfer) here.
-         *
-         * That query was causing unnecessary RPC delays.
-         *
-         * Purchase history will be added later using a
-         * better method.
-         */
-        setPurchases([]);
+        setFlags({ seller: isSeller, buyer: isBuyer });
 
         // -------------------------------------------------
         // Determine role
@@ -435,26 +441,17 @@ const Dashboard = ({
           setRole("Lender");
         } else if (isSeller) {
           setRole("Seller");
-        } else if (isBuyer) {
-          setRole("Buyer");
         } else {
           /*
            * New/unassigned account.
            *
            * We don't call it Seller just because it
-           * owns an NFT.
+           * owns an NFT.  A wallet with no escrow
+           * history is a Buyer; the sections it gets
+           * are composed from `flags` below.
            */
           setRole("Buyer");
         }
-
-        console.log("Seller:", isSeller);
-        console.log("Buyer:", isBuyer);
-        console.log(
-          "Final role:",
-          isSeller ? "Seller" : isBuyer ? "Buyer" : "Buyer",
-        );
-
-        console.log("Dashboard loaded successfully.");
 
         setError(null);
         requestRef.current = {
@@ -467,7 +464,7 @@ const Dashboard = ({
 
         if (mounted) {
           setError(
-            "Could not load your dashboard. Make sure Hardhat is running on http://localhost:8545 and MetaMask is connected to chain 31337.",
+            "Could not load your on-chain activity. Make sure the MILLOW chain is running on http://localhost:8545 and the wallet is connected to chain 31337.",
           );
 
           if (setNotification) {
@@ -496,98 +493,12 @@ const Dashboard = ({
     // IMPORTANT:
     // Do not add setNotification here.
     // App recreates notify() on every render.
-  }, [account, realEstate, escrow]);
+  }, [account, realEstate, escrow, registry, mreidFor, setNotification]);
 
-  // ---------------------------------------------------------
-  // SECTION COMPONENT
-  // ---------------------------------------------------------
-
-  const Section = ({ title, badge, items, empty, amount = false }) => {
-    return (
-      <div className="dash__section">
-        <div className="dash__section-head">
-          <h3>{title}</h3>
-
-          {items.length > 0 && (
-            <span className={`dash__badge dash__badge--${badge}`}>
-              {items.length}
-            </span>
-          )}
-        </div>
-
-        {items.length === 0 ? (
-          <p className="cards__empty">{empty}</p>
-        ) : (
-          <div className="cards">
-            {items.map((item, index) => {
-              const attributes = item.meta?.attributes || [];
-
-              const purchasePrice = attributes[0]?.value ?? "-";
-
-              const bedrooms = attributes[2]?.value ?? "-";
-
-              const bathrooms = attributes[3]?.value ?? "-";
-
-              const sqft = attributes[4]?.value ?? "-";
-
-              return (
-                <div
-                  className="card"
-                  key={item.id}
-                  style={{
-                    animationDelay: `${index * 0.05}s`,
-                  }}
-                  onClick={() => onSelect && onSelect(item.meta)}
-                >
-                  <div className="card__image">
-                    <img
-                      src={item.meta.image || "/images/1.jpg"}
-                      alt={item.meta.name || "Home"}
-                    />
-                  </div>
-
-                  <div className="card__info">
-                    <h4>{purchasePrice} ETH</h4>
-
-                    {amount && (
-                      <p className="dash__amount">
-                        <strong>Lent:</strong>{" "}
-                        {(() => {
-                          try {
-                            const lent =
-                              item.lenderFunded && item.lenderFunded.gt(0)
-                                ? item.lenderFunded
-                                : item.price.sub(item.escrowAmt);
-                            return Number(
-                              ethers.utils.formatEther(lent),
-                            ).toFixed(2);
-                          } catch {
-                            return "0.00";
-                          }
-                        })()}{" "}
-                        ETH
-                      </p>
-                    )}
-
-                    <p>
-                      <strong>{bedrooms}</strong> bds |{" "}
-                      <strong>{bathrooms}</strong> ba | <strong>{sqft}</strong>{" "}
-                      sqft
-                    </p>
-
-                    <p>{item.meta.address || "Address unavailable"}</p>
-                  </div>
-
-                  <span className={`dash__tag dash__tag--${badge}`}>
-                    {badge}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    );
+  const retry = () => {
+    requestRef.current.completed = false;
+    requestRef.current.key = null;
+    if (loadRef.current) loadRef.current();
   };
 
   // ---------------------------------------------------------
@@ -608,7 +519,10 @@ const Dashboard = ({
         <div className="dash__hero">
           <h2>My Dashboard</h2>
 
-          <p>Connect your wallet to view your dashboard.</p>
+          <p>
+            Connect your wallet to see the properties you own, your listings and
+            your transactions. Browsing the marketplace works without a wallet.
+          </p>
         </div>
       </div>
     );
@@ -629,8 +543,9 @@ const Dashboard = ({
 
         <div className="dash__error">
           <p>
-            Waiting for blockchain connection. Make sure Hardhat is running on
-            http://localhost:8545 and MetaMask is connected to chain 31337.
+            Waiting for blockchain connection. Make sure the MILLOW chain is
+            running on http://localhost:8545 and the wallet is connected to
+            chain 31337.
           </p>
         </div>
       </div>
@@ -638,8 +553,446 @@ const Dashboard = ({
   }
 
   // ---------------------------------------------------------
-  // MAIN DASHBOARD
+  // SECTIONS
   // ---------------------------------------------------------
+
+  const Kpi = ({ label, value, sub }) => (
+    <div className="dash__kpi">
+      <span className="dash__kpi-label">{label}</span>
+      <strong className="dash__kpi-value">{value}</strong>
+      {sub && <span className="dash__kpi-sub">{sub}</span>}
+    </div>
+  );
+
+  const StageRows = ({ title, badge, items, empty, note }) => (
+    <div className="dash__section">
+      <div className="dash__section-head">
+        <h3>{title}</h3>
+        {items.length > 0 && (
+          <span className={`dash__badge dash__badge--${badge}`}>{items.length}</span>
+        )}
+      </div>
+      {note && <p className="dash__section-note">{note}</p>}
+      {items.length === 0 ? (
+        <p className="cards__empty">{empty}</p>
+      ) : (
+        <div className="dash__rows">
+          {items.map((item) => (
+            <article className="dash__row" key={item.id}>
+              <div className="dash__row-main">
+                <h4>{item.mreid || `Token #${item.id}`}</h4>
+                <p className="dash__row-meta">
+                  {item.stage || "Stage not reported"}
+                  {item.isListed ? " · listed" : " · unlisted"}
+                </p>
+                <p className="dash__row-meta">
+                  <span className="dash__row-eth">
+                    {(() => {
+                      try {
+                        return `${Number(
+                          ethers.utils.formatEther(item.escrowAmt || 0),
+                        ).toFixed(2)} test ETH in escrow`;
+                      } catch {
+                        return "escrow amount not reported";
+                      }
+                    })()}
+                  </span>
+                  {` · sale price ${(() => {
+                    try {
+                      return `${Number(
+                        ethers.utils.formatEther(item.price || 0),
+                      ).toFixed(2)} test ETH`;
+                    } catch {
+                      return "not reported";
+                    }
+                  })()}`}
+                </p>
+                <p className="dash__row-meta">
+                  {item.isListed ? "Buyer" : "Owner"} {short(
+                    item.isListed ? item.buyer : item.owner,
+                  )}
+                  {item.inspectionPassed ? " · inspection passed" : ""}
+                </p>
+              </div>
+              <div className="dash__row-side">
+                <span className={`dash__tag dash__tag--${badge}`}>{badge}</span>
+                {item.mreid ? (
+                  <button
+                    type="button"
+                    className="dash__row-open"
+                    onClick={() => onSelectProperty(item.mreid)}
+                  >
+                    Open property →
+                  </button>
+                ) : (
+                  <span className="dash__row-unavailable">
+                    MREID not available
+                  </span>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const portfolio = holdings && holdings.portfolio ? holdings.portfolio : null;
+  const holdingsTotal = holdings ? holdings.count : 0;
+  const holdingsPages = Math.max(Math.ceil(holdingsTotal / HOLDINGS_PAGE), 1);
+
+  // ---------------------------------------------------------
+  // WHICH ACTIVITY SECTIONS BELONG TO THIS WALLET
+  //
+  // The dashboard always leads with the two sections every visitor cares
+  // about — the marketplace overview and the market intelligence — and then
+  // shows the activity that matches the connected account:
+  //
+  //   seller    sold, properties for sale
+  //   buyer     sold, purchases in escrow, owned through escrow
+  //   inspector properties inspected
+  //   lender    loans funded
+  //
+  // An account can be both a buyer and a seller, and an inspector or lender
+  // can also own property, so the sections are composed rather than switched
+  // between.  "My properties" and "Favourites" come last because they are the
+  // same for every wallet.
+  // ---------------------------------------------------------
+
+  const showSeller = flags.seller || selling.length > 0 || sold.length > 0;
+  const showBuyer = flags.buyer || buying.length > 0 || owned.length > 0;
+  const isServiceRole = role === "Inspector" || role === "Lender";
+
+  // A plain wallet gets the full buyer view even before it has any activity,
+  // so the sections explain themselves.  An inspector or lender only sees the
+  // owner sections once the chain shows they actually own or trade property.
+  const showOwnerSections = isServiceRole ? showSeller || showBuyer : true;
+  const showBuyingSections = showOwnerSections && (showBuyer || !showSeller);
+
+  const activitySections = [
+    role === "Inspector" ? (
+      <StageRows
+        key="inspected"
+        title="Properties inspected"
+        badge="inspected"
+        items={inspected}
+        empty="No inspections completed yet."
+        note="Inspections recorded by this wallet on MillowEscrow."
+      />
+    ) : null,
+
+    role === "Lender" ? (
+      <StageRows
+        key="lended"
+        title="Loans funded"
+        badge="lended"
+        items={lended}
+        empty="No loans funded yet."
+        note="Amounts are denominated in test ETH for this local chain."
+      />
+    ) : null,
+
+    showOwnerSections ? (
+      <StageRows
+        key="sold"
+        title="Sold"
+        badge="sold"
+        items={sold}
+        empty="No property has sold yet."
+        note="Sales of this wallet that settled on chain. A settled sale moves the token to the buyer and cannot be undone."
+      />
+    ) : null,
+
+    showOwnerSections && showSeller ? (
+      <StageRows
+        key="selling"
+        title="Properties for sale"
+        badge="selling"
+        items={selling}
+        empty="You have not listed any property yet. Use “List your home” in the marketplace to start a listing."
+        note="Listings created by this wallet, read live from MillowEscrow. The listing, its terms and the escrow all live on the property page."
+      />
+    ) : null,
+
+    showBuyingSections ? (
+      <StageRows
+        key="buying"
+        title="Purchases in escrow"
+        badge="buying"
+        items={buying}
+        empty="No purchase is in escrow right now."
+        note="Each purchase shows how much has been committed and what is still required before the sale can settle."
+      />
+    ) : null,
+
+    showBuyingSections ? (
+      <StageRows
+        key="owned"
+        title="Owned through escrow"
+        badge="owned"
+        items={owned}
+        empty="No completed purchase on this chain yet."
+        note="Purchases of this wallet that settled, so the token now belongs to it."
+      />
+    ) : null,
+  ].filter(Boolean);
+
+  const overviewSection = (
+    <div className="dash__section" key="overview">
+      <div className="dash__section-head">
+        <h3>Marketplace overview</h3>
+      </div>
+
+      {overviewError ? (
+        <p className="cards__empty">
+          Market overview unavailable: {overviewError}
+        </p>
+      ) : !overview ? (
+        <p className="cards__empty">Loading market overview…</p>
+      ) : (
+        <>
+          <div className="dash__kpis">
+            <Kpi
+              label="Properties listed"
+              value={(overview.catalogue.total || 0).toLocaleString("en-IN")}
+              sub="MREID catalogue"
+            />
+            <Kpi
+              label="Tokenized"
+              value={
+                overview.catalogue.tokenized === null ||
+                overview.catalogue.tokenized === undefined
+                  ? "Not available"
+                  : overview.catalogue.tokenized.toLocaleString("en-IN")
+              }
+              sub={
+                overview.catalogue.chain && overview.catalogue.chain.available
+                  ? `snapshot ${String(
+                      overview.catalogue.chain.exported_at || "",
+                    ).slice(0, 10)}`
+                  : "chain snapshot unavailable"
+              }
+            />
+            <Kpi
+              label="On sale now"
+              value={
+                overview.catalogue.listed === null ||
+                overview.catalogue.listed === undefined
+                  ? "Not available"
+                  : overview.catalogue.listed
+              }
+              sub="listed for sale on chain"
+            />
+            <Kpi
+              label="Avg listed price"
+              value={formatInrCompact(overview.ai.avg_listed)}
+              sub={`avg AI estimate ${formatInrCompact(
+                overview.ai.avg_ai_estimate,
+              )}`}
+            />
+            <Kpi
+              label="Potentially undervalued"
+              value={overview.ai.undervalued.toLocaleString("en-IN")}
+              sub={`${overview.ai.in_range.toLocaleString(
+                "en-IN",
+              )} near estimate`}
+            />
+            <Kpi
+              label="Potentially overvalued"
+              value={overview.ai.overvalued.toLocaleString("en-IN")}
+              sub={
+                overview.ai.model_mae_inr
+                  ? `model MAE ${formatInrCompact(overview.ai.model_mae_inr)}`
+                  : "model error not reported"
+              }
+            />
+          </div>
+          <p className="dash__section-note">{overview.ai.note}</p>
+        </>
+      )}
+    </div>
+  );
+
+  const holdingsSection = (
+    <div className="dash__section" key="holdings">
+      <div className="dash__section-head">
+        <h3>My properties</h3>
+        {holdings && holdings.available && holdingsTotal > 0 && (
+          <span className="dash__badge dash__badge--owned">{holdingsTotal}</span>
+        )}
+      </div>
+
+      {portfolio && (
+        <div className="dash__kpis dash__kpis--compact">
+          <Kpi
+            label="Properties held"
+            value={portfolio.count.toLocaleString("en-IN")}
+            sub={`${portfolio.on_sale_count} on sale`}
+          />
+          <Kpi
+            label="Listed value"
+            value={portfolio.listed_value_formatted}
+            sub="sum of catalogue prices"
+          />
+          <Kpi
+            label="MILLOW AI estimate"
+            value={portfolio.ai_estimated_value_formatted}
+            sub="research estimate"
+          />
+        </div>
+      )}
+
+      {holdingsError ? (
+        <p className="cards__empty">{holdingsError}</p>
+      ) : holdingsLoading && !holdings ? (
+        <p className="cards__empty">Loading your properties…</p>
+      ) : holdings && holdings.count === 0 ? (
+        <p className="cards__empty">
+          This wallet does not hold any property token yet. Buy a property in
+          the marketplace and its NFT will appear here.
+        </p>
+      ) : holdings ? (
+        <>
+          <div className="dash__rows">
+            {holdings.holdings.map((holding) => (
+              <article className="dash__row" key={holding.mreid_id}>
+                <div className="dash__row-main">
+                  <h4>
+                    {holding.summary
+                      ? `${holding.summary.location}, ${holding.summary.city}`
+                      : holding.mreid_id}
+                  </h4>
+                  <p className="dash__row-meta">
+                    {holding.chain.token_id
+                      ? `${holding.mreid_id} · token #${holding.chain.token_id}`
+                      : holding.mreid_id}
+                  </p>
+                  {holding.summary ? (
+                    <p className="dash__row-meta">
+                      Listed {holding.summary.price_formatted} · AI{" "}
+                      {holding.summary.ai_estimated_price_formatted} ·{" "}
+                      {holding.summary.ai_market_signal.label}
+                    </p>
+                  ) : (
+                    <p className="dash__row-meta">
+                      {holding.note || "No catalogue data for this token."}
+                    </p>
+                  )}
+                </div>
+                <div className="dash__row-side">
+                  <span
+                    className={`dash__tag dash__tag--${
+                      holding.chain.listed || holding.chain.active_sale
+                        ? "selling"
+                        : "owned"
+                    }`}
+                  >
+                    {holding.chain.listed || holding.chain.active_sale
+                      ? "for sale"
+                      : "held"}
+                  </span>
+                  <button
+                    type="button"
+                    className="dash__row-open"
+                    onClick={() => onSelectProperty(holding.mreid_id)}
+                  >
+                    Open property →
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {holdingsPages > 1 && (
+            <nav className="mkt__pagination" aria-label="Holdings pages">
+              <button
+                type="button"
+                className="mkt__page-btn"
+                disabled={holdingsPage === 0 || holdingsLoading}
+                onClick={() => setHoldingsPage((p) => Math.max(p - 1, 0))}
+              >
+                ← Prev
+              </button>
+              <span className="mkt__page-info">
+                {holdingsLoading
+                  ? "Loading…"
+                  : `Page ${holdingsPage + 1} of ${holdingsPages}`}
+              </span>
+              <button
+                type="button"
+                className="mkt__page-btn"
+                disabled={holdingsPage + 1 >= holdingsPages || holdingsLoading}
+                onClick={() => setHoldingsPage((p) => p + 1)}
+              >
+                Next →
+              </button>
+            </nav>
+          )}
+
+          {holdings.note && <p className="dash__section-note">{holdings.note}</p>}
+        </>
+      ) : null}
+    </div>
+  );
+
+  const favouritesSection = (
+    <div className="dash__section" key="favourites">
+      <div className="dash__section-head">
+        <h3>Favourites</h3>
+        {favorites.length > 0 && (
+          <span className="dash__badge dash__badge--history">{favorites.length}</span>
+        )}
+      </div>
+
+      {!favorites.length ? (
+        <p className="cards__empty">
+          No favourites yet. Save a listing from the marketplace with the heart
+          on its card.
+        </p>
+      ) : favLoading && !favItems.length ? (
+        <p className="cards__empty">Loading your favourites…</p>
+      ) : (
+        <>
+          <div className="mkt__grid">
+            {favItems.map((property) => (
+              <PropertyCard
+                key={property.mreid_id}
+                property={property}
+                onSelect={onSelectProperty}
+                favorited
+                onToggleFavorite={onToggleFavorite}
+              />
+            ))}
+          </div>
+          {favItems.length < favorites.length && (
+            <p className="cards__empty">
+              {favorites.length - favItems.length} favourite
+              {favorites.length - favItems.length === 1 ? "" : "s"} could not be
+              loaded from the registry.
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+
+  const activitySection = error ? (
+    <div className="dash__error" key="activity">
+      <p>{error}</p>
+
+      <button type="button" className="dash__retry" onClick={retry}>
+        Retry
+      </button>
+    </div>
+  ) : loading ? (
+    <div className="dash__loading" key="activity">
+      <div className="spinner"></div>
+
+      <p>Loading your on-chain activity…</p>
+    </div>
+  ) : (
+    <div key="activity">{activitySections}</div>
+  );
 
   return (
     <div className="dash">
@@ -655,226 +1008,15 @@ const Dashboard = ({
         )}
       </div>
 
-      {/* MARKET INTELLIGENCE (backend-driven) */}
+      {overviewSection}
 
       <MarketIntelligence />
 
-      {/* AI MARKET INSIGHTS */}
+      {activitySection}
 
-      <div className="dash__section dash__ai">
-        <div className="dash__section-head">
-          <h3>AI Market Insights</h3>
-        </div>
+      {holdingsSection}
 
-        {aiLoading ? (
-          <p className="cards__empty">Loading AI market analysis...</p>
-        ) : aiError ? (
-          <p className="cards__empty">
-            AI insights unavailable. Start the AI server with{" "}
-            <code>npm run ai</code> and refresh.
-          </p>
-        ) : aiMarket ? (
-          <>
-            <div className="ai__stats">
-              <div className="ai__stat">
-                <span>Avg listed</span>
-                <strong>{aiMarket.stats.avg_listed_eth} ETH</strong>
-              </div>
-              <div className="ai__stat">
-                <span>Avg AI value</span>
-                <strong>{aiMarket.stats.avg_predicted_eth} ETH</strong>
-              </div>
-              <div className="ai__stat">
-                <span>Undervalued</span>
-                <strong>{aiMarket.stats.undervalued}</strong>
-              </div>
-              <div className="ai__stat">
-                <span>Overvalued</span>
-                <strong>{aiMarket.stats.overvalued}</strong>
-              </div>
-              <div className="ai__stat">
-                <span>Avg risk</span>
-                <strong>{aiMarket.stats.avg_risk}/100</strong>
-              </div>
-            </div>
-
-            <h4 className="ai__subtitle">Top undervalued picks</h4>
-            <div className="cards">
-              {aiMarket.deals.map((deal, index) => (
-                <div
-                  className="card"
-                  key={deal.token_id}
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                  onClick={() => {
-                    const home = findHome(deal.token_id);
-                    if (home) onSelect(home);
-                  }}
-                >
-                  <div className="card__image">
-                    <img src={deal.image} alt={deal.name} />
-                  </div>
-                  <div className="card__info">
-                    <h4>{deal.listed_price_eth} ETH</h4>
-                    <p className="ai__match">
-                      {deal.verdict} · {deal.difference_pct >= 0 ? "+" : ""}
-                      {deal.difference_pct}%
-                    </p>
-                    <p>{deal.name}</p>
-                  </div>
-                  <span className="dash__tag dash__tag--selling">
-                    {deal.verdict}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : null}
-      </div>
-
-      {/* RECOMMENDED FOR YOU */}
-
-      {recs.length > 0 && (
-        <div className="dash__section dash__ai">
-          <div className="dash__section-head">
-            <h3>Recommended for you</h3>
-          </div>
-          <div className="cards">
-            {recs.map((similar, index) => (
-              <div
-                className="card"
-                key={similar.token_id}
-                style={{ animationDelay: `${index * 0.05}s` }}
-                onClick={() => {
-                  const home = findHome(similar.token_id);
-                  if (home) onSelect(home);
-                }}
-              >
-                <div className="card__image">
-                  <img src={similar.image} alt={similar.name} />
-                </div>
-                <div className="card__info">
-                  <h4>{similar.price_eth} ETH</h4>
-                  <p className="ai__match">{similar.match}% match</p>
-                  <p>{similar.name}</p>
-                </div>
-                <span className="dash__tag dash__tag--buying">AI pick</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ERROR */}
-
-      {error ? (
-        <div className="dash__error">
-          <p>{error}</p>
-
-          <button
-            type="button"
-            className="dash__retry"
-            onClick={() => {
-              requestRef.current.completed = false;
-              requestRef.current.key = null;
-              if (loadRef.current) {
-                loadRef.current();
-              }
-            }}
-          >
-            Retry
-          </button>
-        </div>
-      ) : loading ? (
-        /* LOADING */
-
-        <div className="dash__loading">
-          <div className="spinner"></div>
-
-          <p>Loading your dashboard...</p>
-        </div>
-      ) : (
-        /* LOADED */
-
-        <>
-          {/* ============================= */}
-          {/* INSPECTOR */}
-          {/* ============================= */}
-
-          {role === "Inspector" && (
-            <Section
-              title="Properties inspected"
-              badge="inspected"
-              items={inspected}
-              empty="No inspections completed yet."
-            />
-          )}
-
-          {/* ============================= */}
-          {/* LENDER */}
-          {/* ============================= */}
-
-          {role === "Lender" && (
-            <Section
-              title="Loans funded"
-              badge="lended"
-              items={lended}
-              empty="No loans funded yet."
-              amount={true}
-            />
-          )}
-
-          {/* ============================= */}
-          {/* SELLER */}
-          {/* ============================= */}
-
-          {role === "Seller" && (
-            <>
-              <Section
-                title="Properties for sale"
-                badge="selling"
-                items={selling}
-                empty="You haven't listed any properties."
-              />
-
-              <Section
-                title="Sold"
-                badge="sold"
-                items={sold}
-                empty="No properties sold yet."
-              />
-            </>
-          )}
-
-          {/* ============================= */}
-          {/* BUYER */}
-          {/* ============================= */}
-
-          {role === "Buyer" && (
-            <>
-              <Section
-                title="Owned"
-                badge="owned"
-                items={owned}
-                empty="You don't own any properties yet."
-              />
-
-              <Section
-                title="Buying (in escrow)"
-                badge="buying"
-                items={buying}
-                empty="No properties being purchased right now."
-              />
-
-              <Section
-                title="Purchase history"
-                badge="history"
-                items={purchases}
-                empty="No purchase history yet."
-              />
-            </>
-          )}
-        </>
-      )}
+      {favouritesSection}
     </div>
   );
 };

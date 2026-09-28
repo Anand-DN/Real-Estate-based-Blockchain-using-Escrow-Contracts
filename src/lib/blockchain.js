@@ -336,7 +336,9 @@ const SALE_EVENTS = [
   "SellerApproved",
 ];
 
-const STATUS_NAMES = {
+// Sale stages as MillowEscrow reports them.  Shared so the dashboard labels a
+// transaction exactly the way the transaction workspace does.
+export const STATUS_NAMES = {
   0: "Not in a sale",
   1: "Listed",
   2: "Under contract",
