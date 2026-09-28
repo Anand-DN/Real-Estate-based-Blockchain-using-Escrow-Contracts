@@ -32,3 +32,15 @@ In a separate terminal execute:
 
 ### 8. Run AI
 `$ npm run ai`
+
+### 9. Run Server
+`$ npm run server`
+
+### 10. Run AI_Valuation
+`$ npm run valuation`
+
+### 11. Run Persistent Chain
+`$ npm run chain:start`
+`$ npm run chain:status`
+`$ npm run chain:stop`
+
