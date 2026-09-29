@@ -61,6 +61,12 @@ const Icon = {
       <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
     </svg>
   ),
+  trend: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+      <polyline points="16 7 22 7 22 13" />
+    </svg>
+  ),
 };
 
 // Quick actions follow the brief: help users find properties, understand
@@ -101,6 +107,12 @@ const actionsFor = (context) => {
         label: "On-chain",
         icon: Icon.link,
         prompt: `What is the blockchain status of ${name} (${context.mreid_id}) — is it tokenized, who holds the NFT, is it listed for sale, and is there an active escrow sale?`,
+      },
+      {
+        id: "forecast",
+        label: "Forecast",
+        icon: Icon.trend,
+        prompt: `What will the price of ${name} (${context.mreid_id}) be in the next 15 years? Project the value forward and say what you assumed.`,
       },
       {
         id: "similar",
@@ -341,10 +353,15 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const [provider, setProvider] = useState(null);
+  const [degraded, setDegraded] = useState(false);
   const [unread, setUnread] = useState(true);
   const [context, setContext] = useState(null);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
+  const lastMsgRef = useRef(null);
+  // Set when a reply lands so the effect below can reveal the TOP of that
+  // reply.  Clearing it on send keeps the "typing" bubble in view.
+  const revealTopRef = useRef(false);
 
   useEffect(() => {
     try {
@@ -355,10 +372,20 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
   }, [messages]);
 
   useEffect(() => {
-    if (open && bodyRef.current) {
-      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-      setUnread(false);
+    const body = bodyRef.current;
+    if (!open || !body) return;
+
+    if (revealTopRef.current && lastMsgRef.current) {
+      // A long reply used to scroll its own first line off the top of the
+      // panel, so the answer only ever showed its tail.  Anchor on the top of
+      // the newest bubble instead of jumping to the bottom of the log.
+      revealTopRef.current = false;
+      const top = lastMsgRef.current.offsetTop - body.offsetTop;
+      body.scrollTop = Math.max(0, top - 8);
+    } else {
+      body.scrollTop = body.scrollHeight;
     }
+    setUnread(false);
   }, [messages, busy, open]);
 
   // Auto-grow the textarea so multi-line messages (Shift+Enter) stay readable
@@ -412,6 +439,9 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
 
     const userMessage = { role: "user", content: text };
     const nextMessages = [...messages, userMessage];
+    // While the reply is in flight the typing bubble should be the thing that
+    // stays in view; only once it lands do we anchor on its first line.
+    revealTopRef.current = false;
     setMessages(nextMessages);
 
     try {
@@ -425,8 +455,12 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
       });
       const data = await response.json();
       const reply = data.reply?.trim() || "I didn't get that. Could you rephrase?";
+      revealTopRef.current = true;
       setMessages([...nextMessages, { role: "assistant", content: reply }]);
       setProvider(data.provider || (data.offline ? "offline" : null));
+      // The local model answers correctly but takes a couple of minutes, so a
+      // degraded reply is flagged rather than left looking like a normal answer.
+      setDegraded(!!data.degraded);
     } catch {
       setMessages([
         ...nextMessages,
@@ -436,7 +470,9 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
             "I couldn't reach the MILLOW AI server. Make sure it's running with `npm run ai`.",
         },
       ]);
+      revealTopRef.current = true;
       setProvider("offline");
+      setDegraded(true);
     } finally {
       setBusy(false);
     }
@@ -452,6 +488,7 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
   const reset = () => {
     setMessages([WELCOME]);
     setProvider(null);
+    setDegraded(false);
   };
 
   const actions = actionsFor(context);
@@ -468,11 +505,13 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
                 <span className="chatbot__status">
                   {busy
                     ? "Thinking..."
-                    : provider
-                      ? `via ${provider}`
-                      : context
-                        ? `asking about ${context.label}`
-                        : "Marketplace assistant"}
+                    : degraded
+                      ? "Slow local model (Groq unavailable)"
+                      : provider
+                        ? `via ${provider}`
+                        : context
+                          ? `asking about ${context.label}`
+                          : "Marketplace assistant"}
                 </span>
               </div>
             </div>
@@ -490,6 +529,9 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
             {messages.map((message, index) => (
               <div
                 key={index}
+                ref={
+                  index === messages.length - 1 ? lastMsgRef : undefined
+                }
                 className={`chatbot__msg chatbot__msg--${message.role}`}
               >
                 {renderMessage(message.content)}

@@ -157,6 +157,62 @@ def handle_insights():
         return {"error": f"Dashboard insights failed: {exc}"}
 
 
+# Flat annual appreciation used for the horizon projection.  Deliberately
+# modest and clearly labelled, because this is a research projection and not
+# advice.  Bounded so a user asking for 100 years gets a sane answer.
+FORECAST_ANNUAL_APPRECIATION = 0.05
+FORECAST_MAX_YEARS = 30
+
+
+def handle_forecast(mreid_id, years=5):
+    """Project the AI research estimate forward by a flat annual rate.
+
+    Without this the assistant refuses "what will this cost in 15 years",
+    because the MREID agent had no forecast tool at all: forecast_price in
+    app.py works on the 24 ETH demo listings by numeric token id, which does
+    not exist in the MREID catalogue.
+    """
+    mreid_id = str(mreid_id or "").strip()
+    if not mreid_id:
+        return {"error": "MREID id is required."}
+    try:
+        years = int(years)
+    except (TypeError, ValueError):
+        years = 5
+    years = max(1, min(years, FORECAST_MAX_YEARS))
+
+    record = handle_property(mreid_id)
+    if isinstance(record, dict) and record.get("error"):
+        return record
+
+    base = (record.get("ai_estimation") or {}).get("ai_estimated_price")
+    if not base:
+        return {"error": f"No AI research estimate on file for {mreid_id}."}
+
+    rate = FORECAST_ANNUAL_APPRECIATION
+    projected = round(base * (1 + rate) ** years, 2)
+    area = (record.get("property") or {}).get("area")
+    ppsf = round(projected / area, 2) if area else None
+
+    return {
+        "mreid_id": mreid_id,
+        "name": (record.get("property") or {}).get("location"),
+        "base_ai_estimate": base,
+        "base_ai_estimate_formatted": (record.get("ai_estimation") or {}).get(
+            "ai_estimated_price_formatted"
+        ),
+        "projected_price": projected,
+        "projected_price_per_sqft": ppsf,
+        "years": years,
+        "annual_appreciation": rate,
+        "note": (
+            f"Projection compounds the MILLOW V5 research estimate at a flat "
+            f"{rate:.0%} per year for {years} years. It is a research projection, "
+            "not a certified appraisal, and actual appreciation will differ."
+        ),
+    }
+
+
 MREID_TOOLS = [
     {
         "type": "function",
@@ -226,6 +282,34 @@ MREID_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "forecast_mreid_price",
+            "description": (
+                "Project what a real MREID property's value could be in the future. "
+                "Compounds the MILLOW V5 AI research estimate at a flat annual rate "
+                "(default 5%, max 30 years). Use this whenever the user asks about "
+                "future price, forecast, appreciation, 'what will this be worth in N "
+                "years', or 'price in 2035'. Without this tool the assistant has to "
+                "refuse those questions."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mreid_id": {
+                        "type": "string",
+                        "description": "Property id like MREID_0000001",
+                    },
+                    "years": {
+                        "type": "integer",
+                        "description": "Years ahead to project (default 5, max 30)",
+                    },
+                },
+                "required": ["mreid_id"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "get_mreid_overview",
             "description": (
                 "Top-level catalogue overview: total properties, tokenized/listed/active-sale counts "
@@ -252,6 +336,7 @@ MREID_HANDLERS = {
     "get_mreid_property": lambda **k: handle_property(k.get("mreid_id")),
     "search_mreid_properties": lambda **k: handle_search(k),
     "get_mreid_market_breakdown": lambda **k: handle_market_breakdown(k),
+    "forecast_mreid_price": lambda **k: handle_forecast(k.get("mreid_id"), k.get("years", 5)),
     "get_mreid_overview": lambda **k: handle_overview(),
     "get_mreid_insights": lambda **k: handle_insights(),
 }
@@ -270,6 +355,11 @@ MREID_SYSTEM_PROMPT = (
     "Rules:\n"
     "- If the user names a property or MREID, call get_mreid_property first. If it errors, "
     "say you don't have that record and offer to search.\n"
+    "- For any question about a future or projected value ('what will it be worth in N "
+    "years', 'price in 2035', 'appreciation', 'forecast'), call forecast_mreid_price with "
+    "the MREID and the number of years, and report the projected figure as MODEL-BASED "
+    "INTERPRETATION with the base estimate and the rate you assumed. Never reply that you "
+    "cannot predict future prices: this tool exists for exactly that question.\n"
     "- Report prices in Indian Rupees using the formatted values the tool returns "
     "(\u20b9 Crore / \u20b9 Lakh).\n"
     "- The AI estimate is an AI-assisted research estimate, not a certified appraisal; "

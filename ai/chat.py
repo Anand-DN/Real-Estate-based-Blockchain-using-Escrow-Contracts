@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import time
 
 import httpx
 from dotenv import load_dotenv
@@ -13,6 +14,26 @@ OLLAMA_API = f'{OLLAMA_BASE}/api/chat'
 
 MODEL_GROQ = os.getenv('GROQ_MODEL', 'llama-3.3-70b-versatile')
 MODEL_OLLAMA = os.getenv('OLLAMA_MODEL', 'llama3.1:8b')
+
+# The gpt-oss family spends its token budget on hidden reasoning and can return
+# an empty completion once the cap is reached, so it needs the effort knob.
+REASONING_MODELS = 'gpt-oss' in (MODEL_GROQ or '')
+REASONING_EFFORT = os.getenv('GROQ_REASONING_EFFORT', 'low') if REASONING_MODELS else ''
+
+# A 429 is a quota window rather than a bad request, so it is worth waiting out
+# rather than failing straight over to the local model.
+# The free Groq tier allows ~8k tokens per minute for the whole org, and this
+# app is the only caller, so a chat turn is easily half the budget. A 429 needs
+# the quota window to refill, which takes up to a minute, so the backoff is
+# sized to cover it rather than to fail fast onto the 2-minute local model.
+GROQ_RETRIES = int(os.getenv('GROQ_RETRIES', '3'))
+GROQ_BACKOFF = float(os.getenv('GROQ_BACKOFF_SECONDS', '8'))
+
+# Shown instead of an empty bubble when a provider returns no text at all.
+EMPTY_REPLY = (
+    'Millow AI could not produce an answer for that. Please try rephrasing, '
+    'or ask about a specific property, price or risk detail.'
+)
 
 DEFAULT_SYSTEM_PROMPT = (
     'You are Millow AI, the intelligent assistant inside the Millow Real Estate NFT DApp. '
@@ -55,6 +76,7 @@ class ChatAgent:
         self.max_loops = max_loops
         self.groq_api_key = groq_api_key or os.getenv('GROQ_API_KEY', '')
         self.request_timeout = request_timeout
+        self._last_error = None
 
     @staticmethod
     def _format_reply(text):
@@ -75,23 +97,49 @@ class ChatAgent:
             'model': MODEL_GROQ,
             'messages': messages,
             'temperature': float(os.getenv('GROQ_TEMPERATURE', '0.3')),
-            'max_tokens': int(os.getenv('GROQ_MAX_TOKENS', '900')),
+            'max_tokens': int(os.getenv('GROQ_MAX_TOKENS', '1400')),
             'stream': False,
         }
+        # gpt-oss-20b is a reasoning model and burns most of its budget on
+        # hidden reasoning: a single tool-calling turn spent 483 of 517
+        # completion tokens thinking and returned no content at all, which the
+        # agent then rendered as an empty bubble. "low" keeps the reasoning
+        # short so the answer actually fits in the budget.
+        if REASONING_MODELS and REASONING_EFFORT:
+            payload['reasoning_effort'] = REASONING_EFFORT
         if tools:
             payload['tools'] = tools
             payload['tool_choice'] = 'auto'
         return payload
 
     def _post_groq(self, messages, tools):
-        response = httpx.post(
-            f'{BASE_URL_OPENAI}/chat/completions',
-            headers=self._groq_headers(),
-            json=self._groq_payload(messages, tools),
-            timeout=self.request_timeout,
-        )
-        response.raise_for_status()
-        return response.json()
+        payload = self._groq_payload(messages, tools)
+        last_error = None
+        for attempt in range(GROQ_RETRIES + 1):
+            try:
+                response = httpx.post(
+                    f'{BASE_URL_OPENAI}/chat/completions',
+                    headers=self._groq_headers(),
+                    json=payload,
+                    timeout=self.request_timeout,
+                )
+            except httpx.HTTPError as error:
+                last_error = error
+            else:
+                if response.status_code != 429:
+                    response.raise_for_status()
+                    return response.json()
+                last_error = httpx.HTTPStatusError(
+                    f'429 Too Many Requests: {response.text[:200]}',
+                    request=response.request,
+                    response=response,
+                )
+            # 429 is a quota window, not a bad request, so waiting and retrying
+            # is worth it. Backing off here keeps a burst of chat turns from
+            # dumping the user straight onto the slow local fallback.
+            if attempt < GROQ_RETRIES:
+                time.sleep(GROQ_BACKOFF * (2 ** attempt))
+        raise last_error
 
     def _post_ollama(self, messages, tools):
         num_ctx = int(os.getenv('OLLAMA_NUM_CTX', '4096'))
@@ -130,6 +178,9 @@ class ChatAgent:
             'ollama_model': MODEL_OLLAMA,
             'ollama_url': OLLAMA_BASE,
             'tools': [t['function']['name'] for t in self.tools],
+            'reasoning_model': REASONING_MODELS,
+            'reasoning_effort': REASONING_EFFORT or None,
+            'max_tokens': int(os.getenv('GROQ_MAX_TOKENS', '1400')),
         }
 
     def chat(self, messages, provider='auto', context=None):
@@ -144,10 +195,17 @@ class ChatAgent:
         if provider in ('auto', 'ollama'):
             attempts.append(('ollama', self._post_ollama))
 
+        failures = []
         for name, poster in attempts:
             result = self._try_provider(name, poster, history)
             if result is not None:
+                # The local model answers correctly but takes two minutes, so
+                # say so instead of letting it look like a hang.
+                if name != 'groq' and failures:
+                    result['degraded'] = True
+                    result['degraded_reason'] = failures[-1]
                 return result
+            failures.append(f'{name}: {self._last_error or "unknown error"}')
 
         return {
             'reply': (
@@ -157,6 +215,8 @@ class ChatAgent:
             ),
             'provider': None,
             'offline': True,
+            'degraded': True,
+            'degraded_reason': '; '.join(failures) or 'no provider was reachable',
         }
 
     def _try_provider(self, name, poster, history):
@@ -175,8 +235,16 @@ class ChatAgent:
                     tool_calls = message.get('tool_calls') or []
 
                 if not tool_calls:
+                    # A reasoning model that exhausted its budget on internal
+                    # reasoning returns content="" and no tool calls. Treating
+                    # that as a finished answer is what produced empty bubbles,
+                    # so spend the last loop re-asking for prose only.
+                    if not content.strip() and name == 'groq' and _ < self.max_loops - 1:
+                        print('[chat] groq returned an empty completion; retrying for text')
+                        messages.append({'role': 'user', 'content': 'Reply with the answer only.'})
+                        continue
                     return {
-                        'reply': self._format_reply(content),
+                        'reply': self._format_reply(content) or EMPTY_REPLY,
                         'provider': name,
                         'model': f'{MODEL_GROQ if name == "groq" else MODEL_OLLAMA}',
                         'offline': False,
@@ -221,5 +289,6 @@ class ChatAgent:
                 'offline': False,
             }
         except Exception as error:
-            print(f'[chat] provider {name!r} failed: {error}')
+            self._last_error = f'{type(error).__name__}: {error}'
+            print(f'[chat] provider {name!r} failed: {self._last_error}')
             return None
