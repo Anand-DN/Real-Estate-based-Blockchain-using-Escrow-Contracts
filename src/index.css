@@ -5234,7 +5234,7 @@ header::after {
 
 [data-theme="dark"] .mkt__chip-btn {
   background: var(--clr-bg-dark, #111827);
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__chip-btn--on {
@@ -5487,12 +5487,12 @@ header::after {
 [data-theme="dark"] .sell__input,
 [data-theme="dark"] .sell__check {
   background: #1f2937;
-  color: var(--clr-white);
+  color: var(--color-text-primary);
   border-color: rgba(255, 255, 255, 0.10);
 }
 
 [data-theme="dark"] .sell__notice {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 /* -- dashboard: marketplace sections -- */
@@ -5620,13 +5620,13 @@ header::after {
 [data-theme="dark"] .dash__row,
 [data-theme="dark"] .dash__row-open {
   background: #1f2937;
-  color: var(--clr-white);
+  color: var(--color-text-primary);
   border-color: rgba(255, 255, 255, 0.10);
 }
 
 [data-theme="dark"] .dash__kpi-value,
 [data-theme="dark"] .dash__row h4 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .dash__kpi-label,
@@ -5651,11 +5651,11 @@ header::after {
 
 [data-theme="dark"] .dash__hero {
   background: transparent;
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .dash__hero h2 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .dash__hero p {
@@ -5678,7 +5678,7 @@ header::after {
 }
 
 [data-theme="dark"] .dash__section-head h3 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .dash__badge {
@@ -5731,7 +5731,7 @@ header::after {
 }
 
 [data-theme="dark"] .dash__row-main h4 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .dash__row-meta {
@@ -5807,7 +5807,7 @@ header::after {
 }
 
 [data-theme="dark"] .dash__kpi-value {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .dash__kpi-sub {
@@ -5821,7 +5821,7 @@ header::after {
 [data-theme="dark"] .mkt__card {
   background: #1f2937;
   border-color: rgba(255, 255, 255, 0.08);
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__card-city {
@@ -5829,7 +5829,7 @@ header::after {
 }
 
 [data-theme="dark"] .mkt__card-location {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__card-meta {
@@ -5905,7 +5905,7 @@ header::after {
 }
 
 [data-theme="dark"] .tx-card h4 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .tx-card-head {
@@ -5959,7 +5959,7 @@ header::after {
 }
 
 [data-theme="dark"] .tx-stat-value {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .tx-chip {
@@ -5982,7 +5982,7 @@ header::after {
 
 /* Sell / List Your Home */
 [data-theme="dark"] .sell__head h2 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .sell__head p {
@@ -5992,7 +5992,7 @@ header::after {
 [data-theme="dark"] .sell__steps li {
   background: #1f2937;
   border-color: rgba(255, 255, 255, 0.10);
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .sell__steps li::before {
@@ -6000,7 +6000,7 @@ header::after {
 }
 
 [data-theme="dark"] .sell__steps strong {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .sell__steps span {
@@ -6020,7 +6020,7 @@ header::after {
 [data-theme="dark"] .sell__input {
   background: #1f2937;
   border-color: rgba(255, 255, 255, 0.15);
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .sell__input:focus {
@@ -6042,13 +6042,13 @@ header::after {
 }
 
 [data-theme="dark"] .sell__result h3 {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .sell__check,
 [data-theme="dark"] .sell__primary {
   background: #1f2937;
-  color: var(--clr-white);
+  color: var(--color-text-primary);
   border-color: rgba(255, 255, 255, 0.15);
 }
 
@@ -6089,7 +6089,7 @@ header::after {
 }
 
 [data-theme="dark"] .mkt__detail-location {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__detail-facts {
@@ -6102,7 +6102,7 @@ header::after {
 }
 
 [data-theme="dark"] .mkt__fact strong {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__detail-prices {
@@ -6117,7 +6117,7 @@ header::after {
 
 [data-theme="dark"] .mkt__detail-listed-value,
 [data-theme="dark"] .mkt__detail-ai-value {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__detail-listed-sqft,
@@ -6140,7 +6140,7 @@ header::after {
 }
 
 [data-theme="dark"] .mkt__section-title {
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__amenities {
@@ -6150,7 +6150,7 @@ header::after {
 [data-theme="dark"] .mkt__amenity {
   background: #111827;
   border-color: rgba(255, 255, 255, 0.10);
-  color: var(--clr-white);
+  color: var(--color-text-primary);
 }
 
 [data-theme="dark"] .mkt__amenity i {
