@@ -2538,6 +2538,93 @@ header::after {
   animation: chat-msg-in 0.30s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Replies are structured Markdown: paragraphs and lists that space themselves
+   out, instead of one pre-wrapped blob with literal ** markers in it. */
+.chatbot__msg > * + * {
+  margin-top: 10px;
+}
+
+.chatbot__msg-p {
+  margin: 0;
+}
+
+.chatbot__msg-h {
+  margin: 0;
+  font-weight: 700;
+  color: var(--clr-black);
+}
+
+/* A heading sits tight under its own content but clearly apart from the block
+   before it, so a bulleted or multi-line reply still reads in sections. */
+.chatbot__msg > .chatbot__msg-h + * {
+  margin-top: 3px;
+}
+
+.chatbot__msg > * + .chatbot__msg-h {
+  margin-top: 14px;
+}
+
+/* Numbered lists read as steps, so the numbers stay in the gutter. */
+.chatbot__msg-list--ol,
+ol.chatbot__msg-list {
+  padding-left: 20px;
+}
+
+ol.chatbot__msg-list > li {
+  padding-left: 2px;
+}
+
+.chatbot__msg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94em;
+  table-layout: fixed;
+}
+
+.chatbot__msg-table th,
+.chatbot__msg-table td {
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+  word-break: break-word;
+}
+
+.chatbot__msg-table th {
+  font-weight: 700;
+  color: var(--clr-black);
+  border-bottom-width: 2px;
+}
+
+.chatbot__msg-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+[data-theme="dark"] .chatbot__msg-table th,
+[data-theme="dark"] .chatbot__msg-table td {
+  border-bottom-color: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .chatbot__msg-table th {
+  color: #e5e7eb;
+}
+
+.chatbot__msg-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chatbot__msg-list > li::marker {
+  color: var(--clr-grey);
+}
+
+[data-theme="dark"] .chatbot__msg-list > li::marker {
+  color: #94a3b8;
+}
+
 @keyframes chat-msg-in {
   from {
     opacity: 0;
@@ -2790,31 +2877,6 @@ header::after {
 
 .chatbot__fab:active {
   transform: scale(0.95);
-}
-
-.chatbot__fab-tag {
-  position: absolute;
-  right: -2px;
-  bottom: -2px;
-  display: grid;
-  place-items: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 5px;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #6C63FF;
-  border: 2px solid #6C63FF;
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.02em;
-}
-
-[data-theme="dark"] .chatbot__fab-tag {
-  background: #0b1220;
-  color: #c7d2fe;
-  border-color: #8b5cf6;
 }
 
 .chatbot__context {

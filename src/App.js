@@ -64,6 +64,12 @@ function App() {
   const [networkError, setNetworkError] = useState(null);
   const [notification, setNotification] = useState(null);
   const [favorites, setFavorites] = useState([]);
+
+  // The MILLOW AI launcher is available on every view, not only behind a
+  // property.  With a property open the route stays the source of truth, because
+  // /assistant/:mreid is a deep link that has to survive a reload; without one
+  // there is no route to hang the panel off, so it is plain local state.
+  const [standaloneAssistant, setStandaloneAssistant] = useState(false);
   const [theme, setTheme] = useState(() => {
     const stored = localStorage.getItem("millow_theme");
     if (stored === "dark" || stored === "light") return stored;
@@ -120,22 +126,29 @@ function App() {
     navigate(pathFor({ view: propertyOrigin.current, section: marketSection }));
   }, [marketSection]);
 
-  const setAssistantOpen = useCallback((open) => {
-    if (open) {
-      navigate(
-        pathFor({
-          view,
-          section: marketSection,
-          propertyId,
-          assistant: true,
-        }),
-      );
-    } else {
-      navigate(pathFor({ view, section: marketSection, propertyId }), {
-        replace: true,
-      });
-    }
-  }, [propertyId, view, marketSection]);
+  const setAssistantOpen = useCallback(
+    (open) => {
+      if (!propertyId) {
+        setStandaloneAssistant(open);
+        return;
+      }
+      if (open) {
+        navigate(
+          pathFor({
+            view,
+            section: marketSection,
+            propertyId,
+            assistant: true,
+          }),
+        );
+      } else {
+        navigate(pathFor({ view, section: marketSection, propertyId }), {
+          replace: true,
+        });
+      }
+    },
+    [propertyId, view, marketSection],
+  );
 
   const switchNetwork = useCallback(async () => {
     if (networkSwitchAttempted.current) return;
@@ -392,13 +405,11 @@ function App() {
         />
       )}
 
-      {propertyId && (
-        <ChatBot
-          open={Boolean(route.assistant)}
-          onOpenChange={setAssistantOpen}
-          propertyId={propertyId}
-        />
-      )}
+      <ChatBot
+        open={propertyId ? Boolean(route.assistant) : standaloneAssistant}
+        onOpenChange={setAssistantOpen}
+        propertyId={propertyId}
+      />
 
       {themeCurtain && (
         <div className="theme-curtain" aria-hidden="true">

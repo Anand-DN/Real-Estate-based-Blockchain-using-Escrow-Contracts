@@ -142,6 +142,164 @@ const actionsFor = (context) => {
   ];
 };
 
+// The assistant answers in Markdown, and the raw string used to be dropped
+// straight into the bubble, so the **bold** markers showed up as literal text
+// and every block ran together.  The reply is turned into real elements here:
+// **text** becomes <strong>, "- " lines become a list, and blocks are separated
+// by CSS rather than by literal blank lines.  Keys are derived from the line
+// index, which is stable for a given message.
+const BOLD = /\*\*(.+?)\*\*/g;
+const UNORDERED = /^[-*•]\s+/;
+const ORDERED = /^\d+[.)]\s+/;
+const HEADING = /^#{1,6}\s+/;
+const TABLE_RULE = /^\|?[\s:|-]+\|[\s:|-]*$/;
+// The model pads prices and percentages with spaces around the symbol
+// ("49.7 %", "₹ 82.05 Lakh").  Tightened so the figures read as one token.
+const LOOSE_NUMBER = /\s+([%₹])|([%₹])\s+/g;
+
+// Splits one line into text runs and <strong> runs, leaving the asterisks out.
+const inline = (text, key) => {
+  const parts = [];
+  let last = 0;
+  let match;
+  BOLD.lastIndex = 0;
+  while ((match = BOLD.exec(text)) !== null) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    parts.push(<strong key={`${key}-${match.index}`}>{match[1]}</strong>);
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+};
+
+// Collapses the whitespace the model sprinkles around currency and percent
+// signs, so a figure reads as one token instead of "₹ 82.05 Lakh".
+const tidyNumbers = (text) => {
+  let out = String(text).replace(/\s+%/g, "%");
+  let previous;
+  do {
+    previous = out;
+    out = out.replace(LOOSE_NUMBER, "$1$2");
+  } while (out !== previous);
+  return out;
+};
+
+const cells = (line) =>
+  line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((c) => tidyNumbers(c.trim()));
+
+const renderMessage = (text) => {
+  const blocks = [];
+  let items = null;
+  let ordered = false;
+  let rows = null;
+
+  const flushList = () => {
+    if (!items) return;
+    const Tag = ordered ? "ol" : "ul";
+    blocks.push(
+      <Tag className="chatbot__msg-list" key={`list-${blocks.length}`}>
+        {items}
+      </Tag>,
+    );
+    items = null;
+  };
+
+  const flushTable = () => {
+    if (!rows) return;
+    const [head, ...body] = rows;
+    blocks.push(
+      <table className="chatbot__msg-table" key={`table-${blocks.length}`}>
+        <thead>
+          <tr>
+            {head.map((c, i) => (
+              <th key={i}>{inline(tidyNumbers(c), `th-${i}`)}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {body.map((r, i) => (
+            <tr key={i}>
+              {r.map((c, j) => (
+                <td key={j}>{inline(tidyNumbers(c), `td-${i}-${j}`)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>,
+    );
+    rows = null;
+  };
+
+  const flushAll = () => {
+    flushList();
+    flushTable();
+  };
+
+  String(text ?? "")
+    .split("\n")
+    .forEach((raw, i) => {
+      const line = raw.trim();
+      // A blank line separates blocks; it must not break a list in half, since
+      // the model puts one blank line between bullets.
+      if (!line) return;
+
+      // Pipe table.  The |---|---| separator row is dropped, not rendered.
+      if (line.startsWith("|")) {
+        flushList();
+        if (TABLE_RULE.test(line)) return;
+        if (!rows) rows = [];
+        rows.push(cells(line));
+        return;
+      }
+      flushTable();
+
+      if (UNORDERED.test(line) || ORDERED.test(line)) {
+        const nowOrdered = ORDERED.test(line);
+        // A bullet list directly after a numbered one (or the reverse) starts a
+        // new list rather than silently changing the tag mid-run.
+        if (items && ordered !== nowOrdered) flushList();
+        if (!items) {
+          items = [];
+          ordered = nowOrdered;
+        }
+        const body = tidyNumbers(line.replace(nowOrdered ? ORDERED : UNORDERED, ""));
+        items.push(<li key={i}>{inline(body, `li-${i}`)}</li>);
+        return;
+      }
+      flushList();
+
+      if (HEADING.test(line)) {
+        blocks.push(
+          <p className="chatbot__msg-h" key={`h-${i}`}>
+            {inline(tidyNumbers(line.replace(HEADING, "")), `h-${i}`)}
+          </p>,
+        );
+        return;
+      }
+
+      const parts = inline(tidyNumbers(line), `p-${i}`);
+      // A line that is nothing but bold is a heading too: the model uses that
+      // shape for "Listed price" / "Risk" style section labels.
+      const isHeading = parts.length === 1 && typeof parts[0] !== "string";
+      blocks.push(
+        <p
+          className={isHeading ? "chatbot__msg-h" : "chatbot__msg-p"}
+          key={`p-${i}`}
+        >
+          {parts}
+        </p>,
+      );
+    });
+
+  flushAll();
+  return blocks;
+};
+
 // The assistant is told exactly what the user is looking at, with the real
 // numbers the property page is showing, and is told to use them instead of
 // guessing.  The MREID agent still verifies everything through its own tools.
@@ -172,6 +330,9 @@ const buildContext = (detail, chain) => {
   return {
     text: lines.filter(Boolean).join("\n"),
     label: `${property.location}, ${property.city}`,
+    location: property.location,
+    city: property.city,
+    mreid_id: detail.mreid_id,
   };
 };
 
@@ -331,7 +492,7 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
                 key={index}
                 className={`chatbot__msg chatbot__msg--${message.role}`}
               >
-                {message.content}
+                {renderMessage(message.content)}
               </div>
             ))}
             {busy && (
@@ -397,11 +558,7 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
         className="chatbot__fab"
         onClick={toggle}
         title="Ask MILLOW AI about this property"
-        aria-label={
-          open
-            ? "Close MILLOW AI assistant"
-            : "Open MILLOW AI assistant for this property"
-        }
+        aria-label={open ? "Close MILLOW AI assistant" : "Open MILLOW AI assistant"}
       >
         {open ? (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
@@ -410,10 +567,8 @@ const ChatBot = ({ open = false, onOpenChange, propertyId = null }) => {
         ) : (
           <>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.5-4.6A8.4 8.4 0 0 1 3.6 11.5a8.4 8.4 0 0 1 8.4-8.4h.5a8.4 8.4 0 0 1 8.5 8.4z" />
-              <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
+              <path d="M3 9.75 12 3l9 6.75V20a1.5 1.5 0 0 1-1.5 1.5h-4.75V15h-5.5v6.5H4.5A1.5 1.5 0 0 1 3 20z" />
             </svg>
-            <span className="chatbot__fab-tag">AI</span>
           </>
         )}
         {!open && unread && <span className="chatbot__badge" />}
