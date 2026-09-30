@@ -171,16 +171,9 @@ async function main() {
   // ---- 3. prove the toolchain works BEFORE overwriting the state file ----
   // A wrong/missing anvil must not leave a replaced .chain/state.json behind a
   // failed import, so the version gate runs before any destructive write.
-  const bin = path.join(
-    __dirname,
-    "..",
-    "node_modules",
-    ".bin",
-    process.platform === "win32" ? "anvil.cmd" : "anvil",
-  );
-  const binPath = process.env.MILLOW_ANVIL || (fs.existsSync(bin) ? bin : "anvil");
+  const { resolveAnvil, assertAnvilVersion } = require("./lib/chain");
+  const binPath = resolveAnvil();
   const args = anvilArgs(manifest, { load: true });
-  const { assertAnvilVersion } = require("./lib/chain");
   const version = assertAnvilVersion(binPath, manifest.node.version_required);
   console.log(`anvil version: ${version} (required ${manifest.node.version_required})`);
 
@@ -205,7 +198,7 @@ async function main() {
     throw new Error(
       `Could not start "${binPath}": ${spawnError.message}\n` +
         `This toolchain requires Foundry Anvil ${manifest.node.version_required} (https://getfoundry.sh), ` +
-        "or set MILLOW_ANVIL to the binary.",
+        `or place it in .foundry/bin/, or set MILLOW_ANVIL to the binary.`,
     );
   }
 

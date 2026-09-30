@@ -75,6 +75,9 @@ exportChainIndex.err.log
 !yarn-error.log*
 build_log.txt
 
+#project-local Anvil binary (~43MB, machine-specific; install per checkout)
+.foundry/
+
 #persistent local chain (Anvil) runtime state and generated artifacts
 #Never commit: contains the whole chain and is machine-specific.
 .chain/

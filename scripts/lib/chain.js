@@ -242,6 +242,44 @@ function sha256File(p) {
   return crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex");
 }
 
+// Candidate locations for a non-PATH anvil, in priority order.  On Windows a
+// real .exe is preferred, but a .cmd shim is also accepted because
+// node_modules/.bin only ever contains shims.
+function anvilSearchPaths() {
+  const home = process.env.USERPROFILE || process.env.HOME || "";
+  const names =
+    process.platform === "win32" ? ["anvil.exe", "anvil.cmd"] : ["anvil"];
+  const dirs = [
+    path.join(ROOT, ".foundry", "bin"), // vendored into this repo
+    home ? path.join(home, ".foundry", "bin") : null, // user-wide Foundry
+    path.join(ROOT, "node_modules", ".bin"), // provided by a dependency
+  ];
+  const out = [];
+  for (const dir of dirs) {
+    if (!dir) continue;
+    for (const name of names) out.push(path.join(dir, name));
+  }
+  return out;
+}
+
+// Picks the anvil binary this toolchain runs, in priority order:
+//   1. MILLOW_ANVIL              explicit override, used verbatim
+//   2. <repo>/.foundry/bin       project-local vendored binary
+//   3. <home>/.foundry/bin       user-wide Foundry install
+//   4. <repo>/node_modules/.bin  a dependency-provided shim
+//   5. "anvil"                   whatever PATH resolves
+//
+// The override is returned without an existence check on purpose: a mistyped
+// MILLOW_ANVIL must fail loudly at spawn time instead of silently falling
+// through to a different node, which would break the reproducibility guarantee.
+function resolveAnvil() {
+  if (process.env.MILLOW_ANVIL) return process.env.MILLOW_ANVIL;
+  for (const candidate of anvilSearchPaths()) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return "anvil";
+}
+
 // Reproducibility depends on the exact foundry release, because state-dump
 // layout and default account derivation have changed between versions.  Runs
 // `<bin> --version` and compares the first semver it finds against the manifest.
@@ -329,6 +367,8 @@ module.exports = {
   isAnvilProcess,
   isRpcUp,
   sha256File,
+  anvilSearchPaths,
+  resolveAnvil,
   anvilVersion,
   assertAnvilVersion,
   eventTopic,

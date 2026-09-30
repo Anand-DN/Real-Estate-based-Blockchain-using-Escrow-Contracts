@@ -13,6 +13,7 @@ const {
   CHAIN_DIR,
   ensureChainDir,
   anvilArgs,
+  resolveAnvil,
   assertAnvilVersion,
   readPid,
   writePid,
@@ -26,20 +27,6 @@ const {
 
 const LOG = path.join(CHAIN_DIR, "anvil.log");
 const ERR = path.join(CHAIN_DIR, "anvil.err.log");
-
-function resolveAnvil() {
-  if (process.env.MILLOW_ANVIL) return process.env.MILLOW_ANVIL;
-  const local = path.join(
-    __dirname,
-    "..",
-    "node_modules",
-    ".bin",
-    process.platform === "win32" ? "anvil.cmd" : "anvil",
-  );
-  if (fs.existsSync(local)) return local;
-  // Fall back to whatever is on PATH.
-  return "anvil";
-}
 
 async function main() {
   const manifest = loadManifest();
@@ -96,7 +83,9 @@ async function main() {
     throw new Error(
       `Could not start "${bin}": ${spawnError.message}\n` +
         `This toolchain requires Foundry Anvil ${manifest.node.version_required}.\n` +
-        "  - install Foundry  (https://getfoundry.sh) so `anvil --version` works, or\n" +
+        "  - place anvil " +
+        `${manifest.node.version_required} in .foundry/bin/ next to package.json,\n` +
+        "  - install Foundry (https://getfoundry.sh) so `anvil --version` works, or\n" +
         "  - point MILLOW_ANVIL at an existing anvil binary.",
     );
   }
