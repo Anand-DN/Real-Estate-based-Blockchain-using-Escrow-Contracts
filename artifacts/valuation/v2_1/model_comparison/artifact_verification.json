@@ -1,0 +1,450 @@
+{
+  "note": "Every persisted comparison model was re-loaded and re-predicted on its own persisted validation fold. Recomputed metrics match the recorded metrics within the per-metric tolerances. XGBoost was not retrained; its anchor artifact was referenced.",
+  "tolerances": {
+    "MAE_INR": 0.001,
+    "RMSE_INR": 0.001,
+    "R2_INR": 1e-09,
+    "MAPE_percent": 1e-09,
+    "MedAPE_percent": 1e-09,
+    "MAE_log": 1e-12,
+    "RMSE_log": 1e-12,
+    "R2_log": 1e-12
+  },
+  "models_verified": 40,
+  "anchor_rows_referenced": 10,
+  "mismatches": [],
+  "failures": [],
+  "all_verified": true,
+  "checks": [
+    {
+      "model": "Ridge",
+      "regime": "random",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/random_fold1.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "random",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/random_fold2.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "random",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/random_fold3.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "random",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/random_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "random",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/random_fold5.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "location_grouped",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/location_grouped_fold1.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "location_grouped",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/location_grouped_fold2.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "location_grouped",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/location_grouped_fold3.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "location_grouped",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/location_grouped_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "Ridge",
+      "regime": "location_grouped",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/Ridge/location_grouped_fold5.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "random",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/random_fold1.joblib",
+      "worst_metric": "RMSE_log",
+      "max_abs_difference": 1.1102230246251565e-16,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "random",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/random_fold2.joblib",
+      "worst_metric": "MAPE_percent",
+      "max_abs_difference": 1.4210854715202004e-14,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "random",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/random_fold3.joblib",
+      "worst_metric": "RMSE_INR",
+      "max_abs_difference": 3.725290298461914e-09,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "random",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/random_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 9.313225746154785e-10,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "random",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/random_fold5.joblib",
+      "worst_metric": "MedAPE_percent",
+      "max_abs_difference": 1.1368683772161603e-13,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "location_grouped",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/location_grouped_fold1.joblib",
+      "worst_metric": "RMSE_INR",
+      "max_abs_difference": 3.725290298461914e-09,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "location_grouped",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/location_grouped_fold2.joblib",
+      "worst_metric": "R2_INR",
+      "max_abs_difference": 2.220446049250313e-16,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "location_grouped",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/location_grouped_fold3.joblib",
+      "worst_metric": "RMSE_INR",
+      "max_abs_difference": 3.725290298461914e-09,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "location_grouped",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/location_grouped_fold4.joblib",
+      "worst_metric": "MAPE_percent",
+      "max_abs_difference": 4.263256414560601e-14,
+      "within_tolerance": true
+    },
+    {
+      "model": "RandomForest",
+      "regime": "location_grouped",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/RandomForest/location_grouped_fold5.joblib",
+      "worst_metric": "MedAPE_percent",
+      "max_abs_difference": 1.0658141036401503e-13,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "random",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/random_fold1.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "random",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/random_fold2.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "random",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/random_fold3.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "random",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/random_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "random",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/random_fold5.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "location_grouped",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/location_grouped_fold1.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "location_grouped",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/location_grouped_fold2.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "location_grouped",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/location_grouped_fold3.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "location_grouped",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/location_grouped_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "LightGBM",
+      "regime": "location_grouped",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/LightGBM/location_grouped_fold5.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "random",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/random_fold1.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "random",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/random_fold2.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "random",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/random_fold3.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "random",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/random_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "random",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/random_fold5.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "location_grouped",
+      "fold": 1,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/location_grouped_fold1.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "location_grouped",
+      "fold": 2,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/location_grouped_fold2.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "location_grouped",
+      "fold": 3,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/location_grouped_fold3.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "location_grouped",
+      "fold": 4,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/location_grouped_fold4.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "CatBoost",
+      "regime": "location_grouped",
+      "fold": 5,
+      "model_path": "models/valuation/v2_1/model_comparison/CatBoost/location_grouped_fold5.joblib",
+      "worst_metric": "MAE_INR",
+      "max_abs_difference": 0.0,
+      "within_tolerance": true
+    },
+    {
+      "model": "XGBoost",
+      "regime": "random",
+      "fold": 1,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "random",
+      "fold": 2,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "random",
+      "fold": 3,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "random",
+      "fold": 4,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "random",
+      "fold": 5,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "location_grouped",
+      "fold": 1,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "location_grouped",
+      "fold": 2,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "location_grouped",
+      "fold": 3,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "location_grouped",
+      "fold": 4,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "XGBoost",
+      "regime": "location_grouped",
+      "fold": 5,
+      "verified": "anchor artifact present, not retrained",
+      "max_abs_difference": 0.0
+    }
+  ]
+}

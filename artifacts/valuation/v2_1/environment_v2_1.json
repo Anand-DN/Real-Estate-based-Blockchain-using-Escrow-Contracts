@@ -1,5 +1,5 @@
 {
-  "recorded_at_utc": "2026-10-01T08:49:23.063388+00:00",
+  "recorded_at_utc": "2026-10-01T13:56:17.840575+00:00",
   "python_version": "3.14.7",
   "python_implementation": "CPython",
   "platform": "Windows-11-10.0.26200-SP0",
@@ -12,8 +12,8 @@
     "joblib": "1.6.0"
   },
   "optional_packages": {
-    "lightgbm": "not installed",
-    "catboost": "not installed"
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10"
   },
-  "note": "LightGBM and CatBoost are intentionally absent at baseline creation time. No package was installed, upgraded or downgraded to produce this record."
+  "note": "python, pandas, numpy, scikit-learn, xgboost and joblib are at exactly the versions recorded for the XGBoost anchor run: none was installed, upgraded or downgraded at any point. lightgbm and catboost were absent when this record was first generated and were installed afterwards, unmodified from the versions shown, solely to run the Experiment 1 five-model baseline comparison. catboost pulled in plotly and graphviz as transitive dependencies; no research-relevant package was affected."
 }

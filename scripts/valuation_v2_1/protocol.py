@@ -963,7 +963,7 @@ ENVIRONMENT_EXECUTABLE_LABEL = "python"
 def environment_record() -> Dict[str, Any]:
     """Record exact installed versions. Records only; changes nothing."""
     return {
-        "recorded_at_utc": pd.Timestamp.utcnow().isoformat(),
+        "recorded_at_utc": pd.Timestamp.now("UTC").isoformat(),
         "python_version": platform.python_version(),
         "python_implementation": platform.python_implementation(),
         "platform": platform.platform(),
@@ -977,9 +977,14 @@ def environment_record() -> Dict[str, Any]:
         },
         "optional_packages": _optional_versions(),
         "note": (
-            "LightGBM and CatBoost are intentionally absent at baseline "
-            "creation time. No package was installed, upgraded or downgraded "
-            "to produce this record."
+            "python, pandas, numpy, scikit-learn, xgboost and joblib are at "
+            "exactly the versions recorded for the XGBoost anchor run: none "
+            "was installed, upgraded or downgraded at any point. lightgbm and "
+            "catboost were absent when this record was first generated and "
+            "were installed afterwards, unmodified from the versions shown, "
+            "solely to run the Experiment 1 five-model baseline comparison. "
+            "catboost pulled in plotly and graphviz as transitive "
+            "dependencies; no research-relevant package was affected."
         ),
     }
 

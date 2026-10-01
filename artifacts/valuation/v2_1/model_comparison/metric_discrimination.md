@@ -1,0 +1,20 @@
+### Metric discriminative power: between-model spread vs fold noise
+
+| Regime | Metric key | Metric | Best model on this metric in this regime | Between-model spread | Mean within-model fold SD | Discrimination ratio | Separates models at n=5 |
+|---|---|---|---|---|---|---|---|
+| Random CV | MAE_INR | MAE (INR) | XGBoost | 460460.5776156485 | 73636.35214310422 | 6.253169313993089 | True |
+| Random CV | RMSE_INR | RMSE (INR) | XGBoost | 351177.9132023677 | 982694.8700017694 | 0.35736211098948284 | False |
+| Random CV | R2_INR | R² | XGBoost | 0.027391659128138596 | 0.014145182335136 | 1.9364656092201047 | True |
+| Random CV | MAPE_percent | MAPE (%) | XGBoost | 4.168171420325379 | 1.0482888166588258 | 3.976167020087504 | True |
+| Random CV | MedAPE_percent | MedAPE (%) | XGBoost | 5.132057586609616 | 0.6345610487232302 | 8.08757108072672 | True |
+| Random CV | MAE_log | MAE (log1p INR) | XGBoost | 0.028218865519636704 | 0.00638647931358412 | 4.41853236095431 | True |
+| Random CV | RMSE_log | RMSE (log1p INR) | XGBoost | 0.02174371257472596 | 0.00776845369539632 | 2.7989756298105437 | True |
+| Random CV | R2_log | R² (log space) | XGBoost | 0.042742598887473116 | 0.0104396752538449 | 4.094246022809105 | True |
+| Location-Grouped CV | MAE_INR | MAE (INR) | CatBoost | 724379.5371774333 | 971484.4036569234 | 0.745641962393506 | False |
+| Location-Grouped CV | RMSE_INR | RMSE (INR) | XGBoost | 245251.02526051924 | 6152713.4510998055 | 0.03986062851938608 | False |
+| Location-Grouped CV | R2_INR | R² | XGBoost | 0.023655309408663595 | 0.02369677609473242 | 0.9982501127620461 | False |
+| Location-Grouped CV | MAPE_percent | MAPE (%) | CatBoost | 11.902642646751346 | 7.418888436529855 | 1.6043700816612823 | True |
+| Location-Grouped CV | MedAPE_percent | MedAPE (%) | CatBoost | 8.091123868434536 | 2.5157059127940324 | 3.216243928706375 | True |
+| Location-Grouped CV | MAE_log | MAE (log1p INR) | CatBoost | 0.05651502457953539 | 0.02329442083254408 | 2.4261184678427203 | True |
+| Location-Grouped CV | RMSE_log | RMSE (log1p INR) | CatBoost | 0.04536234842187081 | 0.02342321369533522 | 1.9366406767191306 | True |
+| Location-Grouped CV | R2_log | R² (log space) | CatBoost | 0.09870542106542599 | 0.0480644446079472 | 2.053605775964913 | True |

@@ -1,0 +1,135 @@
+{
+  "experiment": "MILLOW Experiment 1 - five-model baseline comparison",
+  "protocol": "V2.1 (leakage-controlled research protocol)",
+  "historical_reference": "Historical V2 reference - pre-leakage-control baseline",
+  "non_equivalence_warning": "V2.1 and historical V2 are NOT directly comparable. Frequency leakage removed, 737 duplicates removed, feature set changed, evaluation changed from a single split to 5-fold CV. No better-or-worse claim is made.",
+  "models_trained_this_run": [
+    "Ridge",
+    "RandomForest",
+    "LightGBM",
+    "CatBoost"
+  ],
+  "xgboost": "NOT retrained. Results read from the existing V2.1 anchor at artifacts/valuation/v2_1/xgb_anchor_metrics_v2_1.json.",
+  "tuning_performed": false,
+  "hyperparameter_search": false,
+  "early_stopping_used": false,
+  "post_hoc_configuration_changes": false,
+  "predictions_pooled_across_folds": false,
+  "winner_chosen": false,
+  "models_ranked": false,
+  "primary_metrics_for_interpretation": [
+    "R2_log",
+    "MAE_log",
+    "MedAPE_percent"
+  ],
+  "metric_keys": [
+    "MAE_INR",
+    "RMSE_INR",
+    "R2_INR",
+    "MAPE_percent",
+    "MedAPE_percent",
+    "MAE_log",
+    "RMSE_log",
+    "R2_log"
+  ],
+  "feature_count": 48,
+  "random_state": 42,
+  "folds_loaded_from": "artifacts/valuation/v2_1/cv_folds_v2_1.json",
+  "folds_regenerated": false,
+  "dataset": {
+    "path": "data/processed/MREID_property.csv",
+    "policy": "Drop rows that are exact duplicates on ['source_city', 'location', 'area', 'no_of_bedrooms', 'price'], keeping the first occurrence. mreid_id and source_file are excluded from the key. No fuzzy, near-duplicate or within-location de-duplication is performed.",
+    "key": [
+      "source_city",
+      "location",
+      "area",
+      "no_of_bedrooms",
+      "price"
+    ],
+    "original_rows": 29135,
+    "duplicate_rows_removed": 737,
+    "final_rows": 28398,
+    "invalid_rows_removed": 0
+  },
+  "training_time_seconds": {
+    "Ridge": {
+      "random_fold1_fit_seconds": 1.374,
+      "random_fold2_fit_seconds": 1.178,
+      "random_fold3_fit_seconds": 1.087,
+      "random_fold4_fit_seconds": 1.104,
+      "random_fold5_fit_seconds": 1.11,
+      "location_grouped_fold1_fit_seconds": 1.247,
+      "location_grouped_fold2_fit_seconds": 1.159,
+      "location_grouped_fold3_fit_seconds": 1.381,
+      "location_grouped_fold4_fit_seconds": 0.888,
+      "location_grouped_fold5_fit_seconds": 1.094,
+      "total_fit_seconds": 11.622,
+      "total_predict_seconds": 0.67,
+      "overall_fit_seconds": 11.622
+    },
+    "RandomForest": {
+      "random_fold1_fit_seconds": 55.239,
+      "random_fold2_fit_seconds": 58.609,
+      "random_fold3_fit_seconds": 67.005,
+      "random_fold4_fit_seconds": 70.407,
+      "random_fold5_fit_seconds": 69.945,
+      "location_grouped_fold1_fit_seconds": 75.098,
+      "location_grouped_fold2_fit_seconds": 81.593,
+      "location_grouped_fold3_fit_seconds": 87.445,
+      "location_grouped_fold4_fit_seconds": 80.956,
+      "location_grouped_fold5_fit_seconds": 81.102,
+      "total_fit_seconds": 727.399,
+      "total_predict_seconds": 6.773,
+      "overall_fit_seconds": 727.399
+    },
+    "LightGBM": {
+      "random_fold1_fit_seconds": 13.524,
+      "random_fold2_fit_seconds": 14.069,
+      "random_fold3_fit_seconds": 11.776,
+      "random_fold4_fit_seconds": 13.514,
+      "random_fold5_fit_seconds": 11.958,
+      "location_grouped_fold1_fit_seconds": 11.489,
+      "location_grouped_fold2_fit_seconds": 10.76,
+      "location_grouped_fold3_fit_seconds": 12.696,
+      "location_grouped_fold4_fit_seconds": 10.841,
+      "location_grouped_fold5_fit_seconds": 14.242,
+      "total_fit_seconds": 124.869,
+      "total_predict_seconds": 3.547,
+      "overall_fit_seconds": 124.869
+    },
+    "CatBoost": {
+      "random_fold1_fit_seconds": 25.779,
+      "random_fold2_fit_seconds": 27.876,
+      "random_fold3_fit_seconds": 28.031,
+      "random_fold4_fit_seconds": 22.886,
+      "random_fold5_fit_seconds": 22.223,
+      "location_grouped_fold1_fit_seconds": 21.16,
+      "location_grouped_fold2_fit_seconds": 21.799,
+      "location_grouped_fold3_fit_seconds": 21.461,
+      "location_grouped_fold4_fit_seconds": 21.664,
+      "location_grouped_fold5_fit_seconds": 20.731,
+      "total_fit_seconds": 233.61,
+      "total_predict_seconds": 2.444,
+      "overall_fit_seconds": 233.61
+    }
+  },
+  "artifacts": {
+    "configurations": "artifacts/valuation/v2_1/model_comparison/model_configurations.json",
+    "per_fold_csv": "artifacts/valuation/v2_1/model_comparison/per_fold_metrics.csv",
+    "per_fold_json": "artifacts/valuation/v2_1/model_comparison/per_fold_metrics.json",
+    "summary_csv": "artifacts/valuation/v2_1/model_comparison/summary_metrics.csv",
+    "comparison_table_csv": "artifacts/valuation/v2_1/model_comparison/comparison_table.csv",
+    "environment_json": "artifacts/valuation/v2_1/model_comparison/environment.json",
+    "training_time_csv": "artifacts/valuation/v2_1/model_comparison/training_time.csv",
+    "artifact_verification_json": "artifacts/valuation/v2_1/model_comparison/artifact_verification.json",
+    "model_dir": "models/valuation/v2_1/model_comparison"
+  },
+  "protected_and_untouched": [
+    "artifacts/valuation/valuation_v2_*",
+    "models/valuation/valuation_v2_*",
+    "artifacts/valuation/v2_1/cv_folds_v2_1.json",
+    "artifacts/valuation/v2_1/xgb_anchor_metrics_v2_1.json",
+    "models/valuation/v2_1/xgb_anchor_folds/",
+    ".chain/state.json"
+  ]
+}

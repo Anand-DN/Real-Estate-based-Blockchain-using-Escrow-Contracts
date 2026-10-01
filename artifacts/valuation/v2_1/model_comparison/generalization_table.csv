@@ -1,0 +1,6 @@
+Model,Random R² (log),Grouped R² (log),R² (log) absolute change,R² (log) relative change,R² (log) change 95% CI (Welch),Random MedAPE (%),Grouped MedAPE (%),MedAPE absolute change,MedAPE relative change,MedAPE change 95% CI (Welch)
+Ridge,0.3296 ± 0.0128,0.1690 ± 0.0473,-0.1606,not applicable: R² is not a ratio scale,"[-0.2185, -0.1027]",33.5493 ± 0.4620,45.3847 ± 1.5882,+11.84 pp,+35.3%,"[+9.89, +13.78] pp"
+Random Forest,0.3308 ± 0.0085,0.2576 ± 0.0359,-0.0732,not applicable: R² is not a ratio scale,"[-0.1172, -0.0293]",33.8880 ± 0.7229,37.7671 ± 2.5157,+3.88 pp,+11.4%,"[+0.80, +6.96] pp"
+LightGBM,0.3397 ± 0.0105,0.1878 ± 0.0618,-0.1519,not applicable: R² is not a ratio scale,"[-0.2281, -0.0757]",35.6561 ± 0.6735,45.3190 ± 3.4349,+9.66 pp,+27.1%,"[+5.44, +13.89] pp"
+CatBoost,0.3640 ± 0.0106,0.2677 ± 0.0378,-0.0963,not applicable: R² is not a ratio scale,"[-0.1426, -0.0500]",32.5243 ± 0.7431,37.2936 ± 2.3122,+4.77 pp,+14.7%,"[+1.95, +7.59] pp"
+XGBoost,0.3723 ± 0.0098,0.2340 ± 0.0575,-0.1384,not applicable: R² is not a ratio scale,"[-0.2093, -0.0675]",30.5240 ± 0.5713,38.9338 ± 2.7274,+8.41 pp,+27.6%,"[+5.06, +11.76] pp"

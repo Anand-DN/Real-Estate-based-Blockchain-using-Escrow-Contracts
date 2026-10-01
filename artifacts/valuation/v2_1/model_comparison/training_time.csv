@@ -1,0 +1,5 @@
+model,random_fold1_fit_seconds,random_fold2_fit_seconds,random_fold3_fit_seconds,random_fold4_fit_seconds,random_fold5_fit_seconds,location_grouped_fold1_fit_seconds,location_grouped_fold2_fit_seconds,location_grouped_fold3_fit_seconds,location_grouped_fold4_fit_seconds,location_grouped_fold5_fit_seconds,total_fit_seconds,total_predict_seconds,overall_fit_seconds
+Ridge,1.374,1.178,1.087,1.104,1.11,1.247,1.159,1.381,0.888,1.094,11.622,0.67,11.622
+RandomForest,55.239,58.609,67.005,70.407,69.945,75.098,81.593,87.445,80.956,81.102,727.399,6.773,727.399
+LightGBM,13.524,14.069,11.776,13.514,11.958,11.489,10.76,12.696,10.841,14.242,124.869,3.547,124.869
+CatBoost,25.779,27.876,28.031,22.886,22.223,21.16,21.799,21.461,21.664,20.731,233.61,2.444,233.61
