@@ -51,7 +51,6 @@ from __future__ import annotations
 import hashlib
 import json
 import platform
-import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence, Tuple
@@ -953,6 +952,14 @@ def compute_metrics(
 # ENVIRONMENT RECORD (V2.1 change 7)
 # ============================================================
 
+# Machine-independent interpreter label recorded in the environment record.
+# sys.executable is an absolute path such as
+#   C:\Users\<user>\AppData\Local\Programs\Python\<ver>\python.exe
+# which discloses the local username and host layout and is useless for
+# reproducibility. python_version() already pins the interpreter version.
+ENVIRONMENT_EXECUTABLE_LABEL = "python"
+
+
 def environment_record() -> Dict[str, Any]:
     """Record exact installed versions. Records only; changes nothing."""
     return {
@@ -960,7 +967,7 @@ def environment_record() -> Dict[str, Any]:
         "python_version": platform.python_version(),
         "python_implementation": platform.python_implementation(),
         "platform": platform.platform(),
-        "executable": sys.executable,
+        "executable": ENVIRONMENT_EXECUTABLE_LABEL,
         "packages": {
             "pandas": pd.__version__,
             "numpy": np.__version__,
