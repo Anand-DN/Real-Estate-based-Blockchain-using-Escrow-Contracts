@@ -15,21 +15,40 @@ can be switched independently.
 
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 
 import httpx
 
+# 127.0.0.1, not "localhost": the backend binds IPv4 only, and on this machine
+# "localhost" resolves to ::1 first, so every httpx.get() took ~2.1s to fail
+# with WinError 10061 before retrying on 127.0.0.1 and finally succeeding. That
+# single character was most of the perceived chat latency, because a risk answer
+# makes three backend calls.
 BACKEND_BASE = os.getenv(
     "MILLOW_PROPERTY_API_URL",
-    "http://localhost:8001",
+    "http://127.0.0.1:8001",
 )
 
 _TIMEOUT = httpx.Timeout(30.0)
 
+# One pooled client instead of httpx.get() per call.  A throwaway client per
+# request meant a fresh TCP handshake every time; the shared client keeps the
+# connection warm across a chat turn's tool calls.
+_CLIENT = httpx.Client(base_url=BACKEND_BASE, timeout=_TIMEOUT)
+
 
 def _get(path):
-    response = httpx.get(f"{BACKEND_BASE}{path}", timeout=_TIMEOUT)
+    response = _CLIENT.get(path)
     response.raise_for_status()
     return response.json()
+
+
+def _get_all(paths):
+    """GET several independent paths concurrently, preserving order."""
+    if len(paths) == 1:
+        return [_get(paths[0])]
+    with ThreadPoolExecutor(max_workers=len(paths)) as pool:
+        return [f.result() for f in [pool.submit(_get, p) for p in paths]]
 
 
 # ============================================================
@@ -64,20 +83,18 @@ def handle_search(kwargs):
             if value < 1 or value > 100:
                 value = 20
         params[key] = value
-    try:
-        data = _get("/api/properties/search")
-    except Exception:
-        data = None
-    if data is None:
-        return {"error": "Catalogue search failed. Backend unavailable?"}
+    # One request, not two.  This used to fetch the unfiltered page first and
+    # then immediately overwrite it whenever any filter was present, so every
+    # filtered search paid for a full page fetch it threw away.
+    path = "/api/properties/search"
     if params:
-        try:
-            qs = "&".join(f"{k}={v}" for k, v in params.items())
-            data = _get(f"/api/properties/search?{qs}")
-        except httpx.HTTPStatusError as exc:
-            return {"error": f"Search failed (HTTP {exc.response.status_code})."}
-        except Exception as exc:
-            return {"error": f"Search failed: {exc}"}
+        path += "?" + "&".join(f"{k}={v}" for k, v in params.items())
+    try:
+        data = _get(path)
+    except httpx.HTTPStatusError as exc:
+        return {"error": f"Search failed (HTTP {exc.response.status_code})."}
+    except Exception as exc:
+        return {"error": f"Search failed: {exc}"}
     results = []
     for row in (data.get("results") or [])[:10]:
         signal = row.get("ai_market_signal") or {}
@@ -213,6 +230,161 @@ def handle_forecast(mreid_id, years=5):
     }
 
 
+# Severity bands over the 0-100 composite anomaly score produced by
+# backend/risk_analysis.py.  These label a deterministic anomaly score; they are
+# not probabilities and not fraud verdicts.
+RISK_BANDS = ((20.0, "low"), (40.0, "moderate"), (60.0, "elevated"), (80.0, "high"))
+
+
+def _risk_band(score):
+    if not isinstance(score, (int, float)):
+        return None
+    for ceiling, label in RISK_BANDS:
+        if score < ceiling:
+            return label
+    return "severe"
+
+
+def handle_mreid_risk(mreid_id):
+    """Deterministic anomaly analysis for one MREID listing.
+
+    The MREID agent had no risk tool at all, so the Risk quick action in
+    ChatBot.js made the assistant answer "I don't have a tool that performs a
+    detailed risk analysis".  The number it was refusing to produce already
+    existed: backend/risk_context.py serves GET
+    /api/properties/{mreid_id}/risk-analysis, which is the same endpoint the
+    property Risk tab renders through src/lib/millowApi.js.  This wraps it so
+    the chat and the UI report one identical score.
+
+    The backend ETH agent's check_transaction_fraud cannot be reused here: it
+    scores the 24 demo listings by numeric token id, which does not exist in the
+    MREID catalogue.
+    """
+    mreid_id = str(mreid_id or "").strip()
+    if not mreid_id:
+        return {"error": "MREID id is required."}
+
+    # The anomaly analysis and the catalogue record are independent reads, so
+    # issue them together rather than one after the other: the record is only
+    # needed for the price-gap context, and waiting for it doubled the tool's
+    # wall time.
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        risk_future = pool.submit(_get, f"/api/properties/{mreid_id}/risk-analysis")
+        record_future = pool.submit(handle_property, mreid_id)
+        try:
+            data = risk_future.result()
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code == 404:
+                return {"error": f"Property '{mreid_id}' not found (HTTP 404)."}
+            if exc.response.status_code == 503:
+                return {
+                    "error": (
+                        "The risk-analysis dataset is not built on this machine. "
+                        "Generate it with: python scripts/analyze_horizon_transactions.py"
+                    )
+                }
+            return {"error": f"Risk analysis failed (HTTP {exc.response.status_code})."}
+        except Exception as exc:
+            return {"error": f"Could not reach the MILLOW property backend at {BACKEND_BASE}: {exc}"}
+        record = record_future.result()
+
+    indicators = data.get("indicators") or []
+    # Rank by severity so the model leads with what actually fired instead of
+    # reading five indicators in dataset order.
+    ranked = sorted(indicators, key=lambda i: -(i.get("severity_points") or 0))
+    flagged = [i for i in ranked if (i.get("status") or "none") != "none"]
+    score = data.get("anomaly_score")
+
+    result = {
+        "mreid_id": data.get("mreid_id", mreid_id),
+        "city": data.get("city"),
+        "anomaly_score": score,
+        "score_scale": data.get("score_scale"),
+        "severity": _risk_band(score),
+        "score_interpretation": data.get("score_interpretation"),
+        "listing_context": data.get("listing_context"),
+        "indicators_total": len(indicators),
+        "indicators_flagged": len(flagged),
+        "indicators": [
+            {
+                "title": i.get("title"),
+                "dimension": i.get("dimension"),
+                "status": i.get("status"),
+                "direction": i.get("direction"),
+                "z": i.get("z"),
+                "explanation": i.get("explanation"),
+            }
+            for i in ranked
+        ],
+        "horizon_context": None,  # replaced just below
+        # One line, not the backend's full paragraph: the result is re-sent as
+        # prompt on the model's follow-up call and the long form is only worth
+        # reading in the UI, where /risk-analysis serves it directly.
+        "methodology": (
+            "Listing scored against comparable MREID listings in the same "
+            "city/locality using robust z-scores (thresholds 2.5 / 4.0). No "
+            "valuation model or external data feed the score."
+        ),
+        "disclaimer": data.get("disclaimer"),
+    }
+
+    # Horizon is procedurally generated benchmark data and its price levels are
+    # not comparable to the MREID catalogue: the city median price-per-sqft it
+    # reports sits 6-14x above the MREID per-sqft figure for the same city, and
+    # the ratio is not constant, so it is not a unit conversion either. Passing
+    # those numbers on invites the model to quote a nonsense "median price per
+    # sqft" at the user, so the price levels are dropped and only the genuinely
+    # non-price context is kept.
+    horizon = data.get("horizon_context")
+    if isinstance(horizon, dict):
+        # synthetic_note and dataset are dropped along with the price levels: the
+        # whole tool result is re-sent as prompt on the model's second call, and
+        # at a 7k input-tokens-per-minute free-tier ceiling every boilerplate
+        # character here is a turn the user cannot ask.  The disclaimer below is
+        # kept in full, because that one is a compliance line, not commentary.
+        horizon = {
+            k: v
+            for k, v in horizon.items()
+            if k not in (
+                "median_price_per_sqft",
+                "median_negotiation_pct",
+                "synthetic_note",
+                "dataset",
+            )
+        }
+        horizon["price_levels_excluded"] = (
+            "Horizon price levels are not comparable with MREID prices and are "
+            "omitted; never quote a median price per sqft from this tool."
+        )
+    result["horizon_context"] = horizon
+
+    # The anomaly score covers how unusual the listing is; the valuation gap is
+    # the other half of what a buyer is actually weighing, and the Risk question
+    # asks for both.  `record` was already fetched concurrently above.
+    if isinstance(record, dict) and not record.get("error"):
+        est = record.get("ai_estimation") or {}
+        signal = record.get("ai_market_signal") or {}
+        locality = record.get("locality") or {}
+        result["valuation_context"] = {
+            "listed_price": record.get("listed_price"),
+            "listed_price_formatted": record.get("listed_price_formatted"),
+            "price_per_sqft": record.get("price_per_sqft"),
+            "ai_estimated_price": est.get("ai_estimated_price"),
+            "ai_estimated_price_formatted": est.get("ai_estimated_price_formatted"),
+            "market_signal": signal.get("label"),
+            "difference_pct": signal.get("difference_pct"),
+            "locality_median_price_per_sqft": locality.get("median_price_per_sqft"),
+            "locality_record_count": locality.get("count"),
+        }
+        result["buyer_checklist"] = (
+            "Verify the title/registration papers and the circle rate against the "
+            "registered price, confirm the area and bedroom count by physical "
+            "inspection, check the seller's authority and any active encumbrance, "
+            "and treat this score as a research signal rather than a clearance."
+        )
+    return result
+
+
 MREID_TOOLS = [
     {
         "type": "function",
@@ -241,23 +413,23 @@ MREID_TOOLS = [
         "function": {
             "name": "search_mreid_properties",
             "description": (
-                "Search the real MILLOW MREID catalogue with optional filters (city, location, "
-                "price/area ranges, bedrooms, AI market signal). Returns real properties with "
-                "listed price, AI estimate and signal. Use for 'find me properties in X'."
+                "Search the real MREID catalogue with optional filters. Returns real "
+                "properties with listed price, AI estimate and market signal. Use for "
+                "'find me properties in X'."
             ),
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "city": {"type": "string", "description": "City (Bangalore, Chennai, Delhi, Hyderabad, Kolkata, Mumbai)"},
-                    "location": {"type": "string", "description": "Locality substring, e.g. 'Whitefield'"},
-                    "min_price": {"type": "number", "description": "Minimum listed price in INR"},
-                    "max_price": {"type": "number", "description": "Maximum listed price in INR"},
-                    "min_area": {"type": "number", "description": "Minimum area in sqft"},
-                    "max_area": {"type": "number", "description": "Maximum area in sqft"},
-                    "bedrooms": {"type": "integer", "description": "Exact number of bedrooms"},
+                    "city": {"type": "string", "description": "City"},
+                    "location": {"type": "string", "description": "Locality substring"},
+                    "min_price": {"type": "number", "description": "Min listed price INR"},
+                    "max_price": {"type": "number", "description": "Max listed price INR"},
+                    "min_area": {"type": "number", "description": "Min area sqft"},
+                    "max_area": {"type": "number", "description": "Max area sqft"},
+                    "bedrooms": {"type": "integer", "description": "Exact bedrooms"},
                     "ai_signal": {"type": "string", "description": "undervalued | overvalued | in_range"},
-                    "sort": {"type": "string", "description": "price_desc, price_asc, ai_difference_desc, ..."},
-                    "page_size": {"type": "integer", "description": "Number of results (max 100)"},
+                    "sort": {"type": "string", "description": "e.g. price_asc, price_desc"},
+                    "page_size": {"type": "integer", "description": "Max results (100)"},
                 },
             },
         },
@@ -284,12 +456,10 @@ MREID_TOOLS = [
         "function": {
             "name": "forecast_mreid_price",
             "description": (
-                "Project what a real MREID property's value could be in the future. "
-                "Compounds the MILLOW V5 AI research estimate at a flat annual rate "
-                "(default 5%, max 30 years). Use this whenever the user asks about "
-                "future price, forecast, appreciation, 'what will this be worth in N "
-                "years', or 'price in 2035'. Without this tool the assistant has to "
-                "refuse those questions."
+                "Project a MREID property's future value: compounds the MILLOW V5 AI "
+                "estimate at a flat annual rate (default 5%, max 30 years). Use for any "
+                "question about future price, forecast, appreciation or 'what will this "
+                "be worth in N years'."
             ),
             "parameters": {
                 "type": "object",
@@ -301,6 +471,30 @@ MREID_TOOLS = [
                     "years": {
                         "type": "integer",
                         "description": "Years ahead to project (default 5, max 30)",
+                    },
+                },
+                "required": ["mreid_id"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_mreid_risk",
+            "description": (
+                "Deterministic risk and anomaly analysis for one MREID listing: a 0-100 "
+                "anomaly score with severity band, the indicators that fired (price/sqft "
+                "vs comparables, registered price vs circle rate, records completeness, "
+                "resale, price history), the price gap vs the AI estimate, and a buyer "
+                "checklist. MANDATORY for any question about a listing's risks, safety, "
+                "anomalies, red flags or due diligence."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mreid_id": {
+                        "type": "string",
+                        "description": "Property id like MREID_0000001",
                     },
                 },
                 "required": ["mreid_id"],
@@ -337,38 +531,141 @@ MREID_HANDLERS = {
     "search_mreid_properties": lambda **k: handle_search(k),
     "get_mreid_market_breakdown": lambda **k: handle_market_breakdown(k),
     "forecast_mreid_price": lambda **k: handle_forecast(k.get("mreid_id"), k.get("years", 5)),
+    "get_mreid_risk": lambda **k: handle_mreid_risk(k.get("mreid_id")),
     "get_mreid_overview": lambda **k: handle_overview(),
     "get_mreid_insights": lambda **k: handle_insights(),
 }
 
 
+# Order matters: the first intent whose keywords appear wins, so the specific
+# ones (risk, forecast) are tested before the broad ones (price, details) that
+# would otherwise swallow the question.
+#
+# The frontend quick actions in src/components/ChatBot.js are the seven tabs
+# (Price, Risk, Details, Locality, On-chain, Forecast, Similar), and each entry
+# below is matched to how the users of those tabs actually phrase their ask.
+_MREID_INTENTS = (
+    (
+        ("risk", "risky", "safe", "safety", "anomaly", "anomalies", "red flag",
+         "fraud", "scam", "due diligence", "verify", "careful", "trustworthy",
+         "encumbrance", "clearance", "should i buy", "problems", "issues"),
+        ("get_mreid_property", "get_mreid_risk"),
+    ),
+    (
+        ("forecast", "future", "appreciation", "projection", "projected",
+         "project", "forward", "in the next", "years", "worth in", "2035",
+         "2040", "2050"),
+        ("get_mreid_property", "forecast_mreid_price"),
+    ),
+    (
+        # Split from the wider market question below.  A locality comparison only
+        # needs the property record (which already carries its own locality
+        # cohort stats) plus the locality breakdown; shipping the whole-catalogue
+        # overview and insight tools with it tripled the prompt for no gain.
+        ("locality", "neighbourhood", "neighborhood", "median price per sqft",
+         "median", "like to live", "compare with other", "surrounding"),
+        ("get_mreid_property", "get_mreid_market_breakdown"),
+    ),
+    (
+        ("market", "average", "breakdown", "trend", "overview",
+         "insight", "city-wide", "across the city", "whole catalogue"),
+        ("get_mreid_market_breakdown", "get_mreid_overview", "get_mreid_insights",
+         "get_mreid_property"),
+    ),
+    (
+        ("similar", "comparable", "alternative", "other properties", "nearby",
+         "like this", "cheaper in", "vs "),
+        ("get_mreid_property", "search_mreid_properties"),
+    ),
+    (
+        ("find", "search", "show me", "listings", "properties in", "any 2-bedroom",
+         "undervalued 2", "options"),
+        ("search_mreid_properties", "get_mreid_property"),
+    ),
+    (
+        ("detail", "details", "configuration", "config", "floor", "facing",
+         "age", "amenities", "catalogue", "on file", "spec", "bedroom", "bhk",
+         "car parking", "lift"),
+        ("get_mreid_property",),
+    ),
+    (
+        ("on-chain", "on chain", "blockchain", "tokenized", "tokenised", "nft",
+         "owner", "escrow", "listed for sale", "active sale", "transaction status"),
+        ("get_mreid_property",),
+    ),
+    (
+        ("price", "valuation", "estimate", "worth", "cost", "how much", "rate"),
+        ("get_mreid_property",),
+    ),
+)
+
+
+def select_tools(messages):
+    """Narrow the tool catalogue to what the latest question can actually need.
+
+    A tool-using turn pays its prompt twice - once to choose the tool, once to
+    write the answer - and Groq's free tier allows 7000 input tokens per minute.
+    Sending all seven schemas every time cost ~4400 tokens per question, so the
+    user was throttled after two or three questions and the turn failed over
+    with a misleading "Groq is not configured" message.  A matched intent is
+    ~2250 tokens instead.
+
+    This is a keyword match, and anything unrecognised returns the full set, so
+    a misroute can cost some accuracy but can never hide a tool.  That property
+    is deliberate: the Risk tab originally refused because a tool was missing,
+    and a router that could hide tools would bring that bug back.
+    """
+    if not messages:
+        return MREID_TOOLS
+    last = messages[-1] or {}
+    text = (last.get("content") or "").lower()
+    if not text:
+        return MREID_TOOLS
+    for keywords, names in _MREID_INTENTS:
+        if any(keyword in text for keyword in keywords):
+            wanted = set(names)
+            picked = [t for t in MREID_TOOLS if t["function"]["name"] in wanted]
+            if picked:
+                return picked
+    return MREID_TOOLS
+
+
+# Kept deliberately tight.  The whole system prompt plus the tool schemas is
+# re-sent on every call, and a turn costs two calls, so at ~2100 prompt tokens a
+# turn burned ~4200 tokens against a free Groq tier that allows roughly 8k per
+# minute - two turns a minute and the API answers 429, which the agent then
+# absorbs as 8s/16s/32s of backoff.  Every rule below earns its tokens.
 MREID_SYSTEM_PROMPT = (
-    "You are Millow AI operating inside the MILLOW MREID Indian real-estate platform. "
-    "You answer questions about real properties from the MREID catalogue using ONLY "
-    "the available tools, whose data comes from the live MILLOW backend — never invent "
-    "property, price, area, owner, or market numbers.\n\n"
-    "Every claim you make must be labelled with one of these prefixes in the answer:\n"
-    "- DATA FACT    -> information returned by a tool from the real dataset/API.\n"
-    "- AI MODEL ESTIMATE -> the MILLOW V5 research estimate returned by a tool.\n"
-    "- MODEL-BASED INTERPRETATION -> your interpretation of tool-returned "
-    "numbers (e.g. 'this looks potentially undervalued relative to the AI estimate').\n\n"
-    "Rules:\n"
-    "- If the user names a property or MREID, call get_mreid_property first. If it errors, "
-    "say you don't have that record and offer to search.\n"
-    "- For any question about a future or projected value ('what will it be worth in N "
-    "years', 'price in 2035', 'appreciation', 'forecast'), call forecast_mreid_price with "
-    "the MREID and the number of years, and report the projected figure as MODEL-BASED "
-    "INTERPRETATION with the base estimate and the rate you assumed. Never reply that you "
-    "cannot predict future prices: this tool exists for exactly that question.\n"
-    "- Report prices in Indian Rupees using the formatted values the tool returns "
-    "(\u20b9 Crore / \u20b9 Lakh).\n"
-    "- The AI estimate is an AI-assisted research estimate, not a certified appraisal; "
-    "say so when reporting valuation.\n"
-    "- Never describe a property as fraudulent or mispriced; use only 'potentially "
-    "undervalued / potentially overvalued / near the estimated market range' as research "
-    "signals, always with the underlying numbers.\n"
-    "- If the question is unrelated to the MREID catalogue, politely decline in one "
-    "short sentence.\n"
-    "- Answer only what was asked, in short readable paragraphs. Cite which tool "
-    "returned the data (e.g. 'per the catalogue record')."
+    "You are Millow AI in the MILLOW MREID Indian real-estate app. Answer only from "
+    "the tools, which read the live MILLOW backend. Never invent property, price, "
+    "area, owner or market numbers.\n\n"
+    "Label every claim:\n"
+    "- DATA FACT = returned by a tool.\n"
+    "- AI MODEL ESTIMATE = the MILLOW V5 research estimate from a tool.\n"
+    "- MODEL-BASED INTERPRETATION = your reading of tool numbers.\n\n"
+    "Tool rules:\n"
+    "- A named property or MREID: call get_mreid_property first; if it errors, say "
+    "the record is missing and offer to search.\n"
+    "- Risks, safety, anomalies, red flags, due diligence, 'should I be careful': call "
+    "get_mreid_risk. NEVER say you have no risk tool or cannot assess a property - "
+    "that tool exists for exactly this and refusing is always wrong. Then give the 0-100 "
+    "anomaly score and severity band, the indicators that fired with their explanations, "
+    "the price gap vs the AI estimate, and what to verify before paying. The score is an "
+    "anomaly score, not a probability and not fraud detection: never call a listing "
+    "fraudulent, and pass on the disclaimer.\n"
+    "- Future value ('worth in N years', 'appreciation', 'forecast'): call "
+    "forecast_mreid_price with the MREID and years, and report it as MODEL-BASED "
+    "INTERPRETATION with the base estimate and the rate. Never say you cannot predict "
+    "future prices.\n"
+    "- Prices: use the formatted ₹ Crore / ₹ Lakh values the tools return.\n"
+    "- The AI estimate is a research estimate, not a certified appraisal; say so.\n"
+    "- Only 'potentially undervalued / potentially overvalued / near the estimated "
+    "range' as research signals, always with the underlying numbers.\n"
+    "- Off-topic: decline in one short sentence.\n\n"
+    "Style (this is a chat bubble, not a report):\n"
+    "- 60-150 words unless depth was asked for. Lead with the number or verdict. No "
+    "preamble, no restating the question, no closing summary.\n"
+    "- Bullet lists only for 3+ genuinely separate items. Never restate raw tool JSON.\n"
+    "- No markdown headings, no pipe tables; short paragraphs and the odd bold phrase.\n"
+    "- Write ₹93.69 Lakh and 9.3% with no space after the symbol."
 )

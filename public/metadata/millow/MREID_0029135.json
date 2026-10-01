@@ -1,0 +1,24 @@
+{
+  "name": "MILLOW Property MREID_0029135",
+  "property_identifier": "MREID_0029135",
+  "description": "Digital property representation of a MILLOW MREID listing (technical proof-of-concept). Blockchain-based ownership record for the prototype. Legal ownership remains subject to applicable Indian property and registration law.",
+  "image": "/images/24.jpg",
+  "attributes": [
+    {
+      "trait_type": "City",
+      "value": "Mumbai"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Mira Road East"
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 2
+    },
+    {
+      "trait_type": "Area (sqft)",
+      "value": 1020
+    }
+  ]
+}

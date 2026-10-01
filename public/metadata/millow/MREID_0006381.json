@@ -1,0 +1,24 @@
+{
+  "name": "MILLOW Property MREID_0006381",
+  "property_identifier": "MREID_0006381",
+  "description": "Digital property representation of a MILLOW MREID listing (technical proof-of-concept). Blockchain-based ownership record for the prototype. Legal ownership remains subject to applicable Indian property and registration law.",
+  "image": "/images/16.jpg",
+  "attributes": [
+    {
+      "trait_type": "City",
+      "value": "Chennai"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Madambakkam"
+    },
+    {
+      "trait_type": "Bedrooms",
+      "value": 3
+    },
+    {
+      "trait_type": "Area (sqft)",
+      "value": 1100
+    }
+  ]
+}

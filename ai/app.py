@@ -557,7 +557,10 @@ def chat(req: ChatRequest):
 def chat_mreid(req: ChatRequest):
     """Chat grounded in the REAL MREID (INR) catalogue via backend :8001."""
     messages = [{'role': m.role, 'content': m.content} for m in req.messages]
-    return MREID_AGENT.chat(messages, provider=req.provider, context=req.context)
+    # Only the latest user turn is classified; earlier turns are history.
+    tools = mreid_tools.select_tools(messages)
+    return MREID_AGENT.chat(messages, provider=req.provider, context=req.context,
+                            tools=tools)
 
 
 if __name__ == '__main__':
