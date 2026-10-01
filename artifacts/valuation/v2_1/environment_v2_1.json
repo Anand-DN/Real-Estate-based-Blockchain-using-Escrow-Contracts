@@ -3,7 +3,7 @@
   "python_version": "3.14.7",
   "python_implementation": "CPython",
   "platform": "Windows-11-10.0.26200-SP0",
-  "executable": "C:\\Users\\conan\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+  "executable": "python",
   "packages": {
     "pandas": "3.0.6",
     "numpy": "2.5.3",
