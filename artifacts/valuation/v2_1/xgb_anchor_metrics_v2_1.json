@@ -1,0 +1,474 @@
+{
+  "experiment": "MILLOW Experiment 1 - V2.1 XGBoost anchor",
+  "purpose": "Single-model anchor on the frozen V2.1 protocol. NOT a tuning run and NOT the five-model comparison.",
+  "protocol": "V2.1 (leakage-controlled research protocol)",
+  "historical_reference": "Historical V2 reference - pre-leakage-control baseline",
+  "non_equivalence_warning": "V2.1 and historical V2 are NOT directly comparable. V2.1 removed frequency leakage, removed 737 exact duplicates, changed the feature set (dropped amenity_known_count, amenity_unknown_count and city_frequency; added amenities_fully_specified; added StandardScaler), and replaced a single train/test draw with 5-fold CV. No better-or-worse claim is made.",
+  "model": "XGBRegressor",
+  "xgboost_params": {
+    "objective": "reg:squarederror",
+    "n_estimators": 700,
+    "max_depth": 7,
+    "learning_rate": 0.04,
+    "subsample": 0.85,
+    "colsample_bytree": 0.85,
+    "min_child_weight": 5,
+    "reg_alpha": 0.1,
+    "reg_lambda": 2.0,
+    "tree_method": "hist",
+    "random_state": 42,
+    "n_jobs": -1,
+    "eval_metric": "rmse"
+  },
+  "tuning_performed": false,
+  "early_stopping_used": false,
+  "hyperparameter_search": false,
+  "predictions_pooled_across_folds": false,
+  "feature_count": 48,
+  "features": [
+    "area",
+    "no_of_bedrooms",
+    "resale",
+    "log_area",
+    "log_bedrooms",
+    "area_per_bedroom",
+    "area_bedroom_interaction",
+    "amenity_yes_count",
+    "amenities_fully_specified",
+    "location_frequency",
+    "log_location_frequency",
+    "source_city",
+    "location",
+    "maintenancestaff",
+    "gymnasium",
+    "swimmingpool",
+    "landscapedgardens",
+    "joggingtrack",
+    "rainwaterharvesting",
+    "indoorgames",
+    "shoppingmall",
+    "intercom",
+    "sportsfacility",
+    "atm",
+    "clubhouse",
+    "school",
+    "24x7security",
+    "powerbackup",
+    "carparking",
+    "staffquarter",
+    "cafeteria",
+    "multipurposeroom",
+    "hospital",
+    "washingmachine",
+    "gasconnection",
+    "ac",
+    "wifi",
+    "children_splayarea",
+    "liftavailable",
+    "bed",
+    "vaastucompliant",
+    "microwave",
+    "golfcourse",
+    "tv",
+    "diningtable",
+    "sofa",
+    "wardrobe",
+    "refrigerator"
+  ],
+  "pipeline_input_columns": [
+    "area",
+    "no_of_bedrooms",
+    "resale",
+    "log_area",
+    "log_bedrooms",
+    "area_per_bedroom",
+    "area_bedroom_interaction",
+    "amenity_yes_count",
+    "amenities_fully_specified",
+    "source_city",
+    "location",
+    "maintenancestaff",
+    "gymnasium",
+    "swimmingpool",
+    "landscapedgardens",
+    "joggingtrack",
+    "rainwaterharvesting",
+    "indoorgames",
+    "shoppingmall",
+    "intercom",
+    "sportsfacility",
+    "atm",
+    "clubhouse",
+    "school",
+    "24x7security",
+    "powerbackup",
+    "carparking",
+    "staffquarter",
+    "cafeteria",
+    "multipurposeroom",
+    "hospital",
+    "washingmachine",
+    "gasconnection",
+    "ac",
+    "wifi",
+    "children_splayarea",
+    "liftavailable",
+    "bed",
+    "vaastucompliant",
+    "microwave",
+    "golfcourse",
+    "tv",
+    "diningtable",
+    "sofa",
+    "wardrobe",
+    "refrigerator"
+  ],
+  "dataset": {
+    "path": "data/processed/MREID_property.csv",
+    "policy": "Drop rows that are exact duplicates on ['source_city', 'location', 'area', 'no_of_bedrooms', 'price'], keeping the first occurrence. mreid_id and source_file are excluded from the key. No fuzzy, near-duplicate or within-location de-duplication is performed.",
+    "key": [
+      "source_city",
+      "location",
+      "area",
+      "no_of_bedrooms",
+      "price"
+    ],
+    "original_rows": 29135,
+    "duplicate_rows_removed": 737,
+    "final_rows": 28398,
+    "invalid_rows_removed": 0
+  },
+  "target": {
+    "column": "price",
+    "training_space": "log1p(price)",
+    "prediction_space": "log1p(price)  (models predict in log space)"
+  },
+  "random_state": 42,
+  "folds": {
+    "random": {
+      "splitter": "KFold(shuffle=True)",
+      "group_column": null,
+      "digest": "1a9f896345492d60b4a8cc677a090b27c8affd745ef302f9fbbf4ea55afc415f",
+      "fold_train_rows": [
+        22718,
+        22718,
+        22718,
+        22719,
+        22719
+      ],
+      "fold_valid_rows": [
+        5680,
+        5680,
+        5680,
+        5679,
+        5679
+      ]
+    },
+    "location_grouped": {
+      "splitter": "GroupKFold(shuffle=True)",
+      "group_column": "group",
+      "digest": "4c1c331cc993ddedb58b0a177e118912eb657613e3c9e4f8b5ae2bc7963ec611",
+      "fold_train_rows": [
+        23540,
+        22693,
+        23384,
+        21409,
+        22566
+      ],
+      "fold_valid_rows": [
+        4858,
+        5705,
+        5014,
+        6989,
+        5832
+      ]
+    }
+  },
+  "metrics": {
+    "keys": [
+      "MAE_INR",
+      "RMSE_INR",
+      "R2_INR",
+      "MAPE_percent",
+      "MedAPE_percent",
+      "MAE_log",
+      "RMSE_log",
+      "R2_log"
+    ],
+    "space": {
+      "MAE_INR": "INR",
+      "RMSE_INR": "INR",
+      "R2_INR": "INR",
+      "MAPE_percent": "INR",
+      "MedAPE_percent": "INR",
+      "MAE_log": "log1p(price)",
+      "RMSE_log": "log1p(price)",
+      "R2_log": "log1p(price)"
+    },
+    "description": {
+      "MAE_INR": "mean_absolute_error on INR after expm1 inversion",
+      "RMSE_INR": "sqrt(mean_squared_error) on INR after expm1 inversion",
+      "R2_INR": "r2_score on INR after expm1 inversion",
+      "MAPE_percent": "mean absolute percentage error on INR, x100",
+      "MedAPE_percent": "median absolute percentage error on INR, x100",
+      "MAE_log": "mean_absolute_error in log1p(price) space, no inversion",
+      "RMSE_log": "sqrt(mean_squared_error) in log1p(price) space, no inversion",
+      "R2_log": "r2_score in log1p(price) space, no inversion"
+    }
+  },
+  "per_fold": [
+    {
+      "regime": "random",
+      "fold": 1,
+      "train_rows": 22718,
+      "valid_rows": 5680,
+      "MAE_INR": 6073823.356358195,
+      "RMSE_INR": 21704525.3671314,
+      "R2_INR": 0.12362047765749107,
+      "MAPE_percent": 51.21345738399149,
+      "MedAPE_percent": 31.344048503693266,
+      "MAE_log": 0.46241495835386587,
+      "RMSE_log": 0.6564404519189948,
+      "R2_log": 0.36545732990243796,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/random_fold1.joblib"
+    },
+    {
+      "regime": "random",
+      "fold": 2,
+      "train_rows": 22718,
+      "valid_rows": 5680,
+      "MAE_INR": 6196552.092811453,
+      "RMSE_INR": 23196493.05609779,
+      "R2_INR": 0.12689060859562729,
+      "MAPE_percent": 51.20417676047479,
+      "MedAPE_percent": 30.185745107592922,
+      "MAE_log": 0.4534013688966265,
+      "RMSE_log": 0.6553118828552048,
+      "R2_log": 0.3770692609489882,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/random_fold2.joblib"
+    },
+    {
+      "regime": "random",
+      "fold": 3,
+      "train_rows": 22718,
+      "valid_rows": 5680,
+      "MAE_INR": 6087406.803209274,
+      "RMSE_INR": 23983680.2157153,
+      "R2_INR": 0.12863009839611894,
+      "MAPE_percent": 49.38109911041743,
+      "MedAPE_percent": 29.947179230964615,
+      "MAE_log": 0.4446109157523737,
+      "RMSE_log": 0.6392301374902057,
+      "R2_log": 0.3766521391731955,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/random_fold3.joblib"
+    },
+    {
+      "regime": "random",
+      "fold": 4,
+      "train_rows": 22719,
+      "valid_rows": 5679,
+      "MAE_INR": 6161316.293166139,
+      "RMSE_INR": 21946488.75124811,
+      "R2_INR": 0.10689783452355994,
+      "MAPE_percent": 49.122787073089405,
+      "MedAPE_percent": 30.27045559413851,
+      "MAE_log": 0.4539025438673119,
+      "RMSE_log": 0.6562483013494089,
+      "R2_log": 0.35916246328381973,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/random_fold4.joblib"
+    },
+    {
+      "regime": "random",
+      "fold": 5,
+      "train_rows": 22719,
+      "valid_rows": 5679,
+      "MAE_INR": 6005099.82256529,
+      "RMSE_INR": 21800282.52753373,
+      "R2_INR": 0.15388579369351407,
+      "MAPE_percent": 51.53250798105999,
+      "MedAPE_percent": 30.872784478889702,
+      "MAE_log": 0.4513494463808967,
+      "RMSE_log": 0.6434449197537143,
+      "R2_log": 0.38338996909442136,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/random_fold5.joblib"
+    },
+    {
+      "regime": "location_grouped",
+      "fold": 1,
+      "train_rows": 23540,
+      "valid_rows": 4858,
+      "MAE_INR": 6421619.827906913,
+      "RMSE_INR": 21037518.86942471,
+      "R2_INR": 0.060034694246189235,
+      "MAPE_percent": 59.3132221647625,
+      "MedAPE_percent": 37.01664072722889,
+      "MAE_log": 0.5069983481058915,
+      "RMSE_log": 0.6988162057200916,
+      "R2_log": 0.25106266226492047,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/location_grouped_fold1.joblib"
+    },
+    {
+      "regime": "location_grouped",
+      "fold": 2,
+      "train_rows": 22693,
+      "valid_rows": 5705,
+      "MAE_INR": 5836111.5176966665,
+      "RMSE_INR": 18430930.42073979,
+      "R2_INR": 0.11494054745005688,
+      "MAPE_percent": 62.75887924427212,
+      "MedAPE_percent": 36.93696608129136,
+      "MAE_log": 0.50061293777759,
+      "RMSE_log": 0.6814055105003403,
+      "R2_log": 0.25571154708654376,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/location_grouped_fold2.joblib"
+    },
+    {
+      "regime": "location_grouped",
+      "fold": 3,
+      "train_rows": 23384,
+      "valid_rows": 5014,
+      "MAE_INR": 8228930.0653969105,
+      "RMSE_INR": 32505299.975859754,
+      "R2_INR": 0.03900399154552314,
+      "MAPE_percent": 54.35635845741197,
+      "MedAPE_percent": 36.89932923807477,
+      "MAE_log": 0.5142793261033033,
+      "RMSE_log": 0.7169918401159074,
+      "R2_log": 0.30962418340858044,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/location_grouped_fold3.joblib"
+    },
+    {
+      "regime": "location_grouped",
+      "fold": 4,
+      "train_rows": 21409,
+      "valid_rows": 6989,
+      "MAE_INR": 6535451.119932755,
+      "RMSE_INR": 17484604.600787662,
+      "R2_INR": 0.08710557746813474,
+      "MAPE_percent": 75.11196701179955,
+      "MedAPE_percent": 42.26956995953237,
+      "MAE_log": 0.5589675950362848,
+      "RMSE_log": 0.7424517081389896,
+      "R2_log": 0.16692518424913994,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/location_grouped_fold4.joblib"
+    },
+    {
+      "regime": "location_grouped",
+      "fold": 5,
+      "train_rows": 22566,
+      "valid_rows": 5832,
+      "MAE_INR": 7553485.382436594,
+      "RMSE_INR": 25871702.075802308,
+      "R2_INR": 0.06818746405361498,
+      "MAPE_percent": 72.53928498859653,
+      "MedAPE_percent": 41.546512353312906,
+      "MAE_log": 0.5559753992685534,
+      "RMSE_log": 0.7444884610977182,
+      "R2_log": 0.18646229279278914,
+      "model_path": "models/valuation/v2_1/xgb_anchor_folds/location_grouped_fold5.joblib"
+    }
+  ],
+  "summary": {
+    "random": {
+      "MAE_INR": {
+        "mean": 6104839.67362207,
+        "std": 75522.7303283025,
+        "min": 6005099.82256529,
+        "max": 6196552.092811453
+      },
+      "RMSE_INR": {
+        "mean": 22526293.983545266,
+        "std": 1013867.8201756557,
+        "min": 21704525.3671314,
+        "max": 23983680.2157153
+      },
+      "R2_INR": {
+        "mean": 0.12798496257326225,
+        "std": 0.016853653621267405,
+        "min": 0.10689783452355994,
+        "max": 0.15388579369351407
+      },
+      "MAPE_percent": {
+        "mean": 50.49080566180662,
+        "std": 1.1422774451946394,
+        "min": 49.122787073089405,
+        "max": 51.53250798105999
+      },
+      "MedAPE_percent": {
+        "mean": 30.524042583055802,
+        "std": 0.5713040980136792,
+        "min": 29.947179230964615,
+        "max": 31.344048503693266
+      },
+      "MAE_log": {
+        "mean": 0.453135846650215,
+        "std": 0.006376243279354694,
+        "min": 0.4446109157523737,
+        "max": 0.46241495835386587
+      },
+      "RMSE_log": {
+        "mean": 0.6501351386735057,
+        "std": 0.008179310688423876,
+        "min": 0.6392301374902057,
+        "max": 0.6564404519189948
+      },
+      "R2_log": {
+        "mean": 0.3723462324805725,
+        "std": 0.009798988439111742,
+        "min": 0.35916246328381973,
+        "max": 0.38338996909442136
+      }
+    },
+    "location_grouped": {
+      "MAE_INR": {
+        "mean": 6915119.582673969,
+        "std": 959890.2844415017,
+        "min": 5836111.5176966665,
+        "max": 8228930.0653969105
+      },
+      "RMSE_INR": {
+        "mean": 23066011.18852285,
+        "std": 6199252.545183038,
+        "min": 17484604.600787662,
+        "max": 32505299.975859754
+      },
+      "R2_INR": {
+        "mean": 0.07385445495270379,
+        "std": 0.028728533795474714,
+        "min": 0.03900399154552314,
+        "max": 0.11494054745005688
+      },
+      "MAPE_percent": {
+        "mean": 64.81594237336853,
+        "std": 8.797335940692525,
+        "min": 54.35635845741197,
+        "max": 75.11196701179955
+      },
+      "MedAPE_percent": {
+        "mean": 38.933803671888064,
+        "std": 2.7274321128678536,
+        "min": 36.89932923807477,
+        "max": 42.26956995953237
+      },
+      "MAE_log": {
+        "mean": 0.5273667212583246,
+        "std": 0.027923946481371437,
+        "min": 0.50061293777759,
+        "max": 0.5589675950362848
+      },
+      "RMSE_log": {
+        "mean": 0.7168307451146095,
+        "std": 0.02739014342957635,
+        "min": 0.6814055105003403,
+        "max": 0.7444884610977182
+      },
+      "R2_log": {
+        "mean": 0.23395717396039473,
+        "std": 0.057533464568141894,
+        "min": 0.16692518424913994,
+        "max": 0.30962418340858044
+      }
+    }
+  },
+  "dataset_rows": 28398
+}

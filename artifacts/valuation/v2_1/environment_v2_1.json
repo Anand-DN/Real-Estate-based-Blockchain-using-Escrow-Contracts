@@ -1,0 +1,19 @@
+{
+  "recorded_at_utc": "2026-10-01T08:49:23.063388+00:00",
+  "python_version": "3.14.7",
+  "python_implementation": "CPython",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "executable": "C:\\Users\\conan\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+  "packages": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "joblib": "1.6.0"
+  },
+  "optional_packages": {
+    "lightgbm": "not installed",
+    "catboost": "not installed"
+  },
+  "note": "LightGBM and CatBoost are intentionally absent at baseline creation time. No package was installed, upgraded or downgraded to produce this record."
+}
