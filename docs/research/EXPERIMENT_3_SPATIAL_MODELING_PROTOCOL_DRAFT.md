@@ -713,10 +713,34 @@ constructions.
 
 Indicative memory: a sparse edge list of 1.85M undirected edges is ~30 MB as two `int32`
 index arrays; the 75.6M-edge all-pairs city graph is ~600 MB and is excluded by default.
-Feature matrices are small (28,398 × tens of features). Training-time and storage estimates
-must be completed once the architecture is frozen; **no training may begin until this
-section is filled with measured per-fold and total time figures**. All computation is
-CPU-feasible at this scale; GPU use is optional and must be recorded if used.
+Feature matrices are small (28,398 × tens of features).
+
+The following **analytical** budget must be recorded **before Phase 3 training**, derived
+from the frozen data and the frozen architecture, without building the graph or running
+training:
+
+- **analytical node counts** — full dataset and per-fold train/test counts (table above);
+- **analytical edge counts** — per candidate construction (table above);
+- **feature dimensionality / range** — the node-feature dimension and its fold-dependent
+  range, together with the 46 frozen E4 similarity coordinates (Section 8.8);
+- **analytical storage estimates** — adjacency index arrays and feature matrices;
+- **analytical parameter estimate** — derived from the frozen GraphSAGE configuration
+  (Section 17.1);
+- **analytical number of model fits** — folds × conditions, with no architecture search;
+- **analytical computational-scale estimate** — per-epoch and total operation order.
+
+The pre-training gate is therefore: **analytical budget complete AND architecture frozen**.
+
+Measured per-fold and total training-time figures are collected during the preregistered
+Phase 3 training run after the architecture and implementation specification have been
+frozen. They are recorded as empirical computational measurements and are not used to
+select or modify the architecture, graph definition, hyperparameters, folds, or evaluation
+protocol.
+
+**No pilot, timing-only, dry-run, or unscored training run is required or permitted solely
+to satisfy the computational-budget gate.** The measured timing requirement is a Phase 3
+measurement output. All computation is CPU-feasible at this scale; GPU use is optional and
+must be recorded if used.
 
 ---
 
@@ -796,6 +820,10 @@ until the protocol is frozen.
 | 6 | Manifest, deterministic re-run verification, protected-state check | verification report | No |
 | 7 | Review and freeze as a research checkpoint | tag (only after approval) | No |
 
+Measured per-fold and total training-time figures are recorded during the Phase 3 training
+run (Section 21); no separate pilot, timing-only, dry-run, or unscored training run is
+performed. The Section 21 pre-training gate is the **analytical** budget only.
+
 Implementation order and gates (F0 before any interpretation) follow the Experiment 2
 pattern. No phase may consume `valid_k` for tuning.
 
@@ -821,7 +849,7 @@ All items must be resolved and recorded before Phase 3 training.
 - [ ] Statistical comparison and any test fixed in advance (Section 18).
 - [ ] Failure criteria F0–F5 fixed (Section 19).
 - [ ] Reproducibility identifiers and manifest schema fixed (Section 20).
-- [ ] Computational budget completed with measured training-time estimates (Section 21).
+- [ ] Analytical computational budget completed before training; measured per-fold and total training-time figures recorded as a Phase 3 output (Section 21).
 - [ ] Protected-state list fixed (Section 22).
 - [ ] Limitations acknowledged (Section 23).
 - [ ] No-result-prediction statement retained verbatim (Section 1).
@@ -837,8 +865,9 @@ state, or Git ref is modified by authoring it.
 
 **Next action:** review this protocol, resolve the pre-registration checklist (Section 26),
 freeze the architecture-selection procedure, and only then proceed to Phase 1. No training
-may begin until the computational budget (Section 21) is complete and the protocol is
-approved.
+may begin until the **analytical** computational budget (Section 21) is complete and the
+protocol is approved; measured training-time figures are a Phase 3 output, not a
+pre-training gate.
 
 ---
 
