@@ -244,7 +244,7 @@ implementation.
 | **E1** | Same city | `source_city` | Connect two properties iff same city (optionally: connect property to a city hub, not all pairs) | Yes (city is a feature) | None (no price used) | Only if constructed globally; must be built per fold | All-pairs is O(N²); city-hub is O(N) | Coarse regional shared structure |
 | **E2** | Same locality | normalised `source_city__location` | Connect two properties iff same locality (or property→locality hub) | Yes (locality is a feature) | None | Must be built per fold; a locality may not span train and test in `location_grouped` | locality-hub O(N); complete-within-locality sum of C(n_g,2) | Micro-market shared structure |
 | **E3** | Geographic proximity | — | **NOT AVAILABLE** | — | — | — | — | Excluded; no reliable coordinates exist |
-| **E4** | Property-characteristic similarity | feature vector (excluding `price` and `derived_price_per_sqft`) | k-nearest neighbours in a standardised attribute space | Yes | None if labels are never used; encoder/scaler must be fit on training rows only | Must restrict edges to avoid test→test label paths (see Section 9) | ~k·N edges | Similar-property analogues |
+| **E4** | Property-characteristic similarity | frozen non-target V2.1 attribute vector (excludes `price`, `derived_price_per_sqft`, `location`, `source_city`; Section 8.8) | **directed** k-nearest neighbours, **k = 5**, in a standardised attribute space; deterministic positional-ID tie-break; unique neighbours; no duplicate edges | Yes | None if labels are never used; scaler/encoder must be fit on training rows only | Must restrict edges to avoid test→test label paths (see Section 9); directed | ~k·N = ~141,990 directed emissions (Section 21) | Similar-property analogues; **PRIMARY** relation (A3) |
 | **E5** | Locality/property-neighbour relationships from training data | training-fold aggregates | Auxiliary locality nodes with attributes = training-fold attribute means/counts; connect properties to their locality hub; connect localities by attribute similarity | Yes for cities/localities attributable from features; for unseen test localities the hub is absent | None if aggregates use features only, never price | Built only from training folds | O(N) | Learned locality-level context |
 | **E6** | Price similarity | — | **PROHIBITED** | — | Direct target leakage | — | — | Not permitted |
 | **E7** | Target-derived neighbourhoods | — | **PROHIBITED** (kNN on price, price rank, price quantile) | — | Direct target leakage | — | — | Not permitted |
@@ -292,23 +292,86 @@ provide no direct neighbourhood for a held-out locality.
 ### 8.7 Graph specification freeze (binding pre-implementation gate)
 
 **Before any Experiment 3 training**, the graph definition must be frozen in full. The
-frozen specification must record, at minimum:
+frozen specification is:
 
-- the exact **node definition** (what a node is);
-- the exact **node-feature set** (which columns/engineered features, and the exclusion of
-  every target-derived field);
-- the exact **edge definitions** (which of E1–E5 are used, and their construction rules);
-- the exact **k** for any kNN / property-similarity construction;
-- **edge weighting and direction** (weighted/unweighted, directed/undirected);
-- the **self-loop policy**;
-- the **normalisation** applied to node features, edge weights, and any graph-level
-  normalisation;
-- the exact **graph construction** procedure, including any training-only aggregation and
-  any inference-time attachment rule.
+- **Node definition.** One node per processed property row (Section 8.1). The node id is the
+  positional row index of the deterministic V2.1 frame; the 737 exact duplicates are removed
+  before any node exists (Section 6.1).
+- **Node-feature set (model input).** The frozen V2.1 feature contract, read-only
+  (`pipeline_input_columns`: 46 columns; the two frequency features are derived
+  training-only by `TrainOnlyFrequencyFeatures`). No target-derived field is used. The
+  encoded dimension is fold-dependent and is recorded per fold.
+- **Edge definitions.** The primary relationship (A3, Section 16) is **E4
+  property-characteristic similarity**. Condition A2 uses only the already-permitted
+  locality/city relations E1, E2 and E5. E3 is not available; E6 and E7 are prohibited
+  (Section 8.3).
+- **k.** For E4, **k = 5**, directed (each node emits edges to its five nearest permitted
+  neighbours); see Section 21.
+- **Edge weighting.** Binary: `w_ij = 1` for every present edge. No distance weighting, no
+  clipping and no distance transformation. Zero-distance neighbours are valid and retained.
+- **Direction.** E4 is **directed**. Training nodes emit directed edges to training
+  neighbours; a test node emits directed edges only to training nodes (Section 9.4). No
+  test→test E4 edge exists in the primary design.
+- **Self-loop / root handling.** Under GraphSAGE mean aggregation each node contributes a
+  self/root term; the exact self/root handling is fixed by the frozen GraphSAGE
+  configuration (Section 17.1).
+- **Normalisation / aggregation.** The propagation rule is **GraphSAGE mean-neighbourhood
+  aggregation**. Symmetric GCN-style normalisation `A_hat = D^(-1/2) A D^(-1/2)` is **not**
+  used, because it would make the layer GCN-style and contradict the frozen GraphSAGE
+  architecture.
+- **Determinism.** Exact distance ties are broken by ascending positional node id; neighbour
+  ids are unique; duplicate edges are not permitted.
+- **Graph construction procedure.** Every learned transform (scaler/encoder/frequency) and
+  the E4 kNN index are fitted on training rows only and applied unchanged to validation/test
+  rows. No test-derived statistic enters any graph and no future/test-label information is
+  used.
+- **E4 similarity coordinates.** The exact permitted non-target coordinates are frozen in
+  Section 8.8 and are identical in definition across folds.
 
 **No graph definition may be selected using `location_grouped` test results.** The frozen
 graph specification, together with a content digest, is part of the pre-registration and is
 verified unchanged before evaluation.
+
+### 8.8 E4 similarity coordinates (frozen)
+
+The E4 property-similarity space uses only non-target attributes from the frozen V2.1
+feature contract. The exact permitted coordinates are every V2.1 feature **except** `price`,
+`log1p(price)`, `derived_price_per_sqft`, any other target-derived quantity, `location`, and
+`source_city`:
+
+- basic: `area`, `no_of_bedrooms`, `resale`;
+- row-wise engineered: `log_area`, `log_bedrooms`, `area_per_bedroom`,
+  `area_bedroom_interaction`;
+- row-wise indicators: `amenity_yes_count`, `amenities_fully_specified`;
+- training-only locality aggregates: `location_frequency`, `log_location_frequency`;
+- the 35 raw amenity columns: `maintenancestaff`, `gymnasium`, `swimmingpool`,
+  `landscapedgardens`, `joggingtrack`, `rainwaterharvesting`, `indoorgames`,
+  `shoppingmall`, `intercom`, `sportsfacility`, `atm`, `clubhouse`, `school`,
+  `24x7security`, `powerbackup`, `carparking`, `staffquarter`, `cafeteria`,
+  `multipurposeroom`, `hospital`, `washingmachine`, `gasconnection`, `ac`, `wifi`,
+  `children_splayarea`, `liftavailable`, `bed`, `vaastucompliant`, `microwave`,
+  `golfcourse`, `tv`, `diningtable`, `sofa`, `wardrobe`, `refrigerator`.
+
+That is **46 coordinates** (the 48 V2.1 features minus `source_city` and `location`).
+`location` and `source_city` are excluded deliberately: the primary evaluation holds out
+localities, and one-hot location identity would inject an artificial train/test category
+asymmetry into the similarity distance. No new property feature is introduced.
+
+Preprocessing is training-only and identical in definition across folds:
+
+- the numeric coordinates are standardised with the frozen V2.1 `StandardScaler`, and the
+  amenity coordinates use the frozen V2.1 categorical (one-hot) encoding; both are **fitted
+  on training rows only** and applied unchanged to validation/test rows, with no test-fitted
+  statistic;
+- distance is deterministic **Euclidean**; **k = 5**, directed;
+- exact distance ties are broken by ascending positional node id; neighbour ids are unique;
+  duplicate edges are not permitted;
+- zero-distance neighbours are valid and retained;
+- every E4 edge weight is `w_ij = 1` (binary); no distance weighting, no clipping and no
+  distance transformation.
+
+The realised encoded dimension is fold-dependent (the training-fold level sets of the
+amenity coordinates) and is recorded per fold.
 
 ---
 
@@ -384,6 +447,10 @@ For the primary inductive design, the following contract is binding and distingu
   rule is that **test nodes may connect only to training nodes** (or to hubs built from
   training nodes) and **never to other test nodes**. A variant permitting test→test edges is
   transductive and belongs to the labelled secondary sensitivity analysis only.
+- For E4 specifically (Section 8.8), the relation is **directed**: each **training** node
+  emits directed edges to its **k = 5** nearest permitted training neighbours, and each
+  **test** node emits directed edges to its **k = 5** nearest permitted **training** nodes
+  only (test→training). No test→test E4 edge exists in the primary design.
 - Self-loops, edge weighting/direction, and normalisation follow the frozen graph
   specification (Section 8.7).
 
@@ -496,58 +563,64 @@ construction must be leakage-safe. The experiment is not exploded into dozens of
 
 | ID | Model | Answers |
 |---|---|---|
-| **A0** | Frozen CatBoost baseline (consume read-only) | Reference |
-| **A1** | Relationship-aware model **without** spatial/locality edges (attribute/feature graph only) | Does relationship structure help beyond the raw features? |
-| **A2** | Relationship-aware model **with** city/locality relationships (E1/E2/E5) | Do spatial/category relations contribute? |
-| **A3** | Relationship-aware model **with** property-similarity relationships (E4) | Do attribute-similarity relations contribute? |
+| **A0** | Frozen Experiment 1 CatBoost baseline (consume read-only, no retraining or tuning) | Reference |
+| **A1** | **Relationship-free GraphSAGE control**: same frozen node-feature representation and same frozen GraphSAGE architecture, but **self/root contribution only — no relational edges** (no locality edges, no similarity edges) | Does relationship structure improve valuation beyond the raw property features? |
+| **A2** | **Locality/city relationship GraphSAGE condition**: uses only the already-permitted locality/city relations **E1 / E2 / E5**, as applicable; no new edge type | Do locality/city relationships improve valuation generalization? |
+| **A3** | **E4 property-similarity GraphSAGE condition**: directed **k = 5**, standardised non-target property-similarity space (Section 8.8), test→training only during primary inductive inference, no test→test edges. **A3 is the PRIMARY graph model.** | Do property-similarity relationships improve valuation generalization? |
 
-A1/A3 isolate the contribution of non-spatial relational information; A2 isolates
-locality/city structure. If A1 already captures nearly all of any effect, RQ6's answer is
-that spatial relations were not the source. Ablations A1–A3 must not be conflated with the
-primary model; the primary model's composition is frozen at pre-registration (Section 17).
+A1 is the relationship-free control (self/root only), A2 isolates locality/city structure, and
+A3 isolates property-similarity structure; the three conditions differ only in relationship
+structure, not by post-hoc tuning. A1 and A3 are deliberately **not** the same condition: A1
+has no relational edges, whereas A3 is the E4 graph. Ablations A1–A3 must not be conflated
+with one another, and A3 is the primary model whose composition is frozen at pre-registration
+(Section 17). If A1 captures nearly all of any effect, RQ6's answer is that relational
+structure was not the source.
 
 ---
 
 ## 17. Model-Selection Procedure
 
-**GraphSAGE, GAT and GCN are candidate model families only.** They are listed to bound the
-search space; none is assumed. **Exactly one family and one architecture must be selected
-and frozen before training begins**, and the frozen configuration is part of the
-pre-registration.
+**GraphSAGE, GAT and GCN were candidate model families.** The pre-registration selects
+**GraphSAGE** as the single model family, with **no architecture search** and **no selection
+against the `location_grouped` outer test folds**. There is no second architecture and no
+post-hoc family choice; the frozen configuration is part of the pre-registration
+(Section 17.1).
 
-- The protocol fixes the **model class and constraints** first; it does **not** prematurely
-  lock an exact architecture at the drafting stage.
-- The final architecture must be selected **before implementation and frozen before
-  evaluation**.
+- The model class and the exact architecture are both fixed before implementation.
+- The final architecture is frozen **before evaluation**, as recorded in Section 17.1.
 - **No hyperparameter tuning against the `location_grouped` test folds** is permitted. Any
-  model/architecture selection is performed on a **training-side validation procedure only**
-  — for example, an inner split of `train_k` (comparable in spirit to Experiment 2's nested
-  `T'_k / C_k` construction) — and **must never inspect `location_grouped` outer test
-  metrics**.
+  training-side choice uses only a **training-side validation procedure** — for example, an
+  inner split of `train_k` (comparable in spirit to Experiment 2's nested `T'_k / C_k`
+  construction) — and **must never inspect `location_grouped` outer test metrics**.
 - The chosen architecture, seeds, and all hyperparameters are frozen and hashed before the
   first evaluation on the frozen outer folds.
 
 ### 17.1 Model-selection freeze (binding)
 
-Before training, exactly one model family must be selected and its **full architecture
-frozen**. The frozen configuration record must include:
+The single preregistered architecture is frozen as follows. No architecture search is
+performed, and no value below is selected using `location_grouped` outer-test results.
 
-- model family (GraphSAGE / GAT / GCN / other declared family);
-- number of layers;
-- hidden dimension;
-- aggregation / attention mechanism;
-- activation function;
-- dropout;
-- optimizer;
-- learning rate;
-- maximum number of epochs;
-- early-stopping rule, if any (and its criterion/patience);
-- random seed.
+| Field | Frozen value |
+|---|---|
+| Model family | **GraphSAGE** |
+| Number of message-passing layers | **2** |
+| Hidden dimension | **64** |
+| Aggregation | **mean-neighbourhood aggregation** (standard GraphSAGE); **no** GCN-style symmetric normalisation |
+| Activation | **ReLU** |
+| Dropout | **0.20** |
+| Residual / skip connections | **none** |
+| Output layer | single scalar; predicted **`log1p(price)`** |
+| Optimizer | **Adam** |
+| Learning rate | **0.001** |
+| Weight decay | **1e-4** |
+| Maximum epochs | **200** |
+| Early stopping | on **training-side validation loss**, **patience = 20** |
+| Loss | **MSE in `log1p(price)`** |
+| Random seed | **42** |
+| Self/root handling | fixed by the frozen GraphSAGE implementation and recorded in the implementation specification |
 
-**If multiple architectures are ultimately compared**, that must be **declared in advance as
-a formal model-comparison experiment** with its own pre-registered comparison procedure and
-multiplicity handling; it must not be conducted as post-hoc model selection on the frozen
-outer test folds.
+No multi-architecture comparison is run. The architecture above is the single preregistered
+model.
 
 ---
 
