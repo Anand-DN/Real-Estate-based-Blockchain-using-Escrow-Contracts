@@ -6257,3 +6257,227 @@ ol.chatbot__msg-list > li {
 [data-theme="dark"] .mkt__detail-close:hover {
   color: var(--clr-red-2);
 }
+
+/* ---- Decision Policy v1.0: read-only decision evidence + workflow gating ---- */
+.mkt__chip--proceed {
+  background: var(--color-success-bg, rgba(16, 185, 129, 0.14));
+  color: var(--color-success-text, #065f46);
+}
+
+.mkt__chip--review {
+  background: var(--color-warning-bg, rgba(245, 158, 11, 0.16));
+  color: var(--color-warning-text, #92400e);
+}
+
+.mkt__chip--enhanced {
+  background: var(--color-warning, #f59e0b);
+  color: #241503;
+}
+
+.mkt__chip--hold {
+  background: var(--color-danger, #ef4444);
+  color: #240b0b;
+}
+
+.mkt__chip--unavailable {
+  background: rgba(127, 132, 140, 0.16);
+  color: #6b7078;
+}
+
+.mkt__detail-ai-diff {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75em;
+  line-height: 1.5;
+  color: var(--clr-grey, #7a7986);
+}
+
+.mkt__decision {
+  margin: 12px 0 4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(127, 132, 140, 0.22);
+  border-radius: 12px;
+  background: rgba(127, 132, 140, 0.05);
+}
+
+.mkt__decision-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mkt__decision-version {
+  font-size: 12px;
+  color: var(--clr-grey, #7a7986);
+}
+
+.mkt__decision-review,
+.mkt__decision-degraded {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.mkt__decision-review {
+  background: var(--color-warning-bg, #fffbeb);
+  color: var(--color-warning-text, #92400e);
+}
+
+.mkt__decision-degraded {
+  background: var(--color-danger-bg, #fef2f2);
+  color: var(--color-danger-text, #991b1b);
+}
+
+.mkt__decision-summary {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.mkt__decision-reasons {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mkt__decision-reason {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.mkt__decision-reason .mkt__chip {
+  text-transform: none;
+  flex: 0 0 auto;
+}
+
+.mkt__decision-reason-text {
+  flex: 1;
+  color: var(--mkt-text-dim, #6b7078);
+}
+
+.mkt__decision-next {
+  font-size: 12.5px;
+}
+
+.mkt__decision-next .mkt__label {
+  display: block;
+}
+
+.mkt__decision-next ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.mkt__decision-next li {
+  line-height: 1.5;
+}
+
+.mkt__decision-disclaimer {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(127, 132, 140, 0.3);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--clr-grey, #7a7986);
+}
+
+.tx-decision {
+  margin: 10px 0 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(127, 132, 140, 0.22);
+  border-radius: 12px;
+  background: #f7f8fc;
+}
+
+.tx-decision-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tx-decision-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--clr-grey, #7a7986);
+}
+
+.tx-decision-flag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: rgba(127, 132, 140, 0.14);
+  color: #6b7078;
+}
+
+.tx-decision-summary {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.tx-decision-boundary {
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(127, 132, 140, 0.3);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--clr-grey, #7a7986);
+}
+
+.tx-decision-retry {
+  margin-left: auto;
+  padding: 3px 10px;
+  border: 1px solid rgba(127, 132, 140, 0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #444;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tx-decision-retry:hover {
+  border-color: var(--color-accent-primary, #8b5cf6);
+  color: var(--color-accent-primary, #8b5cf6);
+}
+
+.tx-decision-retry:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+[data-theme="dark"] .mkt__decision,
+[data-theme="dark"] .tx-decision {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .tx-decision-retry {
+  background: #1f2937;
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .mkt__chip--enhanced {
+  color: #241503;
+}
+
+[data-theme="dark"] .mkt__chip--hold {
+  color: #240b0b;
+}

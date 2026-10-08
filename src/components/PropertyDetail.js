@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { marketContext, propertyById, recommendations, riskAnalysis } from "../lib/millowApi";
+import * as millowApi from "../lib/millowApi";
 import { formatInr } from "../lib/format";
 import PropertyThumb from "./PropertyThumb";
 import PropertyCard from "./PropertyCard";
@@ -19,6 +19,47 @@ const PROPERTY_FACTS = [
   { key: "bedrooms", label: "Bedrooms", format: (v) => String(v) },
   { key: "resale", label: "Resale", format: (v) => (Number(v) ? "Yes" : "No") },
 ];
+
+// Decision Policy v1.0 - the four decision states and the chip modifier used
+// for each one (see backend/decision_policy.py).
+const DECISION_STATES = ["PROCEED", "REVIEW_REQUIRED", "ENHANCED_REVIEW", "HOLD"];
+
+const DECISION_CHIP = {
+  PROCEED: "proceed",
+  REVIEW_REQUIRED: "review",
+  ENHANCED_REVIEW: "enhanced",
+  HOLD: "hold",
+};
+
+const DECISION_SEVERITY_CHIP = {
+  info: "low",
+  review: "review",
+  enhanced: "enhanced",
+  hold: "hold",
+};
+
+const isDecision = (value) =>
+  !!value && DECISION_STATES.indexOf(value.decision) !== -1;
+
+// The AI research estimate compared with the listed price, exactly as the
+// comparison band defines it.  Factual wording only: it never says whether a
+// price is right, only where it sits relative to the estimate and the band.
+const aiComparisonText = (signal) => {
+  const pct = Number(signal.difference_pct);
+  const band = signal.band_pct;
+  const abs = Math.abs(pct);
+  const relative =
+    pct > 0
+      ? `${abs}% above the listed price`
+      : pct < 0
+        ? `${abs}% below the listed price`
+        : "level with the listed price";
+  const inBand =
+    typeof band === "number"
+      ? ` · ${abs <= band ? "within" : "outside"} the ${band}% comparison band`
+      : "";
+  return `AI estimate ${relative}${inBand}`;
+};
 
 const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
   const [detail, setDetail] = useState(null);
@@ -42,12 +83,17 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
   const [recsAttempt, setRecsAttempt] = useState(0);
   const [saleTick, setSaleTick] = useState(0);
 
+  const [decision, setDecision] = useState(null);
+  const [decisionLoading, setDecisionLoading] = useState(true);
+  const [decisionError, setDecisionError] = useState(null);
+  const [decisionAttempt, setDecisionAttempt] = useState(0);
+
   useEffect(() => {
     if (!mreidId) return;
     let cancelled = false;
     setLoading(true);
     setError(null);
-    propertyById(mreidId)
+    millowApi.propertyById(mreidId)
       .then((data) => {
         if (!cancelled) setDetail(data);
       })
@@ -67,7 +113,7 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
     let cancelled = false;
     setMarketLoading(true);
     setMarketError(null);
-    marketContext(mreidId)
+    millowApi.marketContext(mreidId)
       .then((data) => {
         if (!cancelled) setMarket(data);
       })
@@ -87,7 +133,7 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
     let cancelled = false;
     setRiskLoading(true);
     setRiskError(null);
-    riskAnalysis(mreidId)
+    millowApi.riskAnalysis(mreidId)
       .then((data) => {
         if (!cancelled) setRisk(data);
       })
@@ -107,7 +153,7 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
     let cancelled = false;
     setRecsLoading(true);
     setRecsError(null);
-    recommendations(mreidId, { limit: 6 })
+    millowApi.recommendations(mreidId, { limit: 6 })
       .then((data) => {
         if (!cancelled) setRecs(data);
       })
@@ -121,6 +167,45 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
       cancelled = true;
     };
   }, [mreidId, recsAttempt]);
+
+  useEffect(() => {
+    if (!mreidId) return undefined;
+    // The API client module can be stubbed without a decision client; that
+    // must degrade to "decision evidence unavailable" instead of crashing
+    // the view.  A payload that is not one of the four decision states is
+    // treated the same way - never as PROCEED.
+    const fetchDecision =
+      typeof millowApi.decision === "function" ? millowApi.decision : null;
+    if (!fetchDecision) {
+      setDecision(null);
+      setDecisionError("Decision client is unavailable.");
+      setDecisionLoading(false);
+      return undefined;
+    }
+    let cancelled = false;
+    setDecisionLoading(true);
+    setDecisionError(null);
+    fetchDecision(mreidId)
+      .then((data) => {
+        if (!cancelled) {
+          if (isDecision(data)) {
+            setDecision(data);
+          } else {
+            setDecision(null);
+            setDecisionError("Decision response was not a valid decision.");
+          }
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setDecisionError(err.message);
+      })
+      .finally(() => {
+        if (!cancelled) setDecisionLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [mreidId, decisionAttempt]);
 
   useEffect(() => {
     if (!mreidId) return undefined;
@@ -215,6 +300,12 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
                   <span className="mkt__detail-ai-model">
                     {detail.ai_estimation.model}
                   </span>
+                  {detail.ai_market_signal &&
+                    typeof detail.ai_market_signal.difference_pct === "number" && (
+                      <span className="mkt__detail-ai-diff">
+                        {aiComparisonText(detail.ai_market_signal)}
+                      </span>
+                    )}
                 </div>
               </div>
 
@@ -482,6 +573,99 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
                 </div>
               )}
 
+              <h3 className="mkt__section-title">Transaction Decision Policy</h3>
+
+              <div className="mkt__decision" aria-live="polite">
+                {decisionLoading && (
+                  <div className="mkt__nhb-loading">
+                    <div className="spinner" />
+                    <p>Loading decision evidence…</p>
+                  </div>
+                )}
+
+                {!decisionLoading && !decision && (
+                  <div className="mkt__nhb-error">
+                    <p>Decision evidence unavailable.</p>
+                    {decisionError && (
+                      <p className="mkt__error-msg">{decisionError}</p>
+                    )}
+                    <button
+                      type="button"
+                      className="mkt__retry"
+                      onClick={() => setDecisionAttempt((a) => a + 1)}
+                    >
+                      Retry decision
+                    </button>
+                  </div>
+                )}
+
+                {!decisionLoading && decision && (
+                  <div className="mkt__decision-body">
+                    <div className="mkt__decision-head">
+                      <span
+                        className={`mkt__chip mkt__chip--${DECISION_CHIP[decision.decision] || "none"}`}
+                      >
+                        {decision.decision.replace(/_/g, " ")}
+                      </span>
+                      <span className="mkt__decision-version">
+                        Decision Policy v{decision.decision_version}
+                      </span>
+                      {decision.human_review_required && (
+                        <span className="mkt__decision-review">
+                          Human review required
+                        </span>
+                      )}
+                      {decision.degraded && (
+                        <span className="mkt__decision-degraded">
+                          Evidence degraded
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="mkt__decision-summary">
+                      {decision.display_explanation}
+                    </p>
+
+                    {Array.isArray(decision.reasons) &&
+                      decision.reasons.length > 0 && (
+                        <ul className="mkt__decision-reasons">
+                          {decision.reasons.map((reason) => (
+                            <li
+                              className="mkt__decision-reason"
+                              key={reason.code}
+                            >
+                              <span
+                                className={`mkt__chip mkt__chip--${DECISION_SEVERITY_CHIP[reason.severity] || "none"}`}
+                              >
+                                {reason.severity}
+                              </span>
+                              <span className="mkt__decision-reason-text">
+                                {reason.text}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                    {Array.isArray(decision.required_actions) &&
+                      decision.required_actions.length > 0 && (
+                        <div className="mkt__decision-next">
+                          <span className="mkt__label">Required actions</span>
+                          <ul>
+                            {decision.required_actions.map((action) => (
+                              <li key={action}>{action}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                    <p className="mkt__decision-disclaimer">
+                      {decision.disclaimer}
+                    </p>
+                  </div>
+                )}
+              </div>
+
               <h3 className="mkt__section-title">Similar Properties</h3>
 
               {recsLoading && (
@@ -555,6 +739,10 @@ const PropertyDetail = ({ mreidId, onClose, onSelectSimilar }) => {
                 listedPriceInr={detail.listed_price}
                 onSettled={() => setSaleTick((t) => t + 1)}
                 refreshTick={saleTick}
+                decisionResult={decision}
+                decisionLoading={decisionLoading}
+                decisionError={decisionError}
+                onDecisionRetry={() => setDecisionAttempt((a) => a + 1)}
               />
 
               <h3 className="mkt__section-title">Amenities</h3>

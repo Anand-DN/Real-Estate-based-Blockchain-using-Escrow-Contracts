@@ -84,12 +84,14 @@ from market_context import router as market_context_router  # noqa: E402
 from risk_context import router as risk_context_router  # noqa: E402
 from recommendation_context import router as recommendation_context_router  # noqa: E402
 from dashboard import router as dashboard_router  # noqa: E402
+from decision_context import router as decision_router  # noqa: E402
 
 app.include_router(properties_router)
 app.include_router(market_context_router)
 app.include_router(risk_context_router)
 app.include_router(recommendation_context_router)
 app.include_router(dashboard_router)
+app.include_router(decision_router)
 
 
 # ============================================================

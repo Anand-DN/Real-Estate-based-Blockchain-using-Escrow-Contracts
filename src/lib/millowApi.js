@@ -54,6 +54,13 @@ export function riskAnalysis(mreidId) {
   return request(`/api/properties/${encodeURIComponent(mreidId)}/risk-analysis`);
 }
 
+// Decision Policy v1.0 evidence for one listing.  The caller must treat a
+// rejection as "decision unavailable" and fall back to contract-only
+// behaviour rather than assuming PROCEED.
+export function decision(mreidId) {
+  return request(`/api/properties/${encodeURIComponent(mreidId)}/decision`);
+}
+
 export function recommendations(mreidId, options) {
   const qs = new URLSearchParams();
   if (options && options.limit) qs.append("limit", String(options.limit));

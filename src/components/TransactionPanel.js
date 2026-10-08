@@ -74,6 +74,14 @@ export default function TransactionPanel({
   listedPriceInr,
   onSettled,
   refreshTick,
+  // Decision Policy v1.0 context supplied by the caller (PropertyDetail).
+  // Omitted entirely in isolation usage: the panel then applies no
+  // decision-based gating and renders no decision UI, so contract-only
+  // behaviour is unchanged.
+  decisionResult = null,
+  decisionLoading = false,
+  decisionError = null,
+  onDecisionRetry = null,
 }) {
   const [status, setStatus] = useState(null);
   const [account, setAccount] = useState(null);
@@ -180,16 +188,72 @@ export default function TransactionPanel({
   const amInspector = accountRole === "inspector";
   const amLender = accountRole === "lender";
   const roleName = (businessRole && ROLE_NAMES[businessRole]) || "Viewer";
+
+  // ---- Decision Policy v1.0 gating (additive only) -----------------------
+  // The panel never enables an action the contract already blocks; it can
+  // only remove actions the policy withholds.  With no decision context
+  // passed in, every flag below is false and the panel behaves exactly as
+  // before.
+  const DECISION_STATES = [
+    "PROCEED",
+    "REVIEW_REQUIRED",
+    "ENHANCED_REVIEW",
+    "HOLD",
+  ];
+  const decisionProvided =
+    decisionResult != null || decisionLoading || !!decisionError;
+  const decisionValid =
+    !!decisionResult &&
+    DECISION_STATES.indexOf(decisionResult.decision) !== -1;
+  const decisionState = decisionValid ? decisionResult.decision : null;
+  const decisionBlocksWorkflow = decisionState === "HOLD";
+  const decisionBlocksApproval =
+    decisionState === "HOLD" ||
+    decisionState === "REVIEW_REQUIRED" ||
+    decisionState === "ENHANCED_REVIEW";
+  const decisionBlocker =
+    decisionState === "HOLD"
+      ? "decision policy is HOLD"
+      : decisionState
+        ? "decision policy requires human review"
+        : null;
+  const decisionChip =
+    (
+      {
+        PROCEED: "proceed",
+        REVIEW_REQUIRED: "review",
+        ENHANCED_REVIEW: "enhanced",
+        HOLD: "hold",
+      }[decisionState] || "unavailable"
+    );
+
   const canList =
     status &&
     status.registered &&
     status.onOffer === false &&
-    amOwner;
+    amOwner &&
+    !decisionBlocksWorkflow;
 
-  const sellerWorkspaceActive = !!(account && amSeller);
-  const buyerWorkspaceActive = !!(account && (amBuyer || commitCandidate));
-  const inspectorWorkspaceActive = !!(account && amInspector);
-  const lenderWorkspaceActive = !!(account && amLender);
+  const sellerWorkspaceActive = !!(
+    account &&
+    amSeller &&
+    !decisionBlocksWorkflow
+  );
+  const buyerWorkspaceActive = !!(
+    account &&
+    (amBuyer || commitCandidate) &&
+    !decisionBlocksWorkflow
+  );
+  const inspectorWorkspaceActive = !!(
+    account &&
+    amInspector &&
+    !decisionBlocksWorkflow
+  );
+  const lenderWorkspaceActive = !!(
+    account &&
+    amLender &&
+    !decisionBlocksWorkflow
+  );
 
   const fin = (status && status.financing) || {};
   const financingRequested = !!fin.requested;
@@ -236,7 +300,8 @@ export default function TransactionPanel({
     (!status.inspectionRequired || status.inspectionPassed) &&
     (!status.lenderRequired || loanFullyFunded) &&
     status.buyerApproved &&
-    fullFunding;
+    fullFunding &&
+    !decisionBlocksApproval;
 
   const sellerApprovalHint = isExtended && !sellerCanApproveExtended
     ? [
@@ -250,6 +315,7 @@ export default function TransactionPanel({
             : "loan is not approved and fully disbursed",
         status.buyerApproved ? null : "buyer has not approved",
         fullFunding ? null : "escrow is not fully funded",
+        decisionBlocker,
       ].filter(Boolean)
     : [];
 
@@ -259,7 +325,8 @@ export default function TransactionPanel({
     status.sellerApproved &&
     fullFunding &&
     (!status.inspectionRequired || status.inspectionPassed) &&
-    (!status.lenderRequired || (financingApproved && loanFullyFunded));
+    (!status.lenderRequired || (financingApproved && loanFullyFunded)) &&
+    !decisionBlocksApproval;
 
   const finalizeBlockers = [];
   if (statusNum === 3 && !finalizable) {
@@ -272,6 +339,10 @@ export default function TransactionPanel({
     if (status.lenderRequired && !(financingApproved && loanFullyFunded)) {
       finalizeBlockers.push("loan is not approved and fully disbursed");
     }
+  }
+
+  if (statusNum === 3 && !finalizable && decisionBlocker) {
+    finalizeBlockers.push(decisionBlocker);
   }
 
   // Estimated EMI, purely front-end: P * r * (1+r)^n / ((1+r)^n - 1), with the
@@ -747,7 +818,7 @@ export default function TransactionPanel({
       ];
 
   const pendingStage = stages.find((stage) => !stage.done && !stage.neutral);
-  const progressNote = isFinalized
+  const baseProgressNote = isFinalized
     ? "Sale finalized - the NFT was delivered to the buyer and the price paid to the seller."
     : statusNum === 3
       ? finalizable
@@ -756,6 +827,25 @@ export default function TransactionPanel({
       : pendingStage
         ? `Next step: ${pendingStage.label}.`
         : null;
+  // At statusNum 3 the policy blocker already reaches this line through
+  // finalizeBlockers, so it is not repeated.
+  const decisionNote =
+    decisionState === "HOLD"
+      ? "Decision policy HOLD: this workflow cannot advance."
+      : decisionBlocksApproval
+        ? "Decision policy: human review is required before approvals or finalization."
+        : null;
+  const showDecisionNote = !!decisionNote && statusNum !== 3;
+  const progressNote = showDecisionNote
+    ? baseProgressNote
+      ? `${baseProgressNote} ${decisionNote}`
+      : decisionNote
+    : baseProgressNote;
+
+  const workspaceHint = (roleKey, matchesRole) =>
+    matchesRole && decisionBlocksWorkflow
+      ? "Decision policy HOLD: the workflow cannot advance."
+      : performerHint(roleKey, !!account);
 
   return (
     <section className="tx-panel">
@@ -766,6 +856,57 @@ export default function TransactionPanel({
         proof-of-concept; legal ownership remains subject to applicable Indian
         property and registration law.
       </div>
+
+      {/* Decision Policy v1.0 evidence (additive; absent in isolation use) */}
+      {decisionProvided && (
+        <div className="tx-decision" aria-live="polite">
+          <div className="tx-decision-head">
+            <span className="tx-decision-label">Transaction decision</span>
+            <span className={`mkt__chip mkt__chip--${decisionChip}`}>
+              {decisionValid
+                ? decisionState.replace(/_/g, " ")
+                : "Unavailable"}
+            </span>
+            {decisionValid && decisionResult.human_review_required && (
+              <span className="tx-decision-flag">Human review required</span>
+            )}
+            {decisionValid && decisionResult.degraded && (
+              <span className="tx-decision-flag">Evidence degraded</span>
+            )}
+            {!decisionValid && !decisionLoading && (
+              <button
+                type="button"
+                className="tx-decision-retry"
+                disabled={typeof onDecisionRetry !== "function"}
+                onClick={() => onDecisionRetry && onDecisionRetry()}
+              >
+                Retry decision
+              </button>
+            )}
+          </div>
+
+          {decisionLoading && (
+            <p className="tx-hint">Loading decision evidence…</p>
+          )}
+
+          {!decisionLoading && !decisionValid && (
+            <p className="tx-hint">
+              Decision evidence unavailable - contract-only checks.
+              {decisionError ? ` ${decisionError}` : ""}
+            </p>
+          )}
+
+          {decisionValid && (
+            <p className="tx-decision-summary">
+              {decisionResult.display_explanation}
+            </p>
+          )}
+
+          {decisionValid && decisionResult.disclaimer && (
+            <p className="tx-decision-boundary">{decisionResult.disclaimer}</p>
+          )}
+        </div>
+      )}
 
       {/* Sale Summary */}
       <div className="tx-card tx-summary-card">
@@ -889,7 +1030,11 @@ export default function TransactionPanel({
         title="Seller"
         active={sellerWorkspaceActive}
         connected={!!account}
-        footer={!sellerWorkspaceActive && performerHint("seller", !!account)}
+        footer={
+        !sellerWorkspaceActive
+          ? workspaceHint("seller", amSeller)
+          : null
+      }
       >
         {canList && !listed && !underContract && !isFinalized && !isCancelled && (
           <fieldset className="tx-fieldset">
@@ -1022,7 +1167,9 @@ export default function TransactionPanel({
                 type="button"
                 className="tx-action"
                 onClick={handleApproveSeller}
-                disabled={!sellerWorkspaceActive || !!pending}
+                disabled={
+                  !sellerWorkspaceActive || !!pending || decisionBlocksApproval
+                }
               >
                 {pending ? "Working…" : "Approve sale (seller)"}
               </button>
@@ -1032,8 +1179,9 @@ export default function TransactionPanel({
 
         {statusNum === 0 && !canList && (
           <p className="tx-hint">
-            This registered property is not on offer and is owned by another
-            account.
+            {decisionBlocksWorkflow
+              ? "Decision policy HOLD: this workflow cannot advance, so the property must not be listed for sale."
+              : "This registered property is not on offer and is owned by another account."}
           </p>
         )}
       </RoleCard>
@@ -1043,7 +1191,11 @@ export default function TransactionPanel({
         title="Buyer"
         active={buyerWorkspaceActive}
         connected={!!account}
-        footer={!buyerWorkspaceActive && performerHint("buyer", !!account)}
+        footer={
+        !buyerWorkspaceActive
+          ? workspaceHint("buyer", amBuyer || commitCandidate)
+          : null
+      }
       >
         {listed && buyerWorkspaceActive && (
           <div className="tx-account-actions">
@@ -1084,7 +1236,9 @@ export default function TransactionPanel({
                 type="button"
                 className="tx-action"
                 onClick={handleApproveBuyer}
-                disabled={!buyerWorkspaceActive || !!pending}
+                disabled={
+                  !buyerWorkspaceActive || !!pending || decisionBlocksApproval
+                }
               >
                 {pending ? "Working…" : "Approve sale (buyer)"}
               </button>
@@ -1239,7 +1393,9 @@ export default function TransactionPanel({
                   type="button"
                   className="tx-action"
                   onClick={handleApproveBuyer}
-                  disabled={!buyerWorkspaceActive || !!pending}
+                  disabled={
+                    !buyerWorkspaceActive || !!pending || decisionBlocksApproval
+                  }
                 >
                   {pending ? "Working…" : "Approve sale (buyer)"}
                 </button>
@@ -1275,7 +1431,11 @@ export default function TransactionPanel({
         title="Inspector"
         active={inspectorWorkspaceActive}
         connected={!!account}
-        footer={!inspectorWorkspaceActive && performerHint("inspector", !!account)}
+        footer={
+        !inspectorWorkspaceActive
+          ? workspaceHint("inspector", amInspector)
+          : null
+      }
       >
         {status.inspectionRequired ? (
           <>
@@ -1323,7 +1483,11 @@ export default function TransactionPanel({
         title="Lender"
         active={lenderWorkspaceActive}
         connected={!!account}
-        footer={!lenderWorkspaceActive && performerHint("lender", !!account)}
+        footer={
+        !lenderWorkspaceActive
+          ? workspaceHint("lender", amLender)
+          : null
+      }
       >
         {status.lenderRequired ? (
           <>
