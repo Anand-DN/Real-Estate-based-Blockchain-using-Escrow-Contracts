@@ -239,6 +239,9 @@ function App() {
         const timer = setTimeout(() => controller.abort(), ms);
         try {
           const response = await fetch(url, { signal: controller.signal });
+          if (!response.ok) return null;
+          const contentType = response.headers.get("content-type") || "";
+          if (!contentType.includes("application/json")) return null;
           return await response.json();
         } finally {
           clearTimeout(timer);
@@ -254,7 +257,9 @@ function App() {
         try {
           const uri = await realEstate.tokenURI(i);
           const metadata = await fetchWithTimeout(uri);
-          homes.push({ ...metadata, tokenId: i });
+          if (metadata) {
+            homes.push({ ...metadata, tokenId: i });
+          }
         } catch (error) {
           console.warn(`Could not load metadata for token ${i}`, error);
         }

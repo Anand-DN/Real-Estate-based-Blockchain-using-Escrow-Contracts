@@ -300,8 +300,7 @@ export default function TransactionPanel({
     (!status.inspectionRequired || status.inspectionPassed) &&
     (!status.lenderRequired || loanFullyFunded) &&
     status.buyerApproved &&
-    fullFunding &&
-    !decisionBlocksApproval;
+    fullFunding;
 
   const sellerApprovalHint = isExtended && !sellerCanApproveExtended
     ? [
@@ -315,7 +314,6 @@ export default function TransactionPanel({
             : "loan is not approved and fully disbursed",
         status.buyerApproved ? null : "buyer has not approved",
         fullFunding ? null : "escrow is not fully funded",
-        decisionBlocker,
       ].filter(Boolean)
     : [];
 
@@ -326,7 +324,7 @@ export default function TransactionPanel({
     fullFunding &&
     (!status.inspectionRequired || status.inspectionPassed) &&
     (!status.lenderRequired || (financingApproved && loanFullyFunded)) &&
-    !decisionBlocksApproval;
+    !decisionBlocksWorkflow;
 
   const finalizeBlockers = [];
   if (statusNum === 3 && !finalizable) {
@@ -833,7 +831,7 @@ export default function TransactionPanel({
     decisionState === "HOLD"
       ? "Decision policy HOLD: this workflow cannot advance."
       : decisionBlocksApproval
-        ? "Decision policy: human review is required before approvals or finalization."
+        ? "Decision policy: human review is required for this transaction."
         : null;
   const showDecisionNote = !!decisionNote && statusNum !== 3;
   const progressNote = showDecisionNote
@@ -1168,7 +1166,7 @@ export default function TransactionPanel({
                 className="tx-action"
                 onClick={handleApproveSeller}
                 disabled={
-                  !sellerWorkspaceActive || !!pending || decisionBlocksApproval
+                  !sellerWorkspaceActive || !!pending
                 }
               >
                 {pending ? "Working…" : "Approve sale (seller)"}
@@ -1237,7 +1235,7 @@ export default function TransactionPanel({
                 className="tx-action"
                 onClick={handleApproveBuyer}
                 disabled={
-                  !buyerWorkspaceActive || !!pending || decisionBlocksApproval
+                  !buyerWorkspaceActive || !!pending
                 }
               >
                 {pending ? "Working…" : "Approve sale (buyer)"}
@@ -1394,7 +1392,7 @@ export default function TransactionPanel({
                   className="tx-action"
                   onClick={handleApproveBuyer}
                   disabled={
-                    !buyerWorkspaceActive || !!pending || decisionBlocksApproval
+                    !buyerWorkspaceActive || !!pending
                   }
                 >
                   {pending ? "Working…" : "Approve sale (buyer)"}
